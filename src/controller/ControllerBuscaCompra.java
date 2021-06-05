@@ -21,11 +21,18 @@ public class ControllerBuscaCompra implements ActionListener{
         DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaCompra.getjTable1().getModel();
         
         for (Compra compraDaLista : service.ServiceCompra.Buscar()) {
-              tabela.addRow(new Object[]{compraDaLista.getId(),
+              tabela.addRow(new Object[]{
+                  compraDaLista.getId(),
                   compraDaLista.getData(),
                   compraDaLista.getHora(),
+                  
+                  compraDaLista.getDataDeVencimento(),
+                  compraDaLista.getObservacao(),
                   compraDaLista.getValorDeDesconto(),
+                  
                   compraDaLista.getValorTotal(),
+                  compraDaLista.getStatus(),
+                  compraDaLista.getFornecedor()
               });
         }
         

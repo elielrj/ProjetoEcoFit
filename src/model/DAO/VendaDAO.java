@@ -50,7 +50,7 @@ public class VendaDAO implements InterfaceDAO<Venda>{
 
         Connection conexao = ConectionFactory.getConection();
         
-        String sqlExecutar = "SELECT data,hora,dataDeVencimento,observacao,valorDoDesconto,valorTotal,status,pessoaFisicaId FROM venda";
+        String sqlExecutar = "SELECT id,data,hora,dataDeVencimento,observacao,valorDoDesconto,valorTotal,status,pessoaFisicaId FROM venda";
         
         PreparedStatement pstm = null;
         ResultSet rs = null;

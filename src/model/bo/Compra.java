@@ -10,6 +10,7 @@ public class Compra {
     private String observacao;
     private float valorDeDesconto;
     private float valorTotal;
+    private boolean status;
     
     private Fornecedor fornecedor;
     
@@ -17,7 +18,7 @@ public class Compra {
     public Compra() {
     }
 
-    public Compra(int id, String data, String hora, String dataDeVencimento, String observacao, float valorDeDesconto, float valorTotal, Fornecedor fornecedor) {
+    public Compra(int id, String data, String hora, String dataDeVencimento, String observacao, float valorDeDesconto, float valorTotal, Fornecedor fornecedor, boolean status) {
         this.id = id;
         this.data = data;
         this.hora = hora;
@@ -26,6 +27,15 @@ public class Compra {
         this.valorDeDesconto = valorDeDesconto;
         this.valorTotal = valorTotal;
         this.fornecedor = fornecedor;
+        this.status = status;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public String getDataDeVencimento() {
@@ -97,13 +107,8 @@ public class Compra {
     @Override
     public String toString() {
         return 
-                this.getId() + " " + 
-                this.getData() + " " + 
-                this.getHora() + " " + 
-                this.getObservacao() + " " + 
-                this.getValorDeDesconto() + " " + 
-                this.getValorTotal() + " " + 
-                this.getValorDeDesconto() + " " + 
+                this.getId() + " - " + 
+                this.getValorTotal() + " - " +
                 this.getFornecedor().toString();
     }
 

@@ -25,12 +25,14 @@ public class ControllerBuscaVenda implements ActionListener{
                   vendaDaLista.getId(),
                   vendaDaLista.getData(),
                   vendaDaLista.getHora(),
+                  
                   vendaDaLista.getDataDeVencimento(),
                   vendaDaLista.getObservacao(),
                   vendaDaLista.getValorDoDesconto(),
+                  
                   vendaDaLista.getValorTotal(),
                   vendaDaLista.getStatus(),
-                  vendaDaLista.getPessoaFisica().getId()
+                  vendaDaLista.getPessoaFisica().toString()
               });
         }
         

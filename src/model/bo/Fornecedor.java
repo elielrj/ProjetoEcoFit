@@ -86,7 +86,7 @@ public class Fornecedor extends Pessoa{
     
     @Override
     public String toString() {
-        return this.getCnpj()+ this.getRazaoSocial();
+        return this.getCnpj()+ " - " +  this.getRazaoSocial();
     }
     
 }

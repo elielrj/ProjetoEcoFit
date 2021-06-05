@@ -85,10 +85,7 @@ public class PessoaFisica extends Pessoa {
     @Override
     public String toString() {
         return  
-                this.getId() + " - Dt Nasc " +
-                
-                this.getDataDeNascimento() + " - End  " + 
-                this.getEndereco().toString();
+                id + " - " + nome;
     }
 
     

@@ -53,9 +53,11 @@ public class ControllerVenda implements ActionListener{
             venda.setData(this.telaCadastroVenda.getjFormattedTextFieldDataVenda().getText());
             venda.setHora(this.telaCadastroVenda.getjFormattedTextFieldHoraVenda().getText());
             venda.setValorDoDesconto(Float.parseFloat(this.telaCadastroVenda.getjFormattedTextFieldValorDesconto().getText()));
+            
             venda.setValorTotal(Float.parseFloat(this.telaCadastroVenda.getjFormattedTextFieldValorTotal().getText()));
             venda.setPessoaFisica((PessoaFisica)this.telaCadastroVenda.getjComboBoxPessoaFisica().getSelectedItem());
             venda.setDataDeVencimento(this.telaCadastroVenda.getjFormattedTextFieldDataDeVencimento().getText());
+            
             venda.setStatus(this.telaCadastroVenda.getjComboBoxStatus().getSelectedItem().equals("Sim"));
             venda.setObservacao(this.telaCadastroVenda.getjTextAreaObs().getText());
             
@@ -83,14 +85,19 @@ public class ControllerVenda implements ActionListener{
                 LimpaEstadoComponentes(true);
                 Venda venda = new Venda();
                 venda = service.ServiceVenda.Buscar(codigo);
+                
                 this.telaCadastroVenda.getjTextFieldId().setText(venda.getId() + "");
                 this.telaCadastroVenda.getjFormattedTextFieldDataVenda().setText(venda.getData());
                 this.telaCadastroVenda.getjFormattedTextFieldHoraVenda().setText(venda.getHora());
+                
                 this.telaCadastroVenda.getjFormattedTextFieldValorDesconto().setText(venda.getValorDoDesconto()+"");
                 this.telaCadastroVenda.getjFormattedTextFieldValorTotal().setText(venda.getValorTotal()+"");
                 this.telaCadastroVenda.getjComboBoxAluno().setSelectedItem(venda.getPessoaFisica());
+                
                 this.telaCadastroVenda.getjFormattedTextFieldDataDeVencimento().setText(venda.getDataDeVencimento());
                 this.telaCadastroVenda.getjTextAreaObs().setText(venda.getObservacao());
+                this.telaCadastroVenda.getjComboBoxStatus().setSelectedItem(venda.getStatus());
+                
                 this.telaCadastroVenda.getjTextFieldId().setEnabled(false);
             }
         }

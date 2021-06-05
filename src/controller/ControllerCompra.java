@@ -8,6 +8,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 import model.bo.Compra;
+import model.bo.Fornecedor;
 import view.TelaBuscaCompra;
 import view.TelaCadastroCompra;
 
@@ -51,8 +52,14 @@ public class ControllerCompra implements ActionListener{
             
             compra.setData(this.telaCadastroCompra.getjFormattedTextFieldDataVenda().getText());
             compra.setHora(this.telaCadastroCompra.getjFormattedTextFieldHoraVenda().getText());
+            compra.setDataDeVencimento(this.telaCadastroCompra.getjFormattedTextFieldDataVenc().getText());
+            
+            compra.setObservacao(this.telaCadastroCompra.getjTextAreaObs().getText());
             compra.setValorDeDesconto(Float.parseFloat(this.telaCadastroCompra.getjFormattedTextFieldValorDesconto().getText()));
             compra.setValorTotal(Float.parseFloat(this.telaCadastroCompra.getjFormattedTextFieldValorTotal().getText()));
+            
+            compra.setStatus((boolean) this.telaCadastroCompra.getjComboBoxStatus().getSelectedItem().equals("Sim"));
+            compra.setFornecedor((Fornecedor) this.telaCadastroCompra.getjComboBoxFornecedor().getSelectedItem());
             
             if(codigo == 0){
                 service.ServiceCompra.Incluir(compra);
@@ -68,7 +75,7 @@ public class ControllerCompra implements ActionListener{
             codigo =0;
             TelaBuscaCompra telaBuscaCompra = new TelaBuscaCompra(null, true);
             ControllerBuscaCompra controllerBuscaCompra = new ControllerBuscaCompra(telaBuscaCompra);
-            telaBuscaCompra.getjButtonCarregar().setVisible(true);
+            telaBuscaCompra.setVisible(true);
             
             
            
@@ -78,11 +85,18 @@ public class ControllerCompra implements ActionListener{
                 LimpaEstadoComponentes(true);
                 Compra compra = new Compra();
                 compra = service.ServiceCompra.Buscar(codigo);
+                
                 this.telaCadastroCompra.getjTextFieldId().setText(compra.getId() + "");
                 this.telaCadastroCompra.getjFormattedTextFieldDataVenda().setText(compra.getData());
                 this.telaCadastroCompra.getjFormattedTextFieldHoraVenda().setText(compra.getHora());
+                
+                this.telaCadastroCompra.getjFormattedTextFieldDataVenc().setText(compra.getDataDeVencimento());
+                this.telaCadastroCompra.getjTextAreaObs().setText(compra.getObservacao());
                 this.telaCadastroCompra.getjFormattedTextFieldValorDesconto().setText(compra.getValorDeDesconto()+"");
+                
                 this.telaCadastroCompra.getjFormattedTextFieldValorTotal().setText(compra.getValorTotal()+"");
+                this.telaCadastroCompra.getjComboBoxStatus().setSelectedItem(compra.getStatus());
+                this.telaCadastroCompra.getjComboBoxFornecedor().setSelectedItem(compra.getFornecedor());
                 
                 this.telaCadastroCompra.getjTextFieldId().setEnabled(false);
             }

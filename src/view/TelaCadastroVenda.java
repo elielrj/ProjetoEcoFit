@@ -187,6 +187,12 @@ public class TelaCadastroVenda extends javax.swing.JFrame {
 
         jLabel5.setText("Pessoa Física");
 
+        jComboBoxPessoaFisica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPessoaFisicaActionPerformed(evt);
+            }
+        });
+
         jLabel10.setText("Data de Vencimento");
 
         try {
@@ -310,6 +316,10 @@ public class TelaCadastroVenda extends javax.swing.JFrame {
     private void jFormattedTextFieldDataDeVencimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDataDeVencimentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldDataDeVencimentoActionPerformed
+
+    private void jComboBoxPessoaFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPessoaFisicaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxPessoaFisicaActionPerformed
 
     /**
      * @param args the command line arguments
