@@ -20,17 +20,18 @@ public class ControllerBuscaFornecedor implements ActionListener{
         //fazer a carga inicial do jtable
         DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaFornecedor.getjTable1().getModel();
         
-        for (Fornecedor cidadeDaLista : service.ServiceFornecedor.Buscar()) {
-              tabela.addRow(new Object[]{cidadeDaLista.getId(),
-                  cidadeDaLista.getRazaoSocial(), 
-                  cidadeDaLista.getCnpj(), 
-                  cidadeDaLista.getInscricaoEstadual(),
-                  cidadeDaLista.getTelefone1(),
-                  cidadeDaLista.getTelefone2(),
-                  cidadeDaLista.getEmail(),
-                  cidadeDaLista.getObservaca(),
-                  cidadeDaLista.getStatus(),
-                  cidadeDaLista.getEndereco().toString()                  
+        for (Fornecedor fornecedorDaLista : service.ServiceFornecedor.Buscar()) {
+              tabela.addRow(new Object[]{
+                  fornecedorDaLista.getId(),
+                  fornecedorDaLista.getRazaoSocial(), 
+                  fornecedorDaLista.getCnpj(), 
+                  fornecedorDaLista.getInscricaoEstadual(),
+                  fornecedorDaLista.getTelefone1(),
+                  fornecedorDaLista.getTelefone2(),
+                  fornecedorDaLista.getEmail(),
+                  fornecedorDaLista.getObservacao(),
+                  fornecedorDaLista.getStatus(),
+                  fornecedorDaLista.getEndereco().toString()                  
               });
         }
         

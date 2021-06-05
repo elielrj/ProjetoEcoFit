@@ -154,9 +154,10 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica>{
             pstm.setString(6, objeto.getTelefone2());
             pstm.setString(7, objeto.getEmail());
             pstm.setString(8, objeto.getObservacao());
-            pstm.setInt(9, objeto.getEndereco().getId());
-            pstm.setString(10, objeto.getTipo());
-            pstm.setInt(11, objeto.getId());
+            pstm.setBoolean(9, objeto.getStatus());
+            pstm.setInt(10, objeto.getEndereco().getId());
+            pstm.setString(11, objeto.getTipo());
+            pstm.setInt(12, objeto.getId());
             
             pstm.executeUpdate();
             

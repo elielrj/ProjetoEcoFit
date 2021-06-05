@@ -89,7 +89,7 @@ public class ControllerPessoaFisica implements ActionListener{
             codigo =0;
             TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica(null, true);
             ControllerBuscaPessoaFisica controllerBuscaPessoaFisica = new ControllerBuscaPessoaFisica(telaBuscaPessoaFisica);
-            telaCadastroPessoaFisica.setVisible(true);
+            telaBuscaPessoaFisica.setVisible(true);
             
             
            
@@ -103,14 +103,15 @@ public class ControllerPessoaFisica implements ActionListener{
                 this.telaCadastroPessoaFisica.getjTextFieldId().setText(pessoaFisica.getId() + "");
                 this.telaCadastroPessoaFisica.getjTextFieldNome().setText(pessoaFisica.getNome());
                 this.telaCadastroPessoaFisica.getjTextFieldEmail().setText(pessoaFisica.getEmail());
-                this.telaCadastroPessoaFisica.getjFormattedTextFieldTel1().setText(pessoaFisica.getTelefone1());
                 
+                this.telaCadastroPessoaFisica.getjFormattedTextFieldTel1().setText(pessoaFisica.getTelefone1());
                 this.telaCadastroPessoaFisica.getjFormattedTextFieldTel2().setText(pessoaFisica.getTelefone2());
                 this.telaCadastroPessoaFisica.getjFormattedTextFieldRg().setText(pessoaFisica.getRg());
+                
                 this.telaCadastroPessoaFisica.getjFormattedTextFieldCpf().setText(pessoaFisica.getCpf());
                 this.telaCadastroPessoaFisica.getjFormattedTextFieldDataNascimento().setText(pessoaFisica.getDataDeNascimento());
-
                 this.telaCadastroPessoaFisica.getjTextAreaObservacao().setText(pessoaFisica.getObservacao());
+                
                 this.telaCadastroPessoaFisica.getjComboBoxStatus().setSelectedItem(pessoaFisica.getStatus());
                 
                 //Endereco endereco = new Endereco();

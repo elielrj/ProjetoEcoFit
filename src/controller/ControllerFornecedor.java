@@ -66,9 +66,10 @@ public class ControllerFornecedor implements ActionListener{
             fornecedor.setTelefone2(this.telaCadastroFornecedor.getjFormattedTextFieldtel2().getText());
             
             fornecedor.setEmail(this.telaCadastroFornecedor.getjTextFieldEmail().getText());            
+            
             fornecedor.setEndereco((Endereco)this.telaCadastroFornecedor.getjComboBoxEndereco().getSelectedItem());
-            fornecedor.setEmail(this.telaCadastroFornecedor.getjTextFieldEmail().getText());            
-            fornecedor.setObservaca(this.telaCadastroFornecedor.getjTextAreaObs().getText());
+
+            fornecedor.setObservacao(this.telaCadastroFornecedor.getjTextAreaObs().getText());
             fornecedor.setStatus(this.telaCadastroFornecedor.getjComboBoxStatus().getSelectedItem().equals("Sim"));
             
             
@@ -89,9 +90,9 @@ public class ControllerFornecedor implements ActionListener{
         if(e.getSource() == this.telaCadastroFornecedor.getjButtonBuscar()){
            
             codigo =0;
-            TelaBuscaFornecedor telaCadastroFornecedor = new TelaBuscaFornecedor(null, true);
-            ControllerBuscaFornecedor controllerBuscaFornecedor = new ControllerBuscaFornecedor(telaCadastroFornecedor);
-            telaCadastroFornecedor.setVisible(true);
+            TelaBuscaFornecedor telaBuscaFornecedor = new TelaBuscaFornecedor(null, true);
+            ControllerBuscaFornecedor controllerBuscaFornecedor = new ControllerBuscaFornecedor(telaBuscaFornecedor);
+            telaBuscaFornecedor.setVisible(true);
             
             
            
@@ -112,7 +113,7 @@ public class ControllerFornecedor implements ActionListener{
                 this.telaCadastroFornecedor.getjTextFieldEmail().setText(fornecedor.getEmail());
                 
 
-                this.telaCadastroFornecedor.getjTextAreaObs().setText(fornecedor.getObservaca());
+                this.telaCadastroFornecedor.getjTextAreaObs().setText(fornecedor.getObservacao());
                 this.telaCadastroFornecedor.getjComboBoxStatus().setSelectedItem(fornecedor.getStatus());
                 this.telaCadastroFornecedor.getjComboBoxEndereco().setSelectedItem(fornecedor.getEndereco());
                 //Endereco endereco = new Endereco();

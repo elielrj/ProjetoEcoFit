@@ -48,7 +48,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor>{
     public List<Fornecedor> Retrieve() {
         Connection conexao = ConectionFactory.getConection();
         
-        String sqlExecutar = "SELECT id, razaoSocial, cnpj, inscricaoEstadual, telefone1, telefone2, email, observacao, status, enderecoId, FROM fornecedor";
+        String sqlExecutar = "SELECT id, razaoSocial, cnpj, inscricaoEstadual, telefone1, telefone2, email, observacao, status, enderecoId FROM fornecedor";
         
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -88,7 +88,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor>{
     @Override
     public Fornecedor Retrieve(int id) {
         Connection conexao = ConectionFactory.getConection();       
-        String sqlExecutar = "SELECT id, razaoSocial, cnpj, inscricaoEstadual, telefone1, telefone2, email, observacao, status,enderecoId,  FROM fornecedor WHERE  fornecedor.id = ?";
+        String sqlExecutar = "SELECT id, razaoSocial, cnpj, inscricaoEstadual, telefone1, telefone2, email, observacao, status,enderecoId  FROM fornecedor WHERE  fornecedor.id = ?";
         PreparedStatement pstm = null;
         ResultSet rs = null;
  
@@ -103,13 +103,15 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor>{
                 fornecedor.setRazaoSocial(rs.getString("razaoSocial"));
                 fornecedor.setCnpj(rs.getString("cnpj"));
                 fornecedor.setInscricaoEstadual(rs.getString("inscricaoEstadual"));
-
                 fornecedor.setTelefone1(rs.getString("telefone1"));
+                
                 fornecedor.setTelefone2(rs.getString("telefone2"));
                 fornecedor.setEmail(rs.getString("email"));
                 fornecedor.setObservacao(rs.getString("observacao"));
                 fornecedor.setStatus(rs.getBoolean("status"));
-                fornecedor.getEndereco().setId(rs.getInt("enderecoId"));
+                
+                EnderecoDAO enderecoDAO = new EnderecoDAO();
+                fornecedor.setEndereco(enderecoDAO.Retrieve(rs.getInt("enderecoId")));
             }
             
             ConectionFactory.closeConnection(conexao, pstm, rs);
@@ -124,7 +126,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor>{
     @Override
     public void Update(Fornecedor objeto) {
         Connection conexao = ConectionFactory.getConection();        
-        String sqlExecutar = "UPDATE fornecedor SET razaoSocial =?, cnpj = ?, inscricaoEstadual = ?, telefone1 = ?, telefone2 = ?, email = ?, observacao = ?, status = ?, enderecoId = ?, WHERE id =?"; 
+        String sqlExecutar = "UPDATE fornecedor SET razaoSocial =?, cnpj = ?, inscricaoEstadual = ?, telefone1 = ?, telefone2 = ?, email = ?, observacao = ?, status = ?, enderecoId = ? WHERE id =?"; 
         
         PreparedStatement pstm = null;
         

@@ -10,7 +10,6 @@ public class Fornecedor extends Pessoa{
     private String dataDeNascimento;
     private Endereco endereco;
     private String tipo;
-    private String observaca;
 
     public Fornecedor(int id, String razaoSocial, String incricaoEstadual, String cnpj, String dataDeNascimento, Endereco endereco, String tipo, String telefone1, String telefone2, String email, String observacao, boolean status) {
         super(telefone1, telefone2, email, observacao, status);
@@ -82,13 +81,6 @@ public class Fornecedor extends Pessoa{
         this.tipo = tipo;
     }
 
-    public String getObservaca() {
-        return observaca;
-    }
-
-    public void setObservaca(String observaca) {
-        this.observaca = observaca;
-    }
 
   
     

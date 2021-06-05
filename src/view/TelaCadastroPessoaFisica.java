@@ -87,8 +87,6 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
         jFormattedTextFieldTel2 = new javax.swing.JFormattedTextField();
         jFormattedTextFieldDataNascimento = new javax.swing.JFormattedTextField();
         jTextFieldEmail = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextFieldComplemento = new javax.swing.JTextField();
         novoEndereco = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaObservacao = new javax.swing.JTextArea();
@@ -264,14 +262,6 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
         }
         jFormattedTextFieldDataNascimento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jLabel3.setText("Complemento");
-
-        jTextFieldComplemento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldComplementoActionPerformed(evt);
-            }
-        });
-
         novoEndereco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/novo.png"))); // NOI18N
         novoEndereco.setText("Novo");
         novoEndereco.addActionListener(new java.awt.event.ActionListener() {
@@ -305,25 +295,18 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelDadosLayout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel5))
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
+                                .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanelDadosLayout.createSequentialGroup()
+                                .addComponent(jComboBoxEndereco, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextFieldComplemento)
-                                .addGap(125, 125, 125))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosLayout.createSequentialGroup()
-                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel5))
-                                .addGap(38, 38, 38)
-                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelDadosLayout.createSequentialGroup()
-                                        .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(jPanelDadosLayout.createSequentialGroup()
-                                        .addComponent(jComboBoxEndereco, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(novoEndereco)))
-                                .addGap(34, 34, 34))))
+                                .addComponent(novoEndereco)))
+                        .addGap(34, 34, 34))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelDadosLayout.createSequentialGroup()
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -437,11 +420,7 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
                     .addComponent(jLabel12)
                     .addComponent(jComboBoxEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(novoEndereco))
-                .addGap(25, 25, 25)
-                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextFieldComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26))
+                .addGap(71, 71, 71))
         );
 
         getContentPane().add(jPanelDados, java.awt.BorderLayout.CENTER);
@@ -483,10 +462,6 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
         ControllerEndereco controllerEndereco = new ControllerEndereco(telaCadastroEndereco);
         telaCadastroEndereco.setVisible(true);
     }//GEN-LAST:event_novoEnderecoActionPerformed
-
-    private void jTextFieldComplementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldComplementoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldComplementoActionPerformed
 
     private void jTextAreaObservacaoComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTextAreaObservacaoComponentHidden
         // TODO add your handling code here:
@@ -549,7 +524,6 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -562,7 +536,6 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelTitulo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaObservacao;
-    private javax.swing.JTextField jTextFieldComplemento;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldNome;
@@ -631,9 +604,7 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
         return jPanelTitulo;
     }
 
-    public JTextField getjTextFieldComplemento() {
-        return jTextFieldComplemento;
-    }
+
 
     public JTextField getjTextFieldEmail() {
         return jTextFieldEmail;
