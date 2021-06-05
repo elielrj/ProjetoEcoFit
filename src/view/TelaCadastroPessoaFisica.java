@@ -104,6 +104,7 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Formulário de Cadastro de ...");
+        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         jPanelTitulo.setBackground(new java.awt.Color(204, 255, 0));
@@ -281,6 +282,11 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
 
         jTextAreaObservacao.setColumns(20);
         jTextAreaObservacao.setRows(5);
+        jTextAreaObservacao.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                jTextAreaObservacaoComponentHidden(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextAreaObservacao);
 
         jLabel6.setText("Observação");
@@ -482,6 +488,10 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldComplementoActionPerformed
 
+    private void jTextAreaObservacaoComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTextAreaObservacaoComponentHidden
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextAreaObservacaoComponentHidden
+
     /**
      * @param args the command line arguments
      */
@@ -654,9 +664,9 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
     public JComboBox<Object> getjComboBoxTipo() {
         
         if(jComboBoxTipo.getSelectedItem() == "Aluno"){
-            jComboBoxTipo.setSelectedItem("aluno");
+            jComboBoxTipo.setSelectedItem("Aluno");
         }else if(jComboBoxTipo.getSelectedItem() == "Personal"){
-            jComboBoxTipo.setSelectedItem("personal");
+            jComboBoxTipo.setSelectedItem("Personal");
         }        
         return jComboBoxTipo;
  

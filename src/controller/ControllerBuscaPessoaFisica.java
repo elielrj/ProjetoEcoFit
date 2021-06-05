@@ -21,15 +21,20 @@ public class ControllerBuscaPessoaFisica implements ActionListener{
         DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaPessoaFisica.getjTable1().getModel();
         
         for (PessoaFisica pessoaFisica : service.ServicePessoaFisica.Buscar()) {
-              tabela.addRow(new Object[]{pessoaFisica.getId(),
+              tabela.addRow(new Object[]{
+                  
+                  pessoaFisica.getId(),
                   pessoaFisica.getNome(), 
                   pessoaFisica.getRg(), 
+                  
                   pessoaFisica.getCpf(),
                   pessoaFisica.getDataDeNascimento(),
                   pessoaFisica.getTelefone1(),
+                  
                   pessoaFisica.getTelefone2(),
                   pessoaFisica.getEmail(),
                   pessoaFisica.getObservacao(),
+                  
                   pessoaFisica.getStatus(),
                   pessoaFisica.getEndereco().toString(),
                   pessoaFisica.getTipo()

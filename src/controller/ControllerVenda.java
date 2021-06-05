@@ -8,7 +8,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 import model.bo.PessoaFisica;
-import model.bo.Personal;
 import model.bo.Venda;
 import view.TelaBuscaVenda;
 import view.TelaCadastroVenda;

@@ -118,7 +118,7 @@ public class TelaBuscaPessoaFisica extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "RG", "CPF", "Dt Nasc", "Complemento", "Tel1", "Tel2", "Email", "Endereco"
+                "Id", "Nome", "Rg", "CPF", "Data Nasc", "Tel1", "Tel2", "Email", "Obs", "Status", "End", "Tipo"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
