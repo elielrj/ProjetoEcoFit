@@ -5,32 +5,32 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import model.DAO.Enderecos.EnderecoDAO;
+import model.DAO.EnderecoDAO;
 import model.bo.PessoaFisica;
 import model.bo.Bairro;
 import model.bo.Cidade;
 import model.bo.Endereco;
 
 import view.TelaBuscaPessoaFisica;
-import view.TelaCadastroAluno;
+import view.TelaCadastroPessoaFisica;
 
 
 public class ControllerPessoaFisica implements ActionListener{
     
-    TelaCadastroAluno telaCadastroAluno = new TelaCadastroAluno();
+    TelaCadastroPessoaFisica telaCadastroPessoaFisica = new TelaCadastroPessoaFisica();
     public static int codigo;
    
 
     
-    public ControllerPessoaFisica(TelaCadastroAluno telaCadastroAluno){
+    public ControllerPessoaFisica(TelaCadastroPessoaFisica telaCadastroAluno){
        
-        this.telaCadastroAluno = telaCadastroAluno;
+        this.telaCadastroPessoaFisica = telaCadastroAluno;
         
-        this.telaCadastroAluno.getjButtonNovo().addActionListener(this);
-        this.telaCadastroAluno.getjButtonBuscar().addActionListener(this);
-        this.telaCadastroAluno.getjButtonCancelar().addActionListener(this);
-        this.telaCadastroAluno.getjButtonGravar().addActionListener(this);
-        this.telaCadastroAluno.getjButtonSair().addActionListener(this);
+        this.telaCadastroPessoaFisica.getjButtonNovo().addActionListener(this);
+        this.telaCadastroPessoaFisica.getjButtonBuscar().addActionListener(this);
+        this.telaCadastroPessoaFisica.getjButtonCancelar().addActionListener(this);
+        this.telaCadastroPessoaFisica.getjButtonGravar().addActionListener(this);
+        this.telaCadastroPessoaFisica.getjButtonSair().addActionListener(this);
         
         
           
@@ -43,52 +43,52 @@ public class ControllerPessoaFisica implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == this.telaCadastroAluno.getjButtonNovo()){            
+        if(e.getSource() == this.telaCadastroPessoaFisica.getjButtonNovo()){            
             Ativa(false);
             LimpaEstadoComponentes(true);            
-            this.telaCadastroAluno.getjTextFieldId().setEnabled(false);
+            this.telaCadastroPessoaFisica.getjTextFieldId().setEnabled(false);
             codigo = 0;
         }        
-        else if(e.getSource() == this.telaCadastroAluno.getjButtonCancelar()){
+        else if(e.getSource() == this.telaCadastroPessoaFisica.getjButtonCancelar()){
             Ativa(true);
             LimpaEstadoComponentes(false);
         }
-        else if(e.getSource() == this.telaCadastroAluno.getjButtonGravar()){            
+        else if(e.getSource() == this.telaCadastroPessoaFisica.getjButtonGravar()){            
             //montar objeto a persistir
-            PessoaFisica aluno = new PessoaFisica();           
-            aluno.setNome(this.telaCadastroAluno.getjTextFieldNome().getText());
-            aluno.setTelefone1(this.telaCadastroAluno.getjFormattedTextFieldTel1().getText());
-            aluno.setTelefone2(this.telaCadastroAluno.getjFormattedTextFieldTel2().getText());
-            aluno.setRg(this.telaCadastroAluno.getjFormattedTextFieldRg().getText());
-            aluno.setCpf(this.telaCadastroAluno.getjFormattedTextFieldCpf().getText());
-            aluno.setObservacao(this.telaCadastroAluno.getjTextAreaObservacao().getText());            
-            aluno.setDataDeNascimento(this.telaCadastroAluno.getjFormattedTextFieldDataNascimento().getText());
-            aluno.setEmail(this.telaCadastroAluno.getjTextFieldEmail().getText());    
-            aluno.setStatus(this.telaCadastroAluno.getjComboBoxStatus().getSelectedItem().equals("Sim"));
+            PessoaFisica pessoaFisica = new PessoaFisica();           
+            pessoaFisica.setNome(this.telaCadastroPessoaFisica.getjTextFieldNome().getText());
+            pessoaFisica.setTelefone1(this.telaCadastroPessoaFisica.getjFormattedTextFieldTel1().getText());
+            pessoaFisica.setTelefone2(this.telaCadastroPessoaFisica.getjFormattedTextFieldTel2().getText());
+            pessoaFisica.setRg(this.telaCadastroPessoaFisica.getjFormattedTextFieldRg().getText());
+            pessoaFisica.setCpf(this.telaCadastroPessoaFisica.getjFormattedTextFieldCpf().getText());
+            pessoaFisica.setObservacao(this.telaCadastroPessoaFisica.getjTextAreaObservacao().getText());            
+            pessoaFisica.setDataDeNascimento(this.telaCadastroPessoaFisica.getjFormattedTextFieldDataNascimento().getText());
+            pessoaFisica.setEmail(this.telaCadastroPessoaFisica.getjTextFieldEmail().getText());    
+            pessoaFisica.setStatus(this.telaCadastroPessoaFisica.getjComboBoxStatus().getSelectedItem().equals("Sim"));
             
             
             
-            aluno.setEndereco((Endereco) this.telaCadastroAluno.getjComboBoxEndereco().getSelectedItem());
+            pessoaFisica.setEndereco((Endereco) this.telaCadastroPessoaFisica.getjComboBoxEndereco().getSelectedItem());
         
 
                       
             if(codigo == 0){
-                service.ServicePessoaFisica.Incluir(aluno);              
+                service.ServicePessoaFisica.Incluir(pessoaFisica);              
             }else{
 
                 
-                aluno.setId(Integer.parseInt(this.telaCadastroAluno.getjTextFieldId().getText()));
-                service.ServicePessoaFisica.Atualizar(aluno);
+                pessoaFisica.setId(Integer.parseInt(this.telaCadastroPessoaFisica.getjTextFieldId().getText()));
+                service.ServicePessoaFisica.Atualizar(pessoaFisica);
             }
             Ativa(true);
                 LimpaEstadoComponentes(false);
         }        
-        if(e.getSource() == this.telaCadastroAluno.getjButtonBuscar()){
+        if(e.getSource() == this.telaCadastroPessoaFisica.getjButtonBuscar()){
            
             codigo =0;
-            TelaBuscaPessoaFisica telaCadastroAluno = new TelaBuscaPessoaFisica(null, true);
-            ControllerBuscaAluno controllerBuscaAluno = new ControllerBuscaAluno(telaCadastroAluno);
-            telaCadastroAluno.setVisible(true);
+            TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica(null, true);
+            ControllerBuscaPessoaFisica controllerBuscaPessoaFisica = new ControllerBuscaPessoaFisica(telaBuscaPessoaFisica);
+            telaCadastroPessoaFisica.setVisible(true);
             
             
            
@@ -96,46 +96,46 @@ public class ControllerPessoaFisica implements ActionListener{
             if(codigo != 0){
                 Ativa(false);
                 LimpaEstadoComponentes(true);
-                PessoaFisica aluno = new PessoaFisica();
-                aluno = service.ServicePessoaFisica.Buscar(codigo);
+                PessoaFisica pessoaFisica = new PessoaFisica();
+                pessoaFisica = service.ServicePessoaFisica.Buscar(codigo);
                 
-                this.telaCadastroAluno.getjTextFieldId().setText(aluno.getId() + "");
-                this.telaCadastroAluno.getjTextFieldNome().setText(aluno.getNome());
-                this.telaCadastroAluno.getjTextFieldEmail().setText(aluno.getEmail());
-                this.telaCadastroAluno.getjFormattedTextFieldTel1().setText(aluno.getTelefone1());
-                this.telaCadastroAluno.getjFormattedTextFieldTel2().setText(aluno.getTelefone2());
-                this.telaCadastroAluno.getjFormattedTextFieldRg().setText(aluno.getRg());
-                this.telaCadastroAluno.getjFormattedTextFieldCpf().setText(aluno.getCpf());
-                this.telaCadastroAluno.getjFormattedTextFieldDataNascimento().setText(aluno.getDataDeNascimento());
+                this.telaCadastroPessoaFisica.getjTextFieldId().setText(pessoaFisica.getId() + "");
+                this.telaCadastroPessoaFisica.getjTextFieldNome().setText(pessoaFisica.getNome());
+                this.telaCadastroPessoaFisica.getjTextFieldEmail().setText(pessoaFisica.getEmail());
+                this.telaCadastroPessoaFisica.getjFormattedTextFieldTel1().setText(pessoaFisica.getTelefone1());
+                this.telaCadastroPessoaFisica.getjFormattedTextFieldTel2().setText(pessoaFisica.getTelefone2());
+                this.telaCadastroPessoaFisica.getjFormattedTextFieldRg().setText(pessoaFisica.getRg());
+                this.telaCadastroPessoaFisica.getjFormattedTextFieldCpf().setText(pessoaFisica.getCpf());
+                this.telaCadastroPessoaFisica.getjFormattedTextFieldDataNascimento().setText(pessoaFisica.getDataDeNascimento());
 
-                this.telaCadastroAluno.getjTextAreaObservacao().setText(aluno.getObservacao());
-                this.telaCadastroAluno.getjComboBoxStatus().setSelectedItem(aluno.getStatus());
+                this.telaCadastroPessoaFisica.getjTextAreaObservacao().setText(pessoaFisica.getObservacao());
+                this.telaCadastroPessoaFisica.getjComboBoxStatus().setSelectedItem(pessoaFisica.getStatus());
                 
                 //Endereco endereco = new Endereco();
 
-                this.telaCadastroAluno.getjComboBoxEndereco().setSelectedItem(aluno.getEndereco());                
+                this.telaCadastroPessoaFisica.getjComboBoxEndereco().setSelectedItem(pessoaFisica.getEndereco());                
                 
-                this.telaCadastroAluno.getjTextFieldId().setEnabled(false);
+                this.telaCadastroPessoaFisica.getjTextFieldId().setEnabled(false);
             }
         }
         
-        if(e.getSource() == this.telaCadastroAluno.getjButtonSair()){
-            this.telaCadastroAluno.dispose();
+        if(e.getSource() == this.telaCadastroPessoaFisica.getjButtonSair()){
+            this.telaCadastroPessoaFisica.dispose();
         }
 
     }
     
     public void Ativa(boolean estadoBotoes){
-        this.telaCadastroAluno.getjButtonNovo().setEnabled(estadoBotoes);
-        this.telaCadastroAluno.getjButtonCancelar().setEnabled(!estadoBotoes);
-        this.telaCadastroAluno.getjButtonGravar().setEnabled(!estadoBotoes);
-        this.telaCadastroAluno.getjButtonBuscar().setEnabled(estadoBotoes);
-        this.telaCadastroAluno.getjButtonSair().setEnabled(estadoBotoes);        
+        this.telaCadastroPessoaFisica.getjButtonNovo().setEnabled(estadoBotoes);
+        this.telaCadastroPessoaFisica.getjButtonCancelar().setEnabled(!estadoBotoes);
+        this.telaCadastroPessoaFisica.getjButtonGravar().setEnabled(!estadoBotoes);
+        this.telaCadastroPessoaFisica.getjButtonBuscar().setEnabled(estadoBotoes);
+        this.telaCadastroPessoaFisica.getjButtonSair().setEnabled(estadoBotoes);        
     }
     
     public void LimpaEstadoComponentes(boolean estadoCompo){
     
-        Component[] componentes = this.telaCadastroAluno.getjPanelDados().getComponents(); //verificar
+        Component[] componentes = this.telaCadastroPessoaFisica.getjPanelDados().getComponents(); //verificar
     
         LimpaEstadoDeComponentes.limpa(estadoCompo, componentes);
         

@@ -1,4 +1,4 @@
-package model.DAO.Vender;
+package model.DAO;
 
 import model.DAO.Principal.ConectionFactory;
 import model.DAO.Principal.InterfaceDAO;
@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import model.DAO.Enderecos.EnderecoDAO;
 import model.bo.PessoaFisica;
 
 public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica>{

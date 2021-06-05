@@ -28,8 +28,9 @@ public class ControllerBuscaFornecedor implements ActionListener{
                   cidadeDaLista.getTelefone1(),
                   cidadeDaLista.getTelefone2(),
                   cidadeDaLista.getEmail(),
-                  cidadeDaLista.getEndereco().toString(),
-                  cidadeDaLista.getComplemento()
+                  cidadeDaLista.getObservaca(),
+                  cidadeDaLista.getStatus(),
+                  cidadeDaLista.getEndereco().toString()                  
               });
         }
         

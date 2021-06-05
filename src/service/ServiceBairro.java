@@ -3,7 +3,7 @@ package service;
 
 import java.util.List;
 import model.bo.Bairro;
-import model.DAO.Enderecos.BairroDAO;
+import model.DAO.BairroDAO;
 
 public class ServiceBairro {
 

@@ -11,7 +11,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import model.DAO.Vender.VendaDAO;
+import model.DAO.VendaDAO;
 import model.bo.Venda;
 
 /**

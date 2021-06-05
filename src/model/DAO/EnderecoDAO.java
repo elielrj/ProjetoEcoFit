@@ -1,4 +1,4 @@
-package model.DAO.Enderecos;
+package model.DAO;
 
 import model.DAO.Principal.ConectionFactory;
 import model.DAO.Principal.InterfaceDAO;

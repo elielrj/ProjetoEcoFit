@@ -3,7 +3,7 @@ package service;
 
 import java.util.List;
 import model.bo.Cidade;
-import model.DAO.Enderecos.CidadeDAO;
+import model.DAO.CidadeDAO;
 
 public class ServiceCidade {
 

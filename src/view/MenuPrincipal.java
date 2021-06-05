@@ -13,7 +13,6 @@ import controller.ControllerBuscaCidade;
 import controller.ControllerBuscaCompra;
 import controller.ControllerBuscaEndereco;
 import controller.ControllerBuscaFornecedor;
-import controller.ControllerBuscaPersonal;
 import controller.ControllerBuscaProduto;
 import controller.ControllerBuscaReceber;
 import controller.ControllerBuscaVenda;
@@ -22,7 +21,6 @@ import controller.ControllerCidade;
 import controller.ControllerCompra;
 import controller.ControllerEndereco;
 import controller.ControllerFornecedor;
-import controller.ControllerPersonal;
 import controller.ControllerProduto;
 import controller.ControllerVenda;
 
@@ -63,7 +61,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItemAlunos = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItemProdutos = new javax.swing.JMenuItem();
         jSeparator8 = new javax.swing.JPopupMenu.Separator();
         jMenuItem24 = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
@@ -145,7 +142,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuCadastros.add(jSeparator1);
 
         jMenuItemAlunos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aluno.png"))); // NOI18N
-        jMenuItemAlunos.setText("Alunos");
+        jMenuItemAlunos.setText("Aluno e Personal");
         jMenuItemAlunos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemAlunosActionPerformed(evt);
@@ -161,15 +158,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuCadastros.add(jMenuItem5);
-
-        jMenuItemProdutos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pessoal.png"))); // NOI18N
-        jMenuItemProdutos.setText("Perssoal");
-        jMenuItemProdutos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemProdutosActionPerformed(evt);
-            }
-        });
-        jMenuCadastros.add(jMenuItemProdutos);
         jMenuCadastros.add(jSeparator8);
 
         jMenuItem24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/produto.png"))); // NOI18N
@@ -408,7 +396,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemBairrosActionPerformed
 
     private void jMenuItemAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAlunosActionPerformed
-        TelaCadastroAluno telaCadastroAluno = new TelaCadastroAluno();
+        TelaCadastroPessoaFisica telaCadastroAluno = new TelaCadastroPessoaFisica();
         ControllerPessoaFisica controllerAluno = new ControllerPessoaFisica(telaCadastroAluno);
         telaCadastroAluno.setVisible(true);
     }//GEN-LAST:event_jMenuItemAlunosActionPerformed
@@ -418,12 +406,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ControllerFornecedor controllerFornecedor = new ControllerFornecedor(telaCadastroFornecedor);
         telaCadastroFornecedor.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenuItemProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProdutosActionPerformed
-        TelaCadastroPersonal telaCadastroPersonal = new TelaCadastroPersonal();
-        ControllerPersonal controllerPersonal = new ControllerPersonal(telaCadastroPersonal);
-        telaCadastroPersonal.setVisible(true);
-    }//GEN-LAST:event_jMenuItemProdutosActionPerformed
 
     private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
         TelaCadastroProduto telaCadastroProduto = new TelaCadastroProduto();
@@ -464,9 +446,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemRelatorioFornecedoreresActionPerformed
 
     private void jMenuItemRelatorioPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioPersonalActionPerformed
-       TelaBuscaPersonal telaBuscaPersonal = new TelaBuscaPersonal();
-       ControllerBuscaPersonal controllerBuscaPersonal = new ControllerBuscaPersonal(telaBuscaPersonal);
-       telaBuscaPersonal.setVisible(true);
+       TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica();
+       ControllerBuscaPessoaFisica controllerBuscaPessoaFisica = new ControllerBuscaPessoaFisica(telaBuscaPessoaFisica);
+       telaBuscaPessoaFisica.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelatorioPersonalActionPerformed
 
     private void jMenuItemRelatorioProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioProdutosActionPerformed
@@ -600,7 +582,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemContasAReceber;
     private javax.swing.JMenuItem jMenuItemEnderecos;
     private javax.swing.JMenuItem jMenuItemPagar;
-    private javax.swing.JMenuItem jMenuItemProdutos;
     private javax.swing.JMenuItem jMenuItemReceber;
     private javax.swing.JMenuItem jMenuItemRelatorioAlunos;
     private javax.swing.JMenuItem jMenuItemRelatorioBairros;

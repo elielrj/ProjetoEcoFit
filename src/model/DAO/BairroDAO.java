@@ -1,5 +1,5 @@
 
-package model.DAO.Enderecos;
+package model.DAO;
 
 import model.DAO.Principal.InterfaceDAO;
 import model.DAO.SQL.SqlBairro;

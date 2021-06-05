@@ -3,7 +3,7 @@ package service;
 
 import java.util.List;
 import model.bo.Endereco;
-import model.DAO.Enderecos.EnderecoDAO;
+import model.DAO.EnderecoDAO;
 
 public class ServiceEndereco {
 

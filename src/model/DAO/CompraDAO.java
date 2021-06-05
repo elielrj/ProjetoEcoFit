@@ -1,6 +1,6 @@
-package model.DAO.Comprar;
+package model.DAO;
 
-import model.DAO.Comprar.FornecedorDAO;
+import model.DAO.FornecedorDAO;
 import model.DAO.Principal.ConectionFactory;
 import model.DAO.Principal.InterfaceDAO;
 import java.util.List;

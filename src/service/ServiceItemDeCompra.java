@@ -3,7 +3,7 @@ package service;
 
 import java.util.List;
 import model.bo.ItemDeCompra;
-import model.DAO.Comprar.ItemDeCompraDAO;
+import model.DAO.ItemDeCompraDAO;
 
 public class ServiceItemDeCompra {
 

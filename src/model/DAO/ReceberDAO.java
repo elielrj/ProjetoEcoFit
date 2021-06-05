@@ -1,23 +1,22 @@
 
-package model.DAO.Comprar;
+package model.DAO;
 
 import model.DAO.Principal.ConectionFactory;
 import model.DAO.Principal.InterfaceDAO;
 import java.util.List;
-import model.bo.Pagar;
+import model.bo.Receber;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-
-public class PagarDAO implements InterfaceDAO<Pagar> {
+public class ReceberDAO implements InterfaceDAO<Receber> {
 
     @Override
-    public void Create(Pagar objeto) {
+    public void Create(Receber objeto) {
         Connection conexao = ConectionFactory.getConection();     
         
-        String sqlExecutar = "INSERT INTO pagar(data,hora,valorDeDescontoNegociado, valorDeAcrescimo,valorPago, observacao,compraId) VALUES(?,?,?,?,?,?,?)";
+        String sqlExecutar = "INSERT INTO receber(data,hora,valorDeDescontoNegociado, valorDeAcrescimo,valorRecebido, observacao,vendaId) VALUES(?,?,?,?,?,?,?)";
                 
         
         PreparedStatement pstm = null;
@@ -28,48 +27,50 @@ public class PagarDAO implements InterfaceDAO<Pagar> {
             pstm.setString(2, objeto.getHora());
             pstm.setDouble(3, objeto.getValorDeDescontoNegociado());
             pstm.setDouble(4, objeto.getValorDeAcrescimo());
-            pstm.setDouble(5, objeto.getValorPago());
+            pstm.setDouble(5, objeto.getValorRecebido());
             pstm.setString(6, objeto.getObservacao());
-            pstm.setInt(7, objeto.getCompra().getId());
+            pstm.setInt(7, objeto.getVenda().getId());
             pstm.executeUpdate();
+            
         }catch(Exception ex){
             ex.printStackTrace();
         }
+        
         ConectionFactory.closeConnection(conexao, pstm);
     }
 
     @Override
-    public List<Pagar> Retrieve() {
+    public List<Receber> Retrieve() {
         Connection conexao = ConectionFactory.getConection();
         
-        String sqlExecutar = "SELECT id,data,hora,valorDeDescontoNegociado, valorDeAcrescimo,valorPago, observacao,compraId FROM pagar";
+        String sqlExecutar = "SELECT id,data,hora,valorDeDescontoNegociado, valorDeAcrescimo,valorRecebido, observacao,vendaId FROM receber";
+        
         PreparedStatement pstm = null;
         ResultSet rs = null;
  
+        List<Receber> recebimentos = new ArrayList();
+        
         try{
             pstm = conexao.prepareStatement(sqlExecutar);
             rs = pstm.executeQuery();
             
-            List<Pagar> pagamentos = new ArrayList();
+            
             
             while(rs.next()){
-                Pagar pagamento = new Pagar();
-              
-                pagamento.setId(rs.getInt("id"));
-                pagamento.setData(rs.getString("data"));
-                pagamento.setHora(rs.getString("hora")); 
-                pagamento.setValorDeDescontoNegociado(rs.getFloat("valorDeDescontoNegociado"));
-                pagamento.setValorDeAcrescimo(rs.getFloat("valorDeAcrescimo"));
-                pagamento.setValorPago(rs.getFloat("valorPago"));
-                pagamento.setObservacao(rs.getString("observacao"));
+                Receber recebimento = new Receber();
+                recebimento.setId(rs.getInt("id"));
+                recebimento.setData(rs.getString("data"));
+                recebimento.setHora(rs.getString("hora")); 
+                recebimento.setValorDeDescontoNegociado(rs.getFloat("valorDeDescontoNegociado"));
+                recebimento.setValorDeAcrescimo(rs.getFloat("valorDeAcrescimo"));
+                recebimento.setValorRecebido(rs.getFloat("valorRecebido"));
+                recebimento.setObservacao(rs.getString("observacao"));
+                recebimento.getVenda().setId(rs.getInt("vendaId"));
                 
-                CompraDAO compraDAO = new CompraDAO();
-                pagamento.setCompra(compraDAO.Retrieve(rs.getInt("compraId")));
-                
-                pagamentos.add(pagamento);
+                recebimentos.add(recebimento);
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
-            return pagamentos;
+            return recebimentos;
         }catch(Exception ex){
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return null;
@@ -77,10 +78,10 @@ public class PagarDAO implements InterfaceDAO<Pagar> {
     }
 
     @Override
-    public Pagar Retrieve(int id) {
+    public Receber Retrieve(int id) {
         Connection conexao = ConectionFactory.getConection();
         
-        String sqlExecutar = "SELECT id,data,hora,valorDeDescontoNegociado, valorDeAcrescimo,valorPago, observacao,compraId FROM pagar WHERE id = ?";
+        String sqlExecutar = "SELECT id,data,hora,valorDeDescontoNegociado, valorDeAcrescimo,valorRecebido, observacao,vendaId FROM receber WHERE receber.id =?";
         
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -90,23 +91,22 @@ public class PagarDAO implements InterfaceDAO<Pagar> {
             pstm.setInt(1,id);
             rs = pstm.executeQuery();
             
-            Pagar pagamento = new Pagar();
+            Receber recebimento = new Receber();
             
             while(rs.next()){
-                pagamento.setId(rs.getInt("id"));
-                pagamento.setData(rs.getString("data"));
-                pagamento.setHora(rs.getString("hora")); 
-                pagamento.setValorDeDescontoNegociado(rs.getFloat("valorDeDescontoNegociado"));
-                pagamento.setValorDeAcrescimo(rs.getFloat("valorDeAcrescimo"));
-                pagamento.setValorPago(rs.getFloat("valorPago"));
-                pagamento.setObservacao(rs.getString("observacao"));
-                
-                CompraDAO compraDAO = new CompraDAO();
-                pagamento.setCompra(compraDAO.Retrieve(rs.getInt("compraId")));
+                recebimento.setId(rs.getInt("id"));
+                recebimento.setData(rs.getString("data"));
+                recebimento.setHora(rs.getString("hora")); 
+                recebimento.setValorDeDescontoNegociado(rs.getFloat("valorDeDescontoNegociado"));
+                recebimento.setValorDeAcrescimo(rs.getFloat("valorDeAcrescimo"));
+                recebimento.setValorRecebido(rs.getFloat("valorRecebido"));
+                recebimento.setObservacao(rs.getString("observacao"));
+                recebimento.getVenda().setId(rs.getInt("vendaId"));
+ 
                 
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
-            return pagamento;
+            return recebimento;
         }catch(Exception ex){
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return null;
@@ -114,9 +114,9 @@ public class PagarDAO implements InterfaceDAO<Pagar> {
     }
 
     @Override
-    public void Update(Pagar objeto) {
+    public void Update(Receber objeto) {
         Connection conexao = ConectionFactory.getConection();        
-        String sqlExecutar = "UPDATE pagar SET data = ?, hora = ?, valorDeDescontoNegociado = ?, valorDeAcrescimo =?, valorPago = ?, observacao = ?, compraId = ? WHERE id=?"; 
+        String sqlExecutar = "UPDATE receber SET data =?,hora =?,valorDeDescontoNegociado =?,valorDeAcrescimo =?,valorRecebido =?,observacao = ?,vendaId =? WHERE id=?"; 
         
         PreparedStatement pstm = null;
         
@@ -126,11 +126,11 @@ public class PagarDAO implements InterfaceDAO<Pagar> {
             pstm.setString(2, objeto.getHora());
             pstm.setDouble(3, objeto.getValorDeDescontoNegociado());
             pstm.setDouble(4, objeto.getValorDeAcrescimo());
-            pstm.setDouble(5, objeto.getValorPago());
+            pstm.setDouble(5, objeto.getValorRecebido());
             pstm.setString(6, objeto.getObservacao());
-            pstm.setInt(7, objeto.getCompra().getId());
+            pstm.setInt(7, objeto.getVenda().getId());
             pstm.setInt(8, objeto.getId());
-
+            
             pstm.executeUpdate();
             
         }catch(Exception ex){
@@ -140,11 +140,11 @@ public class PagarDAO implements InterfaceDAO<Pagar> {
     }
 
     @Override
-    public void Delete(Pagar objeto) {
+    public void Delete(Receber objeto) {
         
         
         Connection conexao = ConectionFactory.getConection();        
-        String sqlExecutar = "DELETE FROM pagar WHERE id = ?";        
+        String sqlExecutar = "DELETE FROM receber WHERE id =?";        
         PreparedStatement pstm = null;
         
         try{
@@ -156,5 +156,6 @@ public class PagarDAO implements InterfaceDAO<Pagar> {
         }        
         ConectionFactory.closeConnection(conexao, pstm);
     }
+   
     
 }

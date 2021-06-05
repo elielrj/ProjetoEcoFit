@@ -1,21 +1,22 @@
 
 package model.bo;
-class Fornecedor extends Pessoa{
+
+public class Fornecedor extends Pessoa{
     
     private int id;
     private String razaoSocial;
-    private String incricaoestadual;
+    private String inscricaoEstadual;
     private String cnpj;
     private String dataDeNascimento;
     private Endereco endereco;
     private String tipo;
     private String observaca;
 
-    public Fornecedor(int id, String razaoSocial, String incricaoestadual, String cnpj, String dataDeNascimento, Endereco endereco, String tipo, String telefone1, String telefone2, String email, String observacao, boolean status) {
+    public Fornecedor(int id, String razaoSocial, String incricaoEstadual, String cnpj, String dataDeNascimento, Endereco endereco, String tipo, String telefone1, String telefone2, String email, String observacao, boolean status) {
         super(telefone1, telefone2, email, observacao, status);
         this.id = id;
         this.razaoSocial = razaoSocial;
-        this.incricaoestadual = incricaoestadual;
+        this.inscricaoEstadual = incricaoEstadual;
         this.cnpj = cnpj;
         this.dataDeNascimento = dataDeNascimento;
         this.endereco = endereco;
@@ -33,27 +34,27 @@ class Fornecedor extends Pessoa{
         this.id = id;
     }
 
-    public String getNome() {
+    public String getRazaoSocial() {
         return razaoSocial;
     }
 
-    public void setNome(String razaoSocial) {
+    public void setRazaoSocial(String razaoSocial) {
         this.razaoSocial = razaoSocial;
     }
 
-    public String getRg() {
-        return incricaoestadual;
+    public String getInscricaoEstadual() {
+        return inscricaoEstadual;
     }
 
-    public void setRg(String incricaoestadual) {
-        this.incricaoestadual = incricaoestadual;
+    public void setInscricaoEstadual(String inscricaoEstadual) {
+        this.inscricaoEstadual = inscricaoEstadual;
     }
 
-    public String getCpf() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCpf(String cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 
@@ -81,11 +82,6 @@ class Fornecedor extends Pessoa{
         this.tipo = tipo;
     }
 
-    @Override
-    public String toString() {
-        return this.getCpf()+ this.getNome();
-    }
-
     public String getObservaca() {
         return observaca;
     }
@@ -94,29 +90,11 @@ class Fornecedor extends Pessoa{
         this.observaca = observaca;
     }
 
-    public String getRazaoSocial() {
-        return razaoSocial;
+  
+    
+    @Override
+    public String toString() {
+        return this.getCnpj()+ this.getRazaoSocial();
     }
-
-    public void setRazaoSocial(String razaoSocial) {
-        this.razaoSocial = razaoSocial;
-    }
-
-    public String getIncricaoestadual() {
-        return incricaoestadual;
-    }
-
-    public void setIncricaoestadual(String incricaoestadual) {
-        this.incricaoestadual = incricaoestadual;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
     
 }

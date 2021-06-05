@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import model.DAO.Enderecos.CidadeDAO;
+import model.DAO.CidadeDAO;
 
 import model.bo.Cidade;
 import service.ServiceCidade;

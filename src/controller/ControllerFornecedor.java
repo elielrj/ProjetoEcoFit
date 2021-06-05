@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
-import model.DAO.Enderecos.EnderecoDAO;
+import model.DAO.EnderecoDAO;
 import model.bo.Fornecedor;
 import model.bo.Bairro;
 import model.bo.Cidade;
@@ -64,11 +64,12 @@ public class ControllerFornecedor implements ActionListener{
             fornecedor.setInscricaoEstadual(this.telaCadastroFornecedor.getjFormattedTextFieldInscEst().getText());
             fornecedor.setTelefone1(this.telaCadastroFornecedor.getjFormattedTextFieldTel1().getText());
             fornecedor.setTelefone2(this.telaCadastroFornecedor.getjFormattedTextFieldtel2().getText());
+            
             fornecedor.setEmail(this.telaCadastroFornecedor.getjTextFieldEmail().getText());            
             fornecedor.setEndereco((Endereco)this.telaCadastroFornecedor.getjComboBoxEndereco().getSelectedItem());
             fornecedor.setEmail(this.telaCadastroFornecedor.getjTextFieldEmail().getText());            
-            fornecedor.setComplemento(this.telaCadastroFornecedor.getjTextFieldComplemento().getText());
-            fornecedor.setObservacao(this.telaCadastroFornecedor.getjTextFieldComplemento());
+            fornecedor.setObservaca(this.telaCadastroFornecedor.getjTextAreaObs().getText());
+            fornecedor.setStatus(this.telaCadastroFornecedor.getjComboBoxStatus().getSelectedItem().equals("Sim"));
             
             
              
@@ -105,13 +106,15 @@ public class ControllerFornecedor implements ActionListener{
                 this.telaCadastroFornecedor.getjTextFieldRazaoSocial().setText(fornecedor.getRazaoSocial());
                 this.telaCadastroFornecedor.getjFormattedTextFieldCnpj().setText(fornecedor.getCnpj());
                 this.telaCadastroFornecedor.getjFormattedTextFieldInscEst().setText(fornecedor.getInscricaoEstadual());
+                
                 this.telaCadastroFornecedor.getjFormattedTextFieldTel1().setText(fornecedor.getTelefone1());
                 this.telaCadastroFornecedor.getjFormattedTextFieldtel2().setText(fornecedor.getTelefone2());
                 this.telaCadastroFornecedor.getjTextFieldEmail().setText(fornecedor.getEmail());
-                this.telaCadastroFornecedor.getjComboBoxEndereco().setSelectedItem(fornecedor.getEndereco());
-
-                this.telaCadastroFornecedor.getjTextFieldComplemento().setText(fornecedor.getComplemento());
                 
+
+                this.telaCadastroFornecedor.getjTextAreaObs().setText(fornecedor.getObservaca());
+                this.telaCadastroFornecedor.getjComboBoxStatus().setSelectedItem(fornecedor.getStatus());
+                this.telaCadastroFornecedor.getjComboBoxEndereco().setSelectedItem(fornecedor.getEndereco());
                 //Endereco endereco = new Endereco();
 
                 
@@ -136,23 +139,8 @@ public class ControllerFornecedor implements ActionListener{
     
     public void LimpaEstadoComponentes(boolean estadoCompo){
         Component[] componentes = this.telaCadastroFornecedor.getjPanelDados().getComponents(); //verificar
-        for(Component componente : componentes){
-            if(componente instanceof JTextField){
-                ((JTextField)componente).setText("");
-                componente.setEnabled(estadoCompo);
-            }
         
-            if(componente instanceof JFormattedTextField){
-                ((JFormattedTextField) componente).setText("");
-                componente.setEnabled(estadoCompo);
-            }
-            
-            if(componente instanceof JComboBox){
-                ((JComboBox) componente).setSelectedItem(0);
-                componente.setEnabled(estadoCompo);
-            }
-            
-        } 
+        LimpaEstadoDeComponentes.limpa(estadoCompo, componentes);
     }
     
 }
