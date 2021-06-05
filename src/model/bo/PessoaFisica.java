@@ -13,8 +13,8 @@ public class PessoaFisica extends Pessoa {
     public PessoaFisica() {
     }
 
-    public PessoaFisica(int id, String nome, String rg, String cpf, String dataDeNascimento, String complemento, String telefone1, String telefone2, String email, String observacao, Endereco endereco, String tipo) {
-        super(complemento, telefone1, telefone2, email, observacao);
+    public PessoaFisica(int id, String nome, String rg, String cpf, String dataDeNascimento, String complemento, String telefone1, String telefone2, String email, String observacao, Endereco endereco, String tipo, boolean status) {
+        super(telefone1, telefone2, email, observacao, status);
         this.id = id;
         this.nome = nome;
         this.rg = rg;
@@ -91,8 +91,5 @@ public class PessoaFisica extends Pessoa {
                 this.getEndereco().toString();
     }
 
-
-    
-    
     
 }

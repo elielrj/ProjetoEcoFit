@@ -5,9 +5,9 @@
  */
 package view;
 
-import controller.ControllerAluno;
+import controller.ControllerPessoaFisica;
 import controller.ControllerBairro;
-import controller.ControllerBuscaAluno;
+import controller.ControllerBuscaPessoaFisica;
 import controller.ControllerBuscaBairro;
 import controller.ControllerBuscaCidade;
 import controller.ControllerBuscaCompra;
@@ -409,7 +409,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAlunosActionPerformed
         TelaCadastroAluno telaCadastroAluno = new TelaCadastroAluno();
-        ControllerAluno controllerAluno = new ControllerAluno(telaCadastroAluno);
+        ControllerPessoaFisica controllerAluno = new ControllerPessoaFisica(telaCadastroAluno);
         telaCadastroAluno.setVisible(true);
     }//GEN-LAST:event_jMenuItemAlunosActionPerformed
 
@@ -452,8 +452,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemRelatorioCepsActionPerformed
 
     private void jMenuItemRelatorioAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioAlunosActionPerformed
-       TelaBuscaAluno telaBuscaAluno = new TelaBuscaAluno();
-       ControllerBuscaAluno controllerBuscaAluno = new ControllerBuscaAluno(telaBuscaAluno);
+       TelaBuscaPessoaFisica telaBuscaAluno = new TelaBuscaPessoaFisica();
+       ControllerBuscaPessoaFisica controllerBuscaAluno = new ControllerBuscaPessoaFisica(telaBuscaAluno);
        telaBuscaAluno.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelatorioAlunosActionPerformed
 

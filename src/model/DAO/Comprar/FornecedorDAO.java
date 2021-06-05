@@ -18,7 +18,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor>{
     public void Create(Fornecedor objeto) {
         Connection conexao = ConectionFactory.getConection();
         
-        String sqlExecutar = "INSERT INTO fornecedor(razaoSocial, cnpj, inscricaoEstadual, complemento, telefone1, telefone2, email, observacao, enderecoId) VALUES (?, ?,?,?,?,?,?,?,?)";
+        String sqlExecutar = "INSERT INTO fornecedor(razaoSocial, cnpj, inscricaoEstadual, telefone1, telefone2, email, observacao, enderecoId) VALUES (?, ?,?,?,?,?,?,?)";
         
         PreparedStatement pstm = null;
         
@@ -27,12 +27,12 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor>{
             pstm.setString(1, objeto.getRazaoSocial());
             pstm.setString(2, objeto.getCnpj());
             pstm.setString(3, objeto.getInscricaoEstadual());
-            pstm.setString(4, objeto.getComplemento());
-            pstm.setString(5, objeto.getTelefone1());
-            pstm.setString(6, objeto.getTelefone2());
-            pstm.setString(7, objeto.getEmail());
-            pstm.setString(8, objeto.getObservacao());
-            pstm.setInt(9, objeto.getEndereco().getId());
+
+            pstm.setString(4, objeto.getTelefone1());
+            pstm.setString(5, objeto.getTelefone2());
+            pstm.setString(6, objeto.getEmail());
+            pstm.setString(7, objeto.getObservacao());
+            pstm.setInt(8, objeto.getEndereco().getId());
             pstm.executeUpdate();
             
         }catch(Exception ex){
@@ -46,7 +46,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor>{
     public List<Fornecedor> Retrieve() {
         Connection conexao = ConectionFactory.getConection();
         
-        String sqlExecutar = "SELECT id, razaoSocial, cnpj, inscricaoEstadual, telefone1, telefone2, email, observacao, enderecoId,complemento FROM fornecedor";
+        String sqlExecutar = "SELECT id, razaoSocial, cnpj, inscricaoEstadual, telefone1, telefone2, email, observacao, enderecoId, FROM fornecedor";
         
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -63,7 +63,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor>{
                 fornecedor.setRazaoSocial(rs.getString("razaoSocial"));
                 fornecedor.setCnpj(rs.getString("cnpj")); 
                 fornecedor.setInscricaoEstadual(rs.getString("inscricaoEstadual"));
-                fornecedor.setComplemento(rs.getString("complemento"));
+
                 fornecedor.setTelefone1(rs.getString("telefone1"));
                 fornecedor.setTelefone2(rs.getString("telefone2"));
                 fornecedor.setEmail(rs.getString("email"));
@@ -85,7 +85,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor>{
     @Override
     public Fornecedor Retrieve(int id) {
         Connection conexao = ConectionFactory.getConection();       
-        String sqlExecutar = "SELECT id, razaoSocial, cnpj, inscricaoEstadual, telefone1, telefone2, email, observacao, enderecoId, complemento FROM fornecedor WHERE  fornecedor.id = ?";
+        String sqlExecutar = "SELECT id, razaoSocial, cnpj, inscricaoEstadual, telefone1, telefone2, email, observacao, enderecoId,  FROM fornecedor WHERE  fornecedor.id = ?";
         PreparedStatement pstm = null;
         ResultSet rs = null;
  
@@ -100,7 +100,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor>{
                 fornecedor.setRazaoSocial(rs.getString("razaoSocial"));
                 fornecedor.setCnpj(rs.getString("cnpj"));
                 fornecedor.setInscricaoEstadual(rs.getString("inscricaoEstadual"));
-                fornecedor.setComplemento(rs.getString("complemento"));
+
                 fornecedor.setTelefone1(rs.getString("telefone1"));
                 fornecedor.setTelefone2(rs.getString("telefone2"));
                 fornecedor.setEmail(rs.getString("email"));
@@ -120,7 +120,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor>{
     @Override
     public void Update(Fornecedor objeto) {
         Connection conexao = ConectionFactory.getConection();        
-        String sqlExecutar = "UPDATE fornecedor SET razaoSocial =?, cnpj = ?, inscricaoEstadual = ?, telefone1 = ?, telefone2 = ?, email = ?, observacao = ?, enderecoId = ?, complemento = ? WHERE id =?"; 
+        String sqlExecutar = "UPDATE fornecedor SET razaoSocial =?, cnpj = ?, inscricaoEstadual = ?, telefone1 = ?, telefone2 = ?, email = ?, observacao = ?, enderecoId = ?, WHERE id =?"; 
         
         PreparedStatement pstm = null;
         
@@ -134,8 +134,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor>{
             pstm.setString(6, objeto.getEmail());
             pstm.setString(7, objeto.getObservacao());
             pstm.setInt(8, objeto.getEndereco().getId());
-            pstm.setString(9, objeto.getComplemento());
-            pstm.setInt(10, objeto.getId());
+            pstm.setInt(9, objeto.getId());
 
 
             pstm.executeUpdate();   

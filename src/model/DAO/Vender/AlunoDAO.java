@@ -16,7 +16,7 @@ public class AlunoDAO implements InterfaceDAO<PessoaFisica>{
     public void Create(PessoaFisica objeto) {
         
         Connection conexao = ConectionFactory.getConection();
-        String sqlExecutar = "INSERT INTO pessoaFisica(nome, rg, cpf, dataDeNascimento, complemento, telefone1, telefone2, email, observacao, enderecoId) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        String sqlExecutar = "INSERT INTO pessoaFisica(nome, rg, cpf, dataDeNascimento, telefone1, telefone2, email, observacao, enderecoId) VALUES (?,?,?,?,?,?,?,?,?)";
         PreparedStatement pstm = null;
         
         try{
@@ -25,12 +25,12 @@ public class AlunoDAO implements InterfaceDAO<PessoaFisica>{
             pstm.setString(2, objeto.getRg());
             pstm.setString(3, objeto.getCpf());
             pstm.setString(4, objeto.getDataDeNascimento());
-            pstm.setString(5, objeto.getComplemento());
-            pstm.setString(6, objeto.getTelefone1());
-            pstm.setString(7, objeto.getTelefone2());
-            pstm.setString(8, objeto.getEmail());
-            pstm.setString(9, objeto.getObservacao());
-            pstm.setInt(10, objeto.getEndereco().getId());
+
+            pstm.setString(5, objeto.getTelefone1());
+            pstm.setString(6, objeto.getTelefone2());
+            pstm.setString(7, objeto.getEmail());
+            pstm.setString(8, objeto.getObservacao());
+            pstm.setInt(9, objeto.getEndereco().getId());
             
                    
             
@@ -49,7 +49,7 @@ public class AlunoDAO implements InterfaceDAO<PessoaFisica>{
     public List<PessoaFisica> Retrieve() {
         Connection conexao = ConectionFactory.getConection();
         
-        String sqlExecutar = "SELECT id, nome, rg, cpf, dataDeNascimento, complemento, telefone1, telefone2, email, observacao, enderecoId FROM pessoaFisica";
+        String sqlExecutar = "SELECT id, nome, rg, cpf, dataDeNascimento, telefone1, telefone2, email, observacao, enderecoId FROM pessoaFisica";
         
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -66,7 +66,7 @@ public class AlunoDAO implements InterfaceDAO<PessoaFisica>{
                 pessoaFisica.setRg(rs.getString("rg"));
                 pessoaFisica.setCpf(rs.getString("cpf")); 
                 pessoaFisica.setDataDeNascimento(rs.getString("dataDeNascimento"));
-                pessoaFisica.setComplemento(rs.getString("complemento"));
+
                 pessoaFisica.setTelefone1(rs.getString("telefone1"));
                 pessoaFisica.setTelefone2(rs.getString("telefone2"));
                 pessoaFisica.setEmail(rs.getString("email"));
@@ -90,7 +90,7 @@ public class AlunoDAO implements InterfaceDAO<PessoaFisica>{
     public PessoaFisica Retrieve(int id) {
 
         Connection conexao = ConectionFactory.getConection();       
-        String sqlExecutar = "SELECT id, nome, rg, cpf, dataDeNascimento, complemento, telefone1, telefone2, email, observacao, enderecoId FROM pessoaFisica WHERE  pessoaFisica.id = ?";
+        String sqlExecutar = "SELECT id, nome, rg, cpf, dataDeNascimento, telefone1, telefone2, email, observacao, enderecoId FROM pessoaFisica WHERE  pessoaFisica.id = ?";
         PreparedStatement pstm = null;
         ResultSet rs = null;
  
@@ -106,7 +106,7 @@ public class AlunoDAO implements InterfaceDAO<PessoaFisica>{
                 pessoaFisica.setRg(rs.getString("rg"));
                 pessoaFisica.setCpf(rs.getString("cpf"));
                 pessoaFisica.setDataDeNascimento(rs.getString("dataDeNascimento"));
-                pessoaFisica.setComplemento(rs.getString("complemento"));
+
                 pessoaFisica.setTelefone1(rs.getString("telefone1"));
                 pessoaFisica.setTelefone2(rs.getString("telefone2"));
                 pessoaFisica.setEmail(rs.getString("email"));
@@ -131,7 +131,7 @@ public class AlunoDAO implements InterfaceDAO<PessoaFisica>{
     public void Update(PessoaFisica objeto) {
         
         Connection conexao = ConectionFactory.getConection();        
-        String sqlExecutar = "UPDATE pessoaFisica SET nome = ?, rg = ?,cpf =?, dataDeNascimento = ?, complemento = ?, telefone1 = ?, telefone2 = ?, email = ?, observacao = ?, enderecoId = ? WHERE id = ?"; 
+        String sqlExecutar = "UPDATE pessoaFisica SET nome = ?, rg = ?,cpf =?, dataDeNascimento = ?, telefone1 = ?, telefone2 = ?, email = ?, observacao = ?, enderecoId = ? WHERE id = ?"; 
         
         PreparedStatement pstm = null;
         
@@ -141,13 +141,13 @@ public class AlunoDAO implements InterfaceDAO<PessoaFisica>{
             pstm.setString(2, objeto.getRg());
             pstm.setString(3, objeto.getCpf());
             pstm.setString(4, objeto.getDataDeNascimento());
-            pstm.setString(5, objeto.getComplemento());
-            pstm.setString(6, objeto.getTelefone1());
-            pstm.setString(7, objeto.getTelefone2());
-            pstm.setString(8, objeto.getEmail());
-            pstm.setString(9, objeto.getObservacao());
-            pstm.setInt(10, objeto.getEndereco().getId());
-            pstm.setInt(11, objeto.getId());
+
+            pstm.setString(5, objeto.getTelefone1());
+            pstm.setString(6, objeto.getTelefone2());
+            pstm.setString(7, objeto.getEmail());
+            pstm.setString(8, objeto.getObservacao());
+            pstm.setInt(9, objeto.getEndereco().getId());
+            pstm.setInt(10, objeto.getId());
             pstm.executeUpdate();
             
         }catch(Exception ex){

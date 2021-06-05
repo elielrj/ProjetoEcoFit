@@ -7,7 +7,7 @@ import model.DAO.Vender.AlunoDAO;
 import model.DAO.Enderecos.EnderecoDAO;
 import model.bo.Endereco;
 
-public class ServiceAluno {
+public class ServicePessoaFisica {
 
     public static void Incluir(PessoaFisica objeto){
 

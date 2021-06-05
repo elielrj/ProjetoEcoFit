@@ -58,6 +58,7 @@ public class ControllerFornecedor implements ActionListener{
         else if(e.getSource() == this.telaCadastroFornecedor.getjButtonGravar()){            
             //montar objeto a persistir
             Fornecedor fornecedor = new Fornecedor();           
+            
             fornecedor.setRazaoSocial(this.telaCadastroFornecedor.getjTextFieldRazaoSocial().getText());
             fornecedor.setCnpj(this.telaCadastroFornecedor.getjFormattedTextFieldCnpj().getText());
             fornecedor.setInscricaoEstadual(this.telaCadastroFornecedor.getjFormattedTextFieldInscEst().getText());
@@ -67,7 +68,7 @@ public class ControllerFornecedor implements ActionListener{
             fornecedor.setEndereco((Endereco)this.telaCadastroFornecedor.getjComboBoxEndereco().getSelectedItem());
             fornecedor.setEmail(this.telaCadastroFornecedor.getjTextFieldEmail().getText());            
             fornecedor.setComplemento(this.telaCadastroFornecedor.getjTextFieldComplemento().getText());
-            
+            fornecedor.setObservacao(this.telaCadastroFornecedor.getjTextFieldComplemento());
             
             
              

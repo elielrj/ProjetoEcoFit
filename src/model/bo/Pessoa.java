@@ -1,32 +1,22 @@
 package model.bo;
 public abstract class Pessoa {
     
-    private String complemento;
     private String telefone1;
     private String telefone2;
     private String email;
     private String observacao;
+    private boolean status;
    
 
     public Pessoa() {
     }
 
-    public Pessoa(String complemento, String telefone1, String telefone2, String email, String observacao) {
-        this.complemento = complemento;
+    public Pessoa(String telefone1, String telefone2, String email, String observacao, boolean status) {
         this.telefone1 = telefone1;
         this.telefone2 = telefone2;
         this.email = email;
         this.observacao = observacao;
-    }
-
-
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
+        this.status = status;
     }
 
     public String getTelefone1() {
@@ -61,11 +51,20 @@ public abstract class Pessoa {
         this.observacao = observacao;
     }
 
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    
 
 
    @Override
     public String toString() {
-        return  this.getComplemento() + " " +
+        return  
                 this.getTelefone1() + " " +
                 this.getTelefone2() + " " +
                 this.getEmail() + " " +

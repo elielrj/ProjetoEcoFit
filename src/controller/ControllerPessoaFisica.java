@@ -4,16 +4,14 @@ package controller;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
-import javax.swing.JTextField;
+
 import model.DAO.Enderecos.EnderecoDAO;
 import model.bo.PessoaFisica;
 import model.bo.Bairro;
 import model.bo.Cidade;
 import model.bo.Endereco;
 
-import view.TelaBuscaAluno;
+import view.TelaBuscaPessoaFisica;
 import view.TelaCadastroAluno;
 
 
@@ -63,10 +61,10 @@ public class ControllerPessoaFisica implements ActionListener{
             aluno.setTelefone2(this.telaCadastroAluno.getjFormattedTextFieldTel2().getText());
             aluno.setRg(this.telaCadastroAluno.getjFormattedTextFieldRg().getText());
             aluno.setCpf(this.telaCadastroAluno.getjFormattedTextFieldCpf().getText());
-            aluno.setComplemento(this.telaCadastroAluno.getjTextFieldComplemento().getText());            
+            aluno.setObservacao(this.telaCadastroAluno.getjTextAreaObservacao().getText());            
             aluno.setDataDeNascimento(this.telaCadastroAluno.getjFormattedTextFieldDataNascimento().getText());
-            aluno.setEmail(this.telaCadastroAluno.getjTextFieldEmail().getText());            
-            aluno.setComplemento(this.telaCadastroAluno.getjTextFieldComplemento().getText());
+            aluno.setEmail(this.telaCadastroAluno.getjTextFieldEmail().getText());    
+            aluno.setStatus(this.telaCadastroAluno.getjComboBoxStatus().getSelectedItem().equals("Sim"));
             
             
             
@@ -75,12 +73,12 @@ public class ControllerPessoaFisica implements ActionListener{
 
                       
             if(codigo == 0){
-                service.ServiceAluno.Incluir(aluno);              
+                service.ServicePessoaFisica.Incluir(aluno);              
             }else{
 
                 
                 aluno.setId(Integer.parseInt(this.telaCadastroAluno.getjTextFieldId().getText()));
-                service.ServiceAluno.Atualizar(aluno);
+                service.ServicePessoaFisica.Atualizar(aluno);
             }
             Ativa(true);
                 LimpaEstadoComponentes(false);
@@ -88,7 +86,7 @@ public class ControllerPessoaFisica implements ActionListener{
         if(e.getSource() == this.telaCadastroAluno.getjButtonBuscar()){
            
             codigo =0;
-            TelaBuscaAluno telaCadastroAluno = new TelaBuscaAluno(null, true);
+            TelaBuscaPessoaFisica telaCadastroAluno = new TelaBuscaPessoaFisica(null, true);
             ControllerBuscaAluno controllerBuscaAluno = new ControllerBuscaAluno(telaCadastroAluno);
             telaCadastroAluno.setVisible(true);
             
@@ -99,7 +97,7 @@ public class ControllerPessoaFisica implements ActionListener{
                 Ativa(false);
                 LimpaEstadoComponentes(true);
                 PessoaFisica aluno = new PessoaFisica();
-                aluno = service.ServiceAluno.Buscar(codigo);
+                aluno = service.ServicePessoaFisica.Buscar(codigo);
                 
                 this.telaCadastroAluno.getjTextFieldId().setText(aluno.getId() + "");
                 this.telaCadastroAluno.getjTextFieldNome().setText(aluno.getNome());
@@ -110,7 +108,8 @@ public class ControllerPessoaFisica implements ActionListener{
                 this.telaCadastroAluno.getjFormattedTextFieldCpf().setText(aluno.getCpf());
                 this.telaCadastroAluno.getjFormattedTextFieldDataNascimento().setText(aluno.getDataDeNascimento());
 
-                this.telaCadastroAluno.getjTextFieldComplemento().setText(aluno.getComplemento());
+                this.telaCadastroAluno.getjTextAreaObservacao().setText(aluno.getObservacao());
+                this.telaCadastroAluno.getjComboBoxStatus().setSelectedItem(aluno.getStatus());
                 
                 //Endereco endereco = new Endereco();
 
@@ -135,24 +134,11 @@ public class ControllerPessoaFisica implements ActionListener{
     }
     
     public void LimpaEstadoComponentes(boolean estadoCompo){
+    
         Component[] componentes = this.telaCadastroAluno.getjPanelDados().getComponents(); //verificar
-        for(Component componente : componentes){
-            if(componente instanceof JTextField){
-                ((JTextField)componente).setText("");
-                componente.setEnabled(estadoCompo);
-            }
+    
+        LimpaEstadoDeComponentes.limpa(estadoCompo, componentes);
         
-            if(componente instanceof JFormattedTextField){
-                ((JFormattedTextField) componente).setText("");
-                componente.setEnabled(estadoCompo);
-            }
-            
-            if(componente instanceof JComboBox){
-                ((JComboBox) componente).setSelectedItem(0);
-                componente.setEnabled(estadoCompo);
-            }
-            
-        } 
-    }
+    }    
     
 }

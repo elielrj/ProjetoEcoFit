@@ -4,33 +4,35 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
-import view.TelaBuscaAluno;
+import view.TelaBuscaPessoaFisica;
 import model.bo.PessoaFisica;
 
-public class ControllerBuscaAluno implements ActionListener{
+public class ControllerBuscaPessoaFisica implements ActionListener{
     
-    TelaBuscaAluno telaBuscaAluno;
+    TelaBuscaPessoaFisica telaBuscaPessoaFisica;
     
-    public ControllerBuscaAluno(TelaBuscaAluno telaBuscaAluno){
-        this.telaBuscaAluno = telaBuscaAluno;
+    public ControllerBuscaPessoaFisica(TelaBuscaPessoaFisica telaBuscaPessoaFisica){
+        this.telaBuscaPessoaFisica = telaBuscaPessoaFisica;
         
-        this.telaBuscaAluno.getjButtonCarregar().addActionListener(this);
-        this.telaBuscaAluno.getjButtonSair().addActionListener(this);
+        this.telaBuscaPessoaFisica.getjButtonCarregar().addActionListener(this);
+        this.telaBuscaPessoaFisica.getjButtonSair().addActionListener(this);
         
         //fazer a carga inicial do jtable
-        DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaAluno.getjTable1().getModel();
+        DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaPessoaFisica.getjTable1().getModel();
         
-        for (PessoaFisica pessoaFisica : service.ServiceAluno.Buscar()) {
+        for (PessoaFisica pessoaFisica : service.ServicePessoaFisica.Buscar()) {
               tabela.addRow(new Object[]{pessoaFisica.getId(),
+                  pessoaFisica.getNome(), 
                   pessoaFisica.getRg(), 
-                  pessoaFisica.getCpf(), 
-                  pessoaFisica.getDataDeNascimento(), 
-                  pessoaFisica.getComplemento(),
+                  pessoaFisica.getCpf(),
+                  pessoaFisica.getDataDeNascimento(),
                   pessoaFisica.getTelefone1(),
                   pessoaFisica.getTelefone2(),
                   pessoaFisica.getEmail(),
                   pessoaFisica.getObservacao(),
-                  pessoaFisica.getEndereco().toString()
+                  pessoaFisica.getStatus(),
+                  pessoaFisica.getEndereco().toString(),
+                  pessoaFisica.getTipo()
         });
         }
         
@@ -38,12 +40,12 @@ public class ControllerBuscaAluno implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-       if(e.getSource() == this.telaBuscaAluno.getjButtonCarregar()){
-           ControllerAluno.codigo = (int) this.telaBuscaAluno.getjTable1().getValueAt(this.telaBuscaAluno.getjTable1().getSelectedRow(),0);
-           this.telaBuscaAluno.dispose();
+       if(e.getSource() == this.telaBuscaPessoaFisica.getjButtonCarregar()){
+           ControllerPessoaFisica.codigo = (int) this.telaBuscaPessoaFisica.getjTable1().getValueAt(this.telaBuscaPessoaFisica.getjTable1().getSelectedRow(),0);
+           this.telaBuscaPessoaFisica.dispose();
        }
-       if(e.getSource() == this.telaBuscaAluno.getjButtonSair()){
-           this.telaBuscaAluno.dispose();
+       if(e.getSource() == this.telaBuscaPessoaFisica.getjButtonSair()){
+           this.telaBuscaPessoaFisica.dispose();
        }
     }
     

@@ -12,17 +12,17 @@ import javax.swing.JTable;
  *
  * @author esfso
  */
-public class TelaBuscaAluno extends javax.swing.JDialog {
+public class TelaBuscaPessoaFisica extends javax.swing.JDialog {
 
     /**
      * Creates new form FormModeloBuscas
      */
-    public TelaBuscaAluno(java.awt.Frame parent, boolean modal) {
+    public TelaBuscaPessoaFisica(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
-    public TelaBuscaAluno(){
+    public TelaBuscaPessoaFisica(){
         initComponents();
     }
 
@@ -189,7 +189,7 @@ public class TelaBuscaAluno extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TelaBuscaAluno dialog = new TelaBuscaAluno(new javax.swing.JFrame(), true);
+                TelaBuscaPessoaFisica dialog = new TelaBuscaPessoaFisica(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

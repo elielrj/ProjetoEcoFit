@@ -15,7 +15,7 @@ public class TelaCadastroVenda extends javax.swing.JFrame {
     public TelaCadastroVenda() {
         initComponents();
         
-        for(PessoaFisica a: service.ServiceAluno.Buscar()){
+        for(PessoaFisica a: service.ServicePessoaFisica.Buscar()){
             jComboBoxPessoaFisica.addItem(a);
         }
                
