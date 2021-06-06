@@ -2,7 +2,7 @@
 package model.bo;
 
 public class Bairro {
-    
+    // subindo para o git
     private int id;
     private String nome;
     private boolean status;
