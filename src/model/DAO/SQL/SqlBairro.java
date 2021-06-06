@@ -4,8 +4,6 @@ package model.DAO.SQL;
 
 public class SqlBairro implements Sql{
 
-    
-    
     @Override
     public String criar() {
         return  "INSERT INTO bairro(nome,status) VALUES(?,?)";

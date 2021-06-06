@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class BairroDAO implements InterfaceDAO<Bairro> {
     private PS ps;
+
     
     public BairroDAO(){
         this.ps = new PS(new SqlBairro());
@@ -87,4 +88,6 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
             throw new RuntimeException("Erro em deletar bairroDAO: "+ ex);        
         }        
     }
+    
+    
 }
