@@ -21,7 +21,9 @@ import controller.ControllerCidade;
 import controller.ControllerCompra;
 import controller.ControllerEndereco;
 import controller.ControllerFornecedor;
+import controller.ControllerPagar;
 import controller.ControllerProduto;
+import controller.ControllerReceber;
 import controller.ControllerVenda;
 
 /**
@@ -50,6 +52,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem23 = new javax.swing.JMenuItem();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jLabelTitulo1 = new javax.swing.JLabel();
         jLabelTitulo2 = new javax.swing.JLabel();
         jLabelImagem = new javax.swing.JLabel();
@@ -73,6 +76,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jSeparator7 = new javax.swing.JPopupMenu.Separator();
         jMenuItemContasAPagar = new javax.swing.JMenuItem();
         jMenuItemContasAReceber = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuRelatorios = new javax.swing.JMenu();
         jMenuItemRelatorioBairros = new javax.swing.JMenuItem();
         jMenuItem12RelatorioCidades = new javax.swing.JMenuItem();
@@ -89,6 +96,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItemReceber = new javax.swing.JMenuItem();
         jMenuItemRelatorioFaturamentos = new javax.swing.JMenuItem();
         jMenuItemRelatorioCompras = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         jMenuItem8.setText("jMenuItem8");
 
@@ -98,6 +106,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
+
+        jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -231,6 +241,28 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenuMovimentos.add(jMenuItemContasAReceber);
 
+        jMenuItem4.setText("Pagar");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenuMovimentos.add(jMenuItem4);
+
+        jMenuItem6.setText("Receber");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenuMovimentos.add(jMenuItem6);
+
+        jMenuItem9.setText("Itens de Compra");
+        jMenuMovimentos.add(jMenuItem9);
+
+        jMenuItem3.setText("Itens de Venda");
+        jMenuMovimentos.add(jMenuItem3);
+
         jMenuBar1.add(jMenuMovimentos);
 
         jMenuRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/mensalidade.png"))); // NOI18N
@@ -340,6 +372,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuRelatorios.add(jMenuItemRelatorioCompras);
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/vendas.png"))); // NOI18N
+        jMenuItem1.setText("Vendas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuRelatorios.add(jMenuItem1);
 
         jMenuBar1.add(jMenuRelatorios);
 
@@ -523,6 +564,25 @@ public class MenuPrincipal extends javax.swing.JFrame {
         telaCadastroEndereco.setVisible(true);
     }//GEN-LAST:event_jMenuItemEnderecosActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        TelaCadastroVenda telaCadastroVenda = new TelaCadastroVenda();
+        ControllerVenda controllerVenda = new ControllerVenda(telaCadastroVenda);
+        telaCadastroVenda.setVisible(true);
+
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        TelaCadastroReceber telaCadastroReceber = new TelaCadastroReceber();
+        ControllerReceber controllerReceber = new ControllerReceber(telaCadastroReceber);
+        telaCadastroReceber.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        TelaCadastroPagar telaCadastroPagar = new TelaCadastroPagar();
+        ControllerPagar controllerPagar = new ControllerPagar(telaCadastroPagar);
+        telaCadastroPagar.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -566,15 +626,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenu jMenuCotas;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem12RelatorioCidades;
     private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem24;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem jMenuItemAlunos;
     private javax.swing.JMenuItem jMenuItemBairros;
     private javax.swing.JMenuItem jMenuItemCidades;

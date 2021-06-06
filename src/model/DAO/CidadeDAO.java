@@ -1,125 +1,90 @@
-
 package model.DAO;
 
-import model.DAO.Principal.ConectionFactory;
 import model.DAO.Principal.InterfaceDAO;
 import java.util.List;
 import model.bo.Cidade;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
-
+import model.DAO.Principal.PS;
+import model.DAO.SQL.SqlCidade;
 
 public class CidadeDAO implements InterfaceDAO<Cidade>{
-    
+    private PS ps;
+
+    public CidadeDAO() {
+        this.ps = new PS(new SqlCidade());
+    }    
 
     @Override
     public void Create(Cidade objeto) {
-        Connection conexao = ConectionFactory.getConection();        
-        String sqlExecutar = "INSERT INTO cidade(nome,status) VALUES(?,?)"; 
-        PreparedStatement pstm = null;
         try{
-            pstm = conexao.prepareStatement(sqlExecutar);
-            pstm.setString  (1, objeto.getNome());
-            pstm.setBoolean(2, objeto.getStatus());
-            pstm.executeUpdate();
+            ps.criar();
+            ps.preparedStatement.setString(1, objeto.getNome());
+            ps.preparedStatement.setBoolean(2, objeto.getStatus());
+            ps.preparedStatement.executeUpdate();
+            ps.fecharConexao();
         }catch(Exception ex){
-            ex.printStackTrace();
+            throw new RuntimeException("Erro na criação de cidadeDAO: " +ex);
         }        
-        ConectionFactory.closeConnection(conexao, pstm);
     }
-    
 
     @Override
     public List<Cidade> Retrieve() {
-        
-        Connection conexao = ConectionFactory.getConection();
-        PreparedStatement pstm = null;
-        ResultSet rs = null;       
-        
         List<Cidade> cidades = new ArrayList();
-       
         try{
-            
-            String sqlExecutar = "SELECT id,nome,status FROM cidade"; 
-            pstm = conexao.prepareStatement(sqlExecutar);
-            rs = pstm.executeQuery();
-        
-            while(rs.next()){
+            ps.listarTodos();
+            while(ps.resultSet.next()){
                 Cidade cidade = new Cidade();
-                cidade.setId(rs.getInt("id"));
-                cidade.setNome(rs.getString("nome"));
-               
-                cidade.setStatus(rs.getBoolean("status"));
-                
+                cidade.setId(ps.resultSet.getInt("id"));
+                cidade.setNome(ps.resultSet.getString("nome"));               
+                cidade.setStatus(ps.resultSet.getBoolean("status"));                
                 cidades.add(cidade);
             }
-            ConectionFactory.closeConnection(conexao, pstm, rs);
+            ps.fecharConexao();
             return cidades;
-        }catch(Exception ex){
-            
-            //throw new RuntimeException("Erro na conexão com a lista de cidades: "+ex);            
-            ConectionFactory.closeConnection(conexao, pstm, rs);
-            return null;
+        }catch(Exception ex){        
+            throw new  RuntimeException("Erro na listagem geral da cidadeDAO: " + ex);
         }
     }
 
     @Override
     public Cidade Retrieve(int id) {
-        Connection conexao = ConectionFactory.getConection();       
-        String sqlExecutar = "SELECT id,nome,status FROM cidade WHERE cidade.id = ?";
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
         try{
-            pstm = conexao.prepareStatement(sqlExecutar);
-            pstm.setInt(1, id);
-            rs = pstm.executeQuery();
+            ps.listarId(id);
             Cidade cidade = new Cidade();
-            while(rs.next()){
-                cidade.setId    (rs.getInt("id"));
-                cidade.setNome  (rs.getString("nome"));
-                cidade.setStatus(rs.getBoolean("status"));
+            while(ps.resultSet.next()){
+                cidade.setId(ps.resultSet.getInt("id"));
+                cidade.setNome(ps.resultSet.getString("nome"));
+                cidade.setStatus(ps.resultSet.getBoolean("status"));
             }
-            ConectionFactory.closeConnection(conexao, pstm, rs);
+            ps.fecharConexao();
             return cidade;
         }catch(Exception ex){
-            ConectionFactory.closeConnection(conexao, pstm, rs);
-            return null;
+            throw new RuntimeException("Erro na lisgtagem por id de bairroDAO: " + ex);
         }
     }
 
     @Override
-    public void Update(Cidade objeto)
-    {
-        Connection conexao = ConectionFactory.getConection();        
-        String sqlExecutar = "UPDATE cidade SET nome=?,status=? WHERE id = ?";        
-        PreparedStatement pstm = null;   
+    public void Update(Cidade objeto){
         try{
-            pstm = conexao.prepareStatement(sqlExecutar);
-            pstm.setString  (1, objeto.getNome());
-            pstm.setBoolean (2, objeto.getStatus());
-            pstm.setInt     (3, objeto.getId());
-            pstm.executeUpdate();
-            
+            ps.atualizar();
+            ps.preparedStatement.setString(1, objeto.getNome());
+            ps.preparedStatement.setBoolean(2, objeto.getStatus());
+            ps.preparedStatement.setInt(3, objeto.getId());
+            ps.preparedStatement.executeUpdate();            
+            ps.fecharConexao();
         }catch(Exception ex){
-            ex.printStackTrace();
+            throw new RuntimeException("Erro na atualização de cidadeDAO: "+ ex);
         }        
-        ConectionFactory.closeConnection(conexao, pstm);        
     }
 
     @Override
     public void Delete(Cidade objeto){
-        Connection conexao = ConectionFactory.getConection();        
-        String sqlExecutar = "DELETE FROM cidade WHERE id=?";        
-        PreparedStatement pstm = null;
         try{
-            pstm = conexao.prepareStatement(sqlExecutar);
-            pstm.setInt(1, objeto.getId());
-            pstm.executeUpdate();            
+            ps.deletar(objeto.getId());
+            ps.preparedStatement.executeUpdate();
+            ps.fecharConexao();
         }catch(Exception ex){
-            ex.printStackTrace();
+            throw new RuntimeException("Erro em deletar cidadeDAO"+ ex);
         }        
-        ConectionFactory.closeConnection(conexao, pstm);
     }
 }

@@ -28,8 +28,8 @@ public class ControllerBuscaEndereco implements ActionListener{
                 enderecoDaLista.getLogradouro(),
                 enderecoDaLista.getNumero(),
                 enderecoDaLista.getComplemento(),
-                enderecoDaLista.getBairro().getNome(),
-                enderecoDaLista.getCidade().getNome(),
+                enderecoDaLista.getBairro(),
+                enderecoDaLista.getCidade(),
                 enderecoDaLista.getCep(),
                 enderecoDaLista.getStatus()
                     

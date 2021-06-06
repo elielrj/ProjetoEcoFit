@@ -3,22 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/controller/ControllerFornecedor.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/service/ServiceFornecedor.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/controller/ControllerBuscaPessoaFisica.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/controller/ControllerPessoaFisica.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/service/ServicePessoaFisica.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/view/TelaCadastroPessoaFisica.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/controller/ControllerBuscaFornecedor.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/controller/ControllerVenda.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/VendaDAO.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/controller/ControllerBuscaVenda.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/view/TelaBuscaPessoaFisica.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/FornecedorDAO.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/controller/ControllerReceber.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/view/TelaCadastroFornecedor.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/PessoaFisicaDAO.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/bo/Fornecedor.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/view/TelaCadastroPagar.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/view/MenuPrincipal.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/view/TelaCadastroVenda.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/controller/ControllerPagar.java</file>
         </group>
     </open-files>
 </project-private>
