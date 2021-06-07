@@ -1,7 +1,6 @@
 
 package model.bo;
 
-
 public class Cidade {
 
 private int id;

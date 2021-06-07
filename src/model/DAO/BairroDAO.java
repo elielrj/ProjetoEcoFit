@@ -63,7 +63,8 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
             throw new RuntimeException("Erro na listagem por Id de bairroDAO: "+ ex);
         }   
     }
-
+   
+    
     @Override
     public void Update(Bairro objeto) {
         try{
