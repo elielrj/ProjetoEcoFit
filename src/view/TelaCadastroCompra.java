@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -20,6 +21,7 @@ public class TelaCadastroCompra extends javax.swing.JFrame {
      * Creates new form FormModeloCadastros
      */
     public TelaCadastroCompra() {
+   
         initComponents();
         for(Fornecedor f:service.ServiceFornecedor.Buscar()){
             jComboBoxFornecedor.addItem(f);

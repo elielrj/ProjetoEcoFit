@@ -36,6 +36,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
+        setSize(800,600);
         initComponents();
     }
 

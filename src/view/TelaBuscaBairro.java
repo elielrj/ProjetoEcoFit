@@ -23,6 +23,7 @@ public class TelaBuscaBairro extends javax.swing.JDialog {
     }
 
     public TelaBuscaBairro() {
+        setSize(800,600);
         initComponents();
     }
     /**
