@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import model.DAO.EnderecoDAO;
 import model.bo.Fornecedor;
@@ -17,7 +18,7 @@ import view.TelaBuscaFornecedor;
 import view.TelaCadastroFornecedor;
 
 
-public class ControllerFornecedor implements ActionListener{
+public class ControllerFornecedor implements ActionListener {
     
     TelaCadastroFornecedor telaCadastroFornecedor = new TelaCadastroFornecedor();
     public static int codigo;
@@ -141,7 +142,39 @@ public class ControllerFornecedor implements ActionListener{
     public void LimpaEstadoComponentes(boolean estadoCompo){
         Component[] componentes = this.telaCadastroFornecedor.getjPanelDados().getComponents(); //verificar
         
-        LimpaEstadoDeComponentes.limpa(estadoCompo, componentes);
+        for(Component componente : componentes){
+
+        
+            if(componente instanceof JTextField){
+                    ((JTextField)componente).setText("");
+                    componente.setEnabled(estadoCompo);
+                }
+
+                if(componente instanceof JFormattedTextField){
+                    ((JFormattedTextField) componente).setText("");
+                    componente.setEnabled(estadoCompo);
+                }
+
+                if(componente instanceof JComboBox){
+                    ((JComboBox) componente).setSelectedItem(0);
+                    componente.setEnabled(estadoCompo);
+                }
+
+
+                if((componente instanceof JTextArea)){
+                    ((JTextArea) componente).setToolTipText("");
+                    ((JTextArea) componente).setEditable(estadoCompo);
+                }
+
+                if((componente instanceof JTextArea)){
+                    ((JTextArea) componente).setText("");
+                    componente.setEnabled(estadoCompo);
+                }
+                if(componente instanceof  JComboBox){
+                    ((JComboBox) componente).setSelectedItem(0);
+                    componente.setEnabled(estadoCompo);
+                }    
+        }
     }
     
 }

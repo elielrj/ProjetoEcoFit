@@ -438,9 +438,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemBairrosActionPerformed
 
     private void jMenuItemAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAlunosActionPerformed
-        TelaCadastroPessoaFisica telaCadastroAluno = new TelaCadastroPessoaFisica();
-        ControllerPessoaFisica controllerAluno = new ControllerPessoaFisica(telaCadastroAluno);
-        telaCadastroAluno.setVisible(true);
+        TelaCadastroPessoaFisica telaCadastroPessoaFisica = new TelaCadastroPessoaFisica();
+        ControllerPessoaFisica controllerPessoaFisica = new ControllerPessoaFisica(telaCadastroPessoaFisica);
+        telaCadastroPessoaFisica.setVisible(true);
     }//GEN-LAST:event_jMenuItemAlunosActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed

@@ -4,6 +4,10 @@ package controller;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import model.DAO.EnderecoDAO;
 import model.bo.PessoaFisica;
@@ -32,11 +36,10 @@ public class ControllerPessoaFisica implements ActionListener{
         this.telaCadastroPessoaFisica.getjButtonGravar().addActionListener(this);
         this.telaCadastroPessoaFisica.getjButtonSair().addActionListener(this);
         
-        
           
-        
         Ativa(true);
-        LimpaEstadoComponentes(false);
+                LimpaEstadoComponentes(false);
+
         
     
     }
@@ -45,7 +48,7 @@ public class ControllerPessoaFisica implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.telaCadastroPessoaFisica.getjButtonNovo()){            
             Ativa(false);
-            LimpaEstadoComponentes(true);            
+            LimpaEstadoComponentes(true);  
             this.telaCadastroPessoaFisica.getjTextFieldId().setEnabled(false);
             codigo = 0;
         }        
@@ -137,12 +140,43 @@ public class ControllerPessoaFisica implements ActionListener{
         this.telaCadastroPessoaFisica.getjButtonSair().setEnabled(estadoBotoes);        
     }
     
-    public void LimpaEstadoComponentes(boolean estadoCompo){
+   public void LimpaEstadoComponentes(boolean estadoCompo){
     
         Component[] componentes = this.telaCadastroPessoaFisica.getjPanelDados().getComponents(); //verificar
     
-        LimpaEstadoDeComponentes.limpa(estadoCompo, componentes);
+        for(Component componente : componentes){
+
         
+            if(componente instanceof JTextField){
+                    ((JTextField)componente).setText("");
+                    componente.setEnabled(estadoCompo);
+                }
+
+                if(componente instanceof JFormattedTextField){
+                    ((JFormattedTextField) componente).setText("");
+                    componente.setEnabled(estadoCompo);
+                }
+
+                if(componente instanceof JComboBox){
+                    ((JComboBox) componente).setSelectedItem(0);
+                    componente.setEnabled(estadoCompo);
+                }
+
+
+                if((componente instanceof JTextArea)){
+                    ((JTextArea) componente).setToolTipText("");
+                    ((JTextArea) componente).setEditable(estadoCompo);
+                }
+
+                if((componente instanceof JTextArea)){
+                    ((JTextArea) componente).setText("");
+                    componente.setEnabled(estadoCompo);
+                }
+                if(componente instanceof  JComboBox){
+                    ((JComboBox) componente).setSelectedItem(0);
+                    componente.setEnabled(estadoCompo);
+                }
+        }
     }    
     
 }

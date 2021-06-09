@@ -125,20 +125,35 @@ public class ControllerEndereco implements ActionListener{
     public void LimpaEstadoComponentes(boolean estadoCompo){
         Component[] componentes = this.telaCadastroEndereco.getjPanelDados().getComponents(); //verificar!
         for(Component componente : componentes){
-            if(componente instanceof JTextField){
-                ((JTextField)componente).setText("");
-                componente.setEnabled(estadoCompo);
-            }
-        
-            if(componente instanceof JFormattedTextField){
-                ((JFormattedTextField) componente).setText("");
-                componente.setEnabled(estadoCompo);
-            }
-            
-            if(componente instanceof JComboBox){
-                ((JComboBox) componente).setSelectedItem(0);
-                componente.setEnabled(estadoCompo);
-            }
+             if(componente instanceof JTextField){
+                    ((JTextField)componente).setText("");
+                    componente.setEnabled(estadoCompo);
+                }
+
+                if(componente instanceof JFormattedTextField){
+                    ((JFormattedTextField) componente).setText("");
+                    componente.setEnabled(estadoCompo);
+                }
+
+                if(componente instanceof JComboBox){
+                    ((JComboBox) componente).setSelectedItem(0);
+                    componente.setEnabled(estadoCompo);
+                }
+
+
+                if((componente instanceof JTextArea)){
+                    ((JTextArea) componente).setToolTipText("");
+                    ((JTextArea) componente).setEditable(estadoCompo);
+                }
+
+                if((componente instanceof JTextArea)){
+                    ((JTextArea) componente).setText("");
+                    componente.setEnabled(estadoCompo);
+                }
+                if(componente instanceof  JComboBox){
+                    ((JComboBox) componente).setSelectedItem(0);
+                    componente.setEnabled(estadoCompo);
+                }
             
             
         } 
