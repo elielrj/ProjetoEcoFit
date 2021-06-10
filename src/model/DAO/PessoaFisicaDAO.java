@@ -110,6 +110,7 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica>{
 
             while(rs.next()){
                 pessoaFisica.setId(rs.getInt("id"));
+                pessoaFisica.setNome(rs.getString("nome"));
                 pessoaFisica.setRg(rs.getString("rg"));
                 pessoaFisica.setCpf(rs.getString("cpf")); 
                 pessoaFisica.setDataDeNascimento(rs.getString("dataDeNascimento"));

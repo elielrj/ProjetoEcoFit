@@ -8,11 +8,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-import model.DAO.EnderecoDAO;
 import model.bo.PessoaFisica;
-import model.bo.Bairro;
-import model.bo.Cidade;
 import model.bo.Endereco;
 
 import view.TelaBuscaPessoaFisica;
