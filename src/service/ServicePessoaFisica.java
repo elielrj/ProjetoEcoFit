@@ -34,4 +34,14 @@ public class ServicePessoaFisica {
         PessoaFisicaDAO alunoDAO = new PessoaFisicaDAO();
         alunoDAO.Delete(objeto);  
     }
+     
+     public static List<PessoaFisica> BuscarAluno(){
+        PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+        return (pessoaFisicaDAO.RetrieveAluno());  
+    }
+     
+     public static List<PessoaFisica> BuscarPersonal(){
+        PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
+        return (pessoaFisicaDAO.RetrievePersonal());  
+    }
 }

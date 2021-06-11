@@ -13,6 +13,8 @@ import controller.ControllerBuscaCidade;
 import controller.ControllerBuscaCompra;
 import controller.ControllerBuscaEndereco;
 import controller.ControllerBuscaFornecedor;
+import controller.ControllerBuscaPessoaFisicaAluno;
+import controller.ControllerBuscaPessoaFisicaPersonal;
 import controller.ControllerBuscaProduto;
 import controller.ControllerBuscaReceber;
 import controller.ControllerBuscaVenda;
@@ -476,9 +478,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemRelatorioCepsActionPerformed
 
     private void jMenuItemRelatorioAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioAlunosActionPerformed
-       TelaBuscaPessoaFisica telaBuscaAluno = new TelaBuscaPessoaFisica();
-       ControllerBuscaPessoaFisica controllerBuscaAluno = new ControllerBuscaPessoaFisica(telaBuscaAluno);
-       telaBuscaAluno.setVisible(true);
+       TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica();
+        ControllerBuscaPessoaFisicaAluno controllerBuscaPessoaFisicaAluno = new ControllerBuscaPessoaFisicaAluno(telaBuscaPessoaFisica);
+       telaBuscaPessoaFisica.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelatorioAlunosActionPerformed
 
     private void jMenuItemRelatorioFornecedoreresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioFornecedoreresActionPerformed
@@ -489,7 +491,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemRelatorioPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioPersonalActionPerformed
        TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica();
-       ControllerBuscaPessoaFisica controllerBuscaPessoaFisica = new ControllerBuscaPessoaFisica(telaBuscaPessoaFisica);
+        ControllerBuscaPessoaFisicaPersonal controllerBuscaPessoaFisicaPersonal = new ControllerBuscaPessoaFisicaPersonal(telaBuscaPessoaFisica);
        telaBuscaPessoaFisica.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelatorioPersonalActionPerformed
 

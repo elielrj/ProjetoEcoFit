@@ -187,5 +187,97 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica>{
         ConectionFactory.closeConnection(conexao, pstm);
     }
 
+    public List<PessoaFisica> RetrieveAluno() {
+        Connection conexao = ConectionFactory.getConection();
+        
+        String sqlExecutar = "SELECT id,nome,rg,cpf,dataDeNascimento,telefone1,telefone2,email,observacao,status,enderecoId,tipo FROM pessoaFisica where pessoaFisica.tipo = 'aluno'";
+        
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+ 
+        try{
+            pstm = conexao.prepareStatement(sqlExecutar);
+            rs = pstm.executeQuery();
+            
+            List<PessoaFisica> pessoaFisicas = new ArrayList();
+            
+            while(rs.next()){
+                PessoaFisica pessoaFisica = new PessoaFisica();
+                
+                pessoaFisica.setId(rs.getInt("id"));
+                pessoaFisica.setNome(rs.getString("nome"));
+                pessoaFisica.setRg(rs.getString("rg"));
+                
+                pessoaFisica.setCpf(rs.getString("cpf"));
+                pessoaFisica.setDataDeNascimento(rs.getString("dataDeNascimento"));
+                pessoaFisica.setTelefone1(rs.getString("telefone1"));
+                
+                pessoaFisica.setTelefone2(rs.getString("telefone2"));
+                pessoaFisica.setEmail(rs.getString("email"));
+                pessoaFisica.setObservacao(rs.getString("observacao"));
+                
+                pessoaFisica.setStatus(rs.getBoolean("status"));
+                
+                EnderecoDAO enderecoDAO = new EnderecoDAO();
+                pessoaFisica.setEndereco(enderecoDAO.Retrieve(rs.getInt("enderecoId")));
+                
+                pessoaFisica.setTipo(rs.getString("tipo"));
+                
+                pessoaFisicas.add(pessoaFisica);
+            }
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return pessoaFisicas;
+        }catch(Exception ex){
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return null;
+        }
+    }
+
+    public List<PessoaFisica> RetrievePersonal() {
+        Connection conexao = ConectionFactory.getConection();
+        
+        String sqlExecutar = "SELECT id,nome,rg,cpf,dataDeNascimento,telefone1,telefone2,email,observacao,status,enderecoId,tipo FROM pessoaFisica where pessoaFisica.tipo = 'personal'";
+        
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+ 
+        try{
+            pstm = conexao.prepareStatement(sqlExecutar);
+            rs = pstm.executeQuery();
+            
+            List<PessoaFisica> pessoaFisicas = new ArrayList();
+            
+            while(rs.next()){
+                PessoaFisica pessoaFisica = new PessoaFisica();
+                
+                pessoaFisica.setId(rs.getInt("id"));
+                pessoaFisica.setNome(rs.getString("nome"));
+                pessoaFisica.setRg(rs.getString("rg"));
+                
+                pessoaFisica.setCpf(rs.getString("cpf"));
+                pessoaFisica.setDataDeNascimento(rs.getString("dataDeNascimento"));
+                pessoaFisica.setTelefone1(rs.getString("telefone1"));
+                
+                pessoaFisica.setTelefone2(rs.getString("telefone2"));
+                pessoaFisica.setEmail(rs.getString("email"));
+                pessoaFisica.setObservacao(rs.getString("observacao"));
+                
+                pessoaFisica.setStatus(rs.getBoolean("status"));
+                
+                EnderecoDAO enderecoDAO = new EnderecoDAO();
+                pessoaFisica.setEndereco(enderecoDAO.Retrieve(rs.getInt("enderecoId")));
+                
+                pessoaFisica.setTipo(rs.getString("tipo"));
+                
+                pessoaFisicas.add(pessoaFisica);
+            }
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return pessoaFisicas;
+        }catch(Exception ex){
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return null;
+        }
+    }
+
     
 }
