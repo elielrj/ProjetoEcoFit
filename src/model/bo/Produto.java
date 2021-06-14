@@ -11,12 +11,13 @@ private float valor;
 private int quantidadeDeEstoque;
 private String codigoDeBarras;
 private boolean status;
+private String observacao;
        
 
     public Produto() {
     }
 
-    public Produto(int id, String descricao, String unidadeDeCompra, String unidadeDeVenda, String correlacaoUnidade, float valor, int quantidadeDeEstoque, String codigoDeBarras, boolean status) {
+    public Produto(int id, String descricao, String unidadeDeCompra, String unidadeDeVenda, String correlacaoUnidade, float valor, int quantidadeDeEstoque, String codigoDeBarras, boolean status, String observacao) {
         this.id = id;
         this.descricao = descricao;
         this.unidadeDeCompra = unidadeDeCompra;
@@ -26,6 +27,7 @@ private boolean status;
         this.quantidadeDeEstoque = quantidadeDeEstoque;
         this.codigoDeBarras = codigoDeBarras;
         this.status = status;
+        this.observacao = observacao;
     }
 
     public int getId() {
@@ -101,8 +103,13 @@ private boolean status;
         this.codigoDeBarras = codigoDeBarras;
     }
 
+    public String getObservacao() {
+        return observacao;
+    }
 
-
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
     
 
     @Override

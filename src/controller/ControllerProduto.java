@@ -60,6 +60,7 @@ public class ControllerProduto implements ActionListener{
             produto.setQuantidadeDeEstoque(Integer.parseInt(this.telaCadastroProduto.getjTextFieldQtdEstoque().getText()));
             produto.setCodigoDeBarras(this.telaCadastroProduto.getjTextFieldCodBarras().getText());
             produto.setStatus(this.telaCadastroProduto.getjComboBoxStatus().getSelectedItem().equals("Sim"));
+            produto.setObservacao(this.telaCadastroProduto.getjTextAreaObs().getText());
             
             if(codigo == 0){
                 service.ServiceProduto.Incluir(produto);
@@ -95,6 +96,7 @@ public class ControllerProduto implements ActionListener{
                 this.telaCadastroProduto.getjTextFieldQtdEstoque().setText(produto.getQuantidadeDeEstoque()+"");                
                 this.telaCadastroProduto.getjTextFieldCodBarras().setText(produto.getCodigoDeBarras());
                 this.telaCadastroProduto.getjComboBoxStatus().setSelectedItem(produto.getStatus());
+                this.telaCadastroProduto.getjTextAreaObs().setText(produto.getObservacao());
                 
                 this.telaCadastroProduto.getjTextFieldId().setEnabled(false);
             }

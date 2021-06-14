@@ -29,6 +29,7 @@ public class ControllerBuscaProduto implements ActionListener{
                     produtoDaLista.getValor(),
                     produtoDaLista.getQuantidadeDeEstoque(),
                     produtoDaLista.getCodigoDeBarras(),
+                    produtoDaLista.getObservacao(),
                     produtoDaLista.getStatus()
               });
         }

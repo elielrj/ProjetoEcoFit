@@ -118,11 +118,11 @@ public class TelaBuscaProduto extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Descrição", "Un Comp", "Un Vend", "Correl.", "Valor", "Qtd", "Cód Barras", "Status"
+                "Id", "Descrição", "Un Comp", "Un Vend", "Correl.", "Valor", "Qtd", "Cód Barras", "Observação", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, true
+                false, false, false, false, false, false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

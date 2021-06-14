@@ -16,7 +16,7 @@ public class ProdutoDAO implements InterfaceDAO<Produto>{
         
         Connection conexao = ConectionFactory.getConection();     
         
-        String sqlExecutar = "INSERT INTO produto(descricao,unidadeDeCompra,unidadeDeVenda, correlacaoUnidade, valor,quantidadeDeEstoque, codigoDeBarras, status) VALUES(?,?,?,?,?,?,?,?)";    
+        String sqlExecutar = "INSERT INTO produto(descricao,unidadeDeCompra,unidadeDeVenda, correlacaoUnidade, valor,quantidadeDeEstoque, codigoDeBarras, status, observacao) VALUES(?,?,?,?,?,?,?,?,?)";    
         
         PreparedStatement pstm = null;
         
@@ -30,6 +30,7 @@ public class ProdutoDAO implements InterfaceDAO<Produto>{
             pstm.setInt(6, objeto.getQuantidadeDeEstoque());
             pstm.setString(7, objeto.getCodigoDeBarras());
             pstm.setBoolean(8, objeto.getStatus());
+            pstm.setString(9, objeto.getObservacao());
             
             pstm.executeUpdate();
             
@@ -44,7 +45,7 @@ public class ProdutoDAO implements InterfaceDAO<Produto>{
     public List<Produto> Retrieve() {
         Connection conexao = ConectionFactory.getConection();
         
-        String sqlExecutar = "SELECT id, descricao,unidadeDeCompra,unidadeDeVenda, correlacaoUnidade, valor,quantidadeDeEstoque, codigoDeBarras,status  FROM produto";
+        String sqlExecutar = "SELECT id, descricao,unidadeDeCompra,unidadeDeVenda, correlacaoUnidade, valor,quantidadeDeEstoque, codigoDeBarras,status,observacao  FROM produto";
         
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -67,6 +68,7 @@ public class ProdutoDAO implements InterfaceDAO<Produto>{
                 produto.setQuantidadeDeEstoque(rs.getInt("quantidadeDeEstoque"));
                 produto.setCodigoDeBarras(rs.getString("codigoDeBarras"));
                 produto.setStatus(rs.getBoolean("status"));
+                produto.setObservacao(rs.getString("observacao"));
                 
                 produtos.add(produto);
             }
@@ -82,7 +84,7 @@ public class ProdutoDAO implements InterfaceDAO<Produto>{
     public Produto Retrieve(int id) {
         Connection conexao = ConectionFactory.getConection();
         
-        String sqlExecutar = "SELECT id, descricao,unidadeDeCompra,unidadeDeVenda, correlacaoUnidade, valor,quantidadeDeEstoque, codigoDeBarras, status FROM produto WHERE id=?";
+        String sqlExecutar = "SELECT id, descricao,unidadeDeCompra,unidadeDeVenda, correlacaoUnidade, valor,quantidadeDeEstoque, codigoDeBarras, status,observacao FROM produto WHERE id=?";
         
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -106,6 +108,7 @@ public class ProdutoDAO implements InterfaceDAO<Produto>{
                 produto.setQuantidadeDeEstoque(rs.getInt("quantidadeDeEstoque"));
                 produto.setCodigoDeBarras(rs.getString("codigoDeBarras"));
                 produto.setStatus(rs.getBoolean("status"));
+                produto.setObservacao(rs.getString("observacao"));
                 
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
@@ -119,7 +122,7 @@ public class ProdutoDAO implements InterfaceDAO<Produto>{
     @Override
     public void Update(Produto objeto) {
         Connection conexao = ConectionFactory.getConection();        
-        String sqlExecutar = "UPDATE produto SET descricao = ?, unidadeDeCompra =?, unidadeDeVenda =?,correlacaoUnidade =?,valor =?,quantidadeDeEstoque =?,codigoDeBarras =?, status=? WHERE id=?"; 
+        String sqlExecutar = "UPDATE produto SET descricao = ?, unidadeDeCompra =?, unidadeDeVenda =?,correlacaoUnidade =?,valor =?,quantidadeDeEstoque =?,codigoDeBarras =?, status=?, observacao=? WHERE id=?"; 
 
         
         PreparedStatement pstm = null;
@@ -134,7 +137,8 @@ public class ProdutoDAO implements InterfaceDAO<Produto>{
             pstm.setInt(6, objeto.getQuantidadeDeEstoque());
             pstm.setString(7, objeto.getCodigoDeBarras());
             pstm.setBoolean(8, objeto.getStatus());
-            pstm.setInt(9, objeto.getId());
+            pstm.setString(9, objeto.getObservacao());
+            pstm.setInt(10, objeto.getId());
 
             pstm.executeUpdate();
             
