@@ -24,6 +24,7 @@ public class TelaBuscaPersonal extends javax.swing.JDialog {
 
     public TelaBuscaPersonal(){
         initComponents();
+        setPreferredSize(new java.awt.Dimension(800, 600));
     }
 
     /**

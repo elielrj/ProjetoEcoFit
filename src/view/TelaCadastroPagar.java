@@ -22,7 +22,7 @@ public class TelaCadastroPagar extends javax.swing.JFrame {
      */
     public TelaCadastroPagar() {
         initComponents();
-
+        setPreferredSize(new java.awt.Dimension(800, 600));
         for(Compra c: service.ServiceCompra.Buscar()){
             jComboBoxCompra.addItem(c);
         }

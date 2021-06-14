@@ -28,7 +28,7 @@ public class TelaCadastroBairro extends javax.swing.JFrame {
         
 
 
-        
+        setPreferredSize(new java.awt.Dimension(800, 600));
         
         jComboBoxStatus.addItem("Sim");
         jComboBoxStatus.addItem("Não");

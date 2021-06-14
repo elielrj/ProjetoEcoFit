@@ -22,7 +22,7 @@ public class TelaCadastroEndereco extends javax.swing.JFrame {
     public TelaCadastroEndereco() {
         initComponents();       
         
-        
+        setPreferredSize(new java.awt.Dimension(800, 600));
         for(Cidade c: ServiceCidade.Buscar()){
             jComboBoxCidade.addItem(c);
            

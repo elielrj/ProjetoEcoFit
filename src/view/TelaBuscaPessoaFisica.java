@@ -25,6 +25,7 @@ public class TelaBuscaPessoaFisica extends javax.swing.JDialog {
 
     public TelaBuscaPessoaFisica(){
         initComponents();
+        setPreferredSize(new java.awt.Dimension(800, 600));
     }
 
     /**

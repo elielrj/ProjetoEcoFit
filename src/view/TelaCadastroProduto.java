@@ -11,7 +11,7 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
 
     public TelaCadastroProduto() {
         initComponents();
-        
+        setPreferredSize(new java.awt.Dimension(800, 600));
         jComboBoxStatus.addItem("Sim");
         jComboBoxStatus.addItem("Não");
     }

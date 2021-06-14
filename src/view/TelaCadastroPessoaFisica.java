@@ -32,7 +32,7 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
      */
     public TelaCadastroPessoaFisica() {
         initComponents();
-        
+        setPreferredSize(new java.awt.Dimension(800, 600));
 
         
         for(Endereco e: ServiceEndereco.Buscar()){

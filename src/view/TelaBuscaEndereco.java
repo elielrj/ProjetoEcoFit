@@ -20,6 +20,8 @@ public class TelaBuscaEndereco extends javax.swing.JDialog {
     public TelaBuscaEndereco(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setPreferredSize(new java.awt.Dimension(800, 600));
+
     }
 
     public TelaBuscaEndereco(){

@@ -24,6 +24,7 @@ public class TelaBuscaVenda extends javax.swing.JDialog {
 
     TelaBuscaVenda() {
          initComponents();
+         setPreferredSize(new java.awt.Dimension(800, 600));
     }
 
 

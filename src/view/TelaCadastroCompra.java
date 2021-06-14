@@ -21,7 +21,7 @@ public class TelaCadastroCompra extends javax.swing.JFrame {
      * Creates new form FormModeloCadastros
      */
     public TelaCadastroCompra() {
-   
+        setPreferredSize(new java.awt.Dimension(800, 600));
         initComponents();
         for(Fornecedor f:service.ServiceFornecedor.Buscar()){
             jComboBoxFornecedor.addItem(f);
