@@ -17,7 +17,7 @@ public class TelaBuscaCidade extends javax.swing.JDialog {
 
     public TelaBuscaCidade() {
         initComponents();
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setSize(800,600); 
     }
 
     /**

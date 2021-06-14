@@ -24,7 +24,7 @@ public class TelaBuscaPais extends javax.swing.JDialog {
     
     public TelaBuscaPais() {
         initComponents();
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setSize(800,600); 
     }
     /**
      * This method is called from within the constructor to initialize the form.

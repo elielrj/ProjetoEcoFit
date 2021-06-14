@@ -14,7 +14,7 @@ public class TelaCadastroVenda extends javax.swing.JFrame {
 
     public TelaCadastroVenda() {
         initComponents();
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setSize(800,600); 
         for(PessoaFisica a: service.ServicePessoaFisica.Buscar()){
             jComboBoxPessoaFisica.addItem(a);
         }

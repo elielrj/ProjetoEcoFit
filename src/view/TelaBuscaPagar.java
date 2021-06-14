@@ -23,7 +23,7 @@ public class TelaBuscaPagar extends javax.swing.JDialog {
     }
 
     public TelaBuscaPagar() {
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setSize(800,600); 
         initComponents();
     }
     

@@ -13,7 +13,7 @@ public class TelaCadastroCidade extends javax.swing.JFrame {
      */
     public TelaCadastroCidade() {
         initComponents();
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setSize(800,600); 
         jComboBoxStatus.addItem("Sim");
         jComboBoxStatus.addItem("Não");
         

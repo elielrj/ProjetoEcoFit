@@ -22,7 +22,7 @@ public class TelaCadastroReceber extends javax.swing.JFrame {
 
     public TelaCadastroReceber() {
         initComponents();
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setSize(800,600); 
         for(Venda v: service.ServiceVenda.Buscar()){
             jComboBoxVendasId.addItem(v);
         }

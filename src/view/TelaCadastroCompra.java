@@ -21,7 +21,7 @@ public class TelaCadastroCompra extends javax.swing.JFrame {
      * Creates new form FormModeloCadastros
      */
     public TelaCadastroCompra() {
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setSize(800,600); 
         initComponents();
         for(Fornecedor f:service.ServiceFornecedor.Buscar()){
             jComboBoxFornecedor.addItem(f);
@@ -70,6 +70,7 @@ public class TelaCadastroCompra extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Formulário de Cadastro de ...");
+        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         jPanelTitulo.setBackground(new java.awt.Color(204, 255, 0));

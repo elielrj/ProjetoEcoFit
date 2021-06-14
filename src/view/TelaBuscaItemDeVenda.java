@@ -20,7 +20,7 @@ public class TelaBuscaItemDeVenda extends javax.swing.JDialog {
     public TelaBuscaItemDeVenda(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setSize(800,600); 
 
     }
 
