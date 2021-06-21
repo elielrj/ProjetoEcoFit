@@ -15,6 +15,8 @@ import javax.swing.JTable;
  */
 public class TelaBuscaPessoaFisica extends javax.swing.JDialog {
 
+    private int codPessoaFisica = 0;
+
     /**
      * Creates new form FormModeloBuscas
      */
@@ -225,6 +227,16 @@ public class TelaBuscaPessoaFisica extends javax.swing.JDialog {
     public JTable getjTable1() {
         return jTable1;
     }
+
+    public int getCodPessoaFisica() {
+        return codPessoaFisica;
+    }
+
+    public void setCodPessoaFisica(int codPessoaFisica) {
+        this.codPessoaFisica = codPessoaFisica;
+    }
+
+
 
 
 }

@@ -15,12 +15,14 @@ import javax.swing.JTable;
  */
 public class TelaBuscaProduto extends javax.swing.JDialog {
 
+    int codProduto =0;
     /**
      * Creates new form FormModeloBuscas
      */
     public TelaBuscaProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
     }
 
     public TelaBuscaProduto(){
@@ -231,6 +233,14 @@ public class TelaBuscaProduto extends javax.swing.JDialog {
 
     public JTable getjTable1() {
         return jTable1;
+    }
+
+    public void setCodProduto(int codProduto) {
+        this.codProduto = codProduto;
+    }
+
+    public int getCodProduto() {
+        return codProduto;
     }
 
     

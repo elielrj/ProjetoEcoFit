@@ -106,6 +106,6 @@ public class Pagar {
         this.getObservacao()+ " " +        
         this.getCompra().toString();
     }
-    
+   
     
 }

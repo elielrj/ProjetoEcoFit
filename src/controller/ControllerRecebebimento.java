@@ -15,12 +15,12 @@ import view.TelaBuscaReceber;
 import view.TelaCadastroReceber;
 
 
-public class ControllerReceber implements ActionListener{
+public class ControllerRecebebimento implements ActionListener{
     
     TelaCadastroReceber telaCadastroReceber = new TelaCadastroReceber();
     public static int codigo;
     
-    public ControllerReceber(TelaCadastroReceber telaCadastroReceber){
+    public ControllerRecebebimento(TelaCadastroReceber telaCadastroReceber){
        
         this.telaCadastroReceber = telaCadastroReceber;
         

@@ -38,7 +38,7 @@ public class ControllerBuscaReceber implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
        if(e.getSource() == this.telaBuscaReceber.getjButtonCarregar()){
-           ControllerReceber.codigo = (int) this.telaBuscaReceber.getjTable1().getValueAt(this.telaBuscaReceber.getjTable1().getSelectedRow(),0);
+           ControllerRecebebimento.codigo = (int) this.telaBuscaReceber.getjTable1().getValueAt(this.telaBuscaReceber.getjTable1().getSelectedRow(),0);
            this.telaBuscaReceber.dispose();
        }
        if(e.getSource() == this.telaBuscaReceber.getjButtonSair()){

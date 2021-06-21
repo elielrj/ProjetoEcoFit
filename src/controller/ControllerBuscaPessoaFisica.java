@@ -10,6 +10,7 @@ import model.bo.PessoaFisica;
 public class ControllerBuscaPessoaFisica implements ActionListener{
     
     TelaBuscaPessoaFisica telaBuscaPessoaFisica;
+    int codigoPessoaFisica = 0;
     
     public ControllerBuscaPessoaFisica(TelaBuscaPessoaFisica telaBuscaPessoaFisica){
         this.telaBuscaPessoaFisica = telaBuscaPessoaFisica;
@@ -46,12 +47,22 @@ public class ControllerBuscaPessoaFisica implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
        if(e.getSource() == this.telaBuscaPessoaFisica.getjButtonCarregar()){
-           ControllerPessoaFisica.codigo = (int) this.telaBuscaPessoaFisica.getjTable1().getValueAt(this.telaBuscaPessoaFisica.getjTable1().getSelectedRow(),0);
+           codigoPessoaFisica = (int) this.telaBuscaPessoaFisica.getjTable1().getValueAt(this.telaBuscaPessoaFisica.getjTable1().getSelectedRow(),0);
+           ControllerPessoaFisica.codigo = codigoPessoaFisica;
+           this.telaBuscaPessoaFisica.setCodPessoaFisica(codigoPessoaFisica);
            this.telaBuscaPessoaFisica.dispose();
        }
        if(e.getSource() == this.telaBuscaPessoaFisica.getjButtonSair()){
            this.telaBuscaPessoaFisica.dispose();
        }
+    }
+
+    public int getCodigoPessoaFisica() {
+        return codigoPessoaFisica;
+    }
+
+    public void setCodigoPessoaFisica(int codigoPessoaFisica) {
+        this.codigoPessoaFisica = codigoPessoaFisica;
     }
     
 }

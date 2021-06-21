@@ -7,26 +7,22 @@ package view;
 
 import controller.ControllerPessoaFisica;
 import controller.ControllerBairro;
-import controller.ControllerBuscaPessoaFisica;
 import controller.ControllerBuscaBairro;
 import controller.ControllerBuscaCidade;
-import controller.ControllerBuscaCompra;
 import controller.ControllerBuscaEndereco;
 import controller.ControllerBuscaFornecedor;
 import controller.ControllerBuscaPessoaFisicaAluno;
 import controller.ControllerBuscaPessoaFisicaPersonal;
 import controller.ControllerBuscaProduto;
 import controller.ControllerBuscaReceber;
-import controller.ControllerBuscaVenda;
 
 import controller.ControllerCidade;
-import controller.ControllerCompra;
 import controller.ControllerEndereco;
+import controller.ControllerFaturamento;
 import controller.ControllerFornecedor;
-import controller.ControllerPagar;
+import controller.ControllerPagamentos;
 import controller.ControllerProduto;
-import controller.ControllerReceber;
-import controller.ControllerVenda;
+import controller.ControllerRecebebimento;
 
 /**
  *
@@ -423,9 +419,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVendasActionPerformed
-        TelaCadastroVenda telaCadastroVenda = new TelaCadastroVenda();
-        ControllerVenda controllerVenda = new ControllerVenda(telaCadastroVenda);
-        telaCadastroVenda.setVisible(true);
+        //TelaCadastroVenda telaCadastroVenda = new TelaCadastroVenda();
+       // ControllerVenda controllerVenda = new ControllerVenda(telaCadastroVenda);
+        //telaCadastroVenda.setVisible(true);
     }//GEN-LAST:event_jMenuItemVendasActionPerformed
 
     private void jMenuItemCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCidadesActionPerformed
@@ -510,38 +506,40 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItemRelatorioFaturamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioFaturamentosActionPerformed
-        TelaBuscaVenda telaBuscaVenda = new TelaBuscaVenda();
-        ControllerBuscaVenda controllerBuscaVenda = new ControllerBuscaVenda(telaBuscaVenda);
-        telaBuscaVenda.setVisible(true);
+        //TelaBuscaVenda telaBuscaVenda = new TelaBuscaVenda();
+        //ControllerBuscaVenda controllerBuscaVenda = new ControllerBuscaVenda(telaBuscaVenda);
+        //telaBuscaVenda.setVisible(true);
+        TelaFaturamento telaFaturamento = new TelaFaturamento();
+        telaFaturamento.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelatorioFaturamentosActionPerformed
 
     private void jMenuItemRelatorioComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioComprasActionPerformed
         
         
             
-        TelaBuscaCompra telaBuscaCompra = new TelaBuscaCompra();
-        ControllerBuscaCompra controllerBuscaCompra = new ControllerBuscaCompra(telaBuscaCompra);
-        telaBuscaCompra.setVisible(true);
+        //TelaBuscaCompra telaBuscaCompra = new TelaBuscaCompra();
+        //ControllerBuscaCompra controllerBuscaCompra = new ControllerBuscaCompra(telaBuscaCompra);
+        //telaBuscaCompra.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelatorioComprasActionPerformed
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
-        TelaCadastroCompra telaCadastroCompra = new TelaCadastroCompra();
-        ControllerCompra controllerCompra = new ControllerCompra(telaCadastroCompra);
-        telaCadastroCompra.setVisible(true);
+        //TelaCadastroCompra telaCadastroCompra = new TelaCadastroCompra();
+        //ControllerCompra controllerCompra = new ControllerCompra(telaCadastroCompra);
+        //telaCadastroCompra.setVisible(true);
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     private void jMenuItemContasAPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContasAPagarActionPerformed
-        TelaCadastroCompra telaCadastroCompra = new TelaCadastroCompra();
-        ControllerCompra controllerCompra = new ControllerCompra(telaCadastroCompra);
+        //TelaCadastroCompra telaCadastroCompra = new TelaCadastroCompra();
+        //ControllerCompra controllerCompra = new ControllerCompra(telaCadastroCompra);
         
-        telaCadastroCompra.setVisible(true);
+        //telaCadastroCompra.setVisible(true);
                 
     }//GEN-LAST:event_jMenuItemContasAPagarActionPerformed
 
     private void jMenuItemPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPagarActionPerformed
-        TelaBuscaCompra telaBuscaCompra = new TelaBuscaCompra();
-        ControllerBuscaCompra controllerBuscaCompra = new ControllerBuscaCompra(telaBuscaCompra);
-        telaBuscaCompra.setVisible(true);
+        //TelaBuscaCompra telaBuscaCompra = new TelaBuscaCompra();
+        //ControllerBuscaCompra controllerBuscaCompra = new ControllerBuscaCompra(telaBuscaCompra);
+        //telaBuscaCompra.setVisible(true);
     }//GEN-LAST:event_jMenuItemPagarActionPerformed
 
     private void jMenuItemReceberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReceberActionPerformed
@@ -557,9 +555,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemContasAReceberActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
-        TelaBuscaVenda telaBuscaVenda = new TelaBuscaVenda();
-        ControllerBuscaVenda controllerBuscaVenda = new ControllerBuscaVenda(telaBuscaVenda);
-        telaBuscaVenda.setVisible(true);
+        //TelaBuscaVenda telaBuscaVenda = new TelaBuscaVenda();
+        //ControllerBuscaVenda controllerBuscaVenda = new ControllerBuscaVenda(telaBuscaVenda);
+        //telaBuscaVenda.setVisible(true);
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     private void jMenuItemEnderecosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEnderecosActionPerformed
@@ -569,21 +567,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemEnderecosActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        TelaCadastroVenda telaCadastroVenda = new TelaCadastroVenda();
-        ControllerVenda controllerVenda = new ControllerVenda(telaCadastroVenda);
-        telaCadastroVenda.setVisible(true);
+        TelaFaturamento telaFaturamento = new TelaFaturamento();
+        ControllerFaturamento controllerFaturamento = new ControllerFaturamento(telaFaturamento);
+        telaFaturamento.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         TelaCadastroReceber telaCadastroReceber = new TelaCadastroReceber();
-        ControllerReceber controllerReceber = new ControllerReceber(telaCadastroReceber);
+        ControllerRecebebimento controllerReceber = new ControllerRecebebimento(telaCadastroReceber);
         telaCadastroReceber.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        TelaCadastroPagar telaCadastroPagar = new TelaCadastroPagar();
-        ControllerPagar controllerPagar = new ControllerPagar(telaCadastroPagar);
+        TelaCadastroPagamento telaCadastroPagar = new TelaCadastroPagamento();
+        ControllerPagamentos controllerPagar = new ControllerPagamentos(telaCadastroPagar);
         telaCadastroPagar.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 

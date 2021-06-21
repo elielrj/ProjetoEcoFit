@@ -12,22 +12,21 @@ import javax.swing.JTable;
  *
  * @author esfso
  */
-public class TelaBuscaVenda extends javax.swing.JDialog {
+public class TelaBuscaPagamentos extends javax.swing.JDialog {
 
     /**
      * Creates new form FormModeloBuscas
      */
-    public TelaBuscaVenda(java.awt.Frame parent, boolean modal) {
+    public TelaBuscaPagamentos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
-    TelaBuscaVenda() {
-         initComponents();
+    public TelaBuscaPagamentos() {
         setSize(800,600); 
+        initComponents();
     }
-
-
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,7 +56,7 @@ public class TelaBuscaVenda extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Vendas");
+        jLabel1.setText("Pagamentos");
 
         javax.swing.GroupLayout jPanelTituloLayout = new javax.swing.GroupLayout(jPanelTitulo);
         jPanelTitulo.setLayout(jPanelTituloLayout);
@@ -116,12 +115,19 @@ public class TelaBuscaVenda extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Data da Compra", "Hora da Venda", "Dt Venc", "Obs", "Valor Desc", "Valor Total", "Status", "Pessoa"
+                "Id", "Data de Emissão", "Valor Emitido", "Data Vencimento", "Data Pagamento", "Valor de Desconto", "Valor Acrécimo", "Valor Pago", "Obs"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true, true, true
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -131,10 +137,13 @@ public class TelaBuscaVenda extends javax.swing.JDialog {
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setMaxWidth(50);
             jTable1.getColumnModel().getColumn(1).setMaxWidth(100);
-            jTable1.getColumnModel().getColumn(2).setMaxWidth(80);
-            jTable1.getColumnModel().getColumn(3).setMaxWidth(400);
-            jTable1.getColumnModel().getColumn(4).setMaxWidth(80);
-            jTable1.getColumnModel().getColumn(5).setMaxWidth(80);
+            jTable1.getColumnModel().getColumn(2).setMaxWidth(100);
+            jTable1.getColumnModel().getColumn(3).setMaxWidth(100);
+            jTable1.getColumnModel().getColumn(4).setMaxWidth(100);
+            jTable1.getColumnModel().getColumn(5).setMaxWidth(100);
+            jTable1.getColumnModel().getColumn(6).setMaxWidth(100);
+            jTable1.getColumnModel().getColumn(7).setMaxWidth(100);
+            jTable1.getColumnModel().getColumn(8).setMaxWidth(50);
         }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
@@ -222,5 +231,4 @@ public class TelaBuscaVenda extends javax.swing.JDialog {
     public JTable getjTable1() {
         return jTable1;
     }
-
 }

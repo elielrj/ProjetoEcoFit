@@ -10,6 +10,7 @@ import model.bo.Produto;
 public class ControllerBuscaProduto implements ActionListener{
     
     TelaBuscaProduto telaBuscaProduto;
+    int codigoProduto = 0;
     
     public ControllerBuscaProduto(TelaBuscaProduto telaBuscaProduto){
         this.telaBuscaProduto = telaBuscaProduto;
@@ -39,12 +40,19 @@ public class ControllerBuscaProduto implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
        if(e.getSource() == this.telaBuscaProduto.getjButtonCarregar()){
-           ControllerProduto.codigo = (int) this.telaBuscaProduto.getjTable1().getValueAt(this.telaBuscaProduto.getjTable1().getSelectedRow(),0);
+           codigoProduto = (int) this.telaBuscaProduto.getjTable1().getValueAt(this.telaBuscaProduto.getjTable1().getSelectedRow(),0);
+           ControllerProduto.codigo = codigoProduto;
+           this.telaBuscaProduto.setCodProduto(codigoProduto);
            this.telaBuscaProduto.dispose();
        }
        if(e.getSource() == this.telaBuscaProduto.getjButtonSair()){
            this.telaBuscaProduto.dispose();
        }
     }
+
+    public int getCodigoProduto() {
+        return codigoProduto;
+    }
     
+
 }
