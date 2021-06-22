@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
 import model.bo.ItemDeVenda;
-
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import model.DAO.ProdutoDAO;

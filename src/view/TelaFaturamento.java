@@ -4,6 +4,7 @@ package view;
 
 import controller.ControllerBuscaPessoaFisica;
 import controller.ControllerBuscaProduto;
+import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 
 
@@ -39,6 +40,10 @@ public class TelaFaturamento extends javax.swing.JFrame{
     private List<ItemDeVenda> listaDeItens;
     private DefaultTableModel tabela;
     private int contador;
+
+    public DefaultTableModel getTabela() {
+        return tabela;
+    }
     
     public TelaFaturamento() {
         initComponents();
@@ -47,6 +52,8 @@ public class TelaFaturamento extends javax.swing.JFrame{
         caixaAtual();
         this.tabela = (DefaultTableModel) getjTableFaturamentoItens().getModel();
         this.contador = 1;
+        getjComboBoxStatus().addItem("Faturando");
+        getjComboBoxStatus().addItem("Faturado");
     }
 
     public List<ItemDeVenda> getListaDeItens() {
@@ -94,7 +101,7 @@ public class TelaFaturamento extends javax.swing.JFrame{
         jLabel10 = new javax.swing.JLabel();
         jTextFieldClienteEmail = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        jLabelF1 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -103,6 +110,8 @@ public class TelaFaturamento extends javax.swing.JFrame{
         jTextFieldClienteTel2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButtonAdicionar = new javax.swing.JButton();
+        jComboBoxStatus = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Formulário de Cadastro de ...");
@@ -118,6 +127,11 @@ public class TelaFaturamento extends javax.swing.JFrame{
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitulo.setText("Faturamento");
         jLabelTitulo.setPreferredSize(new java.awt.Dimension(533, 50));
+        jLabelTitulo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabelTituloKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelTituloLayout = new javax.swing.GroupLayout(jPanelTitulo);
         jPanelTitulo.setLayout(jPanelTituloLayout);
@@ -277,7 +291,12 @@ public class TelaFaturamento extends javax.swing.JFrame{
 
         jLabel11.setText("Telefone 1");
 
-        jLabel12.setText("F1 = Buscar produto");
+        jLabelF1.setText("F1 = Buscar produto");
+        jLabelF1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabelF1KeyPressed(evt);
+            }
+        });
 
         jLabel13.setText("F2 = Novo Faturamento");
 
@@ -295,6 +314,14 @@ public class TelaFaturamento extends javax.swing.JFrame{
                 jButtonAdicionarActionPerformed(evt);
             }
         });
+
+        jComboBoxStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxStatusActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Status");
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
@@ -322,8 +349,7 @@ public class TelaFaturamento extends javax.swing.JFrame{
                                         .addComponent(jTextFieldClienteId, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING))
                                     .addGap(18, 18, 18)
-                                    .addComponent(jButtonClienteBuscaId)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jButtonClienteBuscaId)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelDadosLayout.createSequentialGroup()
@@ -342,15 +368,13 @@ public class TelaFaturamento extends javax.swing.JFrame{
                                 .addComponent(jTextFieldClienteBairro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jTextFieldClienteNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldFaturamentoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(89, 89, 89))
+                                .addComponent(jTextFieldFaturamentoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
-                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanelDadosLayout.createSequentialGroup()
                                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanelDadosLayout.createSequentialGroup()
@@ -360,12 +384,18 @@ public class TelaFaturamento extends javax.swing.JFrame{
                                             .addGroup(jPanelDadosLayout.createSequentialGroup()
                                                 .addComponent(jLabel5)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jFormattedTextFieldFaturamentoHora, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabelFaturamentoValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(89, 89, 89))))
+                                                .addComponent(jFormattedTextFieldFaturamentoHora, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(29, 29, 29)
+                                                .addComponent(jLabel12)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabelFaturamentoValorTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jComboBoxStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(5, 5, 5)))
+                        .addGap(89, 89, 89))
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
-                        .addComponent(jLabel12)
+                        .addComponent(jLabelF1)
                         .addGap(30, 30, 30)
                         .addComponent(jLabel13)
                         .addGap(28, 28, 28)
@@ -381,7 +411,7 @@ public class TelaFaturamento extends javax.swing.JFrame{
             .addGroup(jPanelDadosLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelDadosLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelDadosLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -410,7 +440,7 @@ public class TelaFaturamento extends javax.swing.JFrame{
                         .addComponent(jTextFieldClienteBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextFieldClienteEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -422,31 +452,31 @@ public class TelaFaturamento extends javax.swing.JFrame{
                             .addComponent(jTextFieldClienteTel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
+                            .addComponent(jLabelF1)
                             .addComponent(jLabel13)
                             .addComponent(jLabel14)
                             .addComponent(jLabel15)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(68, 68, 68))
-                    .addGroup(jPanelDadosLayout.createSequentialGroup()
-                        .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelFaturamentoValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelDadosLayout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jFormattedTextFieldFaturamentoData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jFormattedTextFieldFaturamentoHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelDadosLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3)
+                                .addComponent(jFormattedTextFieldFaturamentoData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelFaturamentoValorTotal, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jFormattedTextFieldFaturamentoHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel12)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTextFieldFaturamentoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(105, 105, 105)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jTextFieldFaturamentoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelDados, java.awt.BorderLayout.CENTER);
@@ -460,10 +490,10 @@ public class TelaFaturamento extends javax.swing.JFrame{
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonProdutoBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutoBuscaActionPerformed
-        TelaBuscaProduto telaBuscaProduto = new TelaBuscaProduto(null,true);
-        ControllerBuscaProduto listaDeProdutos = new ControllerBuscaProduto(telaBuscaProduto);
-        telaBuscaProduto.setVisible(true);
-        getjTextFieldProdutoCodBarras().setText(telaBuscaProduto.getCodProduto()+"");
+        //TelaBuscaProduto telaBuscaProduto = new TelaBuscaProduto(null,true);
+        //ControllerBuscaProduto listaDeProdutos = new ControllerBuscaProduto(telaBuscaProduto);
+        //telaBuscaProduto.setVisible(true);
+        //getjTextFieldProdutoCodBarras().setText(telaBuscaProduto.getCodProduto()+"");
     }//GEN-LAST:event_jButtonProdutoBuscaActionPerformed
 
     private void jTextFieldFaturamentoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFaturamentoUsuarioActionPerformed
@@ -495,7 +525,7 @@ public class TelaFaturamento extends javax.swing.JFrame{
     }//GEN-LAST:event_jTextFieldProdutoCodBarrasActionPerformed
 
     private void jButtonClienteBuscaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteBuscaIdActionPerformed
-        TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica(null,true);
+        /*TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica(null,true);
         ControllerBuscaPessoaFisica controllerBuscaPessoaFisica = new ControllerBuscaPessoaFisica(telaBuscaPessoaFisica);
         telaBuscaPessoaFisica.setVisible(true);
         getjTextFieldClienteId().setText(telaBuscaPessoaFisica.getCodPessoaFisica()+"");
@@ -505,12 +535,41 @@ public class TelaFaturamento extends javax.swing.JFrame{
         getjTextFieldClienteBairro().setText(pessoaFisica.getEndereco().getBairro()+"");
         getjTextFieldClienteEmail().setText(pessoaFisica.getEmail()+"");
         getjTextFieldClienteTel1().setText(pessoaFisica.getTelefone1()+"");
-        getjTextFieldClienteTel2().setText(pessoaFisica.getTelefone2()+"");
+        getjTextFieldClienteTel2().setText(pessoaFisica.getTelefone2()+"");*/
     }//GEN-LAST:event_jButtonClienteBuscaIdActionPerformed
 
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
-        criarProdutoEAdicionar();
+        /*if(!getjTextFieldProdutoCodBarras().getText().equals("")){
+            criarProdutoEAdicionar();
+        }else{
+            getjTextFieldProdutoCodBarras().requestFocus();
+        }*/
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
+
+    public JButton getjButtonProdutoBusca() {
+        return jButtonProdutoBusca;
+    }
+
+    private void jLabelF1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabelF1KeyPressed
+        
+    }//GEN-LAST:event_jLabelF1KeyPressed
+
+    private void jLabelTituloKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabelTituloKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelTituloKeyPressed
+
+    public JComboBox<Object> getjComboBoxStatus() {
+         if(jComboBoxStatus.getSelectedItem() == "Faturando"){
+            jComboBoxStatus.setSelectedItem("Faturando");
+        }else if(jComboBoxStatus.getSelectedItem() == "Faturado"){
+            jComboBoxStatus.setSelectedItem("Faturado");
+        } 
+        return jComboBoxStatus;
+    }
+
+    private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
+       //
+    }//GEN-LAST:event_jComboBoxStatusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -556,6 +615,7 @@ public class TelaFaturamento extends javax.swing.JFrame{
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonProdutoBusca;
     private javax.swing.JButton jButtonSair;
+    private javax.swing.JComboBox<Object> jComboBoxStatus;
     private javax.swing.JFormattedTextField jFormattedTextFieldFaturamentoData;
     private javax.swing.JFormattedTextField jFormattedTextFieldFaturamentoHora;
     private javax.swing.JLabel jLabel1;
@@ -574,6 +634,7 @@ public class TelaFaturamento extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelF1;
     private javax.swing.JLabel jLabelFaturamentoValorTotal;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JPanel jPainelBotoes;
@@ -703,33 +764,65 @@ public class TelaFaturamento extends javax.swing.JFrame{
         this.setUsuario("Eliel");
         jTextFieldFaturamentoUsuario.setText(getUsuario());
     }
-    
+    /*
     private void criarProdutoEAdicionar(){
-        if(!getjTextFieldProdutoCodBarras().getText().equals("")){
-           int idProduto = (Integer.parseInt(jTextFieldProdutoCodBarras.getText()));
-           Produto produto = service.ServiceProduto.Buscar(idProduto);
-           
-           ItemDeVenda item = new ItemDeVenda(false,1, produto, produto.getValor());
-           listaDeItens.add(item);
-           
-           tabela.addRow(new Object[]{
-                        contador,
-                        item.getId(),
-                        item.getProduto().getId(),
-                        1,
-                        item.getValor(),
-                        item.getValor()* 1
-                  });
-           
-           atualizarValorTotal();
-        }
-    }   
-    
+
+        int idProduto = (Integer.parseInt(jTextFieldProdutoCodBarras.getText()));
+        Produto produto = service.ServiceProduto.Buscar(idProduto);
+
+        ItemDeVenda item = new ItemDeVenda(false,1, produto, produto.getValor());
+        listaDeItens.add(item);
+
+        tabela.addRow(new Object[]{
+                     contador,
+                     item.getId(),
+                     item.getProduto().getId(),
+                     1,
+                     item.getValor(),
+                     item.getValor()* 1
+               });
+
+        atualizarValorTotal();
+    }   */
+    /*
     private void atualizarValorTotal() {
         float total=0;
         for(ItemDeVenda i:listaDeItens){
             total += i.getQuantidade()*i.getValor();
         }
         getjLabelFaturamentoValorTotal().setText(total+"");
+    }*/
+
+    public JButton getjButtonBuscar() {
+        return jButtonBuscar;
     }
+
+    public JButton getjButtonCancelar() {
+        return jButtonCancelar;
+    }
+
+    public JButton getjButtonClienteBuscaId() {
+        return jButtonClienteBuscaId;
+    }
+
+    public JButton getjButtonGravar() {
+        return jButtonGravar;
+    }
+
+    public JButton getjButtonNovo() {
+        return jButtonNovo;
+    }
+
+    public JButton getjButtonSair() {
+        return jButtonSair;
+    }
+
+    public int getContador() {
+        return contador;
+    }
+
+    public void setContador(int contador) {
+        this.contador = contador;
+    }
+    
 }

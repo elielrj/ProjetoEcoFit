@@ -102,7 +102,6 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Formulário de Cadastro de ...");
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         jPanelTitulo.setBackground(new java.awt.Color(204, 255, 0));
@@ -281,6 +280,12 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
 
         jLabel6.setText("Observação");
 
+        jComboBoxStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxStatusActionPerformed(evt);
+            }
+        });
+
         jLabel8.setText("Status");
 
         jLabel13.setText("Aluno ou Personal?");
@@ -453,6 +458,10 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
     private void jTextAreaObservacaoComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTextAreaObservacaoComponentHidden
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextAreaObservacaoComponentHidden
+
+    private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxStatusActionPerformed
 
     /**
      * @param args the command line arguments

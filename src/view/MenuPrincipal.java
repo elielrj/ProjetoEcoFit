@@ -506,11 +506,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItemRelatorioFaturamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioFaturamentosActionPerformed
-        //TelaBuscaVenda telaBuscaVenda = new TelaBuscaVenda();
-        //ControllerBuscaVenda controllerBuscaVenda = new ControllerBuscaVenda(telaBuscaVenda);
-        //telaBuscaVenda.setVisible(true);
         TelaFaturamento telaFaturamento = new TelaFaturamento();
+        ControllerFaturamento controllerFaturamento = new ControllerFaturamento(telaFaturamento);
         telaFaturamento.setVisible(true);
+        /*
+        TelaFaturamento telaFaturamento = new TelaFaturamento();
+        telaFaturamento.setVisible(true);*/
     }//GEN-LAST:event_jMenuItemRelatorioFaturamentosActionPerformed
 
     private void jMenuItemRelatorioComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioComprasActionPerformed
