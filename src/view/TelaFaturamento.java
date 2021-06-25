@@ -29,35 +29,27 @@ import model.bo.Produto;
 
 public class TelaFaturamento extends javax.swing.JFrame {
 
-    private String hora;
+    /*private String hora;
     private String data;
     private String usuario;
     private List<ItemDeVenda> listaDeItens;
     private DefaultTableModel tabela;
-    private int contador;
+    private int contador;*/
 
-    public DefaultTableModel getTabela() {
-        return tabela;
-    }
+
 
     public TelaFaturamento() {
         initComponents();
-        this.listaDeItens = new ArrayList<>();
-        dataHora();
-        caixaAtual();
-        this.tabela = (DefaultTableModel) getjTableFaturamentoItens().getModel();
-        this.contador = 1;
+
+        
+
         getjComboBoxStatus().addItem("Faturando");
         getjComboBoxStatus().addItem("Faturado");
     }
 
-    public List<ItemDeVenda> getListaDeItens() {
-        return listaDeItens;
-    }
 
-    public void setListaDeItens(List<ItemDeVenda> listaDeItens) {
-        this.listaDeItens = listaDeItens;
-    }
+
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -72,7 +64,6 @@ public class TelaFaturamento extends javax.swing.JFrame {
         jButtonBuscar = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
         jPanelDados = new javax.swing.JPanel();
-        jTextFieldProdutoCodBarras = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButtonProdutoBusca = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -107,6 +98,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
         jButtonAdicionar = new javax.swing.JButton();
         jComboBoxStatus = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
+        jTextFieldProdutoCodBarras = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Formulário de Cadastro de ...");
@@ -193,12 +185,6 @@ public class TelaFaturamento extends javax.swing.JFrame {
         jPanelDados.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelDados.setPreferredSize(new java.awt.Dimension(700, 500));
 
-        jTextFieldProdutoCodBarras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldProdutoCodBarrasActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Código de barras do produto");
 
         jButtonProdutoBusca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/buscar.png"))); // NOI18N
@@ -251,6 +237,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
 
         jLabel6.setText("Id Cliente");
 
+        jTextFieldClienteId.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldClienteId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldClienteIdActionPerformed(evt);
@@ -318,6 +305,13 @@ public class TelaFaturamento extends javax.swing.JFrame {
 
         jLabel12.setText("Status");
 
+        try {
+            jTextFieldProdutoCodBarras.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###.###.#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jTextFieldProdutoCodBarras.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
         jPanelDadosLayout.setHorizontalGroup(
@@ -327,14 +321,13 @@ public class TelaFaturamento extends javax.swing.JFrame {
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanelDadosLayout.createSequentialGroup()
-                                    .addGap(0, 0, Short.MAX_VALUE)
                                     .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel1)
                                         .addGroup(jPanelDadosLayout.createSequentialGroup()
-                                            .addComponent(jTextFieldProdutoCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
+                                            .addComponent(jTextFieldProdutoCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(35, 35, 35)
                                             .addComponent(jButtonProdutoBusca)
                                             .addGap(18, 18, 18)
                                             .addComponent(jButtonAdicionar)))
@@ -410,9 +403,9 @@ public class TelaFaturamento extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldProdutoCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonProdutoBusca)
-                            .addComponent(jButtonAdicionar))
+                            .addComponent(jButtonAdicionar)
+                            .addComponent(jTextFieldProdutoCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
                         .addGap(7, 7, 7)
@@ -431,7 +424,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
                                 .addGap(3, 3, 3)
                                 .addComponent(jTextFieldClienteCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(12, 12, 12)
                         .addComponent(jTextFieldClienteBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel10)
@@ -471,7 +464,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jTextFieldFaturamentoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelDados, java.awt.BorderLayout.CENTER);
@@ -514,10 +507,6 @@ public class TelaFaturamento extends javax.swing.JFrame {
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonNovoActionPerformed
-
-    private void jTextFieldProdutoCodBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProdutoCodBarrasActionPerformed
-
-    }//GEN-LAST:event_jTextFieldProdutoCodBarrasActionPerformed
 
     private void jButtonClienteBuscaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteBuscaIdActionPerformed
         /*TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica(null,true);
@@ -645,7 +634,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldClienteTel1;
     private javax.swing.JTextField jTextFieldClienteTel2;
     private javax.swing.JTextField jTextFieldFaturamentoUsuario;
-    private javax.swing.JTextField jTextFieldProdutoCodBarras;
+    private javax.swing.JFormattedTextField jTextFieldProdutoCodBarras;
     // End of variables declaration//GEN-END:variables
 
     public JTextField getjTextFieldProdutoCodBarras() {
@@ -709,51 +698,6 @@ public class TelaFaturamento extends javax.swing.JFrame {
         return jTableFaturamentoItens;
     }
 
-    public String getHora() {
-        return hora;
-    }
-
-    public void setHora(String hora) {
-        this.hora = hora;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    private void dataHora() {
-
-        // data/hora atual
-        LocalDateTime agora = LocalDateTime.now();
-
-        // formatar a data
-        DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("dd/MM/uuuu");
-        setData(formatterData.format(agora));
-        jFormattedTextFieldFaturamentoData.setText(getData());
-
-        // formatar a hora
-        DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
-        setHora(formatterHora.format(agora));
-        jFormattedTextFieldFaturamentoHora.setText(getHora());
-
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    private void caixaAtual() {
-        this.setUsuario("Eliel");
-        jTextFieldFaturamentoUsuario.setText(getUsuario());
-    }
 
     /*
     private void criarProdutoEAdicionar(){
@@ -808,16 +752,8 @@ public class TelaFaturamento extends javax.swing.JFrame {
         return jButtonSair;
     }
 
-    public int getContador() {
-        return contador;
-    }
 
-    public void setContador(int contador) {
-        this.contador = contador;
-    }
 
-    public void getContador(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 
 }

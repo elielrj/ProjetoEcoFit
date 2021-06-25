@@ -4,11 +4,15 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import model.bo.ItemDeVenda;
 import model.bo.PessoaFisica;
 import model.bo.Produto;
@@ -16,15 +20,21 @@ import model.bo.Venda;
 import view.TelaBuscaPessoaFisica;
 import view.TelaBuscaProduto;
 import view.TelaFaturamento;
+import model.bo.Faturamento;
 
 public class ControllerFaturamento implements ActionListener {
 
     TelaFaturamento telaFaturamento = new TelaFaturamento();
     public static int codigo;
+    Faturamento faturamento;
+    private DefaultTableModel tabela;
 
     public ControllerFaturamento(TelaFaturamento telaFaturamento) {
 
         this.telaFaturamento = telaFaturamento;
+        this.faturamento = new Faturamento();
+       
+        this.tabela = (DefaultTableModel) this.telaFaturamento.getjTableFaturamentoItens().getModel();
 
         this.telaFaturamento.getjButtonNovo().addActionListener(this);
         this.telaFaturamento.getjButtonBuscar().addActionListener(this);
@@ -40,16 +50,16 @@ public class ControllerFaturamento implements ActionListener {
         this.telaFaturamento.getjTextFieldClienteId().addActionListener(this);
         this.telaFaturamento.getjButtonClienteBuscaId().addActionListener(this);
 
-        this.telaFaturamento.getjTextFieldClienteNome().addActionListener(this);
-        this.telaFaturamento.getjTextFieldClienteCidade().addActionListener(this);
-        this.telaFaturamento.getjTextFieldClienteBairro().addActionListener(this);
-        this.telaFaturamento.getjTextFieldClienteEmail().addActionListener(this);
-        this.telaFaturamento.getjTextFieldClienteTel1().addActionListener(this);
-        this.telaFaturamento.getjTextFieldClienteTel2().addActionListener(this);
+        //this.telaFaturamento.getjTextFieldClienteNome().addActionListener(this);
+        //this.telaFaturamento.getjTextFieldClienteCidade().addActionListener(this);
+        //this.telaFaturamento.getjTextFieldClienteBairro().addActionListener(this);
+        //this.telaFaturamento.getjTextFieldClienteEmail().addActionListener(this);
+        //this.telaFaturamento.getjTextFieldClienteTel1().addActionListener(this);
+        //this.telaFaturamento.getjTextFieldClienteTel2().addActionListener(this);
 
-        this.telaFaturamento.getjFormattedTextFieldFaturamentoData().addActionListener(this);
-        this.telaFaturamento.getjFormattedTextFieldFaturamentoHora().addActionListener(this);
-        this.telaFaturamento.getjTextFieldFaturamentoUsuario().addActionListener(this);
+        //this.telaFaturamento.getjFormattedTextFieldFaturamentoData().addActionListener(this);
+        //this.telaFaturamento.getjFormattedTextFieldFaturamentoHora().addActionListener(this);
+       // this.telaFaturamento.getjTextFieldFaturamentoUsuario().addActionListener(this);
         this.telaFaturamento.getjComboBoxStatus().addActionListener(this);
 
         this.telaFaturamento.getjTextFieldProdutoCodBarras().addKeyListener(new java.awt.event.KeyAdapter() {
@@ -70,7 +80,9 @@ public class ControllerFaturamento implements ActionListener {
                 }
             }
         });
-
+        this.telaFaturamento.getjFormattedTextFieldFaturamentoHora().setText(this.faturamento.getHora());
+        this.telaFaturamento.getjFormattedTextFieldFaturamentoData().setText(this.faturamento.getData());
+        this.telaFaturamento.getjTextFieldFaturamentoUsuario().setText(this.faturamento.getUsuario());
         Ativa(true);
         LimpaEstadoComponentes(false);
 
@@ -164,16 +176,16 @@ public class ControllerFaturamento implements ActionListener {
         this.telaFaturamento.getjTextFieldClienteId().setEnabled(!estadoBotoes);
         this.telaFaturamento.getjButtonClienteBuscaId().setEnabled(!estadoBotoes);
 
-        this.telaFaturamento.getjTextFieldClienteNome().setEnabled(!estadoBotoes);
-        this.telaFaturamento.getjTextFieldClienteCidade().setEnabled(!estadoBotoes);
-        this.telaFaturamento.getjTextFieldClienteBairro().setEnabled(!estadoBotoes);
-        this.telaFaturamento.getjTextFieldClienteEmail().setEnabled(!estadoBotoes);
-        this.telaFaturamento.getjTextFieldClienteTel1().setEnabled(!estadoBotoes);
-        this.telaFaturamento.getjTextFieldClienteTel2().setEnabled(!estadoBotoes);
+        this.telaFaturamento.getjTextFieldClienteNome().setEnabled(false);
+        this.telaFaturamento.getjTextFieldClienteCidade().setEnabled(false);
+        this.telaFaturamento.getjTextFieldClienteBairro().setEnabled(false);
+        this.telaFaturamento.getjTextFieldClienteEmail().setEnabled(false);
+        this.telaFaturamento.getjTextFieldClienteTel1().setEnabled(false);
+        this.telaFaturamento.getjTextFieldClienteTel2().setEnabled(false);
 
-        this.telaFaturamento.getjFormattedTextFieldFaturamentoData().setEnabled(!estadoBotoes);
-        this.telaFaturamento.getjFormattedTextFieldFaturamentoHora().setEnabled(!estadoBotoes);
-        this.telaFaturamento.getjTextFieldFaturamentoUsuario().setEnabled(!estadoBotoes);
+        this.telaFaturamento.getjFormattedTextFieldFaturamentoData().setEnabled(false);
+        this.telaFaturamento.getjFormattedTextFieldFaturamentoHora().setEnabled(false);
+        this.telaFaturamento.getjTextFieldFaturamentoUsuario().setEnabled(false);
         this.telaFaturamento.getjComboBoxStatus().setEnabled(!estadoBotoes);
 
     }
@@ -229,18 +241,24 @@ public class ControllerFaturamento implements ActionListener {
                 String codBarrasSohNumeros = formatarDados(this.telaFaturamento.getjTextFieldProdutoCodBarras().getText());
                 Produto produto = service.ServiceProduto.Buscar(Integer.parseInt(formatarDados(this.telaFaturamento.getjTextFieldProdutoCodBarras().getText())));
                 ItemDeVenda item = new ItemDeVenda(false, 1, produto, produto.getValor());
-                this.telaFaturamento.getListaDeItens().add(item);
-
-                this.telaFaturamento.getTabela().addRow(new Object[]{
-                    this.telaFaturamento.getContador(),
-                    item.getId(),
-                    item.getProduto().getDescricao(),
-                    1,
-                    item.getValor(),
-                    item.getValor() * 1
-                });
-
-                this.telaFaturamento.getContador(this.telaFaturamento.getContador() + 1);
+                
+                this.faturamento.adicionar(item);
+                int contador = 1;
+                    
+                    
+                    tabela.addRow(new Object[]
+                    {
+                        contador,
+                        item.getId(),
+                        item.getProduto().getDescricao(),
+                        1,
+                        item.getValor(),
+                        item.getValor() * 1
+                    });
+                    contador++;
+                
+                this.faturamento.setContador(this.faturamento.getContador() + 1);this.faturamento.valorTotal();
+                this.telaFaturamento.getjLabelFaturamentoValorTotal().setText(this.faturamento.valorTotal()+"");
             } else {
                 JOptionPane.showMessageDialog(null, "Cód de Barras inválido");
             }
@@ -250,13 +268,6 @@ public class ControllerFaturamento implements ActionListener {
         }
     }
 
-    public void atualizarValorTotal() {
-        int total = 0;
-        for (ItemDeVenda item : this.telaFaturamento.getListaDeItens()) {
-            total += item.getQuantidade() * item.getValor();
-        }
-        this.telaFaturamento.getjLabelFaturamentoValorTotal().setText(total + "");
-    }
 
     public void novoFaturamento() {
         if (this.telaFaturamento.getjComboBoxStatus().getSelectedItem().equals("Faturando")) {
@@ -284,4 +295,20 @@ public class ControllerFaturamento implements ActionListener {
         dado = dado.replaceAll("\\.", "");
         return dado;
     }
+    
+    
+    
+    
+
+
+
+    
+
+ 
+
+
+    
+ 
+
+  
 }
