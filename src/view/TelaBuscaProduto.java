@@ -15,20 +15,22 @@ import javax.swing.JTable;
  */
 public class TelaBuscaProduto extends javax.swing.JDialog {
 
-    int codProduto =0;
+    int codProduto = 0;
+
     /**
      * Creates new form FormModeloBuscas
      */
     public TelaBuscaProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
     }
 
-    public TelaBuscaProduto(){
+    public TelaBuscaProduto() {
         initComponents();
-        setSize(800,600); 
+        setSize(800, 600);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -167,7 +169,7 @@ public class TelaBuscaProduto extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void jButtonCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCarregarActionPerformed
-        
+
     }//GEN-LAST:event_jButtonCarregarActionPerformed
 
     /**
@@ -243,7 +245,4 @@ public class TelaBuscaProduto extends javax.swing.JDialog {
         return codProduto;
     }
 
-    
-
-    
 }

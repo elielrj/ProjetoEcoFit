@@ -1,4 +1,3 @@
-
 package service;
 
 import java.util.List;
@@ -9,39 +8,39 @@ import model.bo.Endereco;
 
 public class ServicePessoaFisica {
 
-    public static void Incluir(PessoaFisica objeto){
+    public static void Incluir(PessoaFisica objeto) {
 
         PessoaFisicaDAO alunoDAO = new PessoaFisicaDAO();
         alunoDAO.Create(objeto);
-    }    
+    }
 
     public static void Atualizar(PessoaFisica objeto) {
         PessoaFisicaDAO alunoDAO = new PessoaFisicaDAO();
-        alunoDAO.Update(objeto);  
+        alunoDAO.Update(objeto);
     }
-    
-    public static List<PessoaFisica> Buscar(){
+
+    public static List<PessoaFisica> Buscar() {
         PessoaFisicaDAO alunoDAO = new PessoaFisicaDAO();
-        return (alunoDAO.Retrieve());  
+        return (alunoDAO.Retrieve());
     }
-    
-     public static PessoaFisica Buscar(int id){
+
+    public static PessoaFisica Buscar(int id) {
         PessoaFisicaDAO alunoDAO = new PessoaFisicaDAO();
-        return alunoDAO.Retrieve(id);  
+        return alunoDAO.Retrieve(id);
     }
-     
-     public static void Deletar(PessoaFisica objeto){
+
+    public static void Deletar(PessoaFisica objeto) {
         PessoaFisicaDAO alunoDAO = new PessoaFisicaDAO();
-        alunoDAO.Delete(objeto);  
+        alunoDAO.Delete(objeto);
     }
-     
-     public static List<PessoaFisica> BuscarAluno(){
+
+    public static List<PessoaFisica> BuscarAluno() {
         PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
-        return (pessoaFisicaDAO.RetrieveAluno());  
+        return (pessoaFisicaDAO.RetrieveAluno());
     }
-     
-     public static List<PessoaFisica> BuscarPersonal(){
+
+    public static List<PessoaFisica> BuscarPersonal() {
         PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
-        return (pessoaFisicaDAO.RetrievePersonal());  
+        return (pessoaFisicaDAO.RetrievePersonal());
     }
 }

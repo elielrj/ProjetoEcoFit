@@ -1,12 +1,12 @@
 package model.bo;
+
 public abstract class Pessoa {
-    
+
     private String telefone1;
     private String telefone2;
     private String email;
     private String observacao;
     private boolean status;
-   
 
     public Pessoa() {
     }
@@ -59,19 +59,12 @@ public abstract class Pessoa {
         this.status = status;
     }
 
-    
-
-
-   @Override
+    @Override
     public String toString() {
-        return  
-                this.getTelefone1() + " " +
-                this.getTelefone2() + " " +
-                this.getEmail() + " " +
-                this.getObservacao();
+        return this.getTelefone1() + " "
+                + this.getTelefone2() + " "
+                + this.getEmail() + " "
+                + this.getObservacao();
     }
-    
 
-    
-    
 }

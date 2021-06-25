@@ -2,23 +2,21 @@ package model.bo;
 
 public class Produto {
 
-private int id;
-private String descricao;
-private String unidadeDeCompra;
-private String unidadeDeVenda;
-private String correlacaoUnidade;
-private float valor;
-private int quantidadeDeEstoque;
-private String codigoDeBarras;
-private boolean status;
-private String observacao;
-       
+    private int id;
+    private String descricao;
+    private String unidadeDeCompra;
+    private String unidadeDeVenda;
+    private String correlacaoUnidade;
+    private float valor;
+    private int quantidadeDeEstoque;
+    private String codigoDeBarras;
+    private boolean status;
+    private String observacao;
 
     public Produto() {
     }
 
-    public Produto(int id, String descricao, String unidadeDeCompra, String unidadeDeVenda, String correlacaoUnidade, float valor, int quantidadeDeEstoque, String codigoDeBarras, boolean status, String observacao) {
-        this.id = id;
+    public Produto(String descricao, String unidadeDeCompra, String unidadeDeVenda, String correlacaoUnidade, float valor, int quantidadeDeEstoque, String codigoDeBarras, boolean status, String observacao) {
         this.descricao = descricao;
         this.unidadeDeCompra = unidadeDeCompra;
         this.unidadeDeVenda = unidadeDeVenda;
@@ -28,6 +26,11 @@ private String observacao;
         this.codigoDeBarras = codigoDeBarras;
         this.status = status;
         this.observacao = observacao;
+    }
+
+    public Produto(int id, String descricao, String unidadeDeCompra, String unidadeDeVenda, String correlacaoUnidade, float valor, int quantidadeDeEstoque, String codigoDeBarras, boolean status, String observacao) {
+        this(descricao, unidadeDeCompra, unidadeDeVenda, correlacaoUnidade, valor, quantidadeDeEstoque, codigoDeBarras, status, observacao);
+        this.id = id;
     }
 
     public int getId() {
@@ -82,7 +85,6 @@ private String observacao;
         this.status = status;
     }
 
-    
     public void setValor(float valor) {
         this.valor = valor;
     }
@@ -110,20 +112,17 @@ private String observacao;
     public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
-    
 
     @Override
     public String toString() {
-        return getId() + " " + 
-                getDescricao() + " " + 
-                getUnidadeDeCompra() + " " + 
-                getUnidadeDeVenda() + " " + 
-                getCorrelacaoUnidade() + " " + 
-                getValor() + " " + 
-                getQuantidadeDeEstoque() + " " + 
-                getCodigoDeBarras();
+        return getId() + " "
+                + getDescricao() + " "
+                + getUnidadeDeCompra() + " "
+                + getUnidadeDeVenda() + " "
+                + getCorrelacaoUnidade() + " "
+                + getValor() + " "
+                + getQuantidadeDeEstoque() + " "
+                + getCodigoDeBarras();
     }
 
-
-                
 }

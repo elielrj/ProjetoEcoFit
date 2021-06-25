@@ -1,4 +1,3 @@
-
 package model.bo;
 
 public class Bairro {
@@ -6,18 +5,23 @@ public class Bairro {
     private int id;
     private String nome;
     private boolean status;
-    
+
     public Bairro() {
     }
 
-    public Bairro(int id, String nome, boolean status) {
-        this.id = id;
+    public Bairro(String nome) {
         this.nome = nome;
+    }
+
+    public Bairro(String nome, boolean status) {
+        this(nome);
         this.status = status;
     }
 
-    
-    
+    public Bairro(int id, String nome, boolean status) {
+        this(nome, status);
+        this.id = id;
+    }
 
     public int getId() {
         return id;
@@ -35,7 +39,6 @@ public class Bairro {
         this.nome = nome;
     }
 
-
     public boolean getStatus() {
         return status;
     }
@@ -46,14 +49,7 @@ public class Bairro {
 
     @Override
     public String toString() {
-        return 
-                getNome()
-                ;
+        return getNome();
     }
 
-    
-    
-
-    
-    
 }

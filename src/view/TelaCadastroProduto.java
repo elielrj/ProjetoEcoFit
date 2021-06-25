@@ -11,7 +11,7 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
 
     public TelaCadastroProduto() {
         initComponents();
-        setSize(800,600); 
+        setSize(800, 600);
         jComboBoxStatus.addItem("Sim");
         jComboBoxStatus.addItem("Não");
     }
@@ -41,8 +41,6 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jTextFieldValorProduto = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextFieldCodBarras = new javax.swing.JTextField();
-        jTextFieldCorrelacao = new javax.swing.JTextField();
         jTextFieldUnVenda = new javax.swing.JTextField();
         jTextFieldUnCompra = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -50,6 +48,8 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaObs = new javax.swing.JTextArea();
+        jTextFieldCodBarras = new javax.swing.JFormattedTextField();
+        jTextFieldCorrelacaoa = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Formulário de Cadastro de Produtos");
@@ -169,12 +169,6 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
 
         jLabel8.setText("Cód Barras");
 
-        jTextFieldCodBarras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCodBarrasActionPerformed(evt);
-            }
-        });
-
         jLabel9.setText("Ativo?");
 
         jComboBoxStatus.addActionListener(new java.awt.event.ActionListener() {
@@ -188,6 +182,14 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
         jTextAreaObs.setColumns(20);
         jTextAreaObs.setRows(5);
         jScrollPane1.setViewportView(jTextAreaObs);
+
+        try {
+            jTextFieldCodBarras.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###.###.#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        jTextFieldCorrelacaoa.setText("jTextField1");
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
@@ -213,17 +215,17 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
                                     .addComponent(jLabel9)
                                     .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(79, 79, 79)
-                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel4)
-                                    .addComponent(jTextFieldUnVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldUnVenda, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
                                     .addComponent(jLabel8)
-                                    .addComponent(jTextFieldCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(53, 53, 53)
-                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldCorrelacao, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldCodBarras))
+                                .addGap(57, 57, 57)
+                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel6)
-                                    .addComponent(jTextFieldValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jTextFieldValorProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldCorrelacaoa)))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10)))
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
@@ -261,12 +263,12 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldQtdEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldCorrelacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCorrelacaoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -298,10 +300,6 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
     private void jTextFieldValorProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValorProdutoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldValorProdutoActionPerformed
-
-    private void jTextFieldCodBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodBarrasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCodBarrasActionPerformed
 
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
         // TODO add your handling code here:
@@ -369,8 +367,8 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelTitulo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaObs;
-    private javax.swing.JTextField jTextFieldCodBarras;
-    private javax.swing.JTextField jTextFieldCorrelacao;
+    private javax.swing.JFormattedTextField jTextFieldCodBarras;
+    private javax.swing.JTextField jTextFieldCorrelacaoa;
     private javax.swing.JTextField jTextFieldDescricao;
     private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldQtdEstoque;
@@ -400,7 +398,7 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
     }
 
     public JTextField getjTextFieldCorrelacao() {
-        return jTextFieldCorrelacao;
+        return jTextFieldCorrelacaoa;
     }
 
     public JPanel getjPanelDados() {
@@ -436,13 +434,13 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
     }
 
     public JComboBox<Object> getjComboBoxStatus() {
-        
-        if(jComboBoxStatus.getSelectedItem() == "Sim"){
+
+        if (jComboBoxStatus.getSelectedItem() == "Sim") {
             jComboBoxStatus.setSelectedItem(true);
-        }else{
+        } else {
             jComboBoxStatus.setSelectedItem(false);
         }
-        
+
         return jComboBoxStatus;
     }
 
@@ -450,6 +448,4 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
         return jTextAreaObs;
     }
 
- 
- 
 }

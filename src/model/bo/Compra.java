@@ -1,8 +1,7 @@
-
 package model.bo;
 
 public class Compra {
-    
+
     private int id;
     private String data;
     private String hora;
@@ -11,9 +10,8 @@ public class Compra {
     private float valorDeDesconto;
     private float valorTotal;
     private boolean status;
-    
+
     private Fornecedor fornecedor;
-    
 
     public Compra() {
     }
@@ -102,19 +100,11 @@ public class Compra {
         this.valorTotal = valorTotal;
     }
 
-
-    
     @Override
     public String toString() {
-        return 
-                this.getId() + " - " + 
-                this.getValorTotal() + " - " +
-                this.getFornecedor().toString();
+        return this.getId() + " - "
+                + this.getValorTotal() + " - "
+                + this.getFornecedor().toString();
     }
 
-    
-    
-
-            
-    
 }

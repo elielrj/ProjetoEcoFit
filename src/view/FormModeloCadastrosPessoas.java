@@ -16,7 +16,7 @@ public class FormModeloCadastrosPessoas extends javax.swing.JFrame {
      */
     public FormModeloCadastrosPessoas() {
         initComponents();
-        setSize(800,600); 
+        setSize(800, 600);
     }
 
     /**

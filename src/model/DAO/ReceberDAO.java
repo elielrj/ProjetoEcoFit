@@ -1,4 +1,3 @@
-
 package model.DAO;
 
 import model.DAO.Principal.ConectionFactory;
@@ -14,14 +13,13 @@ public class ReceberDAO implements InterfaceDAO<Receber> {
 
     @Override
     public void Create(Receber objeto) {
-        Connection conexao = ConectionFactory.getConection();     
-        
+        Connection conexao = ConectionFactory.getConection();
+
         String sqlExecutar = "INSERT INTO receber(data,hora,valorDeDescontoNegociado, valorDeAcrescimo,valorRecebido, observacao,vendaId) VALUES(?,?,?,?,?,?,?)";
-                
-        
+
         PreparedStatement pstm = null;
-        
-        try{
+
+        try {
             pstm = conexao.prepareStatement(sqlExecutar);
             pstm.setString(1, objeto.getData());
             pstm.setString(2, objeto.getHora());
@@ -31,47 +29,45 @@ public class ReceberDAO implements InterfaceDAO<Receber> {
             pstm.setString(6, objeto.getObservacao());
             pstm.setInt(7, objeto.getVenda().getId());
             pstm.executeUpdate();
-            
-        }catch(Exception ex){
+
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
+
         ConectionFactory.closeConnection(conexao, pstm);
     }
 
     @Override
     public List<Receber> Retrieve() {
         Connection conexao = ConectionFactory.getConection();
-        
+
         String sqlExecutar = "SELECT id,data,hora,valorDeDescontoNegociado, valorDeAcrescimo,valorRecebido, observacao,vendaId FROM receber";
-        
+
         PreparedStatement pstm = null;
         ResultSet rs = null;
- 
+
         List<Receber> recebimentos = new ArrayList();
-        
-        try{
+
+        try {
             pstm = conexao.prepareStatement(sqlExecutar);
             rs = pstm.executeQuery();
-            
-            
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 Receber recebimento = new Receber();
                 recebimento.setId(rs.getInt("id"));
                 recebimento.setData(rs.getString("data"));
-                recebimento.setHora(rs.getString("hora")); 
+                recebimento.setHora(rs.getString("hora"));
                 recebimento.setValorDeDescontoNegociado(rs.getFloat("valorDeDescontoNegociado"));
                 recebimento.setValorDeAcrescimo(rs.getFloat("valorDeAcrescimo"));
                 recebimento.setValorRecebido(rs.getFloat("valorRecebido"));
                 recebimento.setObservacao(rs.getString("observacao"));
                 recebimento.getVenda().setId(rs.getInt("vendaId"));
-                
+
                 recebimentos.add(recebimento);
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return recebimentos;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return null;
         }
@@ -80,34 +76,33 @@ public class ReceberDAO implements InterfaceDAO<Receber> {
     @Override
     public Receber Retrieve(int id) {
         Connection conexao = ConectionFactory.getConection();
-        
+
         String sqlExecutar = "SELECT id,data,hora,valorDeDescontoNegociado, valorDeAcrescimo,valorRecebido, observacao,vendaId FROM receber WHERE receber.id =?";
-        
+
         PreparedStatement pstm = null;
         ResultSet rs = null;
- 
-        try{
+
+        try {
             pstm = conexao.prepareStatement(sqlExecutar);
-            pstm.setInt(1,id);
+            pstm.setInt(1, id);
             rs = pstm.executeQuery();
-            
+
             Receber recebimento = new Receber();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 recebimento.setId(rs.getInt("id"));
                 recebimento.setData(rs.getString("data"));
-                recebimento.setHora(rs.getString("hora")); 
+                recebimento.setHora(rs.getString("hora"));
                 recebimento.setValorDeDescontoNegociado(rs.getFloat("valorDeDescontoNegociado"));
                 recebimento.setValorDeAcrescimo(rs.getFloat("valorDeAcrescimo"));
                 recebimento.setValorRecebido(rs.getFloat("valorRecebido"));
                 recebimento.setObservacao(rs.getString("observacao"));
                 recebimento.getVenda().setId(rs.getInt("vendaId"));
- 
-                
+
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return recebimento;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return null;
         }
@@ -115,12 +110,12 @@ public class ReceberDAO implements InterfaceDAO<Receber> {
 
     @Override
     public void Update(Receber objeto) {
-        Connection conexao = ConectionFactory.getConection();        
-        String sqlExecutar = "UPDATE receber SET data =?,hora =?,valorDeDescontoNegociado =?,valorDeAcrescimo =?,valorRecebido =?,observacao = ?,vendaId =? WHERE id=?"; 
-        
+        Connection conexao = ConectionFactory.getConection();
+        String sqlExecutar = "UPDATE receber SET data =?,hora =?,valorDeDescontoNegociado =?,valorDeAcrescimo =?,valorRecebido =?,observacao = ?,vendaId =? WHERE id=?";
+
         PreparedStatement pstm = null;
-        
-        try{
+
+        try {
             pstm = conexao.prepareStatement(sqlExecutar);
             pstm.setString(1, objeto.getData());
             pstm.setString(2, objeto.getHora());
@@ -130,32 +125,30 @@ public class ReceberDAO implements InterfaceDAO<Receber> {
             pstm.setString(6, objeto.getObservacao());
             pstm.setInt(7, objeto.getVenda().getId());
             pstm.setInt(8, objeto.getId());
-            
+
             pstm.executeUpdate();
-            
-        }catch(Exception ex){
+
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }        
-        ConectionFactory.closeConnection(conexao, pstm); 
+        }
+        ConectionFactory.closeConnection(conexao, pstm);
     }
 
     @Override
     public void Delete(Receber objeto) {
-        
-        
-        Connection conexao = ConectionFactory.getConection();        
-        String sqlExecutar = "DELETE FROM receber WHERE id =?";        
+
+        Connection conexao = ConectionFactory.getConection();
+        String sqlExecutar = "DELETE FROM receber WHERE id =?";
         PreparedStatement pstm = null;
-        
-        try{
+
+        try {
             pstm = conexao.prepareStatement(sqlExecutar);
             pstm.setInt(1, objeto.getId());
-            pstm.executeUpdate();            
-        }catch(Exception ex){
+            pstm.executeUpdate();
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }        
+        }
         ConectionFactory.closeConnection(conexao, pstm);
     }
-   
-    
+
 }

@@ -1,12 +1,10 @@
-
 package model.bo;
 
 public class Item {
-    
+
     private int quantidade;
     private float valor;
 
-    
     public Item() {
     }
 
@@ -15,7 +13,6 @@ public class Item {
         this.valor = valor;
     }
 
-    
     public int getQuantidade() {
         return quantidade;
     }
@@ -32,10 +29,9 @@ public class Item {
         this.valor = valor;
     }
 
-    
     @Override
     public String toString() {
-        return  this.getQuantidade() + " " + 
-                this.getValor();
+        return this.getQuantidade() + " "
+                + this.getValor();
     }
 }

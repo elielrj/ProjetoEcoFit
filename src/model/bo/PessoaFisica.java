@@ -1,7 +1,7 @@
 package model.bo;
 
 public class PessoaFisica extends Pessoa {
-    
+
     private int id;
     private String nome;
     private String rg;
@@ -32,7 +32,6 @@ public class PessoaFisica extends Pessoa {
         this.nome = nome;
     }
 
-    
     public int getId() {
         return id;
     }
@@ -81,12 +80,9 @@ public class PessoaFisica extends Pessoa {
         this.tipo = tipo;
     }
 
-    
     @Override
     public String toString() {
-        return  
-                id + " - " + nome;
+        return id + " - " + nome;
     }
 
-    
 }

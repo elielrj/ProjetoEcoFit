@@ -1,7 +1,7 @@
 package model.bo;
 
 public class Receber {
-    
+
     private int id;
     private String data;
     private String hora;
@@ -9,14 +9,18 @@ public class Receber {
     private float valorDeAcrescimo;
     private float valorRecebido;
     private String observacao;
-    
+
     private Venda venda;
 
     public Receber() {
     }
 
     public Receber(int id, String data, String hora, float valorDeDescontoNegociado, float valorDeAcrescimo, float valorRecebido, String observacao, Venda venda) {
+        this(data, hora, valorDeDescontoNegociado, valorDeAcrescimo, valorRecebido, observacao, venda);
         this.id = id;
+    }
+
+    public Receber(String data, String hora, float valorDeDescontoNegociado, float valorDeAcrescimo, float valorRecebido, String observacao, Venda venda) {
         this.data = data;
         this.hora = hora;
         this.valorDeDescontoNegociado = valorDeDescontoNegociado;
@@ -90,18 +94,16 @@ public class Receber {
         this.venda = venda;
     }
 
-
     @Override
     public String toString() {
-        return this.getId() + 
-                " " + this.getData() + 
-                " " + this.getHora() + 
-                " " + this.getValorDeDescontoNegociado() + 
-                " " + this.getValorDeAcrescimo() + 
-                " " + this.getValorRecebido() + 
-                " " + this.getObservacao() +
-                " " + this.getVenda().toString();
+        return this.getId()
+                + " " + this.getData()
+                + " " + this.getHora()
+                + " " + this.getValorDeDescontoNegociado()
+                + " " + this.getValorDeAcrescimo()
+                + " " + this.getValorRecebido()
+                + " " + this.getObservacao()
+                + " " + this.getVenda().toString();
     }
-    
-    
+
 }

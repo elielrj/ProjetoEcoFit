@@ -1,8 +1,6 @@
-
 package model.DAO.SQL;
 
-
-public class SqlCidade implements Sql{
+public class SqlCidade implements Sql {
 
     @Override
     public String criar() {
@@ -28,5 +26,5 @@ public class SqlCidade implements Sql{
     public String deletar() {
         return "DELETE FROM cidade WHERE id=?";
     }
-    
+
 }

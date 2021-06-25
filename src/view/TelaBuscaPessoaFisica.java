@@ -25,9 +25,9 @@ public class TelaBuscaPessoaFisica extends javax.swing.JDialog {
         initComponents();
     }
 
-    public TelaBuscaPessoaFisica(){
+    public TelaBuscaPessoaFisica() {
         initComponents();
-        setSize(800,600); 
+        setSize(800, 600);
     }
 
     /**
@@ -235,8 +235,5 @@ public class TelaBuscaPessoaFisica extends javax.swing.JDialog {
     public void setCodPessoaFisica(int codPessoaFisica) {
         this.codPessoaFisica = codPessoaFisica;
     }
-
-
-
 
 }

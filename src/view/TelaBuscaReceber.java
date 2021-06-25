@@ -24,7 +24,7 @@ public class TelaBuscaReceber extends javax.swing.JDialog {
 
     TelaBuscaReceber() {
         initComponents();
-        setSize(800,600); 
+        setSize(800, 600);
     }
 
     /**

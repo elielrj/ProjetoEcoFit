@@ -1,4 +1,3 @@
-
 package service;
 
 import java.util.List;
@@ -7,30 +6,30 @@ import model.DAO.PagarDAO;
 
 public class ServicePagar {
 
-    public static void Incluir(Pagar objeto){
+    public static void Incluir(Pagar objeto) {
 
         PagarDAO pagarDAO = new PagarDAO();
         pagarDAO.Create(objeto);
 
-    }    
+    }
 
     public static void Atualizar(Pagar objeto) {
         PagarDAO pagarDAO = new PagarDAO();
-        pagarDAO.Update(objeto);  
+        pagarDAO.Update(objeto);
     }
-    
-    public static List<Pagar> Buscar(){
+
+    public static List<Pagar> Buscar() {
         PagarDAO pagarDAO = new PagarDAO();
-        return (pagarDAO.Retrieve());  
+        return (pagarDAO.Retrieve());
     }
-    
-     public static Pagar Buscar(int id){
+
+    public static Pagar Buscar(int id) {
         PagarDAO pagarDAO = new PagarDAO();
-        return pagarDAO.Retrieve(id);  
+        return pagarDAO.Retrieve(id);
     }
-     
-     public static void Deletar(Pagar objeto){
+
+    public static void Deletar(Pagar objeto) {
         PagarDAO pagarDAO = new PagarDAO();
-        pagarDAO.Delete(objeto);  
+        pagarDAO.Delete(objeto);
     }
 }

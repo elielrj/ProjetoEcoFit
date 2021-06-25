@@ -1,4 +1,3 @@
-
 package service;
 
 import java.util.List;
@@ -7,30 +6,30 @@ import model.DAO.ProdutoDAO;
 
 public class ServiceProduto {
 
-    public static void Incluir(Produto objeto){
+    public static void Incluir(Produto objeto) {
 
         ProdutoDAO produtoDAO = new ProdutoDAO();
         produtoDAO.Create(objeto);
 
-    }    
+    }
 
     public static void Atualizar(Produto objeto) {
         ProdutoDAO produtoDAO = new ProdutoDAO();
-        produtoDAO.Update(objeto);  
+        produtoDAO.Update(objeto);
     }
-    
-    public static List<Produto> Buscar(){
+
+    public static List<Produto> Buscar() {
         ProdutoDAO produtoDAO = new ProdutoDAO();
-        return (produtoDAO.Retrieve());  
+        return (produtoDAO.Retrieve());
     }
-    
-     public static Produto Buscar(int id){
+
+    public static Produto Buscar(int id) {
         ProdutoDAO produtoDAO = new ProdutoDAO();
-        return produtoDAO.Retrieve(id);  
+        return produtoDAO.Retrieve(id);
     }
-     
-     public static void Deletar(Produto objeto){
+
+    public static void Deletar(Produto objeto) {
         ProdutoDAO produtoDAO = new ProdutoDAO();
-        produtoDAO.Delete(objeto);  
+        produtoDAO.Delete(objeto);
     }
 }

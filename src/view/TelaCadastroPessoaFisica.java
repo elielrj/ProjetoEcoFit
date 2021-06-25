@@ -32,21 +32,18 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
      */
     public TelaCadastroPessoaFisica() {
         initComponents();
-        setSize(800,600); 
+        setSize(800, 600);
 
-        
-        for(Endereco e: ServiceEndereco.Buscar()){
+        for (Endereco e : ServiceEndereco.Buscar()) {
             jComboBoxEndereco.addItem(e);
         }
-        
+
         jComboBoxStatus.addItem("Sim");
         jComboBoxStatus.addItem("Não");
-        
+
         jComboBoxTipo.addItem("Aluno");
         jComboBoxTipo.addItem("Personal");
-        
-        
-       
+
     }
 
     /**
@@ -558,17 +555,10 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
         return jButtonSair;
     }
 
-
-
-
     public JComboBox<Object> getjComboBoxEndereco() {
-         Endereco endereco = (Endereco) jComboBoxEndereco.getSelectedItem();
+        Endereco endereco = (Endereco) jComboBoxEndereco.getSelectedItem();
         return jComboBoxEndereco;
     }
-
-
-
-
 
     public JFormattedTextField getjFormattedTextFieldCpf() {
         return jFormattedTextFieldCpf;
@@ -581,8 +571,6 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
     public JPanel getjPanelDados() {
         return jPanelDados;
     }
-
-   
 
     public JFormattedTextField getjFormattedTextFieldRg() {
         return jFormattedTextFieldRg;
@@ -599,8 +587,6 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
     public JPanel getjPanelTitulo() {
         return jPanelTitulo;
     }
-
-
 
     public JTextField getjTextFieldEmail() {
         return jTextFieldEmail;
@@ -619,31 +605,24 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
     }
 
     public JComboBox<Object> getjComboBoxStatus() {
-        if(jComboBoxStatus.getSelectedItem() == "Sim"){
+        if (jComboBoxStatus.getSelectedItem() == "Sim") {
             jComboBoxStatus.setSelectedItem(true);
-        }else{
+        } else {
             jComboBoxStatus.setSelectedItem(false);
         }
-        
+
         return jComboBoxStatus;
     }
 
     public JComboBox<Object> getjComboBoxTipo() {
-        
-        if(jComboBoxTipo.getSelectedItem() == "Aluno"){
+
+        if (jComboBoxTipo.getSelectedItem() == "Aluno") {
             jComboBoxTipo.setSelectedItem("Aluno");
-        }else if(jComboBoxTipo.getSelectedItem() == "Personal"){
+        } else if (jComboBoxTipo.getSelectedItem() == "Personal") {
             jComboBoxTipo.setSelectedItem("Personal");
-        }        
+        }
         return jComboBoxTipo;
- 
+
     }
-
-   
-
-  
-
-  
-    
 
 }

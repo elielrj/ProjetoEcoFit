@@ -1,7 +1,7 @@
 package model.bo;
 
 public class Venda {
-    
+
     private int id;
     private String data;
     private String hora;
@@ -9,14 +9,18 @@ public class Venda {
     private String observacao;
     private float valorDoDesconto;
     private float valorTotal;
-    private boolean status;    
+    private boolean status;
     private PessoaFisica pessoaFisica;
 
     public Venda() {
     }
 
-    public Venda(int id, String data, String hora, String dataDeVencimento, String observacao, float valorDoDesconto, float valorTotal, PessoaFisica pessoaFisica,boolean status ) {
+    public Venda(int id, String data, String hora, String dataDeVencimento, String observacao, float valorDoDesconto, float valorTotal, PessoaFisica pessoaFisica, boolean status) {
+        this(data, hora, dataDeVencimento, observacao, valorDoDesconto, valorTotal, pessoaFisica, status);
         this.id = id;
+    }
+
+    public Venda(String data, String hora, String dataDeVencimento, String observacao, float valorDoDesconto, float valorTotal, PessoaFisica pessoaFisica, boolean status) {
         this.data = data;
         this.hora = hora;
         this.dataDeVencimento = dataDeVencimento;
@@ -24,7 +28,7 @@ public class Venda {
         this.valorDoDesconto = valorDoDesconto;
         this.valorTotal = valorTotal;
         this.pessoaFisica = pessoaFisica;
-        this.status =  status;
+        this.status = status;
     }
 
     public int getId() {
@@ -87,13 +91,9 @@ public class Venda {
         return pessoaFisica;
     }
 
-
-
     public void setPessoaFisica(PessoaFisica pessoaFisica) {
         this.pessoaFisica = pessoaFisica;
     }
-
-
 
     public boolean getStatus() {
         return status;
@@ -103,24 +103,16 @@ public class Venda {
         this.status = status;
     }
 
-  
-    
-
     @Override
     public String toString() {
-        return 
-                this.getId() + " " + 
-                this.getData() + " " + 
-                this.getHora() + " " + 
-                this.getDataDeVencimento() + " " +
-                this.getObservacao() + " " + 
-                this.getValorDoDesconto() + " " + 
-                this.getValorTotal() + " " + 
-                this.getPessoaFisica().getNome();
+        return this.getId() + " "
+                + this.getData() + " "
+                + this.getHora() + " "
+                + this.getDataDeVencimento() + " "
+                + this.getObservacao() + " "
+                + this.getValorDoDesconto() + " "
+                + this.getValorTotal() + " "
+                + this.getPessoaFisica().getNome();
     }
 
-  
-    
-    
 }
-

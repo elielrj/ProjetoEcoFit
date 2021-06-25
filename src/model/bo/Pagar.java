@@ -1,9 +1,7 @@
-
 package model.bo;
 
-
 public class Pagar {
-    
+
     private int id;
     private String data;
     private String hora;
@@ -11,7 +9,7 @@ public class Pagar {
     private float valorDeAcrescimo;
     private float valorPago;
     private String observacao;
-    
+
     private Compra compra;
 
     public Pagar() {
@@ -92,20 +90,16 @@ public class Pagar {
         this.compra = compra;
     }
 
-
-
     @Override
     public String toString() {
-        return 
-        this.getId() + " " +
-        this.getData()+ " " +
-        this.getHora()+ " " +
-        this.getValorDeDescontoNegociado()+ " " +
-        this.getValorDeAcrescimo()+ " " +
-        this.getValorPago()+ " " +
-        this.getObservacao()+ " " +        
-        this.getCompra().toString();
+        return this.getId() + " "
+                + this.getData() + " "
+                + this.getHora() + " "
+                + this.getValorDeDescontoNegociado() + " "
+                + this.getValorDeAcrescimo() + " "
+                + this.getValorPago() + " "
+                + this.getObservacao() + " "
+                + this.getCompra().toString();
     }
-   
-    
+
 }

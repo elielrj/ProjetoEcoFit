@@ -31,11 +31,11 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
      */
     public TelaCadastroFornecedor() {
         initComponents();
-        setSize(800,600); 
+        setSize(800, 600);
         jComboBoxStatus.addItem("Sim");
         jComboBoxStatus.addItem("Não");
-        
-        for(Endereco e: ServiceEndereco.Buscar()){
+
+        for (Endereco e : ServiceEndereco.Buscar()) {
             jComboBoxEndereco.addItem(e);
         }
     }
@@ -483,7 +483,6 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
         return jFormattedTextFieldtel2;
     }
 
-
     public JTextField getjTextFieldEmail() {
         return jTextFieldEmail;
     }
@@ -501,9 +500,9 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
     }
 
     public JComboBox<Object> getjComboBoxStatus() {
-        if(jComboBoxStatus.getSelectedItem() == "Sim"){
+        if (jComboBoxStatus.getSelectedItem() == "Sim") {
             jComboBoxStatus.setSelectedItem(true);
-        }else{
+        } else {
             jComboBoxStatus.setSelectedItem(false);
         }
         return jComboBoxStatus;
@@ -512,7 +511,5 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
     public JTextArea getjTextAreaObs() {
         return jTextAreaObs;
     }
-
-    
 
 }

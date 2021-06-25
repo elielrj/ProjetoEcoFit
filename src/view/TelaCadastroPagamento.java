@@ -25,8 +25,8 @@ public class TelaCadastroPagamento extends javax.swing.JFrame {
      */
     public TelaCadastroPagamento() {
         initComponents();
-        setSize(800,600); 
-        for(Compra c: service.ServiceCompra.Buscar()){
+        setSize(800, 600);
+        for (Compra c : service.ServiceCompra.Buscar()) {
             jComboBoxCompra.addItem(c);
         }
     }
@@ -398,7 +398,7 @@ public class TelaCadastroPagamento extends javax.swing.JFrame {
     }
 
     public JComboBox<Object> getjComboBoxCompra() {
-        Compra compra = (Compra)jComboBoxCompra.getSelectedItem();
+        Compra compra = (Compra) jComboBoxCompra.getSelectedItem();
         return jComboBoxCompra;
     }
 
@@ -437,6 +437,5 @@ public class TelaCadastroPagamento extends javax.swing.JFrame {
     public JTextArea getjTextAreaObs() {
         return jTextAreaObs;
     }
-
 
 }

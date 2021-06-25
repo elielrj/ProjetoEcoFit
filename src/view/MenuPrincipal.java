@@ -36,7 +36,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public MenuPrincipal() {
         //setSize(800,600);
         initComponents();
-        setSize(800,600); 
+        setSize(800, 600);
     }
 
     /**
@@ -420,7 +420,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVendasActionPerformed
         //TelaCadastroVenda telaCadastroVenda = new TelaCadastroVenda();
-       // ControllerVenda controllerVenda = new ControllerVenda(telaCadastroVenda);
+        // ControllerVenda controllerVenda = new ControllerVenda(telaCadastroVenda);
         //telaCadastroVenda.setVisible(true);
     }//GEN-LAST:event_jMenuItemVendasActionPerformed
 
@@ -458,7 +458,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TelaBuscaBairro telaBuscaBairro = new TelaBuscaBairro();
         ControllerBuscaBairro controllerBuscaBairroRelatorio = new ControllerBuscaBairro(telaBuscaBairro);
         telaBuscaBairro.setVisible(true);
-        
+
     }//GEN-LAST:event_jMenuItemRelatorioBairrosActionPerformed
 
     private void jMenuItem12RelatorioCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12RelatorioCidadesActionPerformed
@@ -471,13 +471,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TelaBuscaEndereco telaBuscaEndereco = new TelaBuscaEndereco();
         ControllerBuscaEndereco controllerBuscaEndereco = new ControllerBuscaEndereco(telaBuscaEndereco);
         telaBuscaEndereco.setVisible(true);
-        
+
     }//GEN-LAST:event_jMenuItemRelatorioCepsActionPerformed
 
     private void jMenuItemRelatorioAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioAlunosActionPerformed
-       TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica();
+        TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica();
         ControllerBuscaPessoaFisicaAluno controllerBuscaPessoaFisicaAluno = new ControllerBuscaPessoaFisicaAluno(telaBuscaPessoaFisica);
-       telaBuscaPessoaFisica.setVisible(true);
+        telaBuscaPessoaFisica.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelatorioAlunosActionPerformed
 
     private void jMenuItemRelatorioFornecedoreresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioFornecedoreresActionPerformed
@@ -487,14 +487,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemRelatorioFornecedoreresActionPerformed
 
     private void jMenuItemRelatorioPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioPersonalActionPerformed
-       TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica();
+        TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica();
         ControllerBuscaPessoaFisicaPersonal controllerBuscaPessoaFisicaPersonal = new ControllerBuscaPessoaFisicaPersonal(telaBuscaPessoaFisica);
-       telaBuscaPessoaFisica.setVisible(true);
+        telaBuscaPessoaFisica.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelatorioPersonalActionPerformed
 
     private void jMenuItemRelatorioProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioProdutosActionPerformed
-
-     
 
         TelaBuscaProduto telaBuscaProduto = new TelaBuscaProduto();
         ControllerBuscaProduto controllerBuscaProduto = new ControllerBuscaProduto(telaBuscaProduto);
@@ -515,9 +513,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemRelatorioFaturamentosActionPerformed
 
     private void jMenuItemRelatorioComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioComprasActionPerformed
-        
-        
-            
+
         //TelaBuscaCompra telaBuscaCompra = new TelaBuscaCompra();
         //ControllerBuscaCompra controllerBuscaCompra = new ControllerBuscaCompra(telaBuscaCompra);
         //telaBuscaCompra.setVisible(true);
@@ -532,9 +528,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenuItemContasAPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContasAPagarActionPerformed
         //TelaCadastroCompra telaCadastroCompra = new TelaCadastroCompra();
         //ControllerCompra controllerCompra = new ControllerCompra(telaCadastroCompra);
-        
+
         //telaCadastroCompra.setVisible(true);
-                
+
     }//GEN-LAST:event_jMenuItemContasAPagarActionPerformed
 
     private void jMenuItemPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPagarActionPerformed
@@ -672,7 +668,5 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator7;
     private javax.swing.JPopupMenu.Separator jSeparator8;
     // End of variables declaration//GEN-END:variables
-
-
 
 }

@@ -1,8 +1,7 @@
-
 package model.bo;
 
-public class Fornecedor extends Pessoa{
-    
+public class Fornecedor extends Pessoa {
+
     private int id;
     private String razaoSocial;
     private String inscricaoEstadual;
@@ -81,12 +80,9 @@ public class Fornecedor extends Pessoa{
         this.tipo = tipo;
     }
 
-
-  
-    
     @Override
     public String toString() {
-        return this.getCnpj()+ " - " +  this.getRazaoSocial();
+        return this.getCnpj() + " - " + this.getRazaoSocial();
     }
-    
+
 }

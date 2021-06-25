@@ -1,9 +1,7 @@
-
 package view;
 
 import javax.swing.JButton;
 import javax.swing.JTable;
-
 
 public class TelaBuscaCidade extends javax.swing.JDialog {
 
@@ -17,7 +15,7 @@ public class TelaBuscaCidade extends javax.swing.JDialog {
 
     public TelaBuscaCidade() {
         initComponents();
-        setSize(800,600); 
+        setSize(800, 600);
     }
 
     /**
@@ -227,8 +225,5 @@ public class TelaBuscaCidade extends javax.swing.JDialog {
     public JTable getjTable1() {
         return jTable1;
     }
-
-   
-
 
 }

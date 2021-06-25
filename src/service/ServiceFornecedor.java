@@ -1,4 +1,3 @@
-
 package service;
 
 import java.util.List;
@@ -7,30 +6,30 @@ import model.DAO.FornecedorDAO;
 
 public class ServiceFornecedor {
 
-    public static void Incluir(Fornecedor objeto){
+    public static void Incluir(Fornecedor objeto) {
 
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
         fornecedorDAO.Create(objeto);
 
-    }    
+    }
 
     public static void Atualizar(Fornecedor objeto) {
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
-        fornecedorDAO.Update(objeto);  
+        fornecedorDAO.Update(objeto);
     }
-    
-    public static List<Fornecedor> Buscar(){
+
+    public static List<Fornecedor> Buscar() {
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
-        return (fornecedorDAO.Retrieve());  
+        return (fornecedorDAO.Retrieve());
     }
-    
-     public static Fornecedor Buscar(int id){
+
+    public static Fornecedor Buscar(int id) {
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
-        return fornecedorDAO.Retrieve(id);  
+        return fornecedorDAO.Retrieve(id);
     }
-     
-     public static void Deletar(Fornecedor objeto){
+
+    public static void Deletar(Fornecedor objeto) {
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
-        fornecedorDAO.Delete(objeto);  
+        fornecedorDAO.Delete(objeto);
     }
 }

@@ -1,8 +1,7 @@
-
 package model.bo;
 
-
 public class Endereco {
+
     private int id;
     private String logradouro;
     private String numero;
@@ -90,13 +89,9 @@ public class Endereco {
         this.cidade = cidade;
     }
 
-    
     @Override
     public String toString() {
         return id + " - Rua " + logradouro + ", " + numero + ", Compl. " + complemento + ", Bairro " + bairro + "Cidade " + getCidade().getNome() + ", CEP " + cep;
     }
 
-    
-
-    
 }

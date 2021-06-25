@@ -17,7 +17,7 @@ public class FormModeloBuscas2 extends javax.swing.JDialog {
     public FormModeloBuscas2(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setSize(800,600); 
+        setSize(800, 600);
     }
 
     /**
@@ -131,7 +131,6 @@ public class FormModeloBuscas2 extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

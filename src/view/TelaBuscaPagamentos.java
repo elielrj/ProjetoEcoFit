@@ -23,10 +23,9 @@ public class TelaBuscaPagamentos extends javax.swing.JDialog {
     }
 
     public TelaBuscaPagamentos() {
-        setSize(800,600); 
+        setSize(800, 600);
         initComponents();
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.

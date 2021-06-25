@@ -1,12 +1,9 @@
-
 package view;
-
 
 import controller.ControllerBuscaPessoaFisica;
 import controller.ControllerBuscaProduto;
 import java.awt.event.KeyEvent;
 import java.text.DateFormat;
-
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -30,10 +27,8 @@ import model.bo.ItemDeVenda;
 import model.bo.PessoaFisica;
 import model.bo.Produto;
 
+public class TelaFaturamento extends javax.swing.JFrame {
 
-    
-public class TelaFaturamento extends javax.swing.JFrame{
-    
     private String hora;
     private String data;
     private String usuario;
@@ -44,11 +39,11 @@ public class TelaFaturamento extends javax.swing.JFrame{
     public DefaultTableModel getTabela() {
         return tabela;
     }
-    
+
     public TelaFaturamento() {
         initComponents();
         this.listaDeItens = new ArrayList<>();
-        dataHora();        
+        dataHora();
         caixaAtual();
         this.tabela = (DefaultTableModel) getjTableFaturamentoItens().getModel();
         this.contador = 1;
@@ -521,7 +516,7 @@ public class TelaFaturamento extends javax.swing.JFrame{
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jTextFieldProdutoCodBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProdutoCodBarrasActionPerformed
-        
+
     }//GEN-LAST:event_jTextFieldProdutoCodBarrasActionPerformed
 
     private void jButtonClienteBuscaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteBuscaIdActionPerformed
@@ -551,7 +546,7 @@ public class TelaFaturamento extends javax.swing.JFrame{
     }
 
     private void jLabelF1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabelF1KeyPressed
-        
+
     }//GEN-LAST:event_jLabelF1KeyPressed
 
     private void jLabelTituloKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabelTituloKeyPressed
@@ -559,16 +554,16 @@ public class TelaFaturamento extends javax.swing.JFrame{
     }//GEN-LAST:event_jLabelTituloKeyPressed
 
     public JComboBox<Object> getjComboBoxStatus() {
-         if(jComboBoxStatus.getSelectedItem() == "Faturando"){
+        if (jComboBoxStatus.getSelectedItem() == "Faturando") {
             jComboBoxStatus.setSelectedItem("Faturando");
-        }else if(jComboBoxStatus.getSelectedItem() == "Faturado"){
+        } else if (jComboBoxStatus.getSelectedItem() == "Faturado") {
             jComboBoxStatus.setSelectedItem("Faturado");
-        } 
+        }
         return jComboBoxStatus;
     }
 
     private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
-       //
+        //
     }//GEN-LAST:event_jComboBoxStatusActionPerformed
 
     /**
@@ -706,8 +701,6 @@ public class TelaFaturamento extends javax.swing.JFrame{
     }
 ////
 
-
-
     public JButton getjButtonAdicionar() {
         return jButtonAdicionar;
     }
@@ -715,8 +708,6 @@ public class TelaFaturamento extends javax.swing.JFrame{
     public JTable getjTableFaturamentoItens() {
         return jTableFaturamentoItens;
     }
-
-
 
     public String getHora() {
         return hora;
@@ -733,9 +724,9 @@ public class TelaFaturamento extends javax.swing.JFrame{
     public void setData(String data) {
         this.data = data;
     }
-       
-    private void dataHora(){        
-        
+
+    private void dataHora() {
+
         // data/hora atual
         LocalDateTime agora = LocalDateTime.now();
 
@@ -743,12 +734,12 @@ public class TelaFaturamento extends javax.swing.JFrame{
         DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         setData(formatterData.format(agora));
         jFormattedTextFieldFaturamentoData.setText(getData());
-        
+
         // formatar a hora
         DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
         setHora(formatterHora.format(agora));
         jFormattedTextFieldFaturamentoHora.setText(getHora());
-        
+
     }
 
     public String getUsuario() {
@@ -759,11 +750,11 @@ public class TelaFaturamento extends javax.swing.JFrame{
         this.usuario = usuario;
     }
 
-    
     private void caixaAtual() {
         this.setUsuario("Eliel");
         jTextFieldFaturamentoUsuario.setText(getUsuario());
     }
+
     /*
     private void criarProdutoEAdicionar(){
 
@@ -784,7 +775,7 @@ public class TelaFaturamento extends javax.swing.JFrame{
 
         atualizarValorTotal();
     }   */
-    /*
+ /*
     private void atualizarValorTotal() {
         float total=0;
         for(ItemDeVenda i:listaDeItens){
@@ -824,5 +815,9 @@ public class TelaFaturamento extends javax.swing.JFrame{
     public void setContador(int contador) {
         this.contador = contador;
     }
-    
+
+    public void getContador(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

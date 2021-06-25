@@ -1,23 +1,21 @@
-
 package model.DAO.SQL;
 
-
-public class SqlBairro implements Sql{
+public class SqlBairro implements Sql {
 
     @Override
     public String criar() {
-        return  "INSERT INTO bairro(nome,status) VALUES(?,?)";
+        return "INSERT INTO bairro(nome,status) VALUES(?,?)";
     }
 
     @Override
     public String listarTodos() {
-        return  "SELECT id,nome,status FROM bairro";
+        return "SELECT id,nome,status FROM bairro";
 
     }
 
     @Override
     public String listarId() {
-    return "SELECT id,nome,status FROM bairro WHERE bairro.id=?";
+        return "SELECT id,nome,status FROM bairro WHERE bairro.id=?";
     }
 
     @Override
@@ -30,10 +28,4 @@ public class SqlBairro implements Sql{
         return "DELETE FROM bairro WHERE id = ?";
     }
 
-
 }
-
-
-
-   
-

@@ -1,15 +1,16 @@
 package model.bo;
-public class ItemDeCompra extends Item{
-    
+
+public class ItemDeCompra extends Item {
+
     private int id;
-            
+
     private Compra compra;
     private Produto produto;
-    
+
     public ItemDeCompra() {
     }
 
-    public ItemDeCompra(int quantidade, float valor, int id,  Compra compra, Produto produto) {
+    public ItemDeCompra(int quantidade, float valor, int id, Compra compra, Produto produto) {
         super(quantidade, valor);
         this.id = id;
         this.compra = compra;
@@ -23,8 +24,6 @@ public class ItemDeCompra extends Item{
     public void setId(int id) {
         this.id = id;
     }
-
-
 
     public Compra getCompra() {
         return compra;
@@ -42,15 +41,12 @@ public class ItemDeCompra extends Item{
         this.produto = produto;
     }
 
-
-     @Override
+    @Override
     public String toString() {
-        return  this.getId() + " " +
-                super.toString() + " " +
-                this.getCompra().toString() + " " +
-                this.getProduto().toString();
+        return this.getId() + " "
+                + super.toString() + " "
+                + this.getCompra().toString() + " "
+                + this.getProduto().toString();
     }
-    
 
-   
 }

@@ -22,9 +22,9 @@ public class TelaBuscaPersonal extends javax.swing.JDialog {
         initComponents();
     }
 
-    public TelaBuscaPersonal(){
+    public TelaBuscaPersonal() {
         initComponents();
-        setSize(800,600); 
+        setSize(800, 600);
     }
 
     /**

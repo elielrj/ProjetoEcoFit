@@ -1,11 +1,10 @@
-
 package model.bo;
 
 public class Cidade {
 
-private int id;
-private String nome;
-private boolean status;
+    private int id;
+    private String nome;
+    private boolean status;
 
     public Cidade() {
     }
@@ -15,8 +14,6 @@ private boolean status;
         this.nome = nome;
         this.status = status;
     }
-
-    
 
     public int getId() {
         return id;
@@ -44,11 +41,7 @@ private boolean status;
 
     @Override
     public String toString() {
-        return 
-                getNome();
+        return getNome();
     }
-
-    
-    
 
 }

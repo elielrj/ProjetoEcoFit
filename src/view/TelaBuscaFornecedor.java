@@ -20,14 +20,14 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
     public TelaBuscaFornecedor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setSize(800,600); 
+        setSize(800, 600);
 
     }
 
-
-    public TelaBuscaFornecedor(){
+    public TelaBuscaFornecedor() {
         initComponents();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -229,5 +229,4 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
         return jTable1;
     }
 
-    
 }

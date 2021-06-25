@@ -22,11 +22,11 @@ public class TelaCadastroReceber extends javax.swing.JFrame {
 
     public TelaCadastroReceber() {
         initComponents();
-        setSize(800,600); 
-        for(Venda v: service.ServiceVenda.Buscar()){
+        setSize(800, 600);
+        for (Venda v : service.ServiceVenda.Buscar()) {
             jComboBoxVendasId.addItem(v);
         }
-        
+
         jComboBoxStatus.addItem("Sim");
         jComboBoxStatus.addItem("Não");
     }
@@ -457,7 +457,7 @@ public class TelaCadastroReceber extends javax.swing.JFrame {
     }
 
     public JComboBox<Object> getjComboBoxVendasId() {
-        Venda venda = (Venda)jComboBoxVendasId.getSelectedItem();
+        Venda venda = (Venda) jComboBoxVendasId.getSelectedItem();
         return jComboBoxVendasId;
     }
 
@@ -474,12 +474,12 @@ public class TelaCadastroReceber extends javax.swing.JFrame {
     }
 
     public JComboBox<Object> getjComboBoxStatus() {
-          if(jComboBoxStatus.getSelectedItem() == "Sim"){
+        if (jComboBoxStatus.getSelectedItem() == "Sim") {
             jComboBoxStatus.setSelectedItem(true);
-        }else{
+        } else {
             jComboBoxStatus.setSelectedItem(false);
         }
-        
+
         return jComboBoxStatus;
-    }   
+    }
 }

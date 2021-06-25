@@ -25,14 +25,12 @@ public class TelaCadastroBairro extends javax.swing.JFrame {
      */
     public TelaCadastroBairro() {
         initComponents();
-        
 
+        setSize(800, 600);
 
-        setSize(800,600); 
-        
         jComboBoxStatus.addItem("Sim");
         jComboBoxStatus.addItem("Não");
-        
+
     }
 
     /**
@@ -271,19 +269,15 @@ public class TelaCadastroBairro extends javax.swing.JFrame {
         return jPanelDados;
     }
 
-
     public JComboBox<Object> getjComboBoxStatus() {
-        
-        if(jComboBoxStatus.getSelectedItem() == "Sim"){
+
+        if (jComboBoxStatus.getSelectedItem() == "Sim") {
             jComboBoxStatus.setSelectedItem(true);
-        }else{
+        } else {
             jComboBoxStatus.setSelectedItem(false);
         }
-        
+
         return jComboBoxStatus;
     }
-
-
-
 
 }

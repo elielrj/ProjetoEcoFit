@@ -20,12 +20,13 @@ public class TelaBuscaBairroRelatorio extends javax.swing.JDialog {
     public TelaBuscaBairroRelatorio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setSize(800,600); 
+        setSize(800, 600);
     }
 
     public TelaBuscaBairroRelatorio() {
         initComponents();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -216,7 +217,5 @@ public class TelaBuscaBairroRelatorio extends javax.swing.JDialog {
     public JTable getjTable1() {
         return jTable1;
     }
-
-    
 
 }

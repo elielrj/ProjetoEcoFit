@@ -18,25 +18,23 @@ import service.ServiceBairro;
 import service.ServiceCidade;
 
 public class TelaCadastroEndereco extends javax.swing.JFrame {
-    
+
     public TelaCadastroEndereco() {
-        initComponents();       
-        
-        setSize(800,600); 
-        for(Cidade c: ServiceCidade.Buscar()){
+        initComponents();
+
+        setSize(800, 600);
+        for (Cidade c : ServiceCidade.Buscar()) {
             jComboBoxCidade.addItem(c);
-           
+
         }
-        
-     
-        for(Bairro b: ServiceBairro.Buscar()){
+
+        for (Bairro b : ServiceBairro.Buscar()) {
             jComboBoxBairro.addItem(b);
         }
-        
 
         jComboBoxStatus.addItem("Sim");
         jComboBoxStatus.addItem("Não");
-        
+
     }
 
     /**
@@ -268,7 +266,6 @@ public class TelaCadastroEndereco extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarActionPerformed
@@ -366,11 +363,6 @@ public class TelaCadastroEndereco extends javax.swing.JFrame {
         return jButtonSair;
     }
 
-
-
-
-  
-
     public JComboBox<Object> getjComboBoxBairro() {
         Bairro bairro = (Bairro) jComboBoxBairro.getSelectedItem();
         return jComboBoxBairro;
@@ -385,24 +377,10 @@ public class TelaCadastroEndereco extends javax.swing.JFrame {
         return jFormattedTextFieldCep;
     }
 
-
-    
-
- 
-
-    
-
- 
-
-   
-
-    
-
     public JPanel getjPanelDados() {
         return jPanelDados;
     }
 
-    
     public JTextField getjTextFieldId() {
         return jTextFieldId;
     }
@@ -432,19 +410,14 @@ public class TelaCadastroEndereco extends javax.swing.JFrame {
     }
 
     public JComboBox<Object> getjComboBoxStatus() {
-        
-        if(jComboBoxStatus.getSelectedItem() == "Sim"){
+
+        if (jComboBoxStatus.getSelectedItem() == "Sim") {
             jComboBoxStatus.setSelectedItem(true);
-        }else{
+        } else {
             jComboBoxStatus.setSelectedItem(false);
         }
-        
+
         return jComboBoxStatus;
     }
-
- 
-
-
-
 
 }
