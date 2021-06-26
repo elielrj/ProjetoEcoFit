@@ -10,6 +10,7 @@ import model.bo.Bairro;
 import model.bo.Cidade;
 import view.TelaBuscaBairro;
 import view.TelaCadastroBairro;
+import controller.Lipar;
 
 public class ControllerBairro implements ActionListener {
 
@@ -36,11 +37,13 @@ public class ControllerBairro implements ActionListener {
         if (e.getSource() == this.telaBuscaBairro.getjButtonNovo()) {
             Ativa(false);
             LimpaEstadoComponentes(true);
+
             this.telaBuscaBairro.getjTextFieldId().setEnabled(false);
             codigo = 0;
         } else if (e.getSource() == this.telaBuscaBairro.getjButtonCancelar()) {
             Ativa(true);
             LimpaEstadoComponentes(false);
+
         } else if (e.getSource() == this.telaBuscaBairro.getjButtonGravar()) {
             //montar objeto a persistir
             Bairro bairro = new Bairro();
@@ -56,6 +59,7 @@ public class ControllerBairro implements ActionListener {
             }
             Ativa(true);
             LimpaEstadoComponentes(false);
+
         }
         if (e.getSource() == this.telaBuscaBairro.getjButtonBuscar()) {
 
@@ -67,7 +71,6 @@ public class ControllerBairro implements ActionListener {
             if (codigo != 0) {
                 Ativa(false);
                 LimpaEstadoComponentes(true);
-
                 Bairro bairro = new Bairro();
                 bairro = service.ServiceBairro.Buscar(codigo);
 

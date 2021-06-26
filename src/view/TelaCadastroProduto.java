@@ -190,6 +190,11 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
         }
 
         jTextFieldCorrelacaoa.setText("jTextField1");
+        jTextFieldCorrelacaoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCorrelacaoaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
@@ -308,6 +313,10 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
     private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxStatusActionPerformed
+
+    private void jTextFieldCorrelacaoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCorrelacaoaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCorrelacaoaActionPerformed
 
     /**
      * @param args the command line arguments

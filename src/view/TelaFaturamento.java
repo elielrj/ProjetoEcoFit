@@ -4,6 +4,7 @@ import controller.ControllerBuscaPessoaFisica;
 import controller.ControllerBuscaProduto;
 import java.awt.event.KeyEvent;
 import java.text.DateFormat;
+import java.text.Normalizer.Form;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -29,27 +30,12 @@ import model.bo.Produto;
 
 public class TelaFaturamento extends javax.swing.JFrame {
 
-    /*private String hora;
-    private String data;
-    private String usuario;
-    private List<ItemDeVenda> listaDeItens;
-    private DefaultTableModel tabela;
-    private int contador;*/
-
-
-
     public TelaFaturamento() {
         initComponents();
-
-        
 
         getjComboBoxStatus().addItem("Faturando");
         getjComboBoxStatus().addItem("Faturado");
     }
-
-
-
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -88,10 +74,10 @@ public class TelaFaturamento extends javax.swing.JFrame {
         jTextFieldClienteEmail = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabelF1 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        jLabelF2 = new javax.swing.JLabel();
+        jLabelF3 = new javax.swing.JLabel();
+        jLabelF4 = new javax.swing.JLabel();
+        jLabelF5 = new javax.swing.JLabel();
         jTextFieldClienteTel1 = new javax.swing.JTextField();
         jTextFieldClienteTel2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -100,7 +86,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jTextFieldProdutoCodBarras = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Formulário de Cadastro de ...");
         setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
@@ -184,6 +170,11 @@ public class TelaFaturamento extends javax.swing.JFrame {
 
         jPanelDados.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelDados.setPreferredSize(new java.awt.Dimension(700, 500));
+        jPanelDados.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanelDadosKeyPressed(evt);
+            }
+        });
 
         jLabel1.setText("Código de barras do produto");
 
@@ -272,6 +263,11 @@ public class TelaFaturamento extends javax.swing.JFrame {
         jLabel10.setText("Email");
 
         jLabel11.setText("Telefone 1");
+        jLabel11.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel11KeyPressed(evt);
+            }
+        });
 
         jLabelF1.setText("F1 = Buscar produto");
         jLabelF1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -280,13 +276,13 @@ public class TelaFaturamento extends javax.swing.JFrame {
             }
         });
 
-        jLabel13.setText("F2 = Novo Faturamento");
+        jLabelF2.setText("F2 = Novo Faturamento");
 
-        jLabel14.setText("F3 = Cancelar Faturamento");
+        jLabelF3.setText("F3 = Cancelar Faturamento");
 
-        jLabel15.setText("F4 = Encerrar faturamento");
+        jLabelF4.setText("F4 = Encerrar faturamento");
 
-        jLabel16.setText("F5 = Cancelar item Faturado");
+        jLabelF5.setText("F5 = Cancelar item Faturado");
 
         jLabel2.setText("Telefone 2");
 
@@ -385,13 +381,13 @@ public class TelaFaturamento extends javax.swing.JFrame {
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
                         .addComponent(jLabelF1)
                         .addGap(30, 30, 30)
-                        .addComponent(jLabel13)
+                        .addComponent(jLabelF2)
                         .addGap(28, 28, 28)
-                        .addComponent(jLabel14)
+                        .addComponent(jLabelF3)
                         .addGap(29, 29, 29)
-                        .addComponent(jLabel15)
+                        .addComponent(jLabelF4)
                         .addGap(34, 34, 34)
-                        .addComponent(jLabel16)
+                        .addComponent(jLabelF5)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanelDadosLayout.setVerticalGroup(
@@ -441,10 +437,10 @@ public class TelaFaturamento extends javax.swing.JFrame {
                         .addGap(16, 16, 16)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelF1)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabelF2)
+                            .addComponent(jLabelF3)
+                            .addComponent(jLabelF4)
+                            .addComponent(jLabelF5, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelDadosLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -509,26 +505,16 @@ public class TelaFaturamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonClienteBuscaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteBuscaIdActionPerformed
-        /*TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica(null,true);
-        ControllerBuscaPessoaFisica controllerBuscaPessoaFisica = new ControllerBuscaPessoaFisica(telaBuscaPessoaFisica);
-        telaBuscaPessoaFisica.setVisible(true);
-        getjTextFieldClienteId().setText(telaBuscaPessoaFisica.getCodPessoaFisica()+"");
-        PessoaFisica pessoaFisica = service.ServicePessoaFisica.Buscar(telaBuscaPessoaFisica.getCodPessoaFisica());
-        getjTextFieldClienteNome().setText(pessoaFisica.getNome());
-        getjTextFieldClienteCidade().setText(pessoaFisica.getEndereco().getCidade()+"");
-        getjTextFieldClienteBairro().setText(pessoaFisica.getEndereco().getBairro()+"");
-        getjTextFieldClienteEmail().setText(pessoaFisica.getEmail()+"");
-        getjTextFieldClienteTel1().setText(pessoaFisica.getTelefone1()+"");
-        getjTextFieldClienteTel2().setText(pessoaFisica.getTelefone2()+"");*/
+
     }//GEN-LAST:event_jButtonClienteBuscaIdActionPerformed
 
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
-        /*if(!getjTextFieldProdutoCodBarras().getText().equals("")){
-            criarProdutoEAdicionar();
-        }else{
-            getjTextFieldProdutoCodBarras().requestFocus();
-        }*/
+
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
+
+    public JPanel getjPanelDados() {
+        return jPanelDados;
+    }
 
     public JButton getjButtonProdutoBusca() {
         return jButtonProdutoBusca;
@@ -554,6 +540,14 @@ public class TelaFaturamento extends javax.swing.JFrame {
     private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
         //
     }//GEN-LAST:event_jComboBoxStatusActionPerformed
+
+    private void jLabel11KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel11KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel11KeyPressed
+
+    private void jPanelDadosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanelDadosKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanelDadosKeyPressed
 
     /**
      * @param args the command line arguments
@@ -606,10 +600,6 @@ public class TelaFaturamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -619,6 +609,10 @@ public class TelaFaturamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelF1;
+    private javax.swing.JLabel jLabelF2;
+    private javax.swing.JLabel jLabelF3;
+    private javax.swing.JLabel jLabelF4;
+    private javax.swing.JLabel jLabelF5;
     private javax.swing.JLabel jLabelFaturamentoValorTotal;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JPanel jPainelBotoes;
@@ -637,123 +631,108 @@ public class TelaFaturamento extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jTextFieldProdutoCodBarras;
     // End of variables declaration//GEN-END:variables
 
-    public JTextField getjTextFieldProdutoCodBarras() {
+    public JTextField getjTextField_Produto_Cod_Barras() {
         return jTextFieldProdutoCodBarras;
     }
 
-    public JTextField getjTextFieldClienteId() {
+    public JTextField getjTextField_Cliente_Id() {
         return jTextFieldClienteId;
     }
 
-    public JTextField getjTextFieldClienteBairro() {
+    public JTextField getjTextField_Cliente_Bairro() {
         return jTextFieldClienteBairro;
     }
 
-    public JTextField getjTextFieldClienteCidade() {
+    public JTextField getjTextField_Cliente_Cidade() {
         return jTextFieldClienteCidade;
     }
 
-    public JTextField getjTextFieldClienteEmail() {
+    public JTextField getjTextField_Cliente_Email() {
         return jTextFieldClienteEmail;
     }
 
-    public JTextField getjTextFieldClienteNome() {
+    public JTextField getjTextField_Cliente_Nome() {
         return jTextFieldClienteNome;
     }
 
-    public JTextField getjTextFieldClienteTel1() {
+    public JTextField getjTextField_Cliente_Tel1() {
         return jTextFieldClienteTel1;
     }
 
-    public JTextField getjTextFieldClienteTel2() {
+    public JTextField getjTextField_Cliente_Tel2() {
         return jTextFieldClienteTel2;
     }
 
-    public JFormattedTextField getjFormattedTextFieldFaturamentoData() {
+    public JFormattedTextField getjFormattedTextField_FaturamentoData() {
         return jFormattedTextFieldFaturamentoData;
     }
 
-    public JFormattedTextField getjFormattedTextFieldFaturamentoHora() {
+    public JFormattedTextField getjFormattedTextField_FaturamentoHora() {
         return jFormattedTextFieldFaturamentoHora;
     }
 
-    public JTextField getjTextFieldFaturamentoUsuario() {
+    public JTextField getjTextField_FaturamentoUsuario() {
         return jTextFieldFaturamentoUsuario;
     }
 
-    public void setjFormattedTextFieldFaturamentoData(String data) {
+    public void setjFormattedTextField_FaturamentoData(String data) {
         this.jFormattedTextFieldFaturamentoData.setText(data);
     }
 
-    public JLabel getjLabelFaturamentoValorTotal() {
+    public JLabel getjLabel_FaturamentoValorTotal() {
         return jLabelFaturamentoValorTotal;
     }
-////
 
-    public JButton getjButtonAdicionar() {
+    public JButton getjButton_Adicionar() {
         return jButtonAdicionar;
     }
 
-    public JTable getjTableFaturamentoItens() {
+    public JTable getjTable_FaturamentoItens() {
         return jTableFaturamentoItens;
     }
 
-
-    /*
-    private void criarProdutoEAdicionar(){
-
-        int idProduto = (Integer.parseInt(jTextFieldProdutoCodBarras.getText()));
-        Produto produto = service.ServiceProduto.Buscar(idProduto);
-
-        ItemDeVenda item = new ItemDeVenda(false,1, produto, produto.getValor());
-        listaDeItens.add(item);
-
-        tabela.addRow(new Object[]{
-                     contador,
-                     item.getId(),
-                     item.getProduto().getId(),
-                     1,
-                     item.getValor(),
-                     item.getValor()* 1
-               });
-
-        atualizarValorTotal();
-    }   */
- /*
-    private void atualizarValorTotal() {
-        float total=0;
-        for(ItemDeVenda i:listaDeItens){
-            total += i.getQuantidade()*i.getValor();
-        }
-        getjLabelFaturamentoValorTotal().setText(total+"");
-    }*/
-
-    public JButton getjButtonBuscar() {
+    public JButton getjButton_Buscar() {
         return jButtonBuscar;
     }
 
-    public JButton getjButtonCancelar() {
+    public JButton getjButton_Cancelar() {
         return jButtonCancelar;
     }
 
-    public JButton getjButtonClienteBuscaId() {
+    public JButton getjButton_ClienteBuscaId() {
         return jButtonClienteBuscaId;
     }
 
-    public JButton getjButtonGravar() {
+    public JButton getjButton_Gravar() {
         return jButtonGravar;
     }
 
-    public JButton getjButtonNovo() {
+    public JButton getjButton_Novo() {
         return jButtonNovo;
     }
 
-    public JButton getjButtonSair() {
+    public JButton getjButton_Sair() {
         return jButtonSair;
     }
 
+    public JLabel getjLabel_F1() {
+        return jLabelF1;
+    }
 
+    public JLabel getjLabel_F2() {
+        return jLabelF2;
+    }
 
+    public JLabel getjLabelF3() {
+        return jLabelF3;
+    }
 
+    public JLabel getjLabel_F4() {
+        return jLabelF4;
+    }
+
+    public JLabel getjLabel_F5() {
+        return jLabelF5;
+    }
 
 }
