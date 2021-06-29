@@ -10,7 +10,6 @@ import model.bo.Bairro;
 import model.bo.Cidade;
 import view.TelaBuscaBairro;
 import view.TelaCadastroBairro;
-import controller.Lipar;
 
 public class ControllerBairro implements ActionListener {
 

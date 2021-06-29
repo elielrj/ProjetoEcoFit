@@ -33,7 +33,7 @@ public class ServiceProduto {
         produtoDAO.Delete(objeto);
     }
     public static boolean codigoDeBarrasValido(int codBarras){
-        ProdutoDAO produtoDAO = new ProdutoDAO();
+                
         if (Buscar(codBarras).equals(null)){
             return false;
         } else {

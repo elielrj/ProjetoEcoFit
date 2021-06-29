@@ -183,11 +183,8 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
         jTextAreaObs.setRows(5);
         jScrollPane1.setViewportView(jTextAreaObs);
 
-        try {
-            jTextFieldCodBarras.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###.###.#")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        jTextFieldCodBarras.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
+        jTextFieldCodBarras.setText("");
 
         jTextFieldCorrelacaoa.setText("jTextField1");
         jTextFieldCorrelacaoa.addActionListener(new java.awt.event.ActionListener() {

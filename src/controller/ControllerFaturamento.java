@@ -4,12 +4,16 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import model.DAO.FaturamentoDAO;
+import model.DAO.ItemDeVendaDAO;
 import model.bo.ItemDeVenda;
 import model.bo.PessoaFisica;
 import model.bo.Produto;
@@ -18,47 +22,39 @@ import view.TelaBuscaPessoaFisica;
 import view.TelaBuscaProduto;
 import view.TelaFaturamento;
 import model.bo.Faturamento;
+import view.TelaBuscaFaturamento;
 
 public class ControllerFaturamento implements ActionListener {
 
-    TelaFaturamento telaFaturamento = new TelaFaturamento();
+    TelaFaturamento telaFaturamento;
     public static int codigo;
     Faturamento faturamento;
-    private DefaultTableModel tabela;
+    DefaultTableModel tabela;
 
     public ControllerFaturamento(TelaFaturamento telaFaturamento) {
 
         this.telaFaturamento = telaFaturamento;
         this.faturamento = new Faturamento();
-
-        this.tabela = (DefaultTableModel) this.telaFaturamento.getjTable_FaturamentoItens().getModel();
-
+        //DefaultTableModel tabela = (DefaultTableModel) this.telaFaturamento.getjTable_FaturamentoItens().getModel();
+        //CREATE  DATE/HOUR/USER
+        this.telaFaturamento.getjFormattedTextField_FaturamentoHora().setText(this.faturamento.getHora());
+        this.telaFaturamento.getjFormattedTextField_FaturamentoData().setText(this.faturamento.getData());
+        this.telaFaturamento.getjTextField_FaturamentoUsuario().setText(this.faturamento.getUserCaixa());
+        //LISTENER BUTTON
         this.telaFaturamento.getjButton_Novo().addActionListener(this);
         this.telaFaturamento.getjButton_Buscar().addActionListener(this);
         this.telaFaturamento.getjButton_Cancelar().addActionListener(this);
         this.telaFaturamento.getjButton_Gravar().addActionListener(this);
         this.telaFaturamento.getjButton_Sair().addActionListener(this);
-        this.telaFaturamento.getjButtonProdutoBusca().addActionListener(this);
-
-        this.telaFaturamento.getjTextField_Produto_Cod_Barras().addActionListener(this);
-        this.telaFaturamento.getjButtonProdutoBusca().addActionListener(this);
-        this.telaFaturamento.getjButton_Adicionar().addActionListener(this);
-
-        this.telaFaturamento.getjTextField_Cliente_Id().addActionListener(this);
+        this.telaFaturamento.getjButton_ProdutoPesquisa().addActionListener(this);
+        this.telaFaturamento.getjButton_ProdutoAdicionar().addActionListener(this);
         this.telaFaturamento.getjButton_ClienteBuscaId().addActionListener(this);
+        this.telaFaturamento.getjButton_ProdutoRemover().addActionListener(this);
+        //LISTENER KEY ENTER
+        this.telaFaturamento.getjTextField_ProdutoCodBarras().addActionListener(this);
+        this.telaFaturamento.getjTextField_ClienteId().addActionListener(this);
 
-        //this.telaFaturamento.getjTextField_Cliente_Nome().addActionListener(this);
-        //this.telaFaturamento.getjTextField_Cliente_Cidade().addActionListener(this);
-        //this.telaFaturamento.getjTextField_Cliente_Bairro().addActionListener(this);
-        //this.telaFaturamento.getjTextField_Cliente_Email().addActionListener(this);
-        //this.telaFaturamento.getjTextField_Cliente_Tel1().addActionListener(this);
-        //this.telaFaturamento.getjTextField_Cliente_Tel2().addActionListener(this);
-        //this.telaFaturamento.getjFormattedTextField_FaturamentoData().addActionListener(this);
-        //this.telaFaturamento.getjFormattedTextField_FaturamentoHora().addActionListener(this);
-        // this.telaFaturamento.getjTextField_FaturamentoUsuario().addActionListener(this);
-        this.telaFaturamento.getjComboBoxStatus().addActionListener(this);
-        
-        this.telaFaturamento.getjTextField_Produto_Cod_Barras().addKeyListener(new java.awt.event.KeyAdapter() {
+        this.telaFaturamento.getjTextField_ProdutoCodBarras().addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                     inserirItem();
@@ -66,96 +62,89 @@ public class ControllerFaturamento implements ActionListener {
                     buscaProdutoPorId();
                 } else if (evt.getKeyCode() == KeyEvent.VK_F2) {
                     novoFaturamento();
-                  
                 } else if (evt.getKeyCode() == KeyEvent.VK_F3) {
-                    Ativa(true);
-                    LimpaEstadoComponentes(false);
+                    cancelarFaturamento();
                 } else if (evt.getKeyCode() == KeyEvent.VK_F4) {
                     //persistir no banco
+                    gravarFaturamento();
                 } else if (evt.getKeyCode() == KeyEvent.VK_F5) {
                     //remover item selecionado
+                    removerItemFaturado();
                 }
             }
+
         });
-        
-        this.telaFaturamento.getjFormattedTextField_FaturamentoHora().setText(this.faturamento.getHora());
-        this.telaFaturamento.getjFormattedTextField_FaturamentoData().setText(this.faturamento.getData());
-        this.telaFaturamento.getjTextField_FaturamentoUsuario().setText(this.faturamento.getUsuario());
+
         Ativa(true);
+        desativarPorPadrao();
         LimpaEstadoComponentes(false);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //BUTTUN NEW
         if (e.getSource() == this.telaFaturamento.getjButton_Novo()) {
-            Ativa(false);
-            LimpaEstadoComponentes(true);
-            codigo = 0;
+            novoFaturamento();
+            //BUTTUN CANELAR
         } else if (e.getSource() == this.telaFaturamento.getjButton_Cancelar()) {
-            Ativa(true);
-            LimpaEstadoComponentes(false);
+            cancelarFaturamento();
+            //BUTTUN GRAVAR
         } else if (e.getSource() == this.telaFaturamento.getjButton_Gravar()) {
-            //montar objeto a persistir
-            Venda venda = new Venda();
-
-            venda.setData(this.telaFaturamento.getjFormattedTextField_FaturamentoData().getText());
-            venda.setHora(this.telaFaturamento.getjFormattedTextField_FaturamentoHora().getText());
-            venda.setStatus(false);
-
-            if (codigo == 0) {
-                service.ServiceVenda.Incluir(venda);
-            } else {
-                // venda.setId(Integer.parseInt(this.telaFaturamento.getjTextFieldIdVenda().getText()));
-                service.ServiceVenda.Atualizar(venda);
-            }
-            Ativa(true);
-            LimpaEstadoComponentes(false);
-        }
-        if (e.getSource() == this.telaFaturamento.getjButton_Buscar()) {
+            gravarFaturamento();
+            //BUTTUN BUSCAR
+        } else if (e.getSource() == this.telaFaturamento.getjButton_Buscar()) {
 
             codigo = 0;
-            //TelaBuscaFaturamento telaBuscaVenda = new TelaBuscaFaturamento(null, true);
-            //ControllerBuscaVenda controllerBuscaVenda = new ControllerBuscaVenda(telaBuscaVenda);
-            //telaBuscaVenda.setVisible(true);
+            TelaBuscaFaturamento telaBuscaFaturamento = new TelaBuscaFaturamento(null, true);
+            ControllerBuscaFaturamento controllerBuscaFaturamento = new ControllerBuscaFaturamento(telaBuscaFaturamento);
+            telaBuscaFaturamento.setVisible(true);
 
             if (codigo != 0) {
                 Ativa(false);
                 LimpaEstadoComponentes(true);
-                Venda venda = new Venda();
-                venda = service.ServiceVenda.Buscar(codigo);
+                faturamento = new Faturamento();
+                faturamento = service.ServiceFaturamento.Buscar(codigo);
 
-                //this.telaFaturamento.getjTextFieldIdVenda().setText(venda.getId() + "");
-                this.telaFaturamento.getjFormattedTextField_FaturamentoData().setText(venda.getData());
-                this.telaFaturamento.getjFormattedTextField_FaturamentoHora().setText(venda.getHora());
-                //this.telaFaturamento.getjComboBoxStatus().setSelectedItem(venda.getStatus());
+                this.telaFaturamento.getjTextField_Faturamento_Id().setText(faturamento.getId() + "");
+                this.telaFaturamento.getjFormattedTextField_FaturamentoData().setText(faturamento.getData());
+                this.telaFaturamento.getjFormattedTextField_FaturamentoHora().setText(faturamento.getHora() + "");
+                this.telaFaturamento.getjFormattedTextField_DataDeVencimento().setText(faturamento.getDataDeVencimento() + "");
+                this.telaFaturamento.getjTextArea_Obs().setText(faturamento.getObservacao() + "");
+                this.telaFaturamento.getjFormattedTextField_ValorDeDesconto().setText(faturamento.getValorDoDesconto() + "");
+                this.telaFaturamento.getjComboBoxStatus().setSelectedItem(faturamento.getStatus());
+                this.telaFaturamento.getjTextField_ClienteId().setText(faturamento.getPessoaFisica().getId() + "");
+                this.telaFaturamento.getjTextField_FaturamentoUsuario().setText(faturamento.getUserCaixa());
 
-                // this.telaFaturamento.getjTextFieldIdVenda().setEnabled(false);
+                this.telaFaturamento.getjTextField_ProdutoCodBarras().setText("");
+                this.telaFaturamento.getjTextField_Cliente_Nome().setText(faturamento.getPessoaFisica().getNome());
+                this.telaFaturamento.getjTextField_Cliente_Cidade().setText(faturamento.getPessoaFisica().getEndereco().getCidade().getNome());
+                this.telaFaturamento.getjTextField_Cliente_Bairro().setText(faturamento.getPessoaFisica().getEndereco().getBairro().getNome());
+                this.telaFaturamento.getjTextField_Cliente_Email().setText(faturamento.getPessoaFisica().getEmail());
+                this.telaFaturamento.getjTextField_Cliente_Tel1().setText(faturamento.getPessoaFisica().getTelefone1());
+                this.telaFaturamento.getjTextField_Cliente_Tel2().setText(faturamento.getPessoaFisica().getTelefone2());
+                
+                ItemDeVendaDAO itemDeVendaDAO = new ItemDeVendaDAO();
+                faturamento.setListaDeItens((ArrayList<ItemDeVenda>) itemDeVendaDAO.RetrieveTodosOsItensDeUmaVenda(faturamento.getId()));
+                
+                
+                atualizarTabelaDeItens();
+                atualizarTotalDaCompra();
+
             }
-        }
-        if (e.getSource() == this.telaFaturamento.getjButtonProdutoBusca()) {
+        //BUTTUN PESQUISAR PRODUTO
+        } else if (e.getSource() == this.telaFaturamento.getjButton_ProdutoPesquisa()) {
             buscaProdutoPorId();
-
-            //TelaBuscaProduto telaBuscaProduto = new TelaBuscaProduto(null,true);
-            //ControllerBuscaProduto controllerBuscaProduto = new ControllerBuscaProduto(telaBuscaProduto);
-            //telaBuscaProduto.setVisible(true);
-            //this.telaFaturamento.getjTextField_Produto_Cod_Barras().setText(telaBuscaProduto.getCodProduto()+"");
-        }
-
-        if (e.getSource() == this.telaFaturamento.getjButton_Adicionar()) {
-            if (!this.telaFaturamento.getjTextField_Produto_Cod_Barras().getText().equals("")) {
-                inserirItem();
-            } else {
-                this.telaFaturamento.getjTextField_Produto_Cod_Barras().requestFocus();
-            }
-        }
-
-        if (e.getSource() == this.telaFaturamento.getjButton_Sair()) {
+        } else if (e.getSource() == this.telaFaturamento.getjButton_ProdutoAdicionar()) {
+            inserirItem();
+        //BUTTUN SAIR
+        } else if (e.getSource() == this.telaFaturamento.getjButton_Sair()) {
             this.telaFaturamento.dispose();
-        }
-
-        if (e.getSource() == this.telaFaturamento.getjButton_ClienteBuscaId()) {
+        //BUTTUN ADD CLIENTE
+        } else if (e.getSource() == this.telaFaturamento.getjButton_ClienteBuscaId()) {
             buscaCliente();
+        } else if (e.getSource() == this.telaFaturamento.getjButton_ProdutoRemover()) {
+            removerItemFaturado();
         }
     }
 
@@ -166,14 +155,22 @@ public class ControllerFaturamento implements ActionListener {
         this.telaFaturamento.getjButton_Buscar().setEnabled(estadoBotoes);
         this.telaFaturamento.getjButton_Sair().setEnabled(estadoBotoes);
 
-        this.telaFaturamento.getjTextField_Produto_Cod_Barras().setEnabled(!estadoBotoes);
-        this.telaFaturamento.getjButtonProdutoBusca().setEnabled(!estadoBotoes);
+        this.telaFaturamento.getjTextField_ProdutoCodBarras().setEnabled(!estadoBotoes);
+        this.telaFaturamento.getjButton_ProdutoPesquisa().setEnabled(!estadoBotoes);
 
-        this.telaFaturamento.getjButton_Adicionar().setEnabled(!estadoBotoes);
-
-        this.telaFaturamento.getjTextField_Cliente_Id().setEnabled(!estadoBotoes);
+        this.telaFaturamento.getjButton_ProdutoAdicionar().setEnabled(!estadoBotoes);
+        this.telaFaturamento.getjButton_ProdutoRemover().setEnabled(!estadoBotoes);
+        this.telaFaturamento.getjTextField_ClienteId().setEnabled(!estadoBotoes);
         this.telaFaturamento.getjButton_ClienteBuscaId().setEnabled(!estadoBotoes);
+        this.telaFaturamento.getjTable_FaturamentoItens().setEnabled(!estadoBotoes);
+        this.telaFaturamento.getjComboBoxStatus().setEnabled(!estadoBotoes);
+        this.telaFaturamento.getjTextArea_Obs().setEnabled(!estadoBotoes);
+        this.telaFaturamento.getjFormattedTextField_ValorDeDesconto().setEnabled(!estadoBotoes);
+        this.telaFaturamento.getjFormattedTextField_DataDeVencimento().setEnabled(!estadoBotoes);
 
+    }
+
+    public void desativarPorPadrao() {
         this.telaFaturamento.getjTextField_Cliente_Nome().setEnabled(false);
         this.telaFaturamento.getjTextField_Cliente_Cidade().setEnabled(false);
         this.telaFaturamento.getjTextField_Cliente_Bairro().setEnabled(false);
@@ -184,7 +181,7 @@ public class ControllerFaturamento implements ActionListener {
         this.telaFaturamento.getjFormattedTextField_FaturamentoData().setEnabled(false);
         this.telaFaturamento.getjFormattedTextField_FaturamentoHora().setEnabled(false);
         this.telaFaturamento.getjTextField_FaturamentoUsuario().setEnabled(false);
-        this.telaFaturamento.getjComboBoxStatus().setEnabled(!estadoBotoes);
+        this.telaFaturamento.getjTextField_Faturamento_Id().setEnabled(false);
 
     }
 
@@ -230,37 +227,31 @@ public class ControllerFaturamento implements ActionListener {
         ControllerBuscaProduto controllerBuscaProduto = new ControllerBuscaProduto(telaBuscaProduto);
         telaBuscaProduto.setVisible(true);
 
-        this.telaFaturamento.getjTextField_Produto_Cod_Barras().setText(service.ServiceProduto.Buscar(telaBuscaProduto.getCodProduto()).getCodigoDeBarras());
+        this.telaFaturamento.getjTextField_ProdutoCodBarras().setText(
+                service.ServiceProduto.Buscar(
+                        telaBuscaProduto.getCodProduto()
+                ).getCodigoDeBarras());
     }
 
     public void inserirItem() {
         if (this.telaFaturamento.getjComboBoxStatus().getSelectedItem().equals("Faturando")) {
-            String codBarrasSohNumeros = faturamento.semMascara(this.telaFaturamento.getjTextField_Produto_Cod_Barras().getText());
-
-            if (service.ServiceProduto.codigoDeBarrasValido(Integer.parseInt(codBarrasSohNumeros)) && (codBarrasSohNumeros.length() >= 13)) {
-
-                Produto produto = service.ServiceProduto.Buscar(Integer.parseInt(faturamento.semMascara(this.telaFaturamento.getjTextField_Produto_Cod_Barras().getText())));
-                ItemDeVenda item = new ItemDeVenda(false, 1, produto, produto.getValor());
+            if (validarCodigoBarras()) {
+                //CRIA PRODUTO
+                Produto produto = service.ServiceProduto.Buscar(
+                        Integer.parseInt(
+                                faturamento.semMascara(
+                                        this.telaFaturamento.getjTextField_ProdutoCodBarras().getText()
+                                )
+                        )
+                );
+                //CRIA ITEM DE VENDA
+                ItemDeVenda item = new ItemDeVenda(false, 1, produto, produto.getValor()); //ID_VENDA & ID_ITEM_DE_VENDA SÓ APÓS FINALIZAÇÃO                                
+                //ADICIONA A LISTA DE ITENS
                 this.faturamento.adicionar(item);
-                int contador = 1;
-
-                this.telaFaturamento.getjTable_FaturamentoItens().removeAll();
-                tabela.getDataVector().removeAllElements();
-
-                for (ItemDeVenda i : faturamento.getListaDeItens()) {
-                    tabela.addRow(new Object[]{
-                        contador,
-                        i.getProduto().getId(),
-                        i.getProduto().getDescricao(),
-                        i.getQuantidade(),
-                        i.getValor(),
-                        i.getValor() * i.getQuantidade()
-                    });
-                    contador++;
-                }
-                this.faturamento.setContador(this.faturamento.getContador() + 1);
-                this.faturamento.valorTotal();
-                this.telaFaturamento.getjLabel_FaturamentoValorTotal().setText(this.faturamento.valorTotal() + "");
+                //ATUALIZAR A LISTA DE ITENS VENDIDOS NA TABELA DE FATURAMENTO
+                atualizarTabelaDeItens();
+                //ATUALIZA TOTAL DA COMPRA
+                atualizarTotalDaCompra();
             } else {
                 JOptionPane.showMessageDialog(null, "Cód de Barras inválido");
             }
@@ -271,18 +262,18 @@ public class ControllerFaturamento implements ActionListener {
     }
 
     public void novoFaturamento() {
-        if (this.telaFaturamento.getjComboBoxStatus().getSelectedItem().equals("Faturando")) {
-            this.telaFaturamento.getjComboBoxStatus().setSelectedItem("Faturando");
-        } else {
-            JOptionPane.showMessageDialog(null, "Existe um faturamento em andamento!");
-        }
+        Ativa(false);
+        LimpaEstadoComponentes(true);
+        codigo = 0;
+        this.telaFaturamento.getjComboBoxStatus().setSelectedItem("Faturando");
+
     }
 
     public void buscaCliente() {
         TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica(null, true);
         ControllerBuscaPessoaFisica controllerBuscaPessoaFisica = new ControllerBuscaPessoaFisica(telaBuscaPessoaFisica);
         telaBuscaPessoaFisica.setVisible(true);
-        this.telaFaturamento.getjTextField_Cliente_Id().setText(telaBuscaPessoaFisica.getCodPessoaFisica() + "");
+        this.telaFaturamento.getjTextField_ClienteId().setText(telaBuscaPessoaFisica.getCodPessoaFisica() + "");
         PessoaFisica pessoaFisica = service.ServicePessoaFisica.Buscar(telaBuscaPessoaFisica.getCodPessoaFisica());
         this.telaFaturamento.getjTextField_Cliente_Nome().setText(pessoaFisica.getNome());
         this.telaFaturamento.getjTextField_Cliente_Cidade().setText(pessoaFisica.getEndereco().getCidade() + "");
@@ -292,6 +283,131 @@ public class ControllerFaturamento implements ActionListener {
         this.telaFaturamento.getjTextField_Cliente_Tel2().setText(pessoaFisica.getTelefone2() + "");
     }
 
-    
+    private boolean validarCodigoBarras() {
 
+        String codigoDeBarras = Faturamento.semMascara(this.telaFaturamento.getjTextField_ProdutoCodBarras().getText());
+
+        if (codigoDeBarras.equals("")) { //"             "
+            return false;
+        } else if (codigoDeBarras.equals("")) {
+            return false;
+        } else if (codigoDeBarras.length() >= 13) {
+            return false;
+        } else {
+            Produto produto = service.ServiceProduto.Buscar(Integer.parseInt(codigoDeBarras));
+            if (produto.getId() == Integer.parseInt(codigoDeBarras)) {
+                return true;
+            }
+            return false;
+        }
+
+    }
+
+    private void atualizarTabelaDeItens() {
+        tabela = (DefaultTableModel) this.telaFaturamento.getjTable_FaturamentoItens().getModel();
+        tabela.getDataVector().removeAllElements();
+        int contador = 0;
+        if (faturamento.getListaDeItens().size() >= 1) {
+            for (ItemDeVenda itemDeVenda : faturamento.getListaDeItens()) {
+                tabela.addRow(new Object[]{
+                    ++contador,
+                    itemDeVenda.getProduto().getId(),
+                    itemDeVenda.getProduto().getDescricao(),
+                    itemDeVenda.getQuantidade(),
+                    itemDeVenda.getValor(),
+                    itemDeVenda.getValor() * itemDeVenda.getQuantidade()
+                });
+            }
+        } else {
+            tabela.addRow(new Object[]{});
+        }
+        this.telaFaturamento.getjTable_FaturamentoItens().setModel(tabela);
+    }
+
+    private void atualizarTotalDaCompra() {
+        this.telaFaturamento.getjLabel_FaturamentoValorTotal().setText(faturamento.valorTotal() + "");
+    }
+
+    private void gravarFaturamento() {
+        if (this.telaFaturamento.getjTextField_ClienteId().getText() != "") {
+            codigo = 0;
+            //montar objeto a persistir
+            faturamento.setHora(this.telaFaturamento.getjFormattedTextField_FaturamentoHora().getText());
+            faturamento.setData(this.telaFaturamento.getjFormattedTextField_FaturamentoData().getText());
+            faturamento.setUserCaixa(this.telaFaturamento.getjTextField_FaturamentoUsuario().getText());
+            faturamento.setDataDeVencimento(this.telaFaturamento.getjFormattedTextField_DataDeVencimento().getText());
+            faturamento.setObservacao(this.telaFaturamento.getjTextArea_Obs().getText());
+            faturamento.setValorDoDesconto(Float.parseFloat(this.telaFaturamento.getjFormattedTextField_ValorDeDesconto().getText()));
+            faturamento.setValorTotal(Float.parseFloat(this.telaFaturamento.getjLabel_FaturamentoValorTotal().getText()));
+            faturamento.setStatus(this.telaFaturamento.getjComboBoxStatus().getSelectedItem().equals("Faturando"));
+            //PESSOA FÍSICA
+            PessoaFisica pessoaFisica = new PessoaFisica();
+            pessoaFisica = service.ServicePessoaFisica.Buscar(Integer.parseInt(this.telaFaturamento.getjTextField_ClienteId().getText()));
+            faturamento.setPessoaFisica(pessoaFisica);
+            //VENDA OK
+
+            if (codigo == 0) {
+                //Primeiro inluir a venda
+                service.ServiceFaturamento.Incluir(faturamento);
+                //Resgatar o Id da Venda
+                FaturamentoDAO faturamentoDAO = new FaturamentoDAO();
+                int idVenda = faturamentoDAO.buscarId(faturamento.getValorTotal(), faturamento.getPessoaFisica().getId(), faturamento.getData());
+                //Terceito: incluir os itens com o Id_da_Venda nos ITENS DE VENDA
+                ItemDeVendaDAO itemDeVendaDAO = new ItemDeVendaDAO();
+                for (ItemDeVenda itemDeVenda : faturamento.getListaDeItens()) {
+                    itemDeVenda.setVendaId(idVenda);
+                    itemDeVendaDAO.Create(itemDeVenda);
+                }
+
+            } else {
+                faturamento.setId(Integer.parseInt(this.telaFaturamento.getjTextField_Faturamento_Id().getText()));
+                service.ServiceFaturamento.Atualizar(faturamento);
+            }
+            Ativa(true);
+            LimpaEstadoComponentes(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um cliente!");
+            this.telaFaturamento.getjTextField_ClienteId().requestFocus();
+        }
+    }
+
+    private void cancelarFaturamento() {
+        faturamento.removerTudo();
+        atualizarTabelaDeItens();
+        atualizarTotalDaCompra();
+        Ativa(true);
+        LimpaEstadoComponentes(false);
+
+        this.telaFaturamento.getjTextField_Cliente_Nome().setText("");
+        this.telaFaturamento.getjTextField_Cliente_Cidade().setText("");
+        this.telaFaturamento.getjTextField_Cliente_Bairro().setText("");
+        this.telaFaturamento.getjTextField_Cliente_Email().setText("");
+        this.telaFaturamento.getjTextField_Cliente_Tel1().setText("");
+        this.telaFaturamento.getjTextField_Cliente_Tel2().setText("");
+        this.telaFaturamento.getjTextArea_Obs().setText("");
+        this.telaFaturamento.getjFormattedTextField_ValorDeDesconto().setText("");
+        this.telaFaturamento.getjFormattedTextField_DataDeVencimento().setText("");
+    }
+
+    private void removerItemFaturado() {
+        int idDaLinhaSelecionada;
+
+        if (this.telaFaturamento.getjTable_FaturamentoItens().getSelectedRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Não selecione uma linha da tabela de itens!");
+            this.telaFaturamento.getjTable_FaturamentoItens().requestFocus();
+        } else {
+
+            idDaLinhaSelecionada = (int) this.telaFaturamento.getjTable_FaturamentoItens().getValueAt(
+                    this.telaFaturamento.getjTable_FaturamentoItens().getSelectedRow(), 1);
+            if (faturamento.existeItemNaLista(idDaLinhaSelecionada)) {
+                faturamento.removerItemDaLista(idDaLinhaSelecionada);
+                atualizarTabelaDeItens();
+                atualizarTotalDaCompra();
+                idDaLinhaSelecionada = 0;
+            } else {
+                JOptionPane.showMessageDialog(null, "Não selecione uma linha da tabela de itens!");
+            }
+
+        }
+    }
 }

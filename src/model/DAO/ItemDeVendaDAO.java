@@ -16,7 +16,7 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
     public void Create(ItemDeVenda objeto) {
         Connection conexao = ConectionFactory.getConection();
 
-        String sqlExecutar = "INSERT INTO itemDeVenda( quantidade, valor, produtoId, vendaId) VALUES(?,?,?,?,?)";
+        String sqlExecutar = "INSERT INTO itemDeVenda( quantidade, valor, produtoId, vendaId, status) VALUES(?,?,?,?,?)";
 
         PreparedStatement pstm = null;
 
@@ -25,7 +25,8 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
             pstm.setInt(1, objeto.getQuantidade());
             pstm.setDouble(2, objeto.getValor());
             pstm.setInt(3, objeto.getProduto().getId());
-            pstm.setInt(4, objeto.getVenda().getId());
+            pstm.setInt(4, objeto.getVendaId());
+            pstm.setBoolean(5, objeto.getStatus());
 
             pstm.executeUpdate();
 
@@ -61,8 +62,7 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
                 ProdutoDAO produtoDAO = new ProdutoDAO();
                 itemDeVenda.setProduto(produtoDAO.Retrieve(rs.getInt("produtoId")));
 
-                VendaDAO vendaDAO = new VendaDAO();
-                itemDeVenda.setVenda(vendaDAO.Retrieve(rs.getInt("vendaId")));
+                itemDeVenda.setVendaId(rs.getInt("vendaId"));
 
                 itensDeVenda.add(itemDeVenda);
             }
@@ -78,7 +78,7 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
     public ItemDeVenda Retrieve(int id) {
         Connection conexao = ConectionFactory.getConection();
 
-        String sqlExecutar = "SELECT id, quantidade, valor, produtoId, vendaId FROM itemDeVenda FROM itemDeVenda WHERE itemDeVenda.id=?";
+        String sqlExecutar = "SELECT id, quantidade, valor, produtoId, vendaId,status FROM itemDeVenda WHERE itemDeVenda.vendaId=?";
 
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -94,12 +94,12 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
                 itemDeVenda.setId(rs.getInt("id"));
                 itemDeVenda.setQuantidade(rs.getInt("quantidade"));
                 itemDeVenda.setValor(rs.getFloat("valor"));
+                itemDeVenda.setStatus(rs.getBoolean("status"));
 
                 ProdutoDAO produtoDAO = new ProdutoDAO();
                 itemDeVenda.setProduto(produtoDAO.Retrieve(rs.getInt("produtoId")));
 
-                VendaDAO vendaDAO = new VendaDAO();
-                itemDeVenda.setVenda(vendaDAO.Retrieve(rs.getInt("vendaId")));;
+                itemDeVenda.setVendaId(rs.getInt("vendaId"));
 
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
@@ -113,7 +113,7 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
     @Override
     public void Update(ItemDeVenda objeto) {
         Connection conexao = ConectionFactory.getConection();
-        String sqlExecutar = "UPDATE itemDeVenda SET quantidade = ?, valor =?, vendaId = ?, produtoId = ? WHERE = id=?";
+        String sqlExecutar = "UPDATE itemDeVenda SET quantidade = ?, valor =?, vendaId = ?, produtoId = ?, status=? WHERE = id=?";
 
         PreparedStatement pstm = null;
 
@@ -121,9 +121,10 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
             pstm = conexao.prepareStatement(sqlExecutar);
             pstm.setInt(1, objeto.getQuantidade());
             pstm.setFloat(2, objeto.getValor());
-            pstm.setInt(3, objeto.getVenda().getId());
+            pstm.setInt(3, objeto.getVendaId());
             pstm.setInt(4, objeto.getProduto().getId());
-            pstm.setInt(5, objeto.getId());
+            pstm.setBoolean(5, objeto.getStatus());
+            pstm.setInt(6, objeto.getId());
             pstm.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -145,6 +146,42 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
             ex.printStackTrace();
         }
         ConectionFactory.closeConnection(conexao, pstm);
+    }
+    
+    public List<ItemDeVenda> RetrieveTodosOsItensDeUmaVenda(int idDaVenda) {
+        Connection conexao = ConectionFactory.getConection();
+
+        String sqlExecutar = "SELECT id, quantidade, valor, produtoId, vendaId,status FROM itemDeVenda WHERE itemDeVenda.vendaId=?";
+
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+
+        try {
+            pstm = conexao.prepareStatement(sqlExecutar);
+            pstm.setInt(1, idDaVenda);
+            rs = pstm.executeQuery();
+
+            List<ItemDeVenda> itensDeVenda = new ArrayList<>();
+
+            while (rs.next()) {
+                ItemDeVenda itemDeVenda = new ItemDeVenda();
+                itemDeVenda.setId(rs.getInt("id"));
+                itemDeVenda.setQuantidade(rs.getInt("quantidade"));
+                itemDeVenda.setValor(rs.getFloat("valor"));
+                itemDeVenda.setStatus(rs.getBoolean("status"));
+
+                ProdutoDAO produtoDAO = new ProdutoDAO();
+                itemDeVenda.setProduto(produtoDAO.Retrieve(rs.getInt("produtoId")));
+
+                itemDeVenda.setVendaId(rs.getInt("vendaId"));
+                itensDeVenda.add(itemDeVenda);
+            }
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return itensDeVenda;
+        } catch (Exception ex) {
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return null;
+        }
     }
 
 }

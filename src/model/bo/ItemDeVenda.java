@@ -50,7 +50,7 @@ public class ItemDeVenda {
         this.id = id;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
