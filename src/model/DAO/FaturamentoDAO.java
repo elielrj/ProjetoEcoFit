@@ -83,7 +83,7 @@ public class FaturamentoDAO implements InterfaceDAO<Faturamento> {
     public Faturamento Retrieve(int id) {
         Connection conexao = ConectionFactory.getConection();
 
-        String sqlExecutar = "SELECT id,data,hora,dataDeVencimento, observacao, valorDoDesconto, valorTotal,status,pessoaFisicaId,userCaixa FROM faturamento WHERE faturamento.id=?";
+        String sqlExecutar = "SELECT id,data,hora,dataDeVencimento,observacao,valorDoDesconto,valorTotal,status,pessoaFisicaId,userCaixa FROM faturamento WHERE faturamento.id=?";
 
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -121,7 +121,7 @@ public class FaturamentoDAO implements InterfaceDAO<Faturamento> {
     @Override
     public void Update(Faturamento objeto) {
         Connection conexao = ConectionFactory.getConection();
-        String sqlExecutar = "UPDATE faturamento SET data = ?, hora = ?, dataDeVencimento= ?,observacao = ?, valorDoDesconto = ?, valorTotal =?, status = ?, pessoaFisicaId = ?, userCaixa=? WHERE id=?";
+        String sqlExecutar = "UPDATE faturamento SET data=?,hora=?,dataDeVencimento= ?,observacao=?,valorDoDesconto=?,valorTotal =?, status=?,pessoaFisicaId=?,userCaixa=? WHERE faturamento.id=?";
 
         PreparedStatement pstm = null;
 

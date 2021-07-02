@@ -27,12 +27,11 @@ public class Faturamento {
         this.listaDeItens = new ArrayList<>();
         this.dataHora();
         this.userCaixa = "Eliel";
-
+        this.dataDeVencimento = getData();
     }
 
     public Faturamento(String observacao, float valorDoDesconto, float valorTotal,PessoaFisica pessoaFisica) {
         this();
-        this.dataDeVencimento = getData();
         this.observacao = observacao;
         this.valorDoDesconto = valorDoDesconto;
         this.valorTotal = valorTotal;

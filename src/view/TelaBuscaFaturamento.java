@@ -107,7 +107,7 @@ public class TelaBuscaFaturamento extends javax.swing.JDialog {
 
         jTable_BucaFaturamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "id", "Data", "Hora", "Data Venc", "Obs", "Valor Desc", "Valor Total", "Status", "Pessoa Física", "Caixa"
