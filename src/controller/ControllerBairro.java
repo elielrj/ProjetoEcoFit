@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
+import model.DAO.BairroDAO;
 import model.bo.Bairro;
-import model.bo.Cidade;
 import view.TelaBuscaBairro;
 import view.TelaCadastroBairro;
 
@@ -45,10 +45,10 @@ public class ControllerBairro implements ActionListener {
 
         } else if (e.getSource() == this.telaBuscaBairro.getjButtonGravar()) {
             //montar objeto a persistir
-            Bairro bairro = new Bairro();
-
-            bairro.setNome(this.telaBuscaBairro.getjTextFieldDescricao().getText());
-            bairro.setStatus(this.telaBuscaBairro.getjComboBoxStatus().getSelectedItem().equals("Sim"));
+            Bairro bairro = new Bairro(
+                    this.telaBuscaBairro.getjTextFieldDescricao().getText(), 
+                    this.telaBuscaBairro.getjComboBoxStatus().getSelectedItem().equals("Sim")
+            );
 
             if (codigo == 0) {
                 service.ServiceBairro.Incluir(bairro);

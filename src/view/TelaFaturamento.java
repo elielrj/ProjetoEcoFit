@@ -37,6 +37,10 @@ public class TelaFaturamento extends javax.swing.JFrame {
 
         getjComboBoxStatus().addItem("Faturando");
         getjComboBoxStatus().addItem("Faturado");
+
+        jComboBox_alunoOuPersonal.addItem("");
+        jComboBox_alunoOuPersonal.addItem("Aluno");
+        jComboBox_alunoOuPersonal.addItem("Personal");
     }
 
     @SuppressWarnings("unchecked")
@@ -97,6 +101,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jTextField_Faturamento_Id = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
+        jComboBox_alunoOuPersonal = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Formulário de Cadastro de ...");
@@ -368,7 +373,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
                                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addGroup(jPanelDadosLayout.createSequentialGroup()
-                                        .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(jPanelDadosLayout.createSequentialGroup()
                                                 .addComponent(jTextField_ProdutoCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
@@ -378,11 +383,16 @@ public class TelaFaturamento extends javax.swing.JFrame {
                                                     .addComponent(jTextFieldClienteId, javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING))
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jButtonClienteBuscaId)
-                                                .addGap(35, 35, 35)
-                                                .addComponent(jLabel16)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jTextField_Faturamento_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addGroup(jPanelDadosLayout.createSequentialGroup()
+                                                        .addGap(0, 0, Short.MAX_VALUE)
+                                                        .addComponent(jLabel16))
+                                                    .addGroup(jPanelDadosLayout.createSequentialGroup()
+                                                        .addComponent(jComboBox_alunoOuPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(jButtonClienteBuscaId)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(jTextField_Faturamento_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jButtonProdutoAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -467,7 +477,9 @@ public class TelaFaturamento extends javax.swing.JFrame {
                             .addComponent(jTextField_ProdutoCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton_ProdutoRemover)
+                            .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton_ProdutoRemover)
+                                .addComponent(jLabel16))
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
                                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanelDadosLayout.createSequentialGroup()
@@ -475,9 +487,9 @@ public class TelaFaturamento extends javax.swing.JFrame {
                                         .addGap(7, 7, 7)
                                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jTextFieldClienteId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jComboBox_alunoOuPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jButtonClienteBuscaId)))
-                                    .addComponent(jTextField_Faturamento_Id, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(jTextField_Faturamento_Id, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosLayout.createSequentialGroup()
                                         .addComponent(jLabel7)
@@ -684,6 +696,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButton_ProdutoRemover;
     private javax.swing.JComboBox<Object> jComboBoxStatus;
+    private javax.swing.JComboBox<Object> jComboBox_alunoOuPersonal;
     private javax.swing.JFormattedTextField jFormattedTextFieldFaturamentoData;
     private javax.swing.JFormattedTextField jFormattedTextFieldFaturamentoHora;
     private javax.swing.JFormattedTextField jFormattedTextField_DataDeVencimento;
@@ -855,6 +868,10 @@ public class TelaFaturamento extends javax.swing.JFrame {
 
     public JTextField getjTextField_Faturamento_Id() {
         return jTextField_Faturamento_Id;
+    }
+
+    public JComboBox<Object> getjComboBox_alunoOuPersonal() {
+        return jComboBox_alunoOuPersonal;
     }
 
     

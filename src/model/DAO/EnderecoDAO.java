@@ -3,11 +3,9 @@ package model.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import model.DAO.Principal.InterfaceDAO;
 import java.util.List;
 import model.bo.Endereco;
 import java.util.ArrayList;
-import model.DAO.Principal.ConectionFactory;
 
 public class EnderecoDAO implements InterfaceDAO<Endereco> {
 

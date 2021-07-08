@@ -118,6 +118,8 @@ public class ControllerPessoaFisica implements ActionListener {
         this.telaCadastroPessoaFisica.getjButtonGravar().setEnabled(!estadoBotoes);
         this.telaCadastroPessoaFisica.getjButtonBuscar().setEnabled(estadoBotoes);
         this.telaCadastroPessoaFisica.getjButtonSair().setEnabled(estadoBotoes);
+        this.telaCadastroPessoaFisica.getjTextAreaObservacao().setEnabled(!estadoBotoes);
+        this.telaCadastroPessoaFisica.getNovoEndereco().setEnabled(!estadoBotoes);
     }
 
     public void LimpaEstadoComponentes(boolean estadoCompo) {

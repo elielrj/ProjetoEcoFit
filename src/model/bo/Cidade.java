@@ -10,10 +10,15 @@ public class Cidade {
     }
 
     public Cidade(int id, String nome, boolean status) {
+        this(nome,status);
         this.id = id;
+    }
+
+    public Cidade(String nome, boolean status) {
         this.nome = nome;
         this.status = status;
     }
+    
 
     public int getId() {
         return id;

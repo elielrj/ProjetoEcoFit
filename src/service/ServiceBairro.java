@@ -7,29 +7,76 @@ import model.DAO.BairroDAO;
 public class ServiceBairro {
 
     public static void Incluir(Bairro objeto) {
-
-        BairroDAO bairroDAO = new BairroDAO();
-        bairroDAO.Create(objeto);
+        try{
+            BairroDAO bairroDAO = new BairroDAO();
+            bairroDAO.Create(objeto);
+        } catch (Exception ex) {
+            throw new RuntimeException(" \nCLASSE: ServiceBairro->Incluir()\nMENSAGEM:" 
+                    + ex.getMessage() + "\nLOCALIZADO:" 
+                    + ex.getLocalizedMessage()
+            );
+        }
 
     }
 
     public static void Atualizar(Bairro objeto) {
-        BairroDAO bairroDAO = new BairroDAO();
-        bairroDAO.Update(objeto);
+        try{
+            BairroDAO bairroDAO = new BairroDAO();
+            bairroDAO.Update(objeto);
+        } catch (Exception ex) {
+            throw new RuntimeException(" \nCLASSE: ServiceBairro->Atualizar(int id)\nMENSAGEM:" 
+                    + ex.getMessage() + "\nLOCALIZADO:" 
+                    + ex.getLocalizedMessage()
+            );
+        }
     }
 
     public static List<Bairro> Buscar() {
-        BairroDAO bairroDAO = new BairroDAO();
-        return (bairroDAO.Retrieve());
+        try{
+            BairroDAO bairroDAO = new BairroDAO();
+            return (bairroDAO.Retrieve());
+        } catch (Exception ex) {
+            throw new RuntimeException(" \nCLASSE: ServiceBairro->Buscar()\nMENSAGEM:" 
+                    + ex.getMessage() + "\nLOCALIZADO:" 
+                    + ex.getLocalizedMessage()
+            );
+        }
+        
     }
 
     public static Bairro Buscar(int id) {
-        BairroDAO bairroDAO = new BairroDAO();
-        return bairroDAO.Retrieve(id);
+        try{
+            BairroDAO bairroDAO = new BairroDAO();
+            return bairroDAO.Retrieve(id);
+        } catch (Exception ex) {
+        throw new RuntimeException(" \nCLASSE: ServiceBairro->Buscar(int id)\nMENSAGEM:" 
+                + ex.getMessage() + "\nLOCALIZADO:" 
+                + ex.getLocalizedMessage()
+            );
+        }
     }
 
     public static void Deletar(Bairro objeto) {
-        BairroDAO bairroDAO = new BairroDAO();
-        bairroDAO.Delete(objeto);
+        try{
+            BairroDAO bairroDAO = new BairroDAO();
+            bairroDAO.Delete(objeto);
+        } catch (Exception ex) {
+        throw new RuntimeException(" \nCLASSE: ServiceBairro->Deletar()\nMENSAGEM:" 
+                + ex.getMessage() + "\nLOCALIZADO:" 
+                + ex.getLocalizedMessage()
+            );
+        }
+    }
+    
+    public static void Deletar(int idBairro) {
+        try{
+            BairroDAO bairroDAO = new BairroDAO();
+            bairroDAO.Delete(idBairro);
+        } catch (Exception ex) {
+        throw new RuntimeException(" \nCLASSE: ServiceBairro->Deletar()\nMENSAGEM:" 
+                + ex.getMessage() + "\nLOCALIZADO:" 
+                + ex.getLocalizedMessage()
+            );
+        }
     }
 }

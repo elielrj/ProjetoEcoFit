@@ -1,7 +1,5 @@
 package model.DAO;
 
-import model.DAO.Principal.ConectionFactory;
-import model.DAO.Principal.InterfaceDAO;
 import java.util.List;
 import model.bo.Receber;
 import java.sql.Connection;

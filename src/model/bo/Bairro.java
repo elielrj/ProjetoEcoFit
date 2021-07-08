@@ -8,18 +8,14 @@ public class Bairro {
 
     public Bairro() {
     }
-
-    public Bairro(String nome) {
-        this.nome = nome;
-    }
-
+    
     public Bairro(String nome, boolean status) {
-        this(nome);
+        this.nome = nome;
         this.status = status;
     }
-
+    
     public Bairro(int id, String nome, boolean status) {
-        this(nome, status);
+        this(nome,status);
         this.id = id;
     }
 
@@ -46,10 +42,5 @@ public class Bairro {
     public void setStatus(boolean status) {
         this.status = status;
     }
-
-    @Override
-    public String toString() {
-        return getNome();
-    }
-
+    
 }

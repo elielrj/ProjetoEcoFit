@@ -1,8 +1,6 @@
 package model.DAO;
 
 import model.DAO.FornecedorDAO;
-import model.DAO.Principal.ConectionFactory;
-import model.DAO.Principal.InterfaceDAO;
 import java.util.List;
 import model.bo.Compra;
 import java.sql.Connection;

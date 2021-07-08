@@ -285,6 +285,12 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
 
         jLabel8.setText("Status");
 
+        jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoActionPerformed(evt);
+            }
+        });
+
         jLabel13.setText("Aluno ou Personal?");
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
@@ -460,6 +466,10 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxStatusActionPerformed
 
+    private void jComboBoxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTipoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -623,6 +633,10 @@ public class TelaCadastroPessoaFisica extends javax.swing.JFrame {
         }
         return jComboBoxTipo;
 
+    }
+
+    public JButton getNovoEndereco() {
+        return novoEndereco;
     }
 
 }

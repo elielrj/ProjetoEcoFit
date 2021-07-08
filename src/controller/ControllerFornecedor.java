@@ -116,6 +116,8 @@ public class ControllerFornecedor implements ActionListener {
         this.telaCadastroFornecedor.getjButtonGravar().setEnabled(!estadoBotoes);
         this.telaCadastroFornecedor.getjButtonBuscar().setEnabled(estadoBotoes);
         this.telaCadastroFornecedor.getjButtonSair().setEnabled(estadoBotoes);
+        this.telaCadastroFornecedor.getjTextAreaObs().setEnabled(!estadoBotoes);
+        this.telaCadastroFornecedor.getjButtonNovo_End().setEnabled(!estadoBotoes);
     }
 
     public void LimpaEstadoComponentes(boolean estadoCompo) {

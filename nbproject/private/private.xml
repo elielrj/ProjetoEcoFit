@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/service/ServiceFaturamento.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/ItemDeVendaDAO.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/ReceberDAO.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/FaturamentoDAO.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/bo/ItemDeCompra.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/controller/ControllerFaturamento.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/VendaDAO.java</file>
+            <file>file://dell/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/controller/ControllerEndereco.java</file>
+            <file>file://dell/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/controller/ControllerFaturamento.java</file>
+            <file>file://dell/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/view/TelaFaturamento.java</file>
+            <file>file://dell/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/service/ServicePessoaFisica.java</file>
         </group>
     </open-files>
 </project-private>
