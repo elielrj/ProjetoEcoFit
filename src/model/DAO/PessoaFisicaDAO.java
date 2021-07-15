@@ -11,12 +11,10 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
 
     @Override
     public void Create(PessoaFisica objeto) {
-
-        Connection conexao = ConectionFactory.getConection();
-        String sqlExecutar = "INSERT INTO pessoaFisica(nome,rg,cpf,dataDeNascimento,telefone1,telefone2,email,observacao,status,enderecoId,tipo) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-        PreparedStatement pstm = null;
-
         try {
+            Connection conexao = ConectionFactory.getConection();
+            String sqlExecutar = "INSERT INTO pessoaFisica(nome,rg,cpf,dataDeNascimento,telefone1,telefone2,email,observacao,status,enderecoId,tipo) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement pstm = null;
             pstm = conexao.prepareStatement(sqlExecutar);
             pstm.setString(1, objeto.getNome());
             pstm.setString(2, objeto.getRg());
@@ -28,7 +26,7 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             pstm.setString(7, objeto.getEmail());
             pstm.setString(8, objeto.getObservacao());
             pstm.setBoolean(9, objeto.getStatus());
-            pstm.setInt(10, objeto.getEndereco().getId());
+            pstm.setInt(10, objeto.getEndereco());
             pstm.setString(11, objeto.getTipo());
 
             pstm.executeUpdate();
@@ -36,21 +34,18 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
-        ConectionFactory.closeConnection(conexao, pstm);
-
     }
 
     @Override
     public List<PessoaFisica> Retrieve() {
-        Connection conexao = ConectionFactory.getConection();
-
-        String sqlExecutar = "SELECT id,nome,rg,cpf,dataDeNascimento,telefone1,telefone2,email,observacao,status,enderecoId,tipo FROM pessoaFisica";
-
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
 
         try {
+            Connection conexao = ConectionFactory.getConection();
+
+            String sqlExecutar = "SELECT id,nome,rg,cpf,dataDeNascimento,telefone1,telefone2,email,observacao,status,enderecoId,tipo FROM pessoaFisica";
+
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
             pstm = conexao.prepareStatement(sqlExecutar);
             rs = pstm.executeQuery();
 
@@ -73,8 +68,12 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
 
                 pessoaFisica.setStatus(rs.getBoolean("status"));
 
-                EnderecoDAO enderecoDAO = new EnderecoDAO();
-                pessoaFisica.setEndereco(enderecoDAO.Retrieve(rs.getInt("enderecoId")));
+                // EnderecoDAO enderecoDAO = new EnderecoDAO();
+                pessoaFisica.setEndereco(
+                        (service.ServiceEndereco.Buscar(
+                                rs.getInt("enderecoId")
+                        )).getId()
+                );
 
                 pessoaFisica.setTipo(rs.getString("tipo"));
 
@@ -83,7 +82,6 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return pessoaFisicas;
         } catch (Exception ex) {
-            ConectionFactory.closeConnection(conexao, pstm, rs);
             return null;
         }
 
@@ -92,12 +90,11 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
     @Override
     public PessoaFisica Retrieve(int id) {
 
-        Connection conexao = ConectionFactory.getConection();
-        String sqlExecutar = "SELECT id,nome,rg,cpf,dataDeNascimento,telefone1,telefone2,email,observacao,status,enderecoId,tipo FROM pessoaFisica WHERE  pessoaFisica.id = ?";
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
-
         try {
+            Connection conexao = ConectionFactory.getConection();
+            String sqlExecutar = "SELECT id,nome,rg,cpf,dataDeNascimento,telefone1,telefone2,email,observacao,status,enderecoId,tipo FROM pessoaFisica WHERE  pessoaFisica.id = ?";
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
             pstm = conexao.prepareStatement(sqlExecutar);
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
@@ -117,7 +114,7 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
                 pessoaFisica.setStatus(rs.getBoolean("status"));
 
                 EnderecoDAO enderecoDAO = new EnderecoDAO();
-                pessoaFisica.setEndereco(enderecoDAO.Retrieve(rs.getInt("enderecoId")));
+                pessoaFisica.setEndereco((service.ServiceEndereco.Buscar(rs.getInt("enderecoId"))).getId());
 
                 pessoaFisica.setTipo(rs.getString("tipo"));
 
@@ -127,7 +124,6 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             return pessoaFisica;
 
         } catch (Exception ex) {
-            ConectionFactory.closeConnection(conexao, pstm, rs);
             return null;
         }
 
@@ -136,12 +132,11 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
     @Override
     public void Update(PessoaFisica objeto) {
 
-        Connection conexao = ConectionFactory.getConection();
-        String sqlExecutar = "UPDATE pessoaFisica SET nome=?,rg=?,cpf=?,dataDeNascimento=?,telefone1=?,telefone2=?,email=?,observacao=?,status=?,enderecoId=?,tipo=? WHERE id = ?";
-
-        PreparedStatement pstm = null;
-
         try {
+            Connection conexao = ConectionFactory.getConection();
+            String sqlExecutar = "UPDATE pessoaFisica SET nome=?,rg=?,cpf=?,dataDeNascimento=?,telefone1=?,telefone2=?,email=?,observacao=?,status=?,enderecoId=?,tipo=? WHERE id = ?";
+
+            PreparedStatement pstm = null;
             pstm = conexao.prepareStatement(sqlExecutar);
             pstm.setString(1, objeto.getNome());
             pstm.setString(2, objeto.getRg());
@@ -153,16 +148,15 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             pstm.setString(7, objeto.getEmail());
             pstm.setString(8, objeto.getObservacao());
             pstm.setBoolean(9, objeto.getStatus());
-            pstm.setInt(10, objeto.getEndereco().getId());
+            pstm.setInt(10, objeto.getEndereco());
             pstm.setString(11, objeto.getTipo());
             pstm.setInt(12, objeto.getId());
 
             pstm.executeUpdate();
-
+            ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        ConectionFactory.closeConnection(conexao, pstm);
     }
 
     @Override
@@ -183,14 +177,14 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
     }
 
     public List<PessoaFisica> RetrieveAluno() {
-        Connection conexao = ConectionFactory.getConection();
-
-        String sqlExecutar = "SELECT id,nome,rg,cpf,dataDeNascimento,telefone1,telefone2,email,observacao,status,enderecoId,tipo FROM pessoaFisica where pessoaFisica.tipo = 'aluno'";
-
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
 
         try {
+            Connection conexao = ConectionFactory.getConection();
+
+            String sqlExecutar = "SELECT id,nome,rg,cpf,dataDeNascimento,telefone1,telefone2,email,observacao,status,enderecoId,tipo FROM pessoaFisica where pessoaFisica.tipo = 'aluno'";
+
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
             pstm = conexao.prepareStatement(sqlExecutar);
             rs = pstm.executeQuery();
 
@@ -214,7 +208,7 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
                 pessoaFisica.setStatus(rs.getBoolean("status"));
 
                 EnderecoDAO enderecoDAO = new EnderecoDAO();
-                pessoaFisica.setEndereco(enderecoDAO.Retrieve(rs.getInt("enderecoId")));
+                pessoaFisica.setEndereco((service.ServiceEndereco.Buscar(rs.getInt("enderecoId"))).getId());
 
                 pessoaFisica.setTipo(rs.getString("tipo"));
 
@@ -223,20 +217,19 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return pessoaFisicas;
         } catch (Exception ex) {
-            ConectionFactory.closeConnection(conexao, pstm, rs);
             return null;
         }
     }
 
     public List<PessoaFisica> RetrievePersonal() {
-        Connection conexao = ConectionFactory.getConection();
-
-        String sqlExecutar = "SELECT id,nome,rg,cpf,dataDeNascimento,telefone1,telefone2,email,observacao,status,enderecoId,tipo FROM pessoaFisica where pessoaFisica.tipo = 'personal'";
-
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
 
         try {
+            Connection conexao = ConectionFactory.getConection();
+
+            String sqlExecutar = "SELECT id,nome,rg,cpf,dataDeNascimento,telefone1,telefone2,email,observacao,status,enderecoId,tipo FROM pessoaFisica where pessoaFisica.tipo = 'personal'";
+
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
             pstm = conexao.prepareStatement(sqlExecutar);
             rs = pstm.executeQuery();
 
@@ -259,8 +252,7 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
 
                 pessoaFisica.setStatus(rs.getBoolean("status"));
 
-                EnderecoDAO enderecoDAO = new EnderecoDAO();
-                pessoaFisica.setEndereco(enderecoDAO.Retrieve(rs.getInt("enderecoId")));
+                pessoaFisica.setEndereco((service.ServiceEndereco.Buscar(rs.getInt("enderecoId"))).getId());
 
                 pessoaFisica.setTipo(rs.getString("tipo"));
 
@@ -269,7 +261,6 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return pessoaFisicas;
         } catch (Exception ex) {
-            ConectionFactory.closeConnection(conexao, pstm, rs);
             return null;
         }
     }

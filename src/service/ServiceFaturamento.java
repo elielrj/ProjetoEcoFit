@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 import model.bo.Faturamento;
 import model.DAO.FaturamentoDAO;
+import model.bo.Venda;
 
 public class ServiceFaturamento {
 
@@ -31,5 +32,9 @@ public class ServiceFaturamento {
     public static void Deletar(Faturamento objeto) {
         FaturamentoDAO faturamentoDAO = new FaturamentoDAO();
         faturamentoDAO.Delete(objeto);
+    }
+
+    public static void Incluir(Venda venda) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

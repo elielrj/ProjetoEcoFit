@@ -41,12 +41,11 @@ public class ControllerCidade implements ActionListener {
             Ativa(true);
             LimpaEstadoComponentes(false);
         } else if (e.getSource() == this.telaCadastroCidade.getjButtonGravar()) {
-            //montar objeto a persistir
-            Cidade cidade = new Cidade();
-
-            cidade.setNome(this.telaCadastroCidade.getjTextFieldDescricao().getText());
-
-            cidade.setStatus(this.telaCadastroCidade.getjComboBoxStatus().getSelectedItem().equals("Sim"));
+            
+            Cidade cidade = new Cidade.CidadeBuilder()
+                    .setNome(this.telaCadastroCidade.getjTextFieldDescricao().getText())
+                    .setStatus(this.telaCadastroCidade.getjComboBoxStatus().getSelectedItem().equals("Sim"))
+                    .createCidade();
 
             if (codigo == 0) {
                 service.ServiceCidade.Incluir(cidade);
@@ -62,19 +61,18 @@ public class ControllerCidade implements ActionListener {
             codigo = 0;
 
             TelaBuscaCidade telaBuscaCidade = new TelaBuscaCidade(null, true);
-            ControllerBuscaCidade controllerBuscaCidade = new ControllerBuscaCidade(telaBuscaCidade);
-            telaBuscaCidade.setVisible(true);//verificarControllerBuscaCidade
+            ControllerCidadeBusca controllerBuscaCidade = new ControllerCidadeBusca(telaBuscaCidade);
+            telaBuscaCidade.setVisible(true);
 
             if (codigo != 0) {
                 Ativa(false);
                 LimpaEstadoComponentes(true);
 
-                Cidade cidade = new Cidade();
+                Cidade cidade = new Cidade.CidadeBuilder().createCidade();
                 cidade = service.ServiceCidade.Buscar(codigo);
 
                 this.telaCadastroCidade.getjTextFieldId().setText(cidade.getId() + "");
                 this.telaCadastroCidade.getjTextFieldDescricao().setText(cidade.getNome());
-
                 this.telaCadastroCidade.getjComboBoxStatus().setSelectedItem(cidade.getStatus());
 
                 this.telaCadastroCidade.getjTextFieldId().setEnabled(false);

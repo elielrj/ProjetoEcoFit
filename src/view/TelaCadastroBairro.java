@@ -14,22 +14,18 @@ import model.DAO.CidadeDAO;
 import model.bo.Cidade;
 import service.ServiceCidade;
 
-/**
- *
- * @author ITAUTEC
- */
 public class TelaCadastroBairro extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormModeloCadastros
-     */
+
     public TelaCadastroBairro() {
         initComponents();
 
-        setSize(800, 600);
-
         jComboBoxStatus.addItem("Sim");
         jComboBoxStatus.addItem("Não");
+        
+        
+        getjComboBox_cidade().addItem(service.ServiceCidade.Buscar(4429));
+        
 
     }
 
@@ -57,6 +53,8 @@ public class TelaCadastroBairro extends javax.swing.JFrame {
         jTextFieldDescricao = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jComboBoxStatus = new javax.swing.JComboBox<>();
+        jComboBox_cidade = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Formulário de Cadastro de ...");
@@ -139,6 +137,8 @@ public class TelaCadastroBairro extends javax.swing.JFrame {
 
         jLabel4.setText("Ativo");
 
+        jLabel3.setText("Cidade");
+
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
         jPanelDadosLayout.setHorizontalGroup(
@@ -148,12 +148,14 @@ public class TelaCadastroBairro extends javax.swing.JFrame {
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_cidade, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanelDadosLayout.setVerticalGroup(
@@ -167,7 +169,11 @@ public class TelaCadastroBairro extends javax.swing.JFrame {
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextFieldDescricao))
-                .addGap(135, 135, 135)
+                .addGap(58, 58, 58)
+                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jComboBox_cidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(57, 57, 57)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -226,8 +232,10 @@ public class TelaCadastroBairro extends javax.swing.JFrame {
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JComboBox<Object> jComboBoxStatus;
+    private javax.swing.JComboBox<Object> jComboBox_cidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JPanel jPainelBotoes;
@@ -278,6 +286,10 @@ public class TelaCadastroBairro extends javax.swing.JFrame {
         }
 
         return jComboBoxStatus;
+    }
+
+    public JComboBox<Object> getjComboBox_cidade() {
+        return jComboBox_cidade;
     }
 
 }

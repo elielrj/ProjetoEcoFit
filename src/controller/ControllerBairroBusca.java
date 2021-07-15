@@ -7,11 +7,11 @@ import javax.swing.table.DefaultTableModel;
 import view.TelaBuscaBairro;
 import model.bo.Bairro;
 
-public class ControllerBuscaBairro implements ActionListener {
+public class ControllerBairroBusca implements ActionListener {
 
     TelaBuscaBairro telaBuscaBairro;
 
-    public ControllerBuscaBairro(TelaBuscaBairro telaBuscaBairro) {
+    public ControllerBairroBusca(TelaBuscaBairro telaBuscaBairro) {
         
         this.telaBuscaBairro = telaBuscaBairro;
 
@@ -52,7 +52,8 @@ public class ControllerBuscaBairro implements ActionListener {
             tabela.addRow(new Object[]{
                 bairroDaLista.getId(),
                 bairroDaLista.getNome(),
-                bairroDaLista.getStatus()
+                bairroDaLista.getStatus(),
+                bairroDaLista.getCidade().getNome()
             });
         }
     }

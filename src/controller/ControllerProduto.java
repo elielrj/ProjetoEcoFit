@@ -70,7 +70,7 @@ public class ControllerProduto implements ActionListener {
 
             codigo = 0;
             TelaBuscaProduto telaBuscaProduto = new TelaBuscaProduto(null, true);
-            ControllerBuscaProduto controllerBuscaProduto = new ControllerBuscaProduto(telaBuscaProduto);
+            ControllerProdutoBusca controllerBuscaProduto = new ControllerProdutoBusca(telaBuscaProduto);
             telaBuscaProduto.setVisible(true);
 
             if (codigo != 0) {

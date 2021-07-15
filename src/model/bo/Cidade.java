@@ -6,19 +6,11 @@ public class Cidade {
     private String nome;
     private boolean status;
 
-    public Cidade() {
+    public Cidade(CidadeBuilder cidadeBuilder) {
+        this.id = cidadeBuilder.id;
+        this.nome = cidadeBuilder.nome;
+        this.status = cidadeBuilder.status;
     }
-
-    public Cidade(int id, String nome, boolean status) {
-        this(nome,status);
-        this.id = id;
-    }
-
-    public Cidade(String nome, boolean status) {
-        this.nome = nome;
-        this.status = status;
-    }
-    
 
     public int getId() {
         return id;
@@ -43,10 +35,40 @@ public class Cidade {
     public void setStatus(boolean status) {
         this.status = status;
     }
-
+  
     @Override
     public String toString() {
-        return getNome();
+        return nome;
     }
+    
+    public static class CidadeBuilder {
 
+        private int id;
+        private String nome;
+        private boolean status;
+
+        public CidadeBuilder() {
+        }
+
+        public CidadeBuilder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public CidadeBuilder setNome(String nome) {
+            this.nome = nome;
+            return this;
+        }
+        
+        public CidadeBuilder setStatus(boolean status) {
+            this.status = status;
+            return this;
+        }
+        
+
+        public Cidade createCidade() {
+            return new Cidade(this);
+        }
+    
+    }
 }

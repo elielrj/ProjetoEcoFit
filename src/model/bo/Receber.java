@@ -9,25 +9,17 @@ public class Receber {
     private float valorDeAcrescimo;
     private float valorRecebido;
     private String observacao;
-
     private Venda venda;
 
-    public Receber() {
-    }
-
-    public Receber(int id, String data, String hora, float valorDeDescontoNegociado, float valorDeAcrescimo, float valorRecebido, String observacao, Venda venda) {
-        this(data, hora, valorDeDescontoNegociado, valorDeAcrescimo, valorRecebido, observacao, venda);
-        this.id = id;
-    }
-
-    public Receber(String data, String hora, float valorDeDescontoNegociado, float valorDeAcrescimo, float valorRecebido, String observacao, Venda venda) {
-        this.data = data;
-        this.hora = hora;
-        this.valorDeDescontoNegociado = valorDeDescontoNegociado;
-        this.valorDeAcrescimo = valorDeAcrescimo;
-        this.valorRecebido = valorRecebido;
-        this.observacao = observacao;
-        this.venda = venda;
+    private Receber(ReceberBuilder receberBuilder) {
+        this.id = receberBuilder.id;
+        this.data = receberBuilder.data;
+        this.hora = receberBuilder.hora;
+        this.valorDeDescontoNegociado = receberBuilder.valorDeDescontoNegociado;
+        this.valorDeAcrescimo = receberBuilder.valorDeAcrescimo;
+        this.valorRecebido = receberBuilder.valorRecebido;
+        this.observacao = receberBuilder.observacao;
+        this.venda = receberBuilder.venda;
     }
 
     public int getId() {
@@ -94,16 +86,64 @@ public class Receber {
         this.venda = venda;
     }
 
-    @Override
-    public String toString() {
-        return this.getId()
-                + " " + this.getData()
-                + " " + this.getHora()
-                + " " + this.getValorDeDescontoNegociado()
-                + " " + this.getValorDeAcrescimo()
-                + " " + this.getValorRecebido()
-                + " " + this.getObservacao()
-                + " " + this.getVenda().toString();
+    public static class ReceberBuilder {
+
+        private int id;
+        private String data;
+        private String hora;
+        private float valorDeDescontoNegociado;
+        private float valorDeAcrescimo;
+        private float valorRecebido;
+        private String observacao;
+        private Venda venda;
+
+        public ReceberBuilder() {
+        }
+
+        public ReceberBuilder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public ReceberBuilder setData(String data) {
+            this.data = data;
+            return this;
+        }
+
+        public ReceberBuilder setHora(String hora) {
+            this.hora = hora;
+            return this;
+        }
+
+        public ReceberBuilder setValorDeDescontoNegociado(float valorDeDescontoNegociado) {
+            this.valorDeDescontoNegociado = valorDeDescontoNegociado;
+            return this;
+        }
+
+        public ReceberBuilder setValorDeAcrescimo(float valorDeAcrescimo) {
+            this.valorDeAcrescimo = valorDeAcrescimo;
+            return this;
+        }
+
+        public ReceberBuilder setValorRecebido(float valorRecebido) {
+            this.valorRecebido = valorRecebido;
+            return this;
+        }
+
+        public ReceberBuilder setObservacao(String observacao) {
+            this.observacao = observacao;
+            return this;
+        }
+
+        public ReceberBuilder setVenda(Venda venda) {
+            this.venda = venda;
+            return this;
+        }
+
+        public Receber createReceber() {
+            return new Receber(this);
+        }
+
     }
 
 }

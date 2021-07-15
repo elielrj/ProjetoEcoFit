@@ -2,35 +2,26 @@ package model.bo;
 
 public class Produto {
 
-    private int id;
-    private String descricao;
-    private String unidadeDeCompra;
-    private String unidadeDeVenda;
-    private String correlacaoUnidade;
-    private float valor;
-    private int quantidadeDeEstoque;
-    private String codigoDeBarras;
-    private boolean status;
-    private String observacao;
+    private int id;//1
+    private String descricao;//2
+    private String unidadeDeCompra;//3
+    private String unidadeDeVenda;//4
+    private String correlacaoUnidade;//5
+    private float valor;//6
+    private String codigoDeBarras;//7
+    private boolean status;//8
+    private String observacao;//9
 
-    public Produto() {
-    }
-
-    public Produto(String descricao, String unidadeDeCompra, String unidadeDeVenda, String correlacaoUnidade, float valor, int quantidadeDeEstoque, String codigoDeBarras, boolean status, String observacao) {
-        this.descricao = descricao;
-        this.unidadeDeCompra = unidadeDeCompra;
-        this.unidadeDeVenda = unidadeDeVenda;
-        this.correlacaoUnidade = correlacaoUnidade;
-        this.valor = valor;
-        this.quantidadeDeEstoque = quantidadeDeEstoque;
-        this.codigoDeBarras = codigoDeBarras;
-        this.status = status;
-        this.observacao = observacao;
-    }
-
-    public Produto(int id, String descricao, String unidadeDeCompra, String unidadeDeVenda, String correlacaoUnidade, float valor, int quantidadeDeEstoque, String codigoDeBarras, boolean status, String observacao) {
-        this(descricao, unidadeDeCompra, unidadeDeVenda, correlacaoUnidade, valor, quantidadeDeEstoque, codigoDeBarras, status, observacao);
-        this.id = id;
+    private Produto(ProdutoBuilder produtoBuilder) {
+        this.id = produtoBuilder.id;
+        this.descricao = produtoBuilder.descricao;
+        this.unidadeDeCompra = produtoBuilder.unidadeDeCompra;
+        this.unidadeDeVenda = produtoBuilder.unidadeDeVenda;
+        this.correlacaoUnidade = produtoBuilder.correlacaoUnidade;
+        this.valor = produtoBuilder.valor;
+        this.codigoDeBarras = produtoBuilder.codigoDeBarras;
+        this.status = produtoBuilder.status;
+        this.observacao = produtoBuilder.observacao;
     }
 
     public int getId() {
@@ -77,24 +68,8 @@ public class Produto {
         return valor;
     }
 
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
     public void setValor(float valor) {
         this.valor = valor;
-    }
-
-    public int getQuantidadeDeEstoque() {
-        return quantidadeDeEstoque;
-    }
-
-    public void setQuantidadeDeEstoque(int quantidadeDeEstoque) {
-        this.quantidadeDeEstoque = quantidadeDeEstoque;
     }
 
     public String getCodigoDeBarras() {
@@ -105,6 +80,14 @@ public class Produto {
         this.codigoDeBarras = codigoDeBarras;
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     public String getObservacao() {
         return observacao;
     }
@@ -113,16 +96,70 @@ public class Produto {
         this.observacao = observacao;
     }
 
-    @Override
-    public String toString() {
-        return getId() + " "
-                + getDescricao() + " "
-                + getUnidadeDeCompra() + " "
-                + getUnidadeDeVenda() + " "
-                + getCorrelacaoUnidade() + " "
-                + getValor() + " "
-                + getQuantidadeDeEstoque() + " "
-                + getCodigoDeBarras();
+    public static class ProdutoBuilder {
+
+        private int id;
+        private String descricao;
+        private String unidadeDeCompra;
+        private String unidadeDeVenda;
+        private String correlacaoUnidade;
+        private float valor;
+        private String codigoDeBarras;
+        private boolean status;
+        private String observacao;
+
+        public ProdutoBuilder() {
+        }
+
+        public ProdutoBuilder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public ProdutoBuilder setDescricao(String descricao) {
+            this.descricao = descricao;
+            return this;
+        }
+
+        public ProdutoBuilder setUnidadeDeCompra(String unidadeDeCompra) {
+            this.unidadeDeCompra = unidadeDeCompra;
+            return this;
+        }
+
+        public ProdutoBuilder setUnidadeDeVenda(String unidadeDeVenda) {
+            this.unidadeDeVenda = unidadeDeVenda;
+            return this;
+        }
+
+        public ProdutoBuilder setCorrelacaoUnidade(String correlacaoUnidade) {
+            this.correlacaoUnidade = correlacaoUnidade;
+            return this;
+        }
+
+        public ProdutoBuilder setValor(float valor) {
+            this.valor = valor;
+            return this;
+        }
+
+        public ProdutoBuilder setCodigoDeBarras(String codigoDeBarras) {
+            this.codigoDeBarras = codigoDeBarras;
+            return this;
+        }
+
+        public ProdutoBuilder setStatus(boolean status) {
+            this.status = status;
+            return this;
+        }
+
+        public ProdutoBuilder setObservacao(String observacao) {
+            this.observacao = observacao;
+            return this;
+        }
+
+        public Produto createProduto() {
+            return new Produto(this);
+        }
+
     }
 
 }

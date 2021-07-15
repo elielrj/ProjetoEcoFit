@@ -6,11 +6,11 @@ import javax.swing.table.DefaultTableModel;
 import view.TelaBuscaPessoaFisica;
 import model.bo.PessoaFisica;
 
-public class ControllerBuscaPessoaFisicaAluno implements ActionListener {
+public class ControllerPessoaFisicaAlunoBusca implements ActionListener {
 
     TelaBuscaPessoaFisica telaBuscaPessoaFisica;
 
-    public ControllerBuscaPessoaFisicaAluno(TelaBuscaPessoaFisica telaBuscaPessoaFisica) {
+    public ControllerPessoaFisicaAlunoBusca(TelaBuscaPessoaFisica telaBuscaPessoaFisica) {
         this.telaBuscaPessoaFisica = telaBuscaPessoaFisica;
 
         this.telaBuscaPessoaFisica.getjButtonCarregar().addActionListener(this);

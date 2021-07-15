@@ -2,44 +2,20 @@ package model.bo;
 
 public class ItemDeVenda {
 
-    private int id;
-    private boolean status;
-    private int quantidade;
-    private Produto produto;
-    private float valor;
-    private int vendaId;
+    private int id;//1
+    private boolean status;//2
+    private int quantidade;//3
+    private Produto produto;//4
+    private float subTotal;//5
+    private int vendaId;//6
 
-    public ItemDeVenda() {
-
-    }
-
-    public ItemDeVenda(boolean status) {
-        this.status = status;
-    }
-
-    public ItemDeVenda(boolean status, int quantidade) {
-        this(status);
-        this.quantidade = quantidade;
-    }
-
-    public ItemDeVenda(boolean status, int quantidade, Produto produto) {
-        this(status, quantidade);
-        this.produto = produto;
-    }
-
-    public ItemDeVenda(boolean status, int quantidade, Produto produto, float valor) {
-        this(status, quantidade, produto);
-        this.valor = valor;
-    }
-
-    public ItemDeVenda(boolean status, int quantidade, Produto produto, float valor, int vendaId) {
-        this(status, quantidade, produto, valor);
-        this.vendaId = vendaId;
-    }
-
-    public ItemDeVenda(boolean status, int quantidade, Produto produto, float valor, int vendaId, int id) {
-        this(status, quantidade, produto, valor, vendaId);
-        this.id = id;
+    private ItemDeVenda(ItemDeVendaBuilder itemDeVendaBuilder) {
+        this.id = itemDeVendaBuilder.id;
+        this.status = itemDeVendaBuilder.status;
+        this.quantidade = itemDeVendaBuilder.quantidade;
+        this.produto = itemDeVendaBuilder.produto;
+        this.subTotal = itemDeVendaBuilder.subTotal;
+        this.vendaId = itemDeVendaBuilder.vendaId;
     }
 
     public int getId() {
@@ -74,12 +50,12 @@ public class ItemDeVenda {
         this.produto = produto;
     }
 
-    public float getValor() {
-        return valor;
+    public float getSubTotal() {
+        return subTotal;
     }
 
-    public void setValor(float valor) {
-        this.valor = valor;
+    public void setSubTotal(float subTotal) {
+        this.subTotal = subTotal;
     }
 
     public int getVendaId() {
@@ -90,8 +66,52 @@ public class ItemDeVenda {
         this.vendaId = vendaId;
     }
 
-    @Override
-    public String toString() {
-        return "Item: " + getId() + " Produto: " + getProduto().getDescricao() + " Qtd: " + getQuantidade() + " Valor: " + getValor() + " SubTotal: " + getQuantidade() * getProduto().getValor();
+    public static class ItemDeVendaBuilder {
+
+        private int id;
+        private boolean status;
+        private int quantidade;
+        private Produto produto;
+        private float subTotal;
+        private int vendaId;
+
+        public ItemDeVendaBuilder() {
+        }
+
+        public ItemDeVendaBuilder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public ItemDeVendaBuilder setStatus(boolean status) {
+            this.status = status;
+            return this;
+        }
+
+        public ItemDeVendaBuilder setQuantidade(int quantidade) {
+            this.quantidade = quantidade;
+            return this;
+        }
+
+        public ItemDeVendaBuilder setProduto(Produto produto) {
+            this.produto = produto;
+            return this;
+        }
+
+        public ItemDeVendaBuilder setSubTotal(float subTotal) {
+            this.subTotal = subTotal;
+            return this;
+        }
+
+        public ItemDeVendaBuilder setVendaId(int vendaId) {
+            this.vendaId = vendaId;
+            return this;
+        }
+
+        public ItemDeVenda createItemDeVenda() {
+            return new ItemDeVenda(this);
+        }
+
     }
+
 }

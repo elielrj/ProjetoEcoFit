@@ -6,11 +6,11 @@ import javax.swing.table.DefaultTableModel;
 import model.bo.Compra;
 import view.TelaBuscaPagamentos;
 
-public class ControllerBuscaPagamentos implements ActionListener {
+public class ControllerPagamentosBusca implements ActionListener {
 
     TelaBuscaPagamentos telaBuscaPagamentos;
 
-    public ControllerBuscaPagamentos(TelaBuscaPagamentos telaBuscaPagamentos) {
+    public ControllerPagamentosBusca(TelaBuscaPagamentos telaBuscaPagamentos) {
         this.telaBuscaPagamentos = telaBuscaPagamentos;
 
         this.telaBuscaPagamentos.getjButtonCarregar().addActionListener(this);

@@ -32,4 +32,13 @@ public class ServiceItemDeVenda {
         ItemDeVendaDAO itemDeVendaDAO = new ItemDeVendaDAO();
         itemDeVendaDAO.Delete(objeto);
     }
+    public static void Deletar(int idVenda) {
+        ItemDeVendaDAO itemDeVendaDAO = new ItemDeVendaDAO();
+        itemDeVendaDAO.Delete(idVenda);
+    }
+    
+    public static List<ItemDeVenda> BuscarListaDeUmaVenda(int idDaVenda) {
+        ItemDeVendaDAO itemDeVendaDAO = new ItemDeVendaDAO();
+        return itemDeVendaDAO.RetrieveListaDeUmaVenda(idDaVenda);
+    }
 }

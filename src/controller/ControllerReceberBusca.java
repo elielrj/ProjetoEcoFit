@@ -6,11 +6,11 @@ import javax.swing.table.DefaultTableModel;
 import view.TelaBuscaReceber;
 import model.bo.Receber;
 
-public class ControllerBuscaReceber implements ActionListener {
+public class ControllerReceberBusca implements ActionListener {
 
     TelaBuscaReceber telaBuscaReceber;
 
-    public ControllerBuscaReceber(TelaBuscaReceber telaBuscaReceber) {
+    public ControllerReceberBusca(TelaBuscaReceber telaBuscaReceber) {
         this.telaBuscaReceber = telaBuscaReceber;
 
         this.telaBuscaReceber.getjButtonCarregar().addActionListener(this);

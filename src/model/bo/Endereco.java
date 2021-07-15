@@ -2,27 +2,20 @@ package model.bo;
 
 public class Endereco {
 
-    private int id;
-    private String logradouro;
-    private String numero;
-    private String complemento;
-    private Cidade cidade;
-    private Bairro bairro;
-    private String cep;
-    private boolean status;
+    private int id;//1
+    private String logradouro;//2
+    private String numero;//3
+    private Bairro bairro;//4
+    private String cep;//5
+    private boolean status;//6
 
-    public Endereco() {
-    }
-
-    public Endereco(int id, String logradouro, String numero, String complemento, Bairro bairro, Cidade cidade, String cep, boolean status) {
-        this.id = id;
-        this.logradouro = logradouro;
-        this.numero = numero;
-        this.complemento = complemento;
-        this.bairro = bairro;
-        this.cep = cep;
-        this.cidade = cidade;
-        this.status = status;
+    private Endereco(EnderecoBuilder enderecoBuilder) {
+        this.id = enderecoBuilder.id;
+        this.logradouro = enderecoBuilder.logradouro;
+        this.numero = enderecoBuilder.numero;
+        this.bairro = enderecoBuilder.bairro;
+        this.cep = enderecoBuilder.cep;
+        this.status = enderecoBuilder.status;
     }
 
     public int getId() {
@@ -49,14 +42,6 @@ public class Endereco {
         this.numero = numero;
     }
 
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
     public Bairro getBairro() {
         return bairro;
     }
@@ -81,17 +66,52 @@ public class Endereco {
         this.status = status;
     }
 
-    public Cidade getCidade() {
-        return cidade;
-    }
+    public static  class EnderecoBuilder {
 
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
-    }
+        private int id;
+        private String logradouro;
+        private String numero;
+        private Bairro bairro;
+        private String cep;
+        private boolean status;
 
-    @Override
-    public String toString() {
-        return id + " - Rua " + logradouro + ", " + numero + ", Compl. " + complemento + ", Bairro " + bairro + "Cidade " + getCidade().getNome() + ", CEP " + cep;
+        public EnderecoBuilder() {
+        }
+
+        public EnderecoBuilder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public EnderecoBuilder setLogradouro(String logradouro) {
+            this.logradouro = logradouro;
+            return this;
+        }
+
+        public EnderecoBuilder setNumero(String numero) {
+            this.numero = numero;
+            return this;
+        }
+
+        public EnderecoBuilder setBairro(Bairro bairro) {
+            this.bairro = bairro;
+            return this;
+        }
+
+        public EnderecoBuilder setCep(String cep) {
+            this.cep = cep;
+            return this;
+        }
+
+        public EnderecoBuilder setStatus(boolean status) {
+            this.status = status;
+            return this;
+        }
+
+        public Endereco createEndereco() {
+            return new Endereco(this);
+        }
+
     }
 
 }

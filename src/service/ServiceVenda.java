@@ -27,6 +27,11 @@ public class ServiceVenda {
         VendaDAO vendaDAO = new VendaDAO();
         return vendaDAO.Retrieve(id);
     }
+    
+    public static int Buscar(Venda venda) {
+        VendaDAO vendaDAO = new VendaDAO();
+        return vendaDAO.Retrieve(venda);
+    }
 
     public static void Deletar(Venda objeto) {
         VendaDAO vendaDAO = new VendaDAO();

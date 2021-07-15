@@ -1,7 +1,7 @@
 package view;
 
-import controller.ControllerBuscaPessoaFisica;
-import controller.ControllerBuscaProduto;
+import controller.ControllerPessoaFisicaBusca;
+import controller.ControllerProdutoBusca;
 import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.Normalizer.Form;
@@ -224,7 +224,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
         jLabelFaturamentoValorTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelFaturamentoValorTotal.setText("000000");
 
-        jLabel3.setText("Data Atual");
+        jLabel3.setText("Data Da Venda");
 
         jLabel4.setText("Usuário");
 
@@ -568,7 +568,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
 
     private void jButtonProdutoPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutoPesquisaActionPerformed
         //TelaBuscaProduto telaBuscaProduto = new TelaBuscaProduto(null,true);
-        //ControllerBuscaProduto listaDeProdutos = new ControllerBuscaProduto(telaBuscaProduto);
+        //ControllerBuscaProduto listaDeProdutos = new ControllerProdutoBusca(telaBuscaProduto);
         //telaBuscaProduto.setVisible(true);
         //getjTextFieldProdutoCodBarras().setText(telaBuscaProduto.getCodProduto()+"");
     }//GEN-LAST:event_jButtonProdutoPesquisaActionPerformed

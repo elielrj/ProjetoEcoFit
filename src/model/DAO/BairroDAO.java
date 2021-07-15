@@ -9,21 +9,21 @@ import java.util.ArrayList;
 import model.DAO.SQL.SQL;
 
 public class BairroDAO implements InterfaceDAO<Bairro> {
-    
+
     @Override
     public void Create(Bairro objeto) {
         try {
             Connection conexao = ConectionFactory.getConection();
-            //String sqlExecutar = "INSERT INTO bairro(nome,status) VALUES(?,?)";
             PreparedStatement pstm = null;
             pstm = conexao.prepareStatement(SQL.BAIRRO_CREATE);
             pstm.setString(1, objeto.getNome());
             pstm.setBoolean(2, objeto.getStatus());
+            pstm.setInt(3, objeto.getCidadeId());            
             pstm.executeUpdate();
-            ConectionFactory.closeConnection(conexao,pstm);
+            ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: BairroDAO->Create->bairroDAO\nMENSAGEM:" 
-                    + ex.getMessage() + "\nLOCALIZADO:" 
+            throw new RuntimeException(" \nCLASSE: BairroDAO->Create->bairroDAO\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
         }
@@ -31,28 +31,27 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
 
     @Override
     public List<Bairro> Retrieve() {
-        
         try {
             Connection conexao = ConectionFactory.getConection();
-            //String sqlExecutar = "SELECT id,nome,status FROM bairro";
             PreparedStatement pstm = null;
             ResultSet rs = null;
-            List<Bairro> bairros = new ArrayList();
             pstm = conexao.prepareStatement(SQL.BAIRRO_RETRIVE_ALL);
             rs = pstm.executeQuery();
+            List<Bairro> bairros = new ArrayList();
             while (rs.next()) {
                 Bairro bairro = new Bairro(
-                                rs.getInt("id"),
-                                rs.getString("nome"),
-                                rs.getBoolean("status")
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getBoolean("status"),
+                        rs.getInt("cidadeId")
                 );
                 bairros.add(bairro);
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return bairros;
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: BairroDAO->Retrive->bairroDAO\nMENSAGEM:" 
-                    + ex.getMessage() + "\nLOCALIZADO:" 
+            throw new RuntimeException(" \nCLASSE: BairroDAO->Retrive->bairroDAO\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
         }
@@ -64,25 +63,24 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
             Connection conexao = ConectionFactory.getConection();
 
             //String sqlExecutar = "SELECT id,nome,status FROM bairro WHERE bairro.id=?";
-           
             PreparedStatement pstm = null;
             ResultSet rs = null;
             pstm = conexao.prepareStatement(SQL.BAIRRO_RETRIVE_ONE_ID);
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
             Bairro bairro = new Bairro();
-            while (rs.next()){
+            while (rs.next()) {
                 bairro.setId(rs.getInt("id"));
                 bairro.setNome(rs.getString("nome"));
                 bairro.setStatus(rs.getBoolean("status"));
+                bairro.setCidadeId(rs.getInt("cidadeId"));
             }
 
-            
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return bairro;
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: BairroDAO->Retrive(int id)->bairroDAO\nMENSAGEM:" 
-                    + ex.getMessage() + "\nLOCALIZADO:" 
+            throw new RuntimeException(" \nCLASSE: BairroDAO->Retrive(int id)->bairroDAO\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
         }
@@ -92,17 +90,18 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
     public void Update(Bairro objeto) {
         try {
             Connection conexao = ConectionFactory.getConection();
-            
+
             PreparedStatement pstm = null;
             pstm = conexao.prepareStatement(SQL.BAIRRO_UPDATE);
             pstm.setString(1, objeto.getNome());
             pstm.setBoolean(2, objeto.getStatus());
-            pstm.setInt(3, objeto.getId());
+            pstm.setInt(3, objeto.getCidadeId());
+            pstm.setInt(4, objeto.getId());
             pstm.executeUpdate();
             ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: BairroDAO->Update->bairroDAO\nMENSAGEM:" 
-                    + ex.getMessage() + "\nLOCALIZADO:" 
+            throw new RuntimeException(" \nCLASSE: BairroDAO->Update->bairroDAO\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
         }
@@ -112,32 +111,82 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
     public void Delete(Bairro objeto) {
         try {
             Connection conexao = ConectionFactory.getConection();
-            //String sqlExecutar = "DELETE FROM bairro WHERE id = ?";
             PreparedStatement pstm = null;
             pstm = conexao.prepareStatement(SQL.BAIRRO_DELETE);
-            pstm.setInt(1,objeto.getId());
+            pstm.setInt(1, objeto.getId());
             pstm.executeUpdate();
             ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: BairroDAO->Delete->bairroDAO\nMENSAGEM:" 
-                    + ex.getMessage() + "\nLOCALIZADO:" 
+            throw new RuntimeException(" \nCLASSE: BairroDAO->Delete->bairroDAO\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
         }
     }
-    
-    @Override
+
     public void Delete(int idBairro) {
         try {
             Connection conexao = ConectionFactory.getConection();
             PreparedStatement pstm = null;
             pstm = conexao.prepareStatement(SQL.BAIRRO_DELETE);
-            pstm.setInt(1,idBairro);
+            pstm.setInt(1, idBairro);
             pstm.executeUpdate();
             ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: BairroDAO->Delete->bairroDAO\nMENSAGEM:" 
-                    + ex.getMessage() + "\nLOCALIZADO:" 
+            throw new RuntimeException(" \nCLASSE: BairroDAO->Delete->bairroDAO\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
+        }
+    }
+
+    public List<Bairro> RetrieveForCity(int idCidade) {
+        try {
+            Connection conexao = ConectionFactory.getConection();
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            pstm = conexao.prepareStatement(SQL.BAIRRO_RETRIVE_ID_CITY);
+            pstm.setInt(1, idCidade);
+            rs = pstm.executeQuery();
+            List<Bairro> bairros = new ArrayList<>();
+            while (rs.next()) {
+                Bairro bairro = new Bairro();
+                bairro.setId(rs.getInt("id"));
+                bairro.setNome(rs.getString("nome"));
+                bairro.setStatus(rs.getBoolean("status"));
+                bairro.setCidadeId(rs.getInt("cidadeId"));
+                bairros.add(bairro);
+            }
+
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return bairros;
+        } catch (Exception ex) {
+            throw new RuntimeException(" \nCLASSE: BairroDAO->Retrive(int id)->bairroDAO\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
+        }
+    }
+
+    public int RetrieveIdTheCity(int idBairro) {
+        try {
+            Connection conexao = ConectionFactory.getConection();
+
+            //String sqlExecutar = "SELECT id,nome,status FROM bairro WHERE bairro.id=?";
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            pstm = conexao.prepareStatement(SQL.BAIRRO_RETRIVE_ONE_ID);
+            pstm.setInt(1, idBairro);
+            rs = pstm.executeQuery();
+            Bairro bairro = new Bairro();
+            while (rs.next()) {
+                bairro.setCidadeId(rs.getInt("cidadeId"));
+            }
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return bairro.getCidadeId();
+        } catch (Exception ex) {
+            throw new RuntimeException(" \nCLASSE: BairroDAO->RetrieveIdTheCity(int idBairro)->bairroDAO\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
         }

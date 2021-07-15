@@ -58,11 +58,9 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
                 itemDeVenda.setValor(rs.getFloat("valor"));
                 itemDeVenda.setStatus(rs.getBoolean("status"));
                 itemDeVenda.setVendaId(rs.getInt("vendaId"));
-                
+
                 ProdutoDAO produtoDAO = new ProdutoDAO();
                 itemDeVenda.setProduto(produtoDAO.Retrieve(rs.getInt("produtoId")));
-
-                
 
                 itensDeVenda.add(itemDeVenda);
             }
@@ -96,11 +94,9 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
                 itemDeVenda.setValor(rs.getFloat("valor"));
                 itemDeVenda.setStatus(rs.getBoolean("status"));
                 itemDeVenda.setVendaId(rs.getInt("vendaId"));
-                
+
                 ProdutoDAO produtoDAO = new ProdutoDAO();
                 itemDeVenda.setProduto(produtoDAO.Retrieve(rs.getInt("produtoId")));
-
-                
 
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
@@ -149,6 +145,21 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
         ConectionFactory.closeConnection(conexao, pstm);
     }
     
+    public void Delete(int idVenda) {
+        Connection conexao = ConectionFactory.getConection();
+        String sqlExecutar = "DELETE FROM itemDeVenda WHERE itemdevenda.vendaid=?";
+        PreparedStatement pstm = null;
+
+        try {
+            pstm = conexao.prepareStatement(sqlExecutar);
+            pstm.setInt(1, idVenda);
+            pstm.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        ConectionFactory.closeConnection(conexao, pstm);
+    }
+
     public List<ItemDeVenda> RetrieveTodosOsItensDeUmaVenda(int idDaVenda) {
         Connection conexao = ConectionFactory.getConection();
 
@@ -171,19 +182,57 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
                 itemDeVenda.setValor(rs.getFloat("valor"));
                 itemDeVenda.setStatus(rs.getBoolean("status"));
                 itemDeVenda.setVendaId(rs.getInt("vendaId"));
-                
+
                 ProdutoDAO produtoDAO = new ProdutoDAO();
                 itemDeVenda.setProduto(produtoDAO.Retrieve(rs.getInt("produtoId")));
 
-                
                 itensDeVenda.add(itemDeVenda);
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return itensDeVenda;
         } catch (Exception ex) {
-            ConectionFactory.closeConnection(conexao, pstm, rs);
-            return null;
+            throw new RuntimeException(" \nCLASSE: BairroDAO->Create->bairroDAO\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
         }
     }
 
+    public List<ItemDeVenda> RetrieveListaDeUmaVenda(int idDaVenda) {
+
+        try {
+
+            String sqlExecutar = "SELECT id, quantidade, valor, status, vendaid,produtoid FROM itemdevenda WHERE vendaid=?";
+
+            Connection conexao = ConectionFactory.getConection();
+
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            pstm = conexao.prepareStatement(sqlExecutar);
+            pstm.setInt(1, idDaVenda);
+
+            List<ItemDeVenda> itensDeVenda = new ArrayList<>();
+
+            while (rs.next()) {
+                ItemDeVenda itemDeVenda = new ItemDeVenda.ItemDeVendaBuilder()
+                        .setId(rs.getInt("id"))//1
+                        .setQuantidade(rs.getInt("quantidade"))//3
+                        .setSubTotal(rs.getFloat("valor"))//5
+                        .setStatus(rs.getBoolean("status"))//2
+                        .setVendaId(rs.getInt("vendaId"))//6
+                        .setProduto(service.ServiceProduto.Buscar(rs.getInt("produtoId")))//4
+                        .createItemDeVenda();
+
+                itensDeVenda.add(itemDeVenda);
+            }
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return itensDeVenda;
+        } catch (Exception ex) {
+            throw new RuntimeException(" \nCLASSE: BairroDAO->Create->bairroDAO\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
+        }
+
+    }
 }

@@ -116,6 +116,42 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
         }
     }
 
+    public Produto Retrieve(String codigodeBarrasDoProduto) {
+        Connection conexao = ConectionFactory.getConection();
+
+        String sqlExecutar = "SELECT id, descricao,unidadeDeCompra,unidadeDeVenda, correlacaoUnidade, valor,quantidadeDeEstoque, codigoDeBarras, status,observacao FROM produto WHERE produto.codigodebarras=?";
+
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+
+        try {
+            pstm = conexao.prepareStatement(sqlExecutar);
+            pstm.setString(1, codigodeBarrasDoProduto);
+            rs = pstm.executeQuery();
+
+            Produto produto = new Produto.ProdutoBuilder().createProduto();
+
+            while (rs.next()) {
+
+                produto.setId(rs.getInt("id"));//1
+                produto.setDescricao(rs.getString("descricao"));//2
+                produto.setUnidadeDeCompra(rs.getString("unidadeDeCompra"));//3
+                produto.setUnidadeDeVenda(rs.getString("unidadeDeVenda"));//4
+                produto.setCorrelacaoUnidade(rs.getString("correlacaoUnidade"));//5
+                produto.setValor(rs.getFloat("valor"));//6
+                produto.setCodigoDeBarras(rs.getString("codigoDeBarras"));//7
+                produto.setStatus(rs.getBoolean("status"));//8
+                produto.setObservacao(rs.getString("observacao"));//9
+
+            }
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return produto;
+        } catch (Exception ex) {
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return null;
+        }
+    }
+    
     @Override
     public void Update(Produto objeto) {
         Connection conexao = ConectionFactory.getConection();

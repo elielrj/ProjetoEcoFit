@@ -3,26 +3,25 @@ package controller;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-//import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-//import javax.swing.table.DefaultTableModel;
+
 import model.bo.Bairro;
 import model.bo.Cidade;
 import model.bo.Endereco;
 import view.TelaBuscaEndereco;
-//import view.TelaCadastroBairro;
+
 import view.TelaCadastroEndereco;
 
 public class ControllerEndereco implements ActionListener {
 
-    TelaCadastroEndereco telaCadastroEndereco = new TelaCadastroEndereco();
+    TelaCadastroEndereco telaCadastroEndereco;
     public static int codigo;
 
     public ControllerEndereco(TelaCadastroEndereco telaCadastroEndereco) {
+
         this.telaCadastroEndereco = telaCadastroEndereco;
 
         this.telaCadastroEndereco.getjButtonNovo().addActionListener(this);
@@ -47,15 +46,13 @@ public class ControllerEndereco implements ActionListener {
             LimpaEstadoComponentes(false);
         } else if (e.getSource() == this.telaCadastroEndereco.getjButtonGravar()) {
             //montar objeto a persistir
-            Endereco endereco = new Endereco();
-            endereco.setCep((String) this.telaCadastroEndereco.getjFormattedTextFieldCep().getText());
-            endereco.setLogradouro(this.telaCadastroEndereco.getjTextFieldLogradouro().getText());
-            endereco.setNumero(this.telaCadastroEndereco.getjTextFieldNumero().getText());
-            endereco.setComplemento(this.telaCadastroEndereco.getjTextFieldComplemento().getText());
-
-            endereco.setBairro((Bairro) this.telaCadastroEndereco.getjComboBoxBairro().getSelectedItem());
-            endereco.setCidade((Cidade) this.telaCadastroEndereco.getjComboBoxCidade().getSelectedItem());
-            endereco.setStatus(this.telaCadastroEndereco.getjComboBoxStatus().getSelectedItem().equals("Sim"));
+            Endereco endereco = new Endereco.EnderecoBuilder()
+                    .setCep(this.telaCadastroEndereco.getjFormattedTextFieldCep().getText()) //5
+                    .setLogradouro(this.telaCadastroEndereco.getjTextFieldLogradouro().getText() )//2
+                    .setNumero(this.telaCadastroEndereco.getjTextFieldNumero().getText()) //3
+                    .setBairro((Bairro) this.telaCadastroEndereco.getjComboBoxBairro().getSelectedItem()) //4
+                    .setStatus(this.telaCadastroEndereco.getjComboBoxStatus().getSelectedItem().equals("Sim")) //6
+                    .createEndereco();
 
             if (codigo == 0) {
                 service.ServiceEndereco.Incluir(endereco);
@@ -72,26 +69,24 @@ public class ControllerEndereco implements ActionListener {
             codigo = 0;
 
             TelaBuscaEndereco telaBuscaEndereco = new TelaBuscaEndereco(null, true);
-            ControllerBuscaEndereco controllerBuscaEndereco = new ControllerBuscaEndereco(telaBuscaEndereco);
+            ControllerEnderecoBusca controllerBuscaEndereco = new ControllerEnderecoBusca(telaBuscaEndereco);
             telaBuscaEndereco.setVisible(true);//verificarControllerBuscaEndereco
 
             if (codigo != 0) {
                 Ativa(false);
                 LimpaEstadoComponentes(true);
 
-                Endereco endereco = new Endereco();
+                Endereco endereco = new Endereco.EnderecoBuilder().createEndereco();
                 endereco = service.ServiceEndereco.Buscar(codigo);
 
-                this.telaCadastroEndereco.getjTextFieldId().setText(endereco.getId() + "");
-
-                this.telaCadastroEndereco.getjTextFieldLogradouro().setText(endereco.getLogradouro());
-                this.telaCadastroEndereco.getjTextFieldNumero().setText(endereco.getNumero());
-                this.telaCadastroEndereco.getjTextFieldComplemento().setText(endereco.getComplemento());
-                this.telaCadastroEndereco.getjComboBoxBairro().setSelectedItem(endereco.getBairro());
-                this.telaCadastroEndereco.getjComboBoxCidade().setSelectedItem(endereco.getCidade());
-                this.telaCadastroEndereco.getjFormattedTextFieldCep().setText(endereco.getCep());
-                this.telaCadastroEndereco.getjComboBoxStatus().setSelectedItem(endereco.getStatus());
-
+                this.telaCadastroEndereco.getjTextFieldId().setText(endereco.getId() + "");  //1
+                this.telaCadastroEndereco.getjTextFieldLogradouro().setText(endereco.getLogradouro());  //2
+                this.telaCadastroEndereco.getjTextFieldNumero().setText(endereco.getNumero());             //3   
+                this.telaCadastroEndereco.getjComboBoxBairro().setSelectedItem(endereco.getBairro()); //4
+                this.telaCadastroEndereco.getjComboBoxCidade().setSelectedItem(endereco.getBairro().getCidade()); //5
+                this.telaCadastroEndereco.getjFormattedTextFieldCep().setText(endereco.getCep()); //6
+                this.telaCadastroEndereco.getjComboBoxStatus().setSelectedItem(endereco.getStatus()); //7
+                
                 this.telaCadastroEndereco.getjTextFieldId().setEnabled(false);
             }
         }
@@ -148,5 +143,4 @@ public class ControllerEndereco implements ActionListener {
 
         }
     }
-
 }

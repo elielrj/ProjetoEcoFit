@@ -8,11 +8,11 @@ import view.TelaBuscaCidade;
 import model.bo.Cidade;
 import service.ServiceCidade;
 
-public class ControllerBuscaCidade implements ActionListener {
+public class ControllerCidadeBusca implements ActionListener {
 
     TelaBuscaCidade telaBuscaCidade;
 
-    public ControllerBuscaCidade(TelaBuscaCidade telaBuscaCidade) {
+    public ControllerCidadeBusca(TelaBuscaCidade telaBuscaCidade) {
         this.telaBuscaCidade = telaBuscaCidade;
 
         this.telaBuscaCidade.getjButtonCarregar().addActionListener(this);
@@ -35,7 +35,7 @@ public class ControllerBuscaCidade implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Cidade deletado com sucesso!");
                 carregarDadosNaTabela();
             } catch (Exception ex) {
-                throw new RuntimeException(" \nCLASSE: ControllerBuscaBairro->actionPerformed(ActionEvent e)->deletar\nMENSAGEM:"
+                throw new RuntimeException(" \nCLASSE: ControllerBuscaCidade->actionPerformed(ActionEvent e)->deletar\nMENSAGEM:"
                         + ex.getMessage() + "\nLOCALIZADO:"
                         + ex.getLocalizedMessage()
                 );

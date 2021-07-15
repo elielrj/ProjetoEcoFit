@@ -1,16 +1,17 @@
 package controller;
 
+import controller.deletar.ControllerFaturamento;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import view.TelaBuscaFaturamento;
 import model.bo.Faturamento;
 
-public class ControllerBuscaFaturamento implements ActionListener {
+public class ControllerFaturamentoBusca implements ActionListener {
 
     TelaBuscaFaturamento telaBuscaFaturamento;
 
-    public ControllerBuscaFaturamento(TelaBuscaFaturamento telaBuscaFaturamento) {
+    public ControllerFaturamentoBusca(TelaBuscaFaturamento telaBuscaFaturamento) {
         
         this.telaBuscaFaturamento = telaBuscaFaturamento;
         this.telaBuscaFaturamento.getjButton_Carregar().addActionListener(this);

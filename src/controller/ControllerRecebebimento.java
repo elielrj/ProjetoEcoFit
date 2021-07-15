@@ -66,7 +66,7 @@ public class ControllerRecebebimento implements ActionListener {
 
             codigo = 0;
             TelaBuscaReceber telaBuscaReceber = new TelaBuscaReceber(null, true);
-            ControllerBuscaReceber controllerBuscaReceber = new ControllerBuscaReceber(telaBuscaReceber);
+            ControllerReceberBusca controllerBuscaReceber = new ControllerReceberBusca(telaBuscaReceber);
             telaBuscaReceber.setVisible(true);
 
             if (codigo != 0) {

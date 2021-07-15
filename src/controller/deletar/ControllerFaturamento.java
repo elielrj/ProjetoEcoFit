@@ -1,5 +1,8 @@
-package controller;
+package controller.deletar;
 
+import controller.ControllerFaturamentoBusca;
+import controller.ControllerPessoaFisicaBusca;
+import controller.ControllerProdutoBusca;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -58,7 +61,7 @@ public class ControllerFaturamento implements ActionListener {
 
             //codigo = 0;
             TelaBuscaFaturamento telaBuscaFaturamento = new TelaBuscaFaturamento(null, true);
-            ControllerBuscaFaturamento controllerBuscaFaturamento = new ControllerBuscaFaturamento(telaBuscaFaturamento);
+            ControllerFaturamentoBusca controllerBuscaFaturamento = new ControllerFaturamentoBusca(telaBuscaFaturamento);
             telaBuscaFaturamento.setVisible(true);
 
             if (codigo != 0) {
@@ -192,7 +195,7 @@ public class ControllerFaturamento implements ActionListener {
     private void buscaProdutoPorId() {
 
         TelaBuscaProduto telaBuscaProduto = new TelaBuscaProduto(null, true);
-        ControllerBuscaProduto controllerBuscaProduto = new ControllerBuscaProduto(telaBuscaProduto);
+        ControllerProdutoBusca controllerBuscaProduto = new ControllerProdutoBusca(telaBuscaProduto);
         telaBuscaProduto.setVisible(true);
 
         this.telaFaturamento.getjTextField_ProdutoCodBarras().setText(
@@ -248,11 +251,11 @@ public class ControllerFaturamento implements ActionListener {
 
     public void buscaClienteAluno() {
         TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica(null, true);
-        ControllerBuscaPessoaFisica controllerBuscaPessoaFisica = new ControllerBuscaPessoaFisica(telaBuscaPessoaFisica);
+        ControllerPessoaFisicaBusca controllerBuscaPessoaFisica = new ControllerPessoaFisicaBusca(telaBuscaPessoaFisica);
         telaBuscaPessoaFisica.setVisible(true);
 
-        this.telaFaturamento.getjTextField_ClienteId().setText(telaBuscaPessoaFisica.getCodPessoaFisica() + "");
-        PessoaFisica pessoaFisica = service.ServicePessoaFisica.Buscar(telaBuscaPessoaFisica.getCodPessoaFisica());
+        this.telaFaturamento.getjTextField_ClienteId().setText(telaBuscaPessoaFisica.getIdDaPessoaFisica() + "");
+        PessoaFisica pessoaFisica = service.ServicePessoaFisica.Buscar(telaBuscaPessoaFisica.getIdDaPessoaFisica());
         /*
         this.telaFaturamento.getjTextField_Cliente_Nome().setText(pessoaFisica.getNome());
         this.telaFaturamento.getjTextField_Cliente_Cidade().setText(pessoaFisica.getEndereco().getCidade() + "");
@@ -495,11 +498,11 @@ public class ControllerFaturamento implements ActionListener {
 
     private void buscaClientePersonal() {
         TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica(null, true);
-        ControllerBuscaPessoaFisica controllerBuscaPessoaFisica = new ControllerBuscaPessoaFisica(telaBuscaPessoaFisica);
+        ControllerPessoaFisicaBusca controllerBuscaPessoaFisica = new ControllerPessoaFisicaBusca(telaBuscaPessoaFisica);
         telaBuscaPessoaFisica.setVisible(true);
 
-        this.telaFaturamento.getjTextField_ClienteId().setText(telaBuscaPessoaFisica.getCodPessoaFisica() + "");
-        PessoaFisica pessoaFisica = service.ServicePessoaFisica.BuscarPersonal(telaBuscaPessoaFisica.getCodPessoaFisica());
+        this.telaFaturamento.getjTextField_ClienteId().setText(telaBuscaPessoaFisica.getIdDaPessoaFisica() + "");
+        PessoaFisica pessoaFisica = service.ServicePessoaFisica.BuscarPersonal(telaBuscaPessoaFisica.getIdDaPessoaFisica());
         /*
         this.telaFaturamento.getjTextField_Cliente_Nome().setText(pessoaFisica.getNome());
         this.telaFaturamento.getjTextField_Cliente_Cidade().setText(pessoaFisica.getEndereco().getCidade() + "");
@@ -509,4 +512,10 @@ public class ControllerFaturamento implements ActionListener {
         this.telaFaturamento.getjTextField_Cliente_Tel2().setText(pessoaFisica.getTelefone2() + "");*/
         atualizarClienteNaTelaFaturamento(pessoaFisica);
     }
+    
+    private static String semMascara(String dado) {
+        dado = dado.replaceAll("\\.", "");
+        return dado;
+    }
+    
 }

@@ -6,12 +6,12 @@ import javax.swing.table.DefaultTableModel;
 import view.TelaBuscaProduto;
 import model.bo.Produto;
 
-public class ControllerBuscaProduto implements ActionListener {
+public class ControllerProdutoBusca implements ActionListener {
 
     TelaBuscaProduto telaBuscaProduto;
     int codigoProduto = 0;
 
-    public ControllerBuscaProduto(TelaBuscaProduto telaBuscaProduto) {
+    public ControllerProdutoBusca(TelaBuscaProduto telaBuscaProduto) {
         this.telaBuscaProduto = telaBuscaProduto;
 
         this.telaBuscaProduto.getjButtonCarregar().addActionListener(this);

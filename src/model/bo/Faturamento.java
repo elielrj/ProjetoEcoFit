@@ -7,17 +7,17 @@ import javax.swing.JTable;
 
 public class Faturamento {
 
-    private int id;
-    private String hora;
-    private String data;
-    private String userCaixa;
-    protected ArrayList<ItemDeVenda> listaDeItens;
-    private String dataDeVencimento;
-    private String observacao;
-    private float valorDoDesconto;
-    private float valorTotal;
-    private boolean status;
-    private PessoaFisica pessoaFisica;
+    private int id;//1
+    private String hora;//2
+    private String data;//3
+    private String userCaixa;//4
+    protected ArrayList<ItemDeVenda> listaDeItens;//5
+    private String dataDeVencimento;//6
+    private String observacao;//7
+    private float valorDoDesconto;//8
+    private float valorTotal;//9
+    private boolean status;//10
+    private PessoaFisica pessoaFisica;//11
 
     //private JTable jTable;
 

@@ -7,10 +7,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import model.DAO.EnderecoDAO;
-import model.bo.Fornecedor;
 import model.bo.Bairro;
-import model.bo.Cidade;
+import model.bo.Fornecedor;
 import model.bo.Endereco;
 
 import view.TelaBuscaFornecedor;
@@ -48,26 +46,36 @@ public class ControllerFornecedor implements ActionListener {
             LimpaEstadoComponentes(false);
         } else if (e.getSource() == this.telaCadastroFornecedor.getjButtonGravar()) {
             //montar objeto a persistir
-            Fornecedor fornecedor = new Fornecedor();
-
-            fornecedor.setRazaoSocial(this.telaCadastroFornecedor.getjTextFieldRazaoSocial().getText());
-            fornecedor.setCnpj(this.telaCadastroFornecedor.getjFormattedTextFieldCnpj().getText());
-            fornecedor.setInscricaoEstadual(this.telaCadastroFornecedor.getjFormattedTextFieldInscEst().getText());
-            fornecedor.setTelefone1(this.telaCadastroFornecedor.getjFormattedTextFieldTel1().getText());
-            fornecedor.setTelefone2(this.telaCadastroFornecedor.getjFormattedTextFieldtel2().getText());
-
-            fornecedor.setEmail(this.telaCadastroFornecedor.getjTextFieldEmail().getText());
-
-            fornecedor.setEndereco((Endereco) this.telaCadastroFornecedor.getjComboBoxEndereco().getSelectedItem());
-
-            fornecedor.setObservacao(this.telaCadastroFornecedor.getjTextAreaObs().getText());
-            fornecedor.setStatus(this.telaCadastroFornecedor.getjComboBoxStatus().getSelectedItem().equals("Sim"));
+            //1º Endereço - ID End
+            Endereco endereco = new Endereco.EnderecoBuilder()
+                    //5-1 ID
+                    .setLogradouro(this.telaCadastroFornecedor.getjTextField_EnderecoLogradouro().getText())//5-2
+                    .setNumero(this.telaCadastroFornecedor.getjTextField_EnderecoID().getText())//5-3
+                    .setBairro((Bairro) this.telaCadastroFornecedor.getjComboBox_EnderecoBairro().getSelectedItem())//5-4
+                    .setCep(this.telaCadastroFornecedor.getjFormattedTextField_EnderecoCEP().getText())//5-5
+                    //5-6 Status
+                    .createEndereco();
+            service.ServiceEndereco.Incluir(endereco);
+            endereco = service.ServiceEndereco.BuscarPorId(endereco); //SUBSTITUI COM O ID_END
+            //2º Fornecedor c/ endereço já existente     
+            Fornecedor fornecedor = new Fornecedor.FornecedorBuilder()
+                    .setRazaoSocial(this.telaCadastroFornecedor.getjTextFieldRazaoSocial().getText())//2
+                    .setInscricaoEstadual(this.telaCadastroFornecedor.getjFormattedTextFieldInscEst().getText())//3
+                    .setCnpj(this.telaCadastroFornecedor.getjFormattedTextFieldCnpj().getText())//4
+                    .setEndereco(endereco)//5
+                    .setTelefone1(this.telaCadastroFornecedor.getjFormattedTextFieldTel1().getText())//6
+                    .setTelefone2(this.telaCadastroFornecedor.getjFormattedTextFieldtel2().getText())//7
+                    .setEmail(this.telaCadastroFornecedor.getjTextFieldEmail().getText())//8
+                    .setObservacao(this.telaCadastroFornecedor.getjTextAreaObs().getText())//9
+                    .setStatus(this.telaCadastroFornecedor.getjComboBoxStatus().getSelectedItem().equals("Sim"))//10
+                    .setComplemento(this.telaCadastroFornecedor.getjTextField_EnderecoComplemento().getText())//11
+                    .createFornecedor();
 
             if (codigo == 0) {
                 service.ServiceFornecedor.Incluir(fornecedor);
             } else {
 
-                fornecedor.setId(Integer.parseInt(this.telaCadastroFornecedor.getjTextFieldId().getText()));
+                fornecedor.setId(Integer.parseInt(this.telaCadastroFornecedor.getjTextFieldId().getText())); //1
                 service.ServiceFornecedor.Atualizar(fornecedor);
             }
             Ativa(true);
@@ -77,28 +85,32 @@ public class ControllerFornecedor implements ActionListener {
 
             codigo = 0;
             TelaBuscaFornecedor telaBuscaFornecedor = new TelaBuscaFornecedor(null, true);
-            ControllerBuscaFornecedor controllerBuscaFornecedor = new ControllerBuscaFornecedor(telaBuscaFornecedor);
+            ControllerFornecedorBusca controllerBuscaFornecedor = new ControllerFornecedorBusca(telaBuscaFornecedor);
             telaBuscaFornecedor.setVisible(true);
 
             if (codigo != 0) {
                 Ativa(false);
                 LimpaEstadoComponentes(true);
-                Fornecedor fornecedor = new Fornecedor();
-                fornecedor = service.ServiceFornecedor.Buscar(codigo);
+                Fornecedor fornecedor = service.ServiceFornecedor.Buscar(codigo);
 
-                this.telaCadastroFornecedor.getjTextFieldId().setText(fornecedor.getId() + "");
-                this.telaCadastroFornecedor.getjTextFieldRazaoSocial().setText(fornecedor.getRazaoSocial());
-                this.telaCadastroFornecedor.getjFormattedTextFieldCnpj().setText(fornecedor.getCnpj());
-                this.telaCadastroFornecedor.getjFormattedTextFieldInscEst().setText(fornecedor.getInscricaoEstadual());
-
-                this.telaCadastroFornecedor.getjFormattedTextFieldTel1().setText(fornecedor.getTelefone1());
-                this.telaCadastroFornecedor.getjFormattedTextFieldtel2().setText(fornecedor.getTelefone2());
-                this.telaCadastroFornecedor.getjTextFieldEmail().setText(fornecedor.getEmail());
-
-                this.telaCadastroFornecedor.getjTextAreaObs().setText(fornecedor.getObservacao());
-                this.telaCadastroFornecedor.getjComboBoxStatus().setSelectedItem(fornecedor.getStatus());
-                this.telaCadastroFornecedor.getjComboBoxEndereco().setSelectedItem(fornecedor.getEndereco());
-                //Endereco endereco = new Endereco();
+                this.telaCadastroFornecedor.getjTextFieldId().setText(fornecedor.getId() + "");//1
+                this.telaCadastroFornecedor.getjTextFieldRazaoSocial().setText(fornecedor.getRazaoSocial());//2
+                this.telaCadastroFornecedor.getjFormattedTextFieldInscEst().setText(fornecedor.getInscricaoEstadual());//3
+                this.telaCadastroFornecedor.getjFormattedTextFieldCnpj().setText(fornecedor.getCnpj());//4
+                //ENDEREÇO - id, logra, nr,bairro, cid, cep
+                this.telaCadastroFornecedor.getjTextField_EnderecoID().setText(fornecedor.getEndereco().getId() + "");//5-1
+                this.telaCadastroFornecedor.getjTextField_EnderecoLogradouro().setText(fornecedor.getEndereco().getLogradouro());//5-2
+                this.telaCadastroFornecedor.getjTextField_EnderecoNumero().setText(fornecedor.getEndereco().getNumero());//5-3
+                this.telaCadastroFornecedor.getjComboBox_EnderecoBairro().setSelectedItem(fornecedor.getEndereco().getBairro());//5-4
+                this.telaCadastroFornecedor.getjComboBox_EnderecoCidade().setSelectedItem(fornecedor.getEndereco().getBairro().getCidade());//5-?
+                this.telaCadastroFornecedor.getjFormattedTextField_EnderecoCEP().setText(fornecedor.getEndereco().getCep());//5-5
+                //5-6 status do CEP
+                this.telaCadastroFornecedor.getjFormattedTextFieldTel1().setText(fornecedor.getTelefone1());//6
+                this.telaCadastroFornecedor.getjFormattedTextFieldtel2().setText(fornecedor.getTelefone2());//7
+                this.telaCadastroFornecedor.getjTextFieldEmail().setText(fornecedor.getEmail());//8
+                this.telaCadastroFornecedor.getjTextAreaObs().setText(fornecedor.getObservacao());//9
+                this.telaCadastroFornecedor.getjComboBoxStatus().setSelectedItem(fornecedor.getStatus());//10
+                this.telaCadastroFornecedor.getjTextField_EnderecoComplemento().setText(fornecedor.getComplemento());//11
 
                 this.telaCadastroFornecedor.getjTextFieldId().setEnabled(false);
             }
@@ -117,7 +129,6 @@ public class ControllerFornecedor implements ActionListener {
         this.telaCadastroFornecedor.getjButtonBuscar().setEnabled(estadoBotoes);
         this.telaCadastroFornecedor.getjButtonSair().setEnabled(estadoBotoes);
         this.telaCadastroFornecedor.getjTextAreaObs().setEnabled(!estadoBotoes);
-        this.telaCadastroFornecedor.getjButtonNovo_End().setEnabled(!estadoBotoes);
     }
 
     public void LimpaEstadoComponentes(boolean estadoCompo) {

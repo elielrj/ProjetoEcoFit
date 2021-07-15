@@ -153,9 +153,36 @@ public class VendaDAO implements InterfaceDAO<Venda> {
             pstm.setInt(1, objeto.getId());
             pstm.executeUpdate();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            throw new RuntimeException(" \nCLASSE: BairroDAO->Retrive->bairroDAO\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
         }
-        ConectionFactory.closeConnection(conexao, pstm);
+    }
+
+    public int Retrieve(Venda venda) {
+        Connection conexao = ConectionFactory.getConection();
+
+        String sqlExecutar = "SELECT id FROM venda WHERE venda.total=? venda.pessoafisicaid=? and venda.data=?";
+
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+
+        try {
+            pstm = conexao.prepareStatement(sqlExecutar);
+            pstm.setFloat(1, venda.getValorTotal());
+            pstm.setInt(2, venda.getPessoaFisica().getId());
+            pstm.setString(3, venda.getData());
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                venda.setId(rs.getInt("id"));//1
+            }
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return venda.getId();
+        } catch (Exception ex) {
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+        }
     }
 
 }

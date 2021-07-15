@@ -7,18 +7,18 @@ package view;
 
 import controller.ControllerPessoaFisica;
 import controller.ControllerBairro;
-import controller.ControllerBuscaBairro;
-import controller.ControllerBuscaCidade;
-import controller.ControllerBuscaEndereco;
-import controller.ControllerBuscaFornecedor;
-import controller.ControllerBuscaPessoaFisicaAluno;
-import controller.ControllerBuscaPessoaFisicaPersonal;
-import controller.ControllerBuscaProduto;
-import controller.ControllerBuscaReceber;
+import controller.ControllerBairroBusca;
+import controller.ControllerCidadeBusca;
+import controller.ControllerEnderecoBusca;
+import controller.ControllerFornecedorBusca;
+import controller.ControllerPessoaFisicaAlunoBusca;
+import controller.ControllerPessoaFisicaPersonalBusca;
+import controller.ControllerProdutoBusca;
+import controller.ControllerReceberBusca;
 
 import controller.ControllerCidade;
 import controller.ControllerEndereco;
-import controller.ControllerFaturamento;
+import controller.deletar.ControllerFaturamento;
 import controller.ControllerFornecedor;
 import controller.ControllerPagamentos;
 import controller.ControllerProduto;
@@ -456,46 +456,46 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemRelatorioBairrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioBairrosActionPerformed
         TelaBuscaBairro telaBuscaBairro = new TelaBuscaBairro();
-        ControllerBuscaBairro controllerBuscaBairroRelatorio = new ControllerBuscaBairro(telaBuscaBairro);
+        ControllerBairroBusca controllerBuscaBairroRelatorio = new ControllerBairroBusca(telaBuscaBairro);
         telaBuscaBairro.setVisible(true);
 
     }//GEN-LAST:event_jMenuItemRelatorioBairrosActionPerformed
 
     private void jMenuItem12RelatorioCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12RelatorioCidadesActionPerformed
         TelaBuscaCidade telaBuscaCidade = new TelaBuscaCidade();
-        ControllerBuscaCidade controllerBuscaCidade = new ControllerBuscaCidade(telaBuscaCidade);
+        ControllerCidadeBusca controllerBuscaCidade = new ControllerCidadeBusca(telaBuscaCidade);
         telaBuscaCidade.setVisible(true);
     }//GEN-LAST:event_jMenuItem12RelatorioCidadesActionPerformed
 
     private void jMenuItemRelatorioCepsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioCepsActionPerformed
         TelaBuscaEndereco telaBuscaEndereco = new TelaBuscaEndereco();
-        ControllerBuscaEndereco controllerBuscaEndereco = new ControllerBuscaEndereco(telaBuscaEndereco);
+        ControllerEnderecoBusca controllerBuscaEndereco = new ControllerEnderecoBusca(telaBuscaEndereco);
         telaBuscaEndereco.setVisible(true);
 
     }//GEN-LAST:event_jMenuItemRelatorioCepsActionPerformed
 
     private void jMenuItemRelatorioAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioAlunosActionPerformed
         TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica();
-        ControllerBuscaPessoaFisicaAluno controllerBuscaPessoaFisicaAluno = new ControllerBuscaPessoaFisicaAluno(telaBuscaPessoaFisica);
+        ControllerPessoaFisicaAlunoBusca controllerBuscaPessoaFisicaAluno = new ControllerPessoaFisicaAlunoBusca(telaBuscaPessoaFisica);
         telaBuscaPessoaFisica.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelatorioAlunosActionPerformed
 
     private void jMenuItemRelatorioFornecedoreresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioFornecedoreresActionPerformed
         TelaBuscaFornecedor telaBuscaFornecedor = new TelaBuscaFornecedor();
-        ControllerBuscaFornecedor controllerBuscaFornecedor = new ControllerBuscaFornecedor(telaBuscaFornecedor);
+        ControllerFornecedorBusca controllerBuscaFornecedor = new ControllerFornecedorBusca(telaBuscaFornecedor);
         telaBuscaFornecedor.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelatorioFornecedoreresActionPerformed
 
     private void jMenuItemRelatorioPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioPersonalActionPerformed
         TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica();
-        ControllerBuscaPessoaFisicaPersonal controllerBuscaPessoaFisicaPersonal = new ControllerBuscaPessoaFisicaPersonal(telaBuscaPessoaFisica);
+        ControllerPessoaFisicaPersonalBusca controllerBuscaPessoaFisicaPersonal = new ControllerPessoaFisicaPersonalBusca(telaBuscaPessoaFisica);
         telaBuscaPessoaFisica.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelatorioPersonalActionPerformed
 
     private void jMenuItemRelatorioProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioProdutosActionPerformed
 
         TelaBuscaProduto telaBuscaProduto = new TelaBuscaProduto();
-        ControllerBuscaProduto controllerBuscaProduto = new ControllerBuscaProduto(telaBuscaProduto);
+        ControllerProdutoBusca controllerBuscaProduto = new ControllerProdutoBusca(telaBuscaProduto);
         telaBuscaProduto.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelatorioProdutosActionPerformed
 
@@ -541,13 +541,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemReceberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReceberActionPerformed
         TelaBuscaReceber telaBuscaReceber = new TelaBuscaReceber();
-        ControllerBuscaReceber conrollerBuscaReceber = new ControllerBuscaReceber(telaBuscaReceber);
+        ControllerReceberBusca conrollerBuscaReceber = new ControllerReceberBusca(telaBuscaReceber);
         telaBuscaReceber.setVisible(true);
     }//GEN-LAST:event_jMenuItemReceberActionPerformed
 
     private void jMenuItemContasAReceberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContasAReceberActionPerformed
         TelaBuscaReceber telaBuscaReceber = new TelaBuscaReceber();
-        ControllerBuscaReceber controllerBuscaReceber = new ControllerBuscaReceber(telaBuscaReceber);
+        ControllerReceberBusca controllerBuscaReceber = new ControllerReceberBusca(telaBuscaReceber);
         telaBuscaReceber.setVisible(true);
     }//GEN-LAST:event_jMenuItemContasAReceberActionPerformed
 

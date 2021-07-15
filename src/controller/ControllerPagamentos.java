@@ -66,7 +66,7 @@ public class ControllerPagamentos implements ActionListener {
 
             codigo = 0;
             TelaBuscaPagamentos telaBuscaPagar = new TelaBuscaPagamentos(null, true);
-            ControllerBuscaPagamentos controllerBuscaPagar = new ControllerBuscaPagamentos(telaBuscaPagar);
+            ControllerPagamentosBusca controllerBuscaPagar = new ControllerPagamentosBusca(telaBuscaPagar);
             telaBuscaPagar.setVisible(true);
 
             if (codigo != 0) {

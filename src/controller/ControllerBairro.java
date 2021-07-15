@@ -6,15 +6,15 @@ import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
-import model.DAO.BairroDAO;
 import model.bo.Bairro;
+import model.bo.Cidade;
 import view.TelaBuscaBairro;
 import view.TelaCadastroBairro;
 
 public class ControllerBairro implements ActionListener {
 
-    TelaCadastroBairro telaBuscaBairro = new TelaCadastroBairro();
-    public static int codigo;
+    protected TelaCadastroBairro telaBuscaBairro;
+    protected static int codigo;
 
     public ControllerBairro(TelaCadastroBairro telaBuscaBairro) {
 
@@ -44,11 +44,12 @@ public class ControllerBairro implements ActionListener {
             LimpaEstadoComponentes(false);
 
         } else if (e.getSource() == this.telaBuscaBairro.getjButtonGravar()) {
-            //montar objeto a persistir
-            Bairro bairro = new Bairro(
-                    this.telaBuscaBairro.getjTextFieldDescricao().getText(), 
-                    this.telaBuscaBairro.getjComboBoxStatus().getSelectedItem().equals("Sim")
-            );
+            
+            Bairro bairro = new Bairro.BairroBuilder()
+            .setNome(this.telaBuscaBairro.getjTextFieldDescricao().getText())
+            .setStatus(this.telaBuscaBairro.getjComboBoxStatus().getSelectedItem().equals("Sim"))
+            .setCidade((Cidade) this.telaBuscaBairro.getjComboBox_cidade().getSelectedItem())
+            .createBairro();            
 
             if (codigo == 0) {
                 service.ServiceBairro.Incluir(bairro);
@@ -64,17 +65,18 @@ public class ControllerBairro implements ActionListener {
 
             codigo = 0;
             TelaBuscaBairro telaBuscaBairro = new TelaBuscaBairro(null, true);
-            ControllerBuscaBairro controllerBuscaBairro = new ControllerBuscaBairro(telaBuscaBairro);
+            ControllerBairroBusca controllerBuscaBairro = new ControllerBairroBusca(telaBuscaBairro);
             telaBuscaBairro.setVisible(true);
 
             if (codigo != 0) {
                 Ativa(false);
                 LimpaEstadoComponentes(true);
-                Bairro bairro = new Bairro();
+                Bairro bairro = new Bairro.BairroBuilder().createBairro();
                 bairro = service.ServiceBairro.Buscar(codigo);
 
                 this.telaBuscaBairro.getjTextFieldId().setText(bairro.getId() + "");
                 this.telaBuscaBairro.getjTextFieldDescricao().setText(bairro.getNome());
+                this.telaBuscaBairro.getjComboBox_cidade().setSelectedItem(bairro.getCidade());
                 this.telaBuscaBairro.getjComboBoxStatus().setSelectedItem(bairro.getStatus());
 
                 this.telaBuscaBairro.getjTextFieldId().setEnabled(false);

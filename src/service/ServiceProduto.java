@@ -28,6 +28,11 @@ public class ServiceProduto {
         return produtoDAO.Retrieve(id);
     }
 
+    public static Produto Buscar(String codigoDeBarrasDoProduto) {
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        return produtoDAO.Retrieve(codigoDeBarrasDoProduto);
+    }
+    
     public static void Deletar(Produto objeto) {
         ProdutoDAO produtoDAO = new ProdutoDAO();
         produtoDAO.Delete(objeto);

@@ -6,11 +6,12 @@ import javax.swing.table.DefaultTableModel;
 import view.TelaBuscaPessoaFisica;
 import model.bo.PessoaFisica;
 
-public class ControllerBuscaPessoaFisicaPersonal implements ActionListener {
+public class ControllerPessoaFisicaBusca implements ActionListener {
 
     TelaBuscaPessoaFisica telaBuscaPessoaFisica;
+    int codigoPessoaFisica = 0;
 
-    public ControllerBuscaPessoaFisicaPersonal(TelaBuscaPessoaFisica telaBuscaPessoaFisica) {
+    public ControllerPessoaFisicaBusca(TelaBuscaPessoaFisica telaBuscaPessoaFisica) {
         this.telaBuscaPessoaFisica = telaBuscaPessoaFisica;
 
         this.telaBuscaPessoaFisica.getjButtonCarregar().addActionListener(this);
@@ -19,7 +20,7 @@ public class ControllerBuscaPessoaFisicaPersonal implements ActionListener {
         //fazer a carga inicial do jtable
         DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaPessoaFisica.getjTable1().getModel();
 
-        for (PessoaFisica pessoaFisica : service.ServicePessoaFisica.BuscarPersonal()) {
+        for (PessoaFisica pessoaFisica : service.ServicePessoaFisica.Buscar()) {
             tabela.addRow(new Object[]{
                 pessoaFisica.getId(),
                 pessoaFisica.getNome(),
@@ -31,7 +32,7 @@ public class ControllerBuscaPessoaFisicaPersonal implements ActionListener {
                 pessoaFisica.getEmail(),
                 pessoaFisica.getObservacao(),
                 pessoaFisica.getStatus(),
-                pessoaFisica.getEndereco().toString(),
+                pessoaFisica.getEndereco(),
                 pessoaFisica.getTipo()
             });
         }
@@ -41,12 +42,22 @@ public class ControllerBuscaPessoaFisicaPersonal implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.telaBuscaPessoaFisica.getjButtonCarregar()) {
-            ControllerPessoaFisica.codigo = (int) this.telaBuscaPessoaFisica.getjTable1().getValueAt(this.telaBuscaPessoaFisica.getjTable1().getSelectedRow(), 0);
+            codigoPessoaFisica = (int) this.telaBuscaPessoaFisica.getjTable1().getValueAt(this.telaBuscaPessoaFisica.getjTable1().getSelectedRow(), 0);
+            ControllerPessoaFisica.codigo = codigoPessoaFisica;
+            this.telaBuscaPessoaFisica.setIdDaPessoaFisica(codigoPessoaFisica);
             this.telaBuscaPessoaFisica.dispose();
         }
         if (e.getSource() == this.telaBuscaPessoaFisica.getjButtonSair()) {
             this.telaBuscaPessoaFisica.dispose();
         }
+    }
+
+    public int getCodigoPessoaFisica() {
+        return codigoPessoaFisica;
+    }
+
+    public void setCodigoPessoaFisica(int codigoPessoaFisica) {
+        this.codigoPessoaFisica = codigoPessoaFisica;
     }
 
 }

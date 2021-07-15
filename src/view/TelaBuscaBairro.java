@@ -108,14 +108,15 @@ public class TelaBuscaBairro extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Bairro", "Status"
+                "Id", "Bairro", "Status", "Cidade"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setMaxWidth(50);
-            jTable1.getColumnModel().getColumn(1).setMaxWidth(650);
+            jTable1.getColumnModel().getColumn(1).setMaxWidth(450);
             jTable1.getColumnModel().getColumn(2).setMaxWidth(50);
+            jTable1.getColumnModel().getColumn(3).setMaxWidth(200);
         }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);

@@ -9,21 +9,17 @@ public class Pagar {
     private float valorDeAcrescimo;
     private float valorPago;
     private String observacao;
-
     private Compra compra;
 
-    public Pagar() {
-    }
-
-    public Pagar(int id, String data, String hora, float valorDeDescontoNegociado, float valorDeAcrescimo, float valorPago, String observacao, Compra compra) {
-        this.id = id;
-        this.data = data;
-        this.hora = hora;
-        this.valorDeDescontoNegociado = valorDeDescontoNegociado;
-        this.valorDeAcrescimo = valorDeAcrescimo;
-        this.valorPago = valorPago;
-        this.observacao = observacao;
-        this.compra = compra;
+    private Pagar(PagarBuilder pagarBuilder) {
+        this.id = pagarBuilder.id;
+        this.data = pagarBuilder.data;
+        this.hora = pagarBuilder.hora;
+        this.valorDeDescontoNegociado = pagarBuilder.valorDeDescontoNegociado;
+        this.valorDeAcrescimo = pagarBuilder.valorDeAcrescimo;
+        this.valorPago = pagarBuilder.valorPago;
+        this.observacao = pagarBuilder.observacao;
+        this.compra = pagarBuilder.compra;
     }
 
     public int getId() {
@@ -90,16 +86,64 @@ public class Pagar {
         this.compra = compra;
     }
 
-    @Override
-    public String toString() {
-        return this.getId() + " "
-                + this.getData() + " "
-                + this.getHora() + " "
-                + this.getValorDeDescontoNegociado() + " "
-                + this.getValorDeAcrescimo() + " "
-                + this.getValorPago() + " "
-                + this.getObservacao() + " "
-                + this.getCompra().toString();
+    public static class PagarBuilder {
+
+        private int id;
+        private String data;
+        private String hora;
+        private float valorDeDescontoNegociado;
+        private float valorDeAcrescimo;
+        private float valorPago;
+        private String observacao;
+        private Compra compra;
+
+        public PagarBuilder() {
+        }
+
+        public PagarBuilder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public PagarBuilder setData(String data) {
+            this.data = data;
+            return this;
+        }
+
+        public PagarBuilder setHora(String hora) {
+            this.hora = hora;
+            return this;
+        }
+
+        public PagarBuilder setValorDeDescontoNegociado(float valorDeDescontoNegociado) {
+            this.valorDeDescontoNegociado = valorDeDescontoNegociado;
+            return this;
+        }
+
+        public PagarBuilder setValorDeAcrescimo(float valorDeAcrescimo) {
+            this.valorDeAcrescimo = valorDeAcrescimo;
+            return this;
+        }
+
+        public PagarBuilder setValorPago(float valorPago) {
+            this.valorPago = valorPago;
+            return this;
+        }
+
+        public PagarBuilder setObservacao(String observacao) {
+            this.observacao = observacao;
+            return this;
+        }
+
+        public PagarBuilder setCompra(Compra compra) {
+            this.compra = compra;
+            return this;
+        }
+
+        public Pagar createPagar() {
+            return new Pagar(this);
+        }
+
     }
 
 }
