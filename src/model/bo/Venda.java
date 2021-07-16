@@ -121,6 +121,10 @@ public class Venda {
     public void setUserCaixa(String userCaixa) {
         this.userCaixa = userCaixa;
     }
+    
+    public int quantidadeDeItensNaLista(){
+        return itensDeVenda.size();
+    }
 
     
     public static class VendaBuilder {
@@ -210,6 +214,7 @@ public class Venda {
         for(ItemDeVenda i : itensDeVenda){
             if(itemDeVenda.getProduto().getId() == i.getProduto().getId()){
                 i.setQuantidade(itemDeVenda.getQuantidade() + i.getQuantidade());
+                i.atualizarSubTotal();
                 return;
             }
         }
@@ -260,7 +265,14 @@ public class Venda {
         itensDeVenda.clear();
     }
     
-    public int quantidadeDeItensNaLista(){
-        return itensDeVenda.size();
+   
+    
+    public float calcularValorTotal(){
+       float total = 0;
+        
+        for (ItemDeVenda itemDeVenda : itensDeVenda){
+            total += itemDeVenda.calcularSubTotal();
+        }
+        return total;
     }
 }

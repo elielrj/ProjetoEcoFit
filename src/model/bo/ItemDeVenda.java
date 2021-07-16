@@ -44,9 +44,7 @@ public class ItemDeVenda {
         return subTotal;
     }
 
-    public void setSubTotal(float subTotal) {
-        this.subTotal = subTotal;
-    }
+
 
     public int getVendaId() {
         return vendaId;
@@ -83,20 +81,25 @@ public class ItemDeVenda {
             return this;
         }
 
-        public ItemDeVendaBuilder setSubTotal(float subTotal) {
-            this.subTotal = subTotal;
-            return this;
-        }
-
         public ItemDeVendaBuilder setVendaId(int vendaId) {
             this.vendaId = vendaId;
             return this;
         }
 
         public ItemDeVenda createItemDeVenda() {
+            this.subTotal = quantidade * produto.getValor();
             return new ItemDeVenda(this);
         }
 
+    }
+    
+    public Float calcularSubTotal(){
+        subTotal = quantidade * produto.getValor();
+        return subTotal;
+    }
+    
+    public void atualizarSubTotal(){
+        subTotal = quantidade * produto.getValor();
     }
 
 }

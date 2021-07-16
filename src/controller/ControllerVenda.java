@@ -334,7 +334,7 @@ public class ControllerVenda implements ActionListener {
         DefaultTableModel tabela = (DefaultTableModel) this.telaFaturamento.getjTable_FaturamentoItens().getModel();
         tabela.getDataVector().removeAllElements();
         int contador = 0;
-        if (venda.getItensDeVenda().size() >= 1) {
+        if (venda.quantidadeDeItensNaLista() > 0) {
             for (ItemDeVenda itemDeVenda : venda.getItensDeVenda()) {
                 tabela.addRow(new Object[]{
                     ++contador,
@@ -349,7 +349,7 @@ public class ControllerVenda implements ActionListener {
             tabela.addRow(new Object[]{});
         }
         this.telaFaturamento.getjTable_FaturamentoItens().setModel(tabela);
-        this.telaFaturamento.getjLabel_FaturamentoValorTotal().setText(venda.getValorTotal() + "");
+        this.telaFaturamento.getjLabel_FaturamentoValorTotal().setText(venda.calcularValorTotal()+ "");
     }
 
     private void gravarFaturamento() {
