@@ -84,7 +84,7 @@ public final class SQL {
     public static String RECEBER_UPDATE = "UPDATE receber SET data =?,hora =?,valorDeDescontoNegociado =?,valorDeAcrescimo =?,valorRecebido =?,observacao=?,vendaId =? WHERE id=?";
     public static String RECEBER_DELETE = "DELETE FROM receber WHERE id =?";
     
-    public static String VENDA_CREATE = "INSERT INTO faturamento(datavenda,hora,datavencimento,observacao,valordesconto,valortotal,status,pessoafisicaid,usercaixa) VALUES(?,?,?,?,?,?,?,?,?)";
+    public static String VENDA_CREATE = "INSERT INTO venda(datavenda,hora,datavencimento,observacao,valordesconto,valortotal,status,pessoafisicaid,usercaixa) VALUES(?,?,?,?,?,?,?,?,?)";
     public static String VENDA_RETRIVE_ALL = "SELECT id,datavenda,hora,datavencimento,observacao,valordesconto,valortotal,status,pessoafisicaid,usercaixa FROM venda";
     public static String VENDA_RETRIVE_ONE_ID = "SELECT id,datavenda,hora,datavencimento,observacao,valordesconto,valortotal,status,pessoafisicaid,usercaixa FROM venda WHERE venda.id=?";
     public static String VENDA_RETRIVE_VENDA_OBJ = "SELECT id FROM venda WHERE venda.total=? and venda.pessoafisicaid=? and venda.datavenda=?";

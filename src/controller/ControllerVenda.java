@@ -4,6 +4,8 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -359,7 +361,11 @@ public class ControllerVenda implements ActionListener {
         venda.setUserCaixa(this.telaFaturamento.getjTextField_FaturamentoUsuario().getText());//4
         venda.setDataDeVencimento(this.telaFaturamento.getjFormattedTextField_DataDeVencimento().getText());//5
         venda.setObservacao(this.telaFaturamento.getjTextArea_Obs().getText());//6
-        venda.setValorDoDesconto(Float.parseFloat(this.telaFaturamento.getjFormattedTextField_ValorDeDesconto().getText()));//7
+        venda.setValorDoDesconto(
+                Float.parseFloat(
+                        semMascara(this.telaFaturamento.getjFormattedTextField_ValorDeDesconto().getText())
+                )
+        );//7
         venda.setValorTotal(Float.parseFloat(this.telaFaturamento.getjLabel_FaturamentoValorTotal().getText()));//8
         venda.setStatus(this.telaFaturamento.getjComboBoxStatus().getSelectedItem().equals("Faturando"));//9
         //ATRIBUIÇÃO DA PESSOA FÍSICA É FEITA NA BUSCA - 10
@@ -463,7 +469,8 @@ public class ControllerVenda implements ActionListener {
     }
 
     private static String semMascara(String dado) {
-        dado = dado.replaceAll("\\.", "");
+        //dado = dado.replaceAll("\\.", "");
+        dado = dado.replaceAll("\\,", ".");
         return dado;
     }
 
@@ -479,5 +486,20 @@ public class ControllerVenda implements ActionListener {
             return true;
         }
         return false;
+    }
+    
+    private void dataHora() {
+
+        // data/hora atual
+        LocalDateTime agora = LocalDateTime.now();
+
+        // formatar a data
+        DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+        venda.setData(formatterData.format(agora));
+
+        // formatar a hora
+        DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+        venda.setHora(formatterHora.format(agora));
+
     }
 }

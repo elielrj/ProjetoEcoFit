@@ -44,7 +44,9 @@ public class ItemDeVenda {
         return subTotal;
     }
 
-
+    public void setSubTotal(float subTotal) {
+        this.subTotal = subTotal;
+    }
 
     public int getVendaId() {
         return vendaId;
@@ -83,6 +85,11 @@ public class ItemDeVenda {
 
         public ItemDeVendaBuilder setVendaId(int vendaId) {
             this.vendaId = vendaId;
+            return this;
+        }
+        
+        public ItemDeVendaBuilder setSubTotal(float subTotal) {
+            this.subTotal = subTotal;
             return this;
         }
 

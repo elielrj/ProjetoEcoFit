@@ -248,7 +248,11 @@ public class TelaFaturamento extends javax.swing.JFrame {
             }
         });
 
-        jFormattedTextFieldFaturamentoHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+        try {
+            jFormattedTextFieldFaturamentoHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         jLabel6.setText("Id Cliente");
 
@@ -331,7 +335,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
         jTextArea_Obs.setRows(5);
         jScrollPane2.setViewportView(jTextArea_Obs);
 
-        jFormattedTextField_ValorDeDesconto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jFormattedTextField_ValorDeDesconto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         jLabel13.setText("Observação");
 
