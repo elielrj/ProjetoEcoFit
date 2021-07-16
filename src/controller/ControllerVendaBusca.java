@@ -1,6 +1,5 @@
 package controller;
 
-import controller.deletar.ControllerFaturamento;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -47,7 +46,7 @@ public class ControllerVendaBusca implements ActionListener {
             this.telaBuscaVenda.dispose();
         else if (e.getSource() == this.telaBuscaVenda.getjButtonCarregar()) {
 
-            ControllerFaturamento.codigo = (int) this.telaBuscaVenda.getjTable_BuscaVendas().getValueAt(this.telaBuscaVenda.getjTable_BuscaVendas().getSelectedRow(), 0);
+            ControllerVenda.codigo = (int) this.telaBuscaVenda.getjTable_BuscaVendas().getValueAt(this.telaBuscaVenda.getjTable_BuscaVendas().getSelectedRow(), 0);
             this.telaBuscaVenda.dispose();
         }else if (e.getSource() == this.telaBuscaVenda.getjButton_deletar()){
             try{

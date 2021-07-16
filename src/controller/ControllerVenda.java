@@ -1,6 +1,5 @@
 package controller;
 
-import controller.deletar.ControllerFaturamentoBusca;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,9 +16,9 @@ import model.bo.Produto;
 import view.busca.TelaBuscaPessoaFisica;
 import view.busca.TelaBuscaProduto;
 import view.TelaFaturamento;
-import model.bo.deletar.Faturamento;
 import model.bo.Venda;
 import view.busca.TelaBuscaFaturamento;
+import view.busca.TelaBuscaVenda;
 
 public class ControllerVenda implements ActionListener {
 
@@ -102,9 +101,9 @@ public class ControllerVenda implements ActionListener {
         } else if (e.getSource() == this.telaFaturamento.getjButton_Buscar()) {
 
             //codigo = 0;
-            TelaBuscaFaturamento telaBuscaFaturamento = new TelaBuscaFaturamento(null, true);
-            ControllerFaturamentoBusca controllerBuscaFaturamento = new ControllerFaturamentoBusca(telaBuscaFaturamento);
-            telaBuscaFaturamento.setVisible(true);
+            TelaBuscaVenda TelaBuscaVenda = new TelaBuscaVenda(null, true);
+            ControllerVendaBusca controllerBuscaFaturamento = new ControllerVendaBusca(TelaBuscaVenda);
+            TelaBuscaVenda.setVisible(true);
 
             if (codigo != 0) {
                 Ativa(false);
@@ -311,7 +310,7 @@ public class ControllerVenda implements ActionListener {
 
     private boolean validarCodigoBarras() {
 
-        String codigoDeBarras = Faturamento.semMascara(this.telaFaturamento.getjTextField_ProdutoCodBarras().getText());
+        String codigoDeBarras = semMascara(this.telaFaturamento.getjTextField_ProdutoCodBarras().getText());
 
         if (codigoDeBarras.equals("")) { //"             "
             return false;
