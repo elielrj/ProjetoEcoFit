@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import view.busca.TelaBuscaPessoaFisica;
 import model.bo.PessoaFisica;
@@ -16,9 +17,53 @@ public class ControllerPessoaFisicaBusca implements ActionListener {
 
         this.telaBuscaPessoaFisica.getjButtonCarregar().addActionListener(this);
         this.telaBuscaPessoaFisica.getjButtonSair().addActionListener(this);
+        this.telaBuscaPessoaFisica.getjButton_Deletar().addActionListener(this);
 
-        //fazer a carga inicial do jtable
+        carregarDadosNaTabela();
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == this.telaBuscaPessoaFisica.getjButtonSair()) 
+            this.telaBuscaPessoaFisica.dispose();
+        
+        else if (e.getSource() == this.telaBuscaPessoaFisica.getjButtonCarregar()) {
+            codigoPessoaFisica = (int) this.telaBuscaPessoaFisica.getjTable1().getValueAt(this.telaBuscaPessoaFisica.getjTable1().getSelectedRow(), 0);
+            ControllerPessoaFisica.codigo = codigoPessoaFisica;
+            this.telaBuscaPessoaFisica.setIdDaPessoaFisica(codigoPessoaFisica);
+            this.telaBuscaPessoaFisica.dispose();
+        }else if(e.getSource() == this.telaBuscaPessoaFisica.getjButton_Deletar()) {
+            try{
+                service.ServicePessoaFisica.Deletar(
+                        (int) this.telaBuscaPessoaFisica.getjTable1().getValueAt(
+                                this.telaBuscaPessoaFisica.getjTable1().getSelectedRow(),0
+                        )
+                );
+                JOptionPane.showMessageDialog(null, "Pessoa deletado com sucesso!");
+                carregarDadosNaTabela();
+            } catch (Exception ex) {
+                throw new RuntimeException(" \nCLASSE: ControllerBuscaFornecedor->actionPerformed(ActionEvent e)->deletar\nMENSAGEM:" 
+                        + ex.getMessage() + "\nLOCALIZADO:" 
+                        + ex.getLocalizedMessage()
+                );
+            }
+        }
+        
+    }
+
+    public int getCodigoPessoaFisica() {
+        return codigoPessoaFisica;
+    }
+
+    public void setCodigoPessoaFisica(int codigoPessoaFisica) {
+        this.codigoPessoaFisica = codigoPessoaFisica;
+    }
+
+    private void carregarDadosNaTabela() {
+        
         DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaPessoaFisica.getjTable1().getModel();
+tabela.getDataVector().removeAllElements();
 
         for (PessoaFisica pessoaFisica : service.ServicePessoaFisica.Buscar()) {
             tabela.addRow(new Object[]{
@@ -32,32 +77,10 @@ public class ControllerPessoaFisicaBusca implements ActionListener {
                 pessoaFisica.getEmail(),
                 pessoaFisica.getObservacao(),
                 pessoaFisica.getStatus(),
-                pessoaFisica.getEndereco(),
+                pessoaFisica.getEndereco().toString(),
                 pessoaFisica.getTipo()
             });
         }
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.telaBuscaPessoaFisica.getjButtonCarregar()) {
-            codigoPessoaFisica = (int) this.telaBuscaPessoaFisica.getjTable1().getValueAt(this.telaBuscaPessoaFisica.getjTable1().getSelectedRow(), 0);
-            ControllerPessoaFisica.codigo = codigoPessoaFisica;
-            this.telaBuscaPessoaFisica.setIdDaPessoaFisica(codigoPessoaFisica);
-            this.telaBuscaPessoaFisica.dispose();
-        }
-        if (e.getSource() == this.telaBuscaPessoaFisica.getjButtonSair()) {
-            this.telaBuscaPessoaFisica.dispose();
-        }
-    }
-
-    public int getCodigoPessoaFisica() {
-        return codigoPessoaFisica;
-    }
-
-    public void setCodigoPessoaFisica(int codigoPessoaFisica) {
-        this.codigoPessoaFisica = codigoPessoaFisica;
     }
 
 }

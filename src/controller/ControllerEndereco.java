@@ -70,7 +70,7 @@ public class ControllerEndereco implements ActionListener {
 
             TelaBuscaEndereco telaBuscaEndereco = new TelaBuscaEndereco(null, true);
             ControllerEnderecoBusca controllerBuscaEndereco = new ControllerEnderecoBusca(telaBuscaEndereco);
-            telaBuscaEndereco.setVisible(true);//verificarControllerBuscaEndereco
+            telaBuscaEndereco.setVisible(true);
 
             if (codigo != 0) {
                 Ativa(false);
@@ -137,7 +137,7 @@ public class ControllerEndereco implements ActionListener {
                 componente.setEnabled(estadoCompo);
             }
             if (componente instanceof JComboBox) {
-                ((JComboBox) componente).setSelectedItem(0);
+                ((JComboBox) componente).setSelectedItem("");
                 componente.setEnabled(estadoCompo);
             }
 

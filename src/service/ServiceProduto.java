@@ -37,6 +37,12 @@ public class ServiceProduto {
         ProdutoDAO produtoDAO = new ProdutoDAO();
         produtoDAO.Delete(objeto);
     }
+    
+    public static void Deletar(int idProduto) {
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        produtoDAO.Delete(idProduto);
+    }
+    
     public static boolean codigoDeBarrasValido(int codBarras){
                 
         if (Buscar(codBarras).equals(null)){

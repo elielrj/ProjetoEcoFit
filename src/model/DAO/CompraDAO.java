@@ -1,6 +1,5 @@
 package model.DAO;
 
-import model.DAO.FornecedorDAO;
 import java.util.List;
 import model.bo.Compra;
 import java.sql.Connection;
@@ -57,15 +56,15 @@ public class CompraDAO implements InterfaceDAO<Compra> {
                 compra.setData(rs.getString("data"));
                 compra.setHora(rs.getString("hora"));
 
-                compra.setDataDeVencimento(rs.getString("dataDeVencimento"));
+                compra.setDataDeVencimento(rs.getString("datavencimento"));
                 compra.setObservacao(rs.getString("observacao"));
-                compra.setValorDeDesconto(rs.getFloat("valorDoDesconto"));
+                compra.setValorDeDesconto(rs.getFloat("valordesconto"));
 
-                compra.setValorTotal(rs.getFloat("valorTotal"));
+                compra.setValorTotal(rs.getFloat("valortotal"));
                 compra.setStatus(rs.getBoolean("status"));
 
                 compra.setFornecedor(
-                        service.ServiceFornecedor.Buscar(rs.getInt("fornecedorId"))
+                        service.ServiceFornecedor.Buscar(rs.getInt("fornecedorid"))
                 );
 
                 compras.add(compra);
@@ -97,16 +96,16 @@ public class CompraDAO implements InterfaceDAO<Compra> {
                 compra.setData(rs.getString("data"));
                 compra.setHora(rs.getString("hora"));
 
-                compra.setDataDeVencimento(rs.getString("dataDeVencimento"));
+                compra.setDataDeVencimento(rs.getString("datavencimento"));
                 compra.setObservacao(rs.getString("observacao"));
-                compra.setValorDeDesconto(rs.getFloat("valorDoDesconto"));
+                compra.setValorDeDesconto(rs.getFloat("valordesconto"));
 
-                compra.setValorTotal(rs.getFloat("valorTotal"));
+                compra.setValorTotal(rs.getFloat("valortotal"));
 
                 compra.setStatus(rs.getBoolean("status"));
 
                 compra.setFornecedor(
-                        service.ServiceFornecedor.Buscar(rs.getInt("fornecedorId"))
+                        service.ServiceFornecedor.Buscar(rs.getInt("fornecedorid"))
                 );
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);

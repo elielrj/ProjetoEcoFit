@@ -74,6 +74,7 @@ public class ControllerPessoaFisica implements ActionListener {
                 service.ServicePessoaFisica.Incluir(pessoaFisica);
             } else {
                 pessoaFisica.setId(Integer.parseInt(this.telaCadastroPessoaFisica.getjTextFieldId().getText()));
+                pessoaFisica.getEndereco().setId(Integer.parseInt(this.telaCadastroPessoaFisica.getjTextField_EnderecoId().getText()));
                 service.ServicePessoaFisica.Atualizar(pessoaFisica);
             }
             Ativa(true);
@@ -114,6 +115,7 @@ public class ControllerPessoaFisica implements ActionListener {
                 this.telaCadastroPessoaFisica.getjTextField_Complemento().setText(pessoaFisica.getComplemento());//13
 
                 this.telaCadastroPessoaFisica.getjTextFieldId().setEnabled(false);
+                this.telaCadastroPessoaFisica.getjTextField_EnderecoId().setEnabled(false);
             }
         }
 

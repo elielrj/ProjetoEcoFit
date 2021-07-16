@@ -33,6 +33,11 @@ public class ServicePessoaFisica {
         PessoaFisicaDAO alunoDAO = new PessoaFisicaDAO();
         alunoDAO.Delete(objeto);
     }
+    
+    public static void Deletar(int idPessoaFisica) {
+        PessoaFisicaDAO alunoDAO = new PessoaFisicaDAO();
+        alunoDAO.Delete(idPessoaFisica);
+    }
 
     public static List<PessoaFisica> BuscarAluno() {
         PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();

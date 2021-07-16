@@ -82,6 +82,32 @@ public class EstoqueDAO implements InterfaceDAO<Estoque> {
             );
         }
     }
+    
+    public int RetrieveDeIdEstoquePeloIdProduto(int id) {
+        try {
+            Connection conexao = ConectionFactory.getConection();
+
+            //String sqlExecutar = "SELECT id,nome,status FROM estoque WHERE estoque.id=?";
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            pstm = conexao.prepareStatement(SQL.ESTOQUE_RETRIVE_ONE_ID_DO_ESTOQUE);
+            pstm.setInt(1, id);
+            rs = pstm.executeQuery();
+            Estoque estoque = new Estoque.EstoqueBuilder().createEstoque();
+            while (rs.next()) {
+                estoque.setId(rs.getInt("id"));
+                
+            }
+
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return estoque.getId();
+        } catch (Exception ex) {
+            throw new RuntimeException(" \nCLASSE: EstoqueDAO->Retrive(int id)->estoqueDAO\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
+        }
+    }
 
     @Override
     public void Update(Estoque objeto) {

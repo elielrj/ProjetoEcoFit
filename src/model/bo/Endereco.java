@@ -66,7 +66,7 @@ public class Endereco {
         this.status = status;
     }
 
-    public static  class EnderecoBuilder {
+    public static class EnderecoBuilder {
 
         private int id;
         private String logradouro;
@@ -114,4 +114,8 @@ public class Endereco {
 
     }
 
+    @Override
+    public String toString() {
+        return "Rua " + logradouro + "Nr " + numero + "Bairro" + bairro;
+    }
 }

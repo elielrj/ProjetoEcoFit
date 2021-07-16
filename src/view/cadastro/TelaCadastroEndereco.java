@@ -68,6 +68,7 @@ public class TelaCadastroEndereco extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Formulário de Cadastro de ...");
+        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         jPanelTitulo.setBackground(new java.awt.Color(204, 255, 0));
@@ -199,9 +200,7 @@ public class TelaCadastroEndereco extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(20, 20, 20)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelDadosLayout.createSequentialGroup()
-                                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldLogradouro)))
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)

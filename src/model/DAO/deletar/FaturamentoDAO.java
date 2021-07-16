@@ -1,4 +1,4 @@
-package model.DAO;
+package model.DAO.deletar;
 
 import java.util.List;
 import model.bo.deletar.Faturamento;
@@ -6,6 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import model.DAO.ConectionFactory;
+import model.DAO.InterfaceDAO;
+import model.DAO.PessoaFisicaDAO;
 
 public class FaturamentoDAO implements InterfaceDAO<Faturamento> {
 

@@ -7,15 +7,8 @@ import model.DAO.EnderecoDAO;
 public class ServiceEndereco {
 
     public static void Incluir(Endereco objeto) {
-        try {
             EnderecoDAO enderecoDAO = new EnderecoDAO();
             enderecoDAO.Create(objeto);
-        } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ServiceEndereco->Incluir\nMENSAGEM:"
-                    + ex.getMessage() + "\nLOCALIZADO:"
-                    + ex.getLocalizedMessage()
-            );
-        }
     }
 
     public static void Atualizar(Endereco objeto) {
@@ -80,15 +73,8 @@ public class ServiceEndereco {
         }
     }
     
-    public static Endereco BuscarPorId(Endereco endereco) {
-        try {
+    public static int BuscarPorId(Endereco endereco) {  
             EnderecoDAO enderecoDAO = new EnderecoDAO();
-            return enderecoDAO.RetrievePorId(endereco);
-        } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ServiceEndereco->Buscar(id)\nMENSAGEM:"
-                    + ex.getMessage() + "\nLOCALIZADO:"
-                    + ex.getLocalizedMessage()
-            );
-        }
+            return enderecoDAO.RetrievePorId(endereco);       
     }
 }

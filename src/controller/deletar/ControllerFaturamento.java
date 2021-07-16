@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import model.DAO.FaturamentoDAO;
+import model.DAO.deletar.FaturamentoDAO;
 import model.DAO.ItemDeVendaDAO;
 import model.bo.ItemDeVenda;
 import model.bo.PessoaFisica;

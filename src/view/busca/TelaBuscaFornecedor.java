@@ -43,6 +43,7 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
         jPanelBotoes = new javax.swing.JPanel();
         jButtonCarregar = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
+        jButton_Deletar = new javax.swing.JButton();
         jPanelDados = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -91,6 +92,9 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
             }
         });
 
+        jButton_Deletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Delete.png"))); // NOI18N
+        jButton_Deletar.setText("Deletar");
+
         javax.swing.GroupLayout jPanelBotoesLayout = new javax.swing.GroupLayout(jPanelBotoes);
         jPanelBotoes.setLayout(jPanelBotoesLayout);
         jPanelBotoesLayout.setHorizontalGroup(
@@ -98,7 +102,9 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
             .addGroup(jPanelBotoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 553, Short.MAX_VALUE)
+                .addGap(219, 219, 219)
+                .addComponent(jButton_Deletar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
                 .addComponent(jButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -108,7 +114,8 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCarregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonSair))
+                    .addComponent(jButtonSair)
+                    .addComponent(jButton_Deletar))
                 .addContainerGap())
         );
 
@@ -210,6 +217,7 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCarregar;
     private javax.swing.JButton jButtonSair;
+    private javax.swing.JButton jButton_Deletar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanelBotoes;
     private javax.swing.JPanel jPanelDados;
@@ -228,6 +236,10 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
 
     public JTable getjTable1() {
         return jTable1;
+    }
+
+    public JButton getjButton_Deletar() {
+        return jButton_Deletar;
     }
 
 }

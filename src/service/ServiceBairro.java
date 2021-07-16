@@ -7,100 +7,42 @@ import model.DAO.BairroDAO;
 public class ServiceBairro {
 
     public static void Incluir(Bairro objeto) {
-        try {
-            BairroDAO bairroDAO = new BairroDAO();
-            bairroDAO.Create(objeto);
-        } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ServiceBairro->Incluir()\nMENSAGEM:"
-                    + ex.getMessage() + "\nLOCALIZADO:"
-                    + ex.getLocalizedMessage()
-            );
-        }
-
+        BairroDAO bairroDAO = new BairroDAO();
+        bairroDAO.Create(objeto);
     }
 
     public static void Atualizar(Bairro objeto) {
-        try {
-            BairroDAO bairroDAO = new BairroDAO();
-            bairroDAO.Update(objeto);
-        } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ServiceBairro->Atualizar(int id)\nMENSAGEM:"
-                    + ex.getMessage() + "\nLOCALIZADO:"
-                    + ex.getLocalizedMessage()
-            );
-        }
+        BairroDAO bairroDAO = new BairroDAO();
+        bairroDAO.Update(objeto);
     }
 
     public static List<Bairro> Buscar() {
-        try {
-            BairroDAO bairroDAO = new BairroDAO();
-            return (bairroDAO.Retrieve());
-        } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ServiceBairro->Buscar()\nMENSAGEM:"
-                    + ex.getMessage() + "\nLOCALIZADO:"
-                    + ex.getLocalizedMessage()
-            );
-        }
-
+        BairroDAO bairroDAO = new BairroDAO();
+        return (bairroDAO.Retrieve());
     }
 
     public static Bairro Buscar(int id) {
-        try {
-            BairroDAO bairroDAO = new BairroDAO();
-            return bairroDAO.Retrieve(id);
-        } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ServiceBairro->Buscar(int id)\nMENSAGEM:"
-                    + ex.getMessage() + "\nLOCALIZADO:"
-                    + ex.getLocalizedMessage()
-            );
-        }
+        BairroDAO bairroDAO = new BairroDAO();
+        return bairroDAO.Retrieve(id);
     }
 
     public static void Deletar(Bairro objeto) {
-        try {
-            BairroDAO bairroDAO = new BairroDAO();
-            bairroDAO.Delete(objeto);
-        } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ServiceBairro->Deletar()\nMENSAGEM:"
-                    + ex.getMessage() + "\nLOCALIZADO:"
-                    + ex.getLocalizedMessage()
-            );
-        }
+        BairroDAO bairroDAO = new BairroDAO();
+        bairroDAO.Delete(objeto);
     }
 
     public static void Deletar(int idBairro) {
-        try {
-            BairroDAO bairroDAO = new BairroDAO();
-            bairroDAO.Delete(idBairro);
-        } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ServiceBairro->Deletar()\nMENSAGEM:"
-                    + ex.getMessage() + "\nLOCALIZADO:"
-                    + ex.getLocalizedMessage()
-            );
-        }
+        BairroDAO bairroDAO = new BairroDAO();
+        bairroDAO.Delete(idBairro);
     }
 
     public static List<Bairro> BuscarPorCidade(int idCidade) {
-        try {
-            BairroDAO bairroDAO = new BairroDAO();
-            return bairroDAO.RetrieveForCity(idCidade);
-        } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ServiceBairro->Buscar(int id)\nMENSAGEM:"
-                    + ex.getMessage() + "\nLOCALIZADO:"
-                    + ex.getLocalizedMessage()
-            );
-        }
+        BairroDAO bairroDAO = new BairroDAO();
+        return bairroDAO.RetrieveForCity(idCidade);
     }
 
     public static int BuscarIdDaCidade(int idBairro) {
-        try {
-            BairroDAO bairroDAO = new BairroDAO();
-            return bairroDAO.RetrieveIdTheCity(idBairro);
-        } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ServiceBairro->BuscarIdDaCidade(int idBairro)\nMENSAGEM:"
-                    + ex.getMessage() + "\nLOCALIZADO:"
-                    + ex.getLocalizedMessage()
-            );
-        }
+        BairroDAO bairroDAO = new BairroDAO();
+        return bairroDAO.RetrieveIdTheCity(idBairro);
     }
 }

@@ -10,6 +10,7 @@ public class Pagar {
     private float valorPago;//6
     private String observacao;//7
     private Compra compra;//8
+    private boolean status;//9
 
     private Pagar(PagarBuilder pagarBuilder) {
         this.id = pagarBuilder.id;
@@ -48,6 +49,14 @@ public class Pagar {
 
     public float getValorDeDescontoNegociado() {
         return valorDeDescontoNegociado;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public void setValorDeDescontoNegociado(float valorDeDescontoNegociado) {
@@ -96,6 +105,7 @@ public class Pagar {
         private float valorPago;
         private String observacao;
         private Compra compra;
+        private boolean status;
 
         public PagarBuilder() {
         }
@@ -127,6 +137,11 @@ public class Pagar {
 
         public PagarBuilder setValorPago(float valorPago) {
             this.valorPago = valorPago;
+            return this;
+        }
+
+        public PagarBuilder setStatus(boolean status) {
+            this.status = status;
             return this;
         }
 

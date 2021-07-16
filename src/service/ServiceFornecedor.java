@@ -32,4 +32,9 @@ public class ServiceFornecedor {
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
         fornecedorDAO.Delete(objeto);
     }
+    
+    public static void Deletar(int idFornecedor) {
+        FornecedorDAO fornecedorDAO = new FornecedorDAO();
+        fornecedorDAO.Delete(idFornecedor);
+    }
 }

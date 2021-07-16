@@ -75,11 +75,10 @@ public class ControllerProduto implements ActionListener {
                 estoque.setProdutoId(produto.getId());
                 
                 estoque.setId(
-                    (service.ServiceEstoque.BuscarEstoquePorIdDoProduto(produto.getId())
-                    ).getId()
+                    service.ServiceEstoque.BuscarEstoquePorIdPeloProduto(produto.getId())
                 );
                         
-                service.ServiceEstoque.Incluir(estoque);
+                service.ServiceEstoque.Atualizar(estoque);
 
             }
             Ativa(true);
@@ -108,7 +107,7 @@ public class ControllerProduto implements ActionListener {
                 this.telaCadastroProduto.getjTextAreaObs().setText(produto.getObservacao());//9
 
                 this.telaCadastroProduto.getjTextFieldQtdEstoque().setText(
-                        service.ServiceEstoque.BuscarEstoquePorIdDoProduto(
+                        service.ServiceEstoque.BuscarEstoquePorIdPeloProduto(
                                 produto.getId())+""
                 );
                 
@@ -128,6 +127,7 @@ public class ControllerProduto implements ActionListener {
         this.telaCadastroProduto.getjButtonGravar().setEnabled(!estadoBotoes);
         this.telaCadastroProduto.getjButtonBuscar().setEnabled(estadoBotoes);
         this.telaCadastroProduto.getjButtonSair().setEnabled(estadoBotoes);
+        this.telaCadastroProduto.getjTextAreaObs().setEnabled(!estadoBotoes);
     }
 
     public void LimpaEstadoComponentes(boolean estadoCompo) {

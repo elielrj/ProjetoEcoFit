@@ -46,7 +46,7 @@ public class EnderecoDAO implements InterfaceDAO<Endereco> {
                         .setLogradouro(rs.getString("logradouro"))
                         .setNumero(rs.getString("numero"))
                         .setBairro(
-                                service.ServiceBairro.Buscar(rs.getInt("bairroId"))
+                                service.ServiceBairro.Buscar(rs.getInt("bairroid"))
                         )
                         .setCep(rs.getString("cep"))
                         .setStatus(rs.getBoolean("status"))
@@ -78,7 +78,7 @@ public class EnderecoDAO implements InterfaceDAO<Endereco> {
                 endereco.setLogradouro(rs.getString("logradouro"));
                 endereco.setNumero(rs.getString("numero"));
                 endereco.setBairro(
-                    service.ServiceBairro.Buscar(rs.getInt("bairroId"))
+                    service.ServiceBairro.Buscar(rs.getInt("bairroid"))
                 );
                 endereco.setCep(rs.getString("cep"));
                 endereco.setStatus(rs.getBoolean("status"));
@@ -148,28 +148,22 @@ public class EnderecoDAO implements InterfaceDAO<Endereco> {
         }
     }
 
-    public Endereco RetrievePorId(Endereco endereco) {
+    public int RetrievePorId(Endereco endereco) {
         try {
             Connection conexao = ConectionFactory.getConection();
             PreparedStatement pstm = null;
             ResultSet rs = null;
-            pstm = conexao.prepareStatement(SQL.ENDERECO_RETRIVE_LOGRADOURO_AND_CEP);
-            pstm.setString(1, endereco.getLogradouro());
-            pstm.setString(2, endereco.getCep());
+            pstm = conexao.prepareStatement(SQL.ENDERECO_RETRIVE_NUMERO_AND_LOGRADOURO_AND_BAIRRO);
+            pstm.setString(1, endereco.getNumero());
+            pstm.setString(2, endereco.getLogradouro());
+            pstm.setInt(3, endereco.getBairro().getId());
             rs = pstm.executeQuery();
             Endereco enderecoRetorno = new Endereco.EnderecoBuilder().createEndereco();
             while (rs.next()) {
                 enderecoRetorno.setId(rs.getInt("id"));
-                enderecoRetorno.setLogradouro(rs.getString("logradouro"));
-                enderecoRetorno.setNumero(rs.getString("numero"));
-                enderecoRetorno.setBairro(
-                        service.ServiceBairro.Buscar(rs.getInt("bairroId"))
-                );
-                enderecoRetorno.setCep(rs.getString("cep"));
-                enderecoRetorno.setStatus(rs.getBoolean("status"));
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
-            return enderecoRetorno;
+            return enderecoRetorno.getId();
         } catch (Exception ex) {
             throw new RuntimeException(" \nCLASSE: EnderecoDAO->Retrive(id)\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"

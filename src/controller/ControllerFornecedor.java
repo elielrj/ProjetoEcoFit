@@ -46,24 +46,21 @@ public class ControllerFornecedor implements ActionListener {
             Ativa(true);
             LimpaEstadoComponentes(false);
         } else if (e.getSource() == this.telaCadastroFornecedor.getjButtonGravar()) {
-            //montar objeto a persistir
-            //1º Endereço - ID End
-            Endereco endereco = new Endereco.EnderecoBuilder()
-                    //5-1 ID
-                    .setLogradouro(this.telaCadastroFornecedor.getjTextField_EnderecoLogradouro().getText())//5-2
-                    .setNumero(this.telaCadastroFornecedor.getjTextField_EnderecoID().getText())//5-3
-                    .setBairro((Bairro) this.telaCadastroFornecedor.getjComboBox_EnderecoBairro().getSelectedItem())//5-4
-                    .setCep(this.telaCadastroFornecedor.getjFormattedTextField_EnderecoCEP().getText())//5-5
-                    //5-6 Status
-                    .createEndereco();
-            service.ServiceEndereco.Incluir(endereco);
-            endereco = service.ServiceEndereco.BuscarPorId(endereco); //SUBSTITUI COM O ID_END
             //2º Fornecedor c/ endereço já existente     
             Fornecedor fornecedor = new Fornecedor.FornecedorBuilder()
                     .setRazaoSocial(this.telaCadastroFornecedor.getjTextFieldRazaoSocial().getText())//2
                     .setInscricaoEstadual(this.telaCadastroFornecedor.getjFormattedTextFieldInscEst().getText())//3
                     .setCnpj(this.telaCadastroFornecedor.getjFormattedTextFieldCnpj().getText())//4
-                    .setEndereco(endereco)//5
+                    .setEndereco(
+                            new Endereco.EnderecoBuilder()
+                                    //5-1 ID 
+                                    .setLogradouro(this.telaCadastroFornecedor.getjTextField_EnderecoLogradouro().getText())//5-2
+                                    .setNumero(this.telaCadastroFornecedor.getjTextField_EnderecoNumero().getText())//5-3
+                                    .setBairro((Bairro) this.telaCadastroFornecedor.getjComboBox_EnderecoBairro().getSelectedItem())//5-4
+                                    .setCep(this.telaCadastroFornecedor.getjFormattedTextField_EnderecoCEP().getText())//5-5
+                                    .setStatus(this.telaCadastroFornecedor.getjComboBoxStatus().getSelectedItem().equals("Sim"))//5-6
+                                    .createEndereco()
+                    )//5
                     .setTelefone1(this.telaCadastroFornecedor.getjFormattedTextFieldTel1().getText())//6
                     .setTelefone2(this.telaCadastroFornecedor.getjFormattedTextFieldtel2().getText())//7
                     .setEmail(this.telaCadastroFornecedor.getjTextFieldEmail().getText())//8
@@ -75,8 +72,9 @@ public class ControllerFornecedor implements ActionListener {
             if (codigo == 0) {
                 service.ServiceFornecedor.Incluir(fornecedor);
             } else {
-
+                
                 fornecedor.setId(Integer.parseInt(this.telaCadastroFornecedor.getjTextFieldId().getText())); //1
+                fornecedor.getEndereco().setId(Integer.parseInt(this.telaCadastroFornecedor.getjTextField_EnderecoID().getText())); //2
                 service.ServiceFornecedor.Atualizar(fornecedor);
             }
             Ativa(true);
@@ -114,6 +112,7 @@ public class ControllerFornecedor implements ActionListener {
                 this.telaCadastroFornecedor.getjTextField_EnderecoComplemento().setText(fornecedor.getComplemento());//11
 
                 this.telaCadastroFornecedor.getjTextFieldId().setEnabled(false);
+                this.telaCadastroFornecedor.getjTextField_EnderecoID().setEnabled(false);
             }
         }
 

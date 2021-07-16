@@ -19,13 +19,13 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
             pstm.setString(1, objeto.getNome());
             pstm.setBoolean(2, objeto.getStatus());
             pstm.setInt(3, objeto.getCidade().getId());            
-            pstm.executeUpdate();
+            pstm.executeUpdate();      
             ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
             throw new RuntimeException(" \nCLASSE: BairroDAO->Create->bairroDAO\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
-            );
+            );            
         }
     }
 
@@ -64,8 +64,6 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
     public Bairro Retrieve(int id) {
         try {
             Connection conexao = ConectionFactory.getConection();
-
-            //String sqlExecutar = "SELECT id,nome,status FROM bairro WHERE bairro.id=?";
             PreparedStatement pstm = null;
             ResultSet rs = null;
             pstm = conexao.prepareStatement(SQL.BAIRRO_RETRIVE_ONE_ID);
@@ -80,7 +78,6 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
                     service.ServiceCidade.Buscar(rs.getInt("cidadeId"))
                 );
             }
-
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return bairro;
         } catch (Exception ex) {
@@ -95,7 +92,6 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
     public void Update(Bairro objeto) {
         try {
             Connection conexao = ConectionFactory.getConection();
-
             PreparedStatement pstm = null;
             pstm = conexao.prepareStatement(SQL.BAIRRO_UPDATE);
             pstm.setString(1, objeto.getNome());
@@ -164,7 +160,6 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
                 );
                 bairros.add(bairro);
             }
-
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return bairros;
         } catch (Exception ex) {
@@ -178,8 +173,6 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
     public int RetrieveIdTheCity(int idBairro) {
         try {
             Connection conexao = ConectionFactory.getConection();
-
-            //String sqlExecutar = "SELECT id,nome,status FROM bairro WHERE bairro.id=?";
             PreparedStatement pstm = null;
             ResultSet rs = null;
             pstm = conexao.prepareStatement(SQL.BAIRRO_RETRIVE_ONE_ID);

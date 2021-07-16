@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import model.DAO.SQL.SQL;
 
 public class VendaDAO implements InterfaceDAO<Venda> {
 
@@ -14,22 +15,20 @@ public class VendaDAO implements InterfaceDAO<Venda> {
 
         Connection conexao = ConectionFactory.getConection();
 
-        String sqlExecutar = "INSERT INTO venda(data,hora,dataDeVencimento,observacao,valorDoDesconto,valorTotal,status, pessoaFisicaId) VALUES(?,?,?,?,?,?,?,?)";
-
         PreparedStatement pstm = null;
 
         try {
-            pstm = conexao.prepareStatement(sqlExecutar);
+            pstm = conexao.prepareStatement(SQL.VENDA_CREATE);
             pstm.setString(1, objeto.getData());
             pstm.setString(2, objeto.getHora());
-            pstm.setString(3, objeto.getUserCaixa());
-            pstm.setString(4, objeto.getDataDeVencimento());
-            pstm.setString(5, objeto.getObservacao());
-            pstm.setFloat(6, objeto.getValorDoDesconto());
-            pstm.setFloat(7, objeto.getValorTotal());
-            pstm.setBoolean(8, objeto.getStatus());
-            pstm.setInt(9, objeto.getPessoaFisica().getId());
-
+            
+            pstm.setString(3, objeto.getDataDeVencimento());
+            pstm.setString(4, objeto.getObservacao());
+            pstm.setFloat(5, objeto.getValorDoDesconto());
+            pstm.setFloat(6, objeto.getValorTotal());
+            pstm.setBoolean(7, objeto.getStatus());
+            pstm.setInt(8, objeto.getPessoaFisica().getId());
+            pstm.setString(9, objeto.getUserCaixa());
             pstm.executeUpdate();
 
         } catch (Exception ex) {
@@ -44,7 +43,7 @@ public class VendaDAO implements InterfaceDAO<Venda> {
 
         Connection conexao = ConectionFactory.getConection();
 
-        String sqlExecutar = "SELECT id,data,hora,dataDeVencimento,observacao,valorDoDesconto,valorTotal,status,pessoaFisicaId FROM venda";
+        
 
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -52,7 +51,7 @@ public class VendaDAO implements InterfaceDAO<Venda> {
         List<Venda> vendas = new ArrayList();
 
         try {
-            pstm = conexao.prepareStatement(sqlExecutar);
+            pstm = conexao.prepareStatement(SQL.VENDA_RETRIVE_ALL);
             rs = pstm.executeQuery();
 
             while (rs.next()) {
@@ -60,14 +59,15 @@ public class VendaDAO implements InterfaceDAO<Venda> {
                         .setId(rs.getInt("id"))
                         .setData(rs.getString("data"))
                         .setHora(rs.getString("hora"))
-                        .setDataDeVencimento(rs.getString("dataDeVencimento"))
+                        .setDataDeVencimento(rs.getString("datavencimento"))
                         .setObservacao(rs.getString("observacao"))
-                        .setValorDoDesconto(rs.getFloat("valorDoDesconto"))
-                        .setValorTotal(rs.getFloat("valorTotal"))
+                        .setValorDoDesconto(rs.getFloat("valordesconto"))
+                        .setValorTotal(rs.getFloat("valortotal"))
                         .setStatus(rs.getBoolean("status"))
                         .setPessoaFisica(
-                                service.ServicePessoaFisica.Buscar(rs.getInt("pessoaFisicaId"))
+                                service.ServicePessoaFisica.Buscar(rs.getInt("pessoafisicaid"))
                         )
+                        .setUserCaixa(rs.getString("usercaixa"))
                         .createVenda();
                 vendas.add(venda);
             }
@@ -83,13 +83,13 @@ public class VendaDAO implements InterfaceDAO<Venda> {
     public Venda Retrieve(int id) {
         Connection conexao = ConectionFactory.getConection();
 
-        String sqlExecutar = "SELECT id,data,hora,dataDeVencimento, observacao, valorDoDesconto, valorTotal,status,pessoaFisicaId FROM venda WHERE venda.id=?";
+        
 
         PreparedStatement pstm = null;
         ResultSet rs = null;
 
         try {
-            pstm = conexao.prepareStatement(sqlExecutar);
+            pstm = conexao.prepareStatement(SQL.VENDA_RETRIVE_ONE_ID);
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
 
@@ -99,16 +99,15 @@ public class VendaDAO implements InterfaceDAO<Venda> {
                 venda.setId(rs.getInt("id"));
                 venda.setData(rs.getString("data"));
                 venda.setHora(rs.getString("hora"));
-                venda.setUserCaixa(rs.getString("usercaixa"));
-                venda.setDataDeVencimento(rs.getString("dataDeVencimento"));
+                venda.setDataDeVencimento(rs.getString("datavencimento"));
                 venda.setObservacao(rs.getString("observacao"));
-                venda.setValorDoDesconto(rs.getFloat("valorDoDesconto"));
-                venda.setValorTotal(rs.getFloat("valorTotal"));
+                venda.setValorDoDesconto(rs.getFloat("valordesconto"));
+                venda.setValorTotal(rs.getFloat("valortotal"));
                 venda.setStatus(rs.getBoolean("status"));
                 venda.setPessoaFisica(
-                        service.ServicePessoaFisica.Buscar(rs.getInt("pessoaFisicaId"))
+                        service.ServicePessoaFisica.Buscar(rs.getInt("pessoafisicaid"))
                 );
-
+  venda.setUserCaixa(rs.getString("usercaixa"));
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return venda;
@@ -121,22 +120,22 @@ public class VendaDAO implements InterfaceDAO<Venda> {
     @Override
     public void Update(Venda objeto) {
         Connection conexao = ConectionFactory.getConection();
-        String sqlExecutar = "UPDATE venda SET data = ?, hora = ?, dataDeVencimento= ?,observacao = ?, valorDoDesconto = ?, valorTotal =?, status = ?, pessoaFisicaId = ? WHERE id=?";
+        
 
         PreparedStatement pstm = null;
 
         try {
-            pstm = conexao.prepareStatement(sqlExecutar);
+            pstm = conexao.prepareStatement(SQL.VENDA_UPDATE);
 
             pstm.setString(1, objeto.getData());
             pstm.setString(2, objeto.getHora());
-            pstm.setString(3, objeto.getUserCaixa());
-            pstm.setString(4, objeto.getDataDeVencimento());
-            pstm.setString(5, objeto.getObservacao());
-            pstm.setDouble(6, objeto.getValorDoDesconto());
-            pstm.setDouble(7, objeto.getValorTotal());
-            pstm.setBoolean(8, objeto.getStatus());
-            pstm.setInt(9, objeto.getPessoaFisica().getId());
+            pstm.setString(3, objeto.getDataDeVencimento());
+            pstm.setString(4, objeto.getObservacao());
+            pstm.setDouble(5, objeto.getValorDoDesconto());
+            pstm.setDouble(6, objeto.getValorTotal());
+            pstm.setBoolean(7, objeto.getStatus());
+            pstm.setInt(8, objeto.getPessoaFisica().getId());
+            pstm.setString(9, objeto.getUserCaixa());
             pstm.setInt(10, objeto.getId());
             pstm.executeUpdate();
 
@@ -149,11 +148,10 @@ public class VendaDAO implements InterfaceDAO<Venda> {
     @Override
     public void Delete(Venda objeto) {
         Connection conexao = ConectionFactory.getConection();
-        String sqlExecutar = "DELETE FROM venda WHERE id = ?";
         PreparedStatement pstm = null;
 
         try {
-            pstm = conexao.prepareStatement(sqlExecutar);
+            pstm = conexao.prepareStatement(SQL.VENDA_DELETE);
             pstm.setInt(1, objeto.getId());
             pstm.executeUpdate();
         } catch (Exception ex) {
@@ -167,13 +165,12 @@ public class VendaDAO implements InterfaceDAO<Venda> {
     public int Retrieve(Venda venda) {
         Connection conexao = ConectionFactory.getConection();
 
-        String sqlExecutar = "SELECT id FROM venda WHERE venda.total=? venda.pessoafisicaid=? and venda.data=?";
 
         PreparedStatement pstm = null;
         ResultSet rs = null;
 
         try {
-            pstm = conexao.prepareStatement(sqlExecutar);
+            pstm = conexao.prepareStatement(SQL.VENDA_RETRIVE_VENDA_OBJ);
             pstm.setFloat(1, venda.getValorTotal());
             pstm.setInt(2, venda.getPessoaFisica().getId());
             pstm.setString(3, venda.getData());

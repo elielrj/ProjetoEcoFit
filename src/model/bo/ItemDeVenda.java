@@ -3,7 +3,6 @@ package model.bo;
 public class ItemDeVenda {
 
     private int id;//1
-    private boolean status;//2
     private int quantidade;//3
     private Produto produto;//4
     private float subTotal;//5
@@ -11,7 +10,6 @@ public class ItemDeVenda {
 
     private ItemDeVenda(ItemDeVendaBuilder itemDeVendaBuilder) {
         this.id = itemDeVendaBuilder.id;
-        this.status = itemDeVendaBuilder.status;
         this.quantidade = itemDeVendaBuilder.quantidade;
         this.produto = itemDeVendaBuilder.produto;
         this.subTotal = itemDeVendaBuilder.subTotal;
@@ -24,14 +22,6 @@ public class ItemDeVenda {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
     }
 
     public int getQuantidade() {
@@ -80,11 +70,6 @@ public class ItemDeVenda {
 
         public ItemDeVendaBuilder setId(int id) {
             this.id = id;
-            return this;
-        }
-
-        public ItemDeVendaBuilder setStatus(boolean status) {
-            this.status = status;
             return this;
         }
 
