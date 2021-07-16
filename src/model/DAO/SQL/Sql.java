@@ -74,6 +74,7 @@ public final class SQL {
     public static String PRODUTO_RETRIVE_ALL = "SELECT id,descricao,unidadedecompra,unidadedevenda,correlacaounidade,valor,codigodebarras,status,observacao  FROM produto";
     public static String PRODUTO_RETRIVE_ONE_ID = "SELECT id,descricao,unidadedecompra,unidadedevenda,correlacaounidade,valor,codigodebarras,status,observacao FROM produto WHERE id=?";
     public static String PRODUTO_RETRIVE_ONE_COD_BARRAS = "SELECT id,descricao,unidadedecompra,unidadedevenda,correlacaounidade,valor,codigodebarras,status,observacao FROM produto WHERE produto.codigodebarras=?";
+    public static String PRODUTO_RETRIVE_ONE_COD_BARRAS_SO = "SELECT codigodebarras FROM produto WHERE produto.codigodebarras=?";
     public static String PRODUTO_UPDATE = "UPDATE produto SET descricao=?,unidadedecompra=?,unidadedevenda=?,correlacaounidade=?,valor=?,codigodebarras=?,status=?,observacao=? WHERE produto.id=?";
     public static String PRODUTO_DELETE = "DELETE FROM produto WHERE id=?";
     

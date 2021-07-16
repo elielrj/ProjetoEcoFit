@@ -145,7 +145,7 @@ public class ControllerVenda implements ActionListener {
                     inserirItem();
                 } else {
                     JOptionPane.showMessageDialog(null, "Cód de Barras inválido");
-                    this.telaFaturamento.getjTextField_ProdutoCodBarras().requestFocus();
+                    this.telaFaturamento.getjFormattedTextField_ProdutoCodBarras().requestFocus();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Não existe um faturamento em andamento");
@@ -188,7 +188,7 @@ public class ControllerVenda implements ActionListener {
         this.telaFaturamento.getjButton_Buscar().setEnabled(estadoBotoes);
         this.telaFaturamento.getjButton_Sair().setEnabled(estadoBotoes);
 
-        this.telaFaturamento.getjTextField_ProdutoCodBarras().setEnabled(!estadoBotoes);
+        this.telaFaturamento.getjFormattedTextField_ProdutoCodBarras().setEnabled(!estadoBotoes);
         this.telaFaturamento.getjButton_ProdutoPesquisa().setEnabled(!estadoBotoes);
 
         this.telaFaturamento.getjButton_ProdutoAdicionar().setEnabled(!estadoBotoes);
@@ -260,7 +260,7 @@ public class ControllerVenda implements ActionListener {
         ControllerProdutoBusca controllerBuscaProduto = new ControllerProdutoBusca(telaBuscaProduto);
         telaBuscaProduto.setVisible(true);
 
-        this.telaFaturamento.getjTextField_ProdutoCodBarras().setText(
+        this.telaFaturamento.getjFormattedTextField_ProdutoCodBarras().setText(
                 service.ServiceProduto.Buscar(
                         telaBuscaProduto.getCodProduto()
                 ).getCodigoDeBarras()
@@ -269,7 +269,7 @@ public class ControllerVenda implements ActionListener {
 
     public void inserirItem() {
         //1º Cria e busca produto pelo Cod Barras
-        Produto produto = service.ServiceProduto.Buscar(this.telaFaturamento.getjTextField_ProdutoCodBarras().getText());
+        Produto produto = service.ServiceProduto.Buscar(this.telaFaturamento.getjFormattedTextField_ProdutoCodBarras().getText());
         //2º Adicionar produto e qtd; atribuindo a responsabilidade a venda de criar ItemDeVenda
         venda.adicionarItem(produto);
         //3º atualizar tabela da tela
@@ -309,8 +309,8 @@ public class ControllerVenda implements ActionListener {
     }
 
     private boolean validarCodigoBarras() {
-
-        String codigoDeBarras = semMascara(this.telaFaturamento.getjTextField_ProdutoCodBarras().getText());
+        /*
+        String codigoDeBarras = semMascara(this.telaFaturamento.getjFormattedTextField_ProdutoCodBarras().getText());
 
         if (codigoDeBarras.equals("")) { //"             "
             return false;
@@ -324,7 +324,9 @@ public class ControllerVenda implements ActionListener {
                 return true;
             }
             return false;
-        }
+        }*/
+
+        return service.ServiceProduto.codigoDeBarrasValido(this.telaFaturamento.getjFormattedTextField_ProdutoCodBarras().getText());
 
     }
 
@@ -373,7 +375,7 @@ public class ControllerVenda implements ActionListener {
 
             for (ItemDeVenda itemDeVenda : venda.getItensDeVenda()) {
                 itemDeVenda.setVendaId(venda.getId());
-                
+
                 //ESTOQUE: 1º busca estoque pelo produtoId
                 Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdDoProduto(itemDeVenda.getProduto().getId());
                 //ESTOQUE: 2º setar a nova qtd no estoque
@@ -381,11 +383,10 @@ public class ControllerVenda implements ActionListener {
                 service.ServiceEstoque.Atualizar(estoque);
                 //VENDA: finalmente inluir-la
                 service.ServiceItemDeVenda.Incluir(itemDeVenda);
-                
+
             }
-            
+
             //DEBITAR NO ESTOQUE!!!!!!!!!!
-            
         } else {
             //1º atualizar a venda
             service.ServiceVenda.Atualizar(venda);
@@ -393,13 +394,13 @@ public class ControllerVenda implements ActionListener {
             //2º deletar itens anterior no banco
             //buscar antes de deletar!
             ItemDeVenda itemDeVenda = service.ServiceItemDeVenda.Buscar(venda.getId());
-            
+
             Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdDoProduto(itemDeVenda.getProduto().getId());
             estoque.setQuantidade(
                     estoque.getQuantidade() + itemDeVenda.getQuantidade()
             );
             service.ServiceEstoque.Atualizar(estoque);
-            
+
             service.ServiceItemDeVenda.Deletar(venda.getId());
             //3ºatualizar os itens c/ idVenda e incluir na tabela de itens de venda no banco          
 

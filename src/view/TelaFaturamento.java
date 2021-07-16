@@ -90,7 +90,6 @@ public class TelaFaturamento extends javax.swing.JFrame {
         jButtonProdutoAdicionar = new javax.swing.JButton();
         jComboBoxStatus = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
-        jTextField_ProdutoCodBarras = new javax.swing.JTextField();
         jButton_ProdutoRemover = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea_Obs = new javax.swing.JTextArea();
@@ -102,6 +101,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
         jTextField_Faturamento_Id = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jComboBox_alunoOuPersonal = new javax.swing.JComboBox<>();
+        jFormattedTextField_ProdutoCodBarras = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Formulário de Cadastro de ...");
@@ -325,13 +325,6 @@ public class TelaFaturamento extends javax.swing.JFrame {
 
         jLabel12.setText("Status");
 
-        jTextField_ProdutoCodBarras.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField_ProdutoCodBarras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_ProdutoCodBarrasActionPerformed(evt);
-            }
-        });
-
         jButton_ProdutoRemover.setText("Remover");
 
         jTextArea_Obs.setColumns(20);
@@ -360,6 +353,13 @@ public class TelaFaturamento extends javax.swing.JFrame {
 
         jLabel16.setText("Id Faturamento");
 
+        try {
+            jFormattedTextField_ProdutoCodBarras.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###.##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedTextField_ProdutoCodBarras.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
         jPanelDadosLayout.setHorizontalGroup(
@@ -375,7 +375,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
                                     .addGroup(jPanelDadosLayout.createSequentialGroup()
                                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(jPanelDadosLayout.createSequentialGroup()
-                                                .addComponent(jTextField_ProdutoCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jFormattedTextField_ProdutoCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(jButtonProdutoPesquisa))
                                             .addGroup(jPanelDadosLayout.createSequentialGroup()
@@ -474,7 +474,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonProdutoPesquisa)
                             .addComponent(jButtonProdutoAdicionar)
-                            .addComponent(jTextField_ProdutoCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jFormattedTextField_ProdutoCodBarras))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -516,7 +516,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
                                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextFieldClienteTel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextFieldClienteTel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 20, Short.MAX_VALUE))
+                        .addGap(24, 24, 24))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(11, 11, 11)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -642,10 +642,6 @@ public class TelaFaturamento extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanelDadosKeyPressed
 
-    private void jTextField_ProdutoCodBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_ProdutoCodBarrasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_ProdutoCodBarrasActionPerformed
-
     private void jFormattedTextField_DataDeVencimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField_DataDeVencimentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextField_DataDeVencimentoActionPerformed
@@ -700,6 +696,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jFormattedTextFieldFaturamentoData;
     private javax.swing.JFormattedTextField jFormattedTextFieldFaturamentoHora;
     private javax.swing.JFormattedTextField jFormattedTextField_DataDeVencimento;
+    private javax.swing.JFormattedTextField jFormattedTextField_ProdutoCodBarras;
     private javax.swing.JFormattedTextField jFormattedTextField_ValorDeDesconto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -740,7 +737,6 @@ public class TelaFaturamento extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldClienteTel2;
     private javax.swing.JTextField jTextFieldFaturamentoUsuario;
     private javax.swing.JTextField jTextField_Faturamento_Id;
-    private javax.swing.JTextField jTextField_ProdutoCodBarras;
     // End of variables declaration//GEN-END:variables
 
     
@@ -806,6 +802,10 @@ public class TelaFaturamento extends javax.swing.JFrame {
         return jButtonBuscar;
     }
 
+    public JFormattedTextField getjFormattedTextField_ProdutoCodBarras() {
+        return jFormattedTextField_ProdutoCodBarras;
+    }
+
     public JButton getjButton_Cancelar() {
         return jButtonCancelar;
     }
@@ -846,9 +846,6 @@ public class TelaFaturamento extends javax.swing.JFrame {
         return jLabelF5;
     }
 
-    public JTextField getjTextField_ProdutoCodBarras() {
-        return jTextField_ProdutoCodBarras;
-    }
 
     public JButton getjButton_ProdutoRemover() {
         return jButton_ProdutoRemover;

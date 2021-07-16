@@ -43,13 +43,10 @@ public class ServiceProduto {
         produtoDAO.Delete(idProduto);
     }
     
-    public static boolean codigoDeBarrasValido(int codBarras){
+    public static boolean codigoDeBarrasValido(String codBarras){
                 
-        if (Buscar(codBarras).equals(null)){
-            return false;
-        } else {
-            return true;
-        }
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        return produtoDAO.codigoDeBarrasValido(codBarras);
         
     }
 }

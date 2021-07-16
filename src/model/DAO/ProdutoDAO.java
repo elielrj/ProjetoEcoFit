@@ -195,4 +195,31 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
         }
         ConectionFactory.closeConnection(conexao, pstm);
     }
+
+    public boolean codigoDeBarrasValido(String codBarras) {
+        Connection conexao = ConectionFactory.getConection();
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
+            pstm = conexao.prepareStatement(SQL.PRODUTO_RETRIVE_ONE_COD_BARRAS_SO);
+            pstm.setString(1, codBarras);
+            rs = pstm.executeQuery();
+            Produto produto = new Produto.ProdutoBuilder().createProduto();
+            while (rs.next()) {
+                
+                produto.setCodigoDeBarras(rs.getString("codigodebarras"));//7
+                
+            }
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            if(produto.getCodigoDeBarras() != null)
+                return true;
+            else 
+                return false;
+        } catch (Exception ex) {
+            throw new RuntimeException(" \nCLASSE: ProdutoDAO->codiDeBarras\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+		);
+}
+    }
 }
