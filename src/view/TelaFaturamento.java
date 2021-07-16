@@ -69,7 +69,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
         jFormattedTextFieldFaturamentoHora = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextFieldClienteId = new javax.swing.JTextField();
-        jButtonClienteBuscaId = new javax.swing.JButton();
+        jButton_ClienteBuscaId = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldClienteNome = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -105,7 +105,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Formulário de Cadastro de ...");
-        setPreferredSize(new java.awt.Dimension(900, 700));
+        setPreferredSize(new java.awt.Dimension(902, 700));
         setResizable(false);
 
         jPanelTitulo.setBackground(new java.awt.Color(204, 255, 0));
@@ -259,10 +259,10 @@ public class TelaFaturamento extends javax.swing.JFrame {
             }
         });
 
-        jButtonClienteBuscaId.setText("...");
-        jButtonClienteBuscaId.addActionListener(new java.awt.event.ActionListener() {
+        jButton_ClienteBuscaId.setText("...");
+        jButton_ClienteBuscaId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonClienteBuscaIdActionPerformed(evt);
+                jButton_ClienteBuscaIdActionPerformed(evt);
             }
         });
 
@@ -390,7 +390,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
                                                     .addGroup(jPanelDadosLayout.createSequentialGroup()
                                                         .addComponent(jComboBox_alunoOuPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(18, 18, 18)
-                                                        .addComponent(jButtonClienteBuscaId)
+                                                        .addComponent(jButton_ClienteBuscaId)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(jTextField_Faturamento_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                         .addGap(18, 18, 18)
@@ -488,7 +488,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
                                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jTextFieldClienteId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jComboBox_alunoOuPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButtonClienteBuscaId)))
+                                            .addComponent(jButton_ClienteBuscaId)))
                                     .addComponent(jTextField_Faturamento_Id, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosLayout.createSequentialGroup()
@@ -597,9 +597,9 @@ public class TelaFaturamento extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
-    private void jButtonClienteBuscaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteBuscaIdActionPerformed
+    private void jButton_ClienteBuscaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ClienteBuscaIdActionPerformed
 
-    }//GEN-LAST:event_jButtonClienteBuscaIdActionPerformed
+    }//GEN-LAST:event_jButton_ClienteBuscaIdActionPerformed
 
     private void jButtonProdutoAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutoAdicionarActionPerformed
         //
@@ -684,12 +684,12 @@ public class TelaFaturamento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JButton jButtonClienteBuscaId;
     private javax.swing.JButton jButtonGravar;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonProdutoAdicionar;
     private javax.swing.JButton jButtonProdutoPesquisa;
     private javax.swing.JButton jButtonSair;
+    private javax.swing.JButton jButton_ClienteBuscaId;
     private javax.swing.JButton jButton_ProdutoRemover;
     private javax.swing.JComboBox<Object> jComboBoxStatus;
     private javax.swing.JComboBox<Object> jComboBox_alunoOuPersonal;
@@ -811,7 +811,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
     }
 
     public JButton getjButton_ClienteBuscaId() {
-        return jButtonClienteBuscaId;
+        return jButton_ClienteBuscaId;
     }
 
     public JButton getjButton_Gravar() {

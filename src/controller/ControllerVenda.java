@@ -17,7 +17,6 @@ import view.busca.TelaBuscaPessoaFisica;
 import view.busca.TelaBuscaProduto;
 import view.TelaFaturamento;
 import model.bo.Venda;
-import view.busca.TelaBuscaFaturamento;
 import view.busca.TelaBuscaVenda;
 
 public class ControllerVenda implements ActionListener {
@@ -156,7 +155,7 @@ public class ControllerVenda implements ActionListener {
             this.telaFaturamento.dispose();
             // 7 - PESQUISAR CLIENTE
         } else if (e.getSource() == this.telaFaturamento.getjButton_ClienteBuscaId()) {
-            if (!this.telaFaturamento.getjTextField_ClienteId().getText().equals("")) {
+            if (validarCliente()) {
 
                 if (this.telaFaturamento.getjComboBox_alunoOuPersonal().getSelectedItem().equals("Aluno")) {
                     buscaClienteAluno();
@@ -285,7 +284,7 @@ public class ControllerVenda implements ActionListener {
 
     public void buscaClienteAluno() {
         TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica(null, true);
-        ControllerPessoaFisicaBusca controllerBuscaPessoaFisica = new ControllerPessoaFisicaBusca(telaBuscaPessoaFisica);
+        ControllerPessoaFisicaAlunoBusca controllerBuscaPessoaFisicaAlunoBusca = new ControllerPessoaFisicaAlunoBusca(telaBuscaPessoaFisica);
         telaBuscaPessoaFisica.setVisible(true);
 
         venda.setPessoaFisica(
@@ -440,7 +439,7 @@ public class ControllerVenda implements ActionListener {
     private void buscaClientePersonal() {
 
         TelaBuscaPessoaFisica telaBuscaPessoaFisica = new TelaBuscaPessoaFisica(null, true);
-        ControllerPessoaFisicaBusca controllerBuscaPessoaFisica = new ControllerPessoaFisicaBusca(telaBuscaPessoaFisica);
+        ControllerPessoaFisicaPersonalBusca controllerBuscaPessoaFisicaPersonalBusca = new ControllerPessoaFisicaPersonalBusca(telaBuscaPessoaFisica);
         telaBuscaPessoaFisica.setVisible(true);
 
         venda.setPessoaFisica(

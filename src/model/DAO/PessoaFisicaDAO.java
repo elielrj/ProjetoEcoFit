@@ -264,9 +264,9 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
                         .setNome(rs.getString("nome"))
                         .setRg(rs.getString("rg"))
                         .setCpf(rs.getString("cpf"))
-                        .setDataDeNascimento(rs.getString("dataDeNascimento"))
+                        .setDataDeNascimento(rs.getString("datanascimento"))
                         .setEndereco(
-                                service.ServiceEndereco.Buscar(rs.getInt("enderecoId"))
+                                service.ServiceEndereco.Buscar(rs.getInt("enderecoid"))
                         )
                         .setTipo(rs.getString("tipo"))
                         .setTelefone1(rs.getString("telefone1"))

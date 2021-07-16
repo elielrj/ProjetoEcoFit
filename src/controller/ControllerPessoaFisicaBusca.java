@@ -25,31 +25,30 @@ public class ControllerPessoaFisicaBusca implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.telaBuscaPessoaFisica.getjButtonSair()) 
+        if (e.getSource() == this.telaBuscaPessoaFisica.getjButtonSair()) {
             this.telaBuscaPessoaFisica.dispose();
-        
-        else if (e.getSource() == this.telaBuscaPessoaFisica.getjButtonCarregar()) {
+        } else if (e.getSource() == this.telaBuscaPessoaFisica.getjButtonCarregar()) {
             codigoPessoaFisica = (int) this.telaBuscaPessoaFisica.getjTable1().getValueAt(this.telaBuscaPessoaFisica.getjTable1().getSelectedRow(), 0);
             ControllerPessoaFisica.codigo = codigoPessoaFisica;
             this.telaBuscaPessoaFisica.setIdDaPessoaFisica(codigoPessoaFisica);
             this.telaBuscaPessoaFisica.dispose();
-        }else if(e.getSource() == this.telaBuscaPessoaFisica.getjButton_Deletar()) {
-            try{
+        } else if (e.getSource() == this.telaBuscaPessoaFisica.getjButton_Deletar()) {
+            try {
                 service.ServicePessoaFisica.Deletar(
                         (int) this.telaBuscaPessoaFisica.getjTable1().getValueAt(
-                                this.telaBuscaPessoaFisica.getjTable1().getSelectedRow(),0
+                                this.telaBuscaPessoaFisica.getjTable1().getSelectedRow(), 0
                         )
                 );
                 JOptionPane.showMessageDialog(null, "Pessoa deletado com sucesso!");
                 carregarDadosNaTabela();
             } catch (Exception ex) {
-                throw new RuntimeException(" \nCLASSE: ControllerBuscaFornecedor->actionPerformed(ActionEvent e)->deletar\nMENSAGEM:" 
-                        + ex.getMessage() + "\nLOCALIZADO:" 
+                throw new RuntimeException(" \nCLASSE: ControllerBuscaFornecedor->actionPerformed(ActionEvent e)->deletar\nMENSAGEM:"
+                        + ex.getMessage() + "\nLOCALIZADO:"
                         + ex.getLocalizedMessage()
                 );
             }
         }
-        
+
     }
 
     public int getCodigoPessoaFisica() {
@@ -61,9 +60,9 @@ public class ControllerPessoaFisicaBusca implements ActionListener {
     }
 
     private void carregarDadosNaTabela() {
-        
+
         DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaPessoaFisica.getjTable1().getModel();
-tabela.getDataVector().removeAllElements();
+        tabela.getDataVector().removeAllElements();
 
         for (PessoaFisica pessoaFisica : service.ServicePessoaFisica.Buscar()) {
             tabela.addRow(new Object[]{

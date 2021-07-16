@@ -75,7 +75,7 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
                 bairro.setNome(rs.getString("nome"));
                 bairro.setStatus(rs.getBoolean("status"));
                 bairro.setCidade(
-                    service.ServiceCidade.Buscar(rs.getInt("cidadeId"))
+                    service.ServiceCidade.Buscar(rs.getInt("cidadeid"))
                 );
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
