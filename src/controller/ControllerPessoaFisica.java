@@ -40,6 +40,7 @@ public class ControllerPessoaFisica implements ActionListener {
             Ativa(false);
             LimpaEstadoComponentes(true);
             this.telaCadastroPessoaFisica.getjTextFieldId().setEnabled(false);
+            this.telaCadastroPessoaFisica.getjTextField_EnderecoId().setEnabled(false);
             codigo = 0;
         } else if (e.getSource() == this.telaCadastroPessoaFisica.getjButtonCancelar()) {
             Ativa(true);

@@ -42,7 +42,7 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
         }
         
         for(Cidade c : service.ServiceCidade.Buscar()){
-            jComboBox_EnderecoBairro.addItem(c);
+            jComboBox_EnderecoCidade.addItem(c);
         }
     }
 
@@ -254,10 +254,11 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
         jLabel15.setText("CEP");
 
         try {
-            jFormattedTextField_EnderecoCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("")));
+            jFormattedTextField_EnderecoCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFormattedTextField_EnderecoCEP.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel16.setText("Complemento");
 

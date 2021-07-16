@@ -40,6 +40,7 @@ public class ControllerFornecedor implements ActionListener {
             Ativa(false);
             LimpaEstadoComponentes(true);
             this.telaCadastroFornecedor.getjTextFieldId().setEnabled(false);
+            this.telaCadastroFornecedor.getjTextField_EnderecoID().setEnabled(false);
             codigo = 0;
         } else if (e.getSource() == this.telaCadastroFornecedor.getjButtonCancelar()) {
             Ativa(true);

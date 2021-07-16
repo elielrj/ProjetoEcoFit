@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import model.DAO.SQL.SQL;
 
 public class CompraDAO implements InterfaceDAO<Compra> {
 
@@ -15,12 +16,10 @@ public class CompraDAO implements InterfaceDAO<Compra> {
 
         Connection conexao = ConectionFactory.getConection();
 
-        String sqlExecutar = "INSERT INTO compra(data,hora,dataDeVencimento,observacao,valorDoDesconto,valorTotal,status,fornecedorId) VALUES(?,?,?,?,?,?,?,?)";
-
         PreparedStatement pstm = null;
 
         try {
-            pstm = conexao.prepareStatement(sqlExecutar);
+            pstm = conexao.prepareStatement(SQL.COMPRA_CREATE);
 
             pstm.setString(1, objeto.getData());
             pstm.setString(2, objeto.getHora());
@@ -43,14 +42,13 @@ public class CompraDAO implements InterfaceDAO<Compra> {
     public List<Compra> Retrieve() {
 
         Connection conexao = ConectionFactory.getConection();
-        String sqlExecutar = "SELECT id,data,hora,dataDeVencimento,observacao,valorDoDesconto,valorTotal,status,fornecedorId FROM compra";
         PreparedStatement pstm = null;
         ResultSet rs = null;
 
         List<Compra> compras = new ArrayList();
 
         try {
-            pstm = conexao.prepareStatement(sqlExecutar);
+            pstm = conexao.prepareStatement(SQL.COMPRA_RETRIVE_ALL);
             rs = pstm.executeQuery();
 
             while (rs.next()) {
@@ -65,8 +63,10 @@ public class CompraDAO implements InterfaceDAO<Compra> {
 
                 compra.setValorTotal(rs.getFloat("valorTotal"));
                 compra.setStatus(rs.getBoolean("status"));
-                FornecedorDAO fornecedorDAO = new FornecedorDAO();
-                compra.setFornecedor(fornecedorDAO.Retrieve(rs.getInt("fornecedorId")));
+
+                compra.setFornecedor(
+                        service.ServiceFornecedor.Buscar(rs.getInt("fornecedorId"))
+                );
 
                 compras.add(compra);
             }
@@ -82,12 +82,11 @@ public class CompraDAO implements InterfaceDAO<Compra> {
     public Compra Retrieve(int id) {
         Connection conexao = ConectionFactory.getConection();
 
-        String sqlExecutar = "SELECT id,data,hora,dataDeVencimento,observacao,valorDoDesconto,valorTotal,status, fornecedorId FROM compra WHERE compra.id = ?";
         PreparedStatement pstm = null;
         ResultSet rs = null;
 
         try {
-            pstm = conexao.prepareStatement(sqlExecutar);
+            pstm = conexao.prepareStatement(SQL.COMPRA_CREATE);
             pstm.setInt(1, id);
 
             rs = pstm.executeQuery();
@@ -106,8 +105,9 @@ public class CompraDAO implements InterfaceDAO<Compra> {
 
                 compra.setStatus(rs.getBoolean("status"));
 
-                FornecedorDAO fornecedorDAO = new FornecedorDAO();
-                compra.setFornecedor(fornecedorDAO.Retrieve(rs.getInt("fornecedorId")));
+                compra.setFornecedor(
+                        service.ServiceFornecedor.Buscar(rs.getInt("fornecedorId"))
+                );
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return compra;
@@ -120,12 +120,11 @@ public class CompraDAO implements InterfaceDAO<Compra> {
     @Override
     public void Update(Compra objeto) {
         Connection conexao = ConectionFactory.getConection();
-        String sqlExecutar = "UPDATE compra SET data=?, hora=?, dataDeVencimento=  ?, observacao=?, valorDoDesconto=?, valorTotal=?,status=?, fornecedorId=? WHERE id=?";
 
         PreparedStatement pstm = null;
 
         try {
-            pstm = conexao.prepareStatement(sqlExecutar);
+            pstm = conexao.prepareStatement(SQL.COMPRA_UPDATE);
             pstm.setString(1, objeto.getData());
             pstm.setString(2, objeto.getHora());
             pstm.setString(3, objeto.getDataDeVencimento());
@@ -147,11 +146,10 @@ public class CompraDAO implements InterfaceDAO<Compra> {
     @Override
     public void Delete(Compra objeto) {
         Connection conexao = ConectionFactory.getConection();
-        String sqlExecutar = "DELETE FROM compra WHERE id =?";
         PreparedStatement pstm = null;
 
         try {
-            pstm = conexao.prepareStatement(sqlExecutar);
+            pstm = conexao.prepareStatement(SQL.COMPRA_DELETE);
             pstm.setInt(1, objeto.getId());
             pstm.executeUpdate();
         } catch (Exception ex) {

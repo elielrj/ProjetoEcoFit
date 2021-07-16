@@ -3,8 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/bo/Venda.java</file>
-            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/controller/ControllerVendaBusca.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/PagarDAO.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/FaturamentoDAO.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/controller/ControllerPessoaFisica.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/EstoqueDAO.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/controller/ControllerPessoaFisicaBusca.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/view/busca/TelaBuscaPessoaFisica.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/InterfaceDAO.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/ConectionFactory.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/VendaDAO.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/BairroDAO.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/CompraDAO.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/EnderecoDAO.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/SQL/SQL.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/FornecedorDAO.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/CidadeDAO.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/PessoaFisicaDAO.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/ItemDeVendaDAO.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/ReceberDAO.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/view/MenuPrincipal.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/ProdutoDAO.java</file>
+            <file>file:/D:/Eliel/Documentos/NetBeansProjects/ProjetoEspacoFit/src/model/DAO/ItemDeCompraDAO.java</file>
         </group>
     </open-files>
 </project-private>

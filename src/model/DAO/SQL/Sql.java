@@ -28,5 +28,57 @@ public final class SQL  {
         public static  String ESTOQUE_RETRIVE_ONE_ID_PRODUTO_DO_ESTOQUE =  "SELECT id,produtoid,quantidade FROM estoque WHERE estoque.produtoid=?";
         public static  String ESTOQUE_UPDATE =  "UPDATE estoque SET produtoid=?,quantidade=?  WHERE id=?";
         public static  String ESTOQUE_DELETE =  "DELETE FROM estoque WHERE id = ?";
+        
+        public static  String COMPRA_CREATE = "INSERT INTO compra(datacompra,hora,datavencimento,observacao,valordesconto,valortotal,status,fornecedorid ) VALUES(?,?,?,?,?,?,?,?,?)";
+        public static  String COMPRA_RETRIVE_ALL =  "SELECT id,datacompra,hora,datavencimento,observacao,valordesconto,valortotal,status,fornecedorid FROM compra";
+        public static  String COMPRA_RETRIVE_ONE_ID ="SELECT id,data,hora,dataDeVencimento,observacao,valorDoDesconto,valorTotal,status, fornecedorId FROM compra WHERE compra.id = ?";
+        public static  String COMPRA_UPDATE =  "UPDATE compra SET data=?, hora=?, dataDeVencimento=  ?, observacao=?, valorDoDesconto=?, valorTotal=?,status=?, fornecedorId=? WHERE id=?";
+        public static  String COMPRA_DELETE =   "DELETE FROM compra WHERE id =?";
+        
+       
+        /*
+        
+        public static  String _CREATE = 
+        public static  String _RETRIVE_ALL =  
+        public static  String _RETRIVE_ONE_ID =
+        public static  String _UPDATE =  
+        public static  String _DELETE = 
+                
+        public static  String _CREATE = 
+        public static  String _RETRIVE_ALL =  
+        public static  String _RETRIVE_ONE_ID =
+        public static  String _UPDATE =  
+        public static  String _DELETE = 
+                
+        public static  String _CREATE = 
+        public static  String _RETRIVE_ALL =  
+        public static  String _RETRIVE_ONE_ID =
+        public static  String _UPDATE =  
+        public static  String _DELETE = 
+                
+        public static  String _CREATE = 
+        public static  String _RETRIVE_ALL =  
+        public static  String _RETRIVE_ONE_ID =
+        public static  String _UPDATE =  
+        public static  String _DELETE = 
+                
+        public static  String _CREATE = 
+        public static  String _RETRIVE_ALL =  
+        public static  String _RETRIVE_ONE_ID =
+        public static  String _UPDATE =  
+        public static  String _DELETE = 
+                
+        public static  String _CREATE = 
+        public static  String _RETRIVE_ALL =  
+        public static  String _RETRIVE_ONE_ID =
+        public static  String _UPDATE =  
+        public static  String _DELETE = 
+                
+        public static  String _CREATE = 
+        public static  String _RETRIVE_ALL =  
+        public static  String _RETRIVE_ONE_ID =
+        public static  String _UPDATE =  
+        public static  String _DELETE = 
+*/
 }
 
