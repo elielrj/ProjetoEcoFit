@@ -9,8 +9,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import model.bo.Compra;
 import model.bo.Pagar;
-import view.TelaBuscaPagamentos;
-import view.TelaCadastroPagamento;
+import view.busca.TelaBuscaPagamentos;
+import view.cadastro.TelaCadastroPagamento;
 
 public class ControllerPagamentos implements ActionListener {
 
@@ -43,18 +43,19 @@ public class ControllerPagamentos implements ActionListener {
             Ativa(true);
             LimpaEstadoComponentes(false);
         } else if (e.getSource() == this.telaCadastroPagamento.getjButtonGravar()) {
-            //montar objeto a persistir
-            Pagar pagar = new Pagar();
-
-            pagar.setValorPago(Float.parseFloat(this.telaCadastroPagamento.getjFormattedTextFieldValorPago().getText()));
-            pagar.setValorDeDescontoNegociado(Float.parseFloat(this.telaCadastroPagamento.getjFormattedTextFieldValorDesconto().getText()));
-            pagar.setValorDeAcrescimo(Float.parseFloat(this.telaCadastroPagamento.getjFormattedTextFieldValorDesconto().getText()));
-            //pagar.setValorEmitido(Float.parseFloat(this.telaCadastroPagamento.getjFormattedTextFieldValorEmitido().getText()));
-            pagar.setData(this.telaCadastroPagamento.getjFormattedTextFieldDataPagamento().getText());
-            pagar.setCompra((Compra) this.telaCadastroPagamento.getjComboBoxCompra().getSelectedItem());
+            Pagar pagar = new Pagar.PagarBuilder()
+                    .setData(this.telaCadastroPagamento.getjFormattedTextFieldDataPagamento().getText())//2
+                    .setHora(this.telaCadastroPagamento.getjFormattedTextField_Hora().getText())//3
+                    .setValorDeDescontoNegociado(Float.parseFloat(this.telaCadastroPagamento.getjFormattedTextFieldValorDesconto().getText()))//4
+                    .setValorDeAcrescimo(Float.parseFloat(this.telaCadastroPagamento.getjFormattedTextFieldValorDesconto().getText()))//5
+                    .setValorPago(Float.parseFloat(this.telaCadastroPagamento.getjFormattedTextFieldValorPago().getText()))//6            
+                    .setObservacao(this.telaCadastroPagamento.getjTextAreaObs().getText())//7
+                    .setCompra((Compra) this.telaCadastroPagamento.getjComboBoxCompra().getSelectedItem())//8
+                    .createPagar();
 
             if (codigo == 0) {
                 service.ServicePagar.Incluir(pagar);
+                
             } else {
                 pagar.setId(Integer.parseInt(this.telaCadastroPagamento.getjTextFieldId().getText()));
                 service.ServicePagar.Atualizar(pagar);
@@ -72,15 +73,17 @@ public class ControllerPagamentos implements ActionListener {
             if (codigo != 0) {
                 Ativa(false);
                 LimpaEstadoComponentes(true);
-                Pagar pagar = new Pagar();
-                pagar = service.ServicePagar.Buscar(codigo);
-                this.telaCadastroPagamento.getjTextFieldId().setText(pagar.getId() + "");
-                // this.telaCadastroPagamento.getjFormattedTextFieldValorEmitido().setText(pagar.getValorRecebido()+ "");
-                this.telaCadastroPagamento.getjFormattedTextFieldValorDesconto().setText(pagar.getValorDeDescontoNegociado() + "");
-                this.telaCadastroPagamento.getjFormattedTextFieldValorAcrescimo().setText(pagar.getValorDeAcrescimo() + "");
-                //this.telaCadastroPagamento.getjFormattedTextFieldDataEmissao().setText(pagar.getData());
-                //this.telaCadastroPagamento.getjComboBoxVendasId().setSelectedItem(pagar.getVenda());
-
+                Pagar pagar = service.ServicePagar.Buscar(codigo);
+                
+                this.telaCadastroPagamento.getjTextFieldId().setText(pagar.getId() + "");//1
+                this.telaCadastroPagamento.getjFormattedTextFieldDataPagamento().setText(pagar.getData());//2
+                this.telaCadastroPagamento.getjFormattedTextField_Hora().setText(pagar.getHora());//3
+                this.telaCadastroPagamento.getjFormattedTextFieldValorDesconto().setText(pagar.getValorDeDescontoNegociado() + "");//4
+                this.telaCadastroPagamento.getjFormattedTextFieldValorAcrescimo().setText(pagar.getValorDeAcrescimo() + "");//5
+                this.telaCadastroPagamento.getjFormattedTextFieldValorPago().setText(pagar.getValorPago()+ "");//6
+                this.telaCadastroPagamento.getjTextAreaObs().setText(pagar.getObservacao());//7
+                this.telaCadastroPagamento.getjComboBoxCompra().setSelectedItem(pagar.getCompra());//8
+                
                 this.telaCadastroPagamento.getjTextFieldId().setEnabled(false);
             }
         }

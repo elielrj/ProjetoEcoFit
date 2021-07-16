@@ -11,8 +11,8 @@ import model.bo.Bairro;
 import model.bo.PessoaFisica;
 import model.bo.Endereco;
 
-import view.TelaBuscaPessoaFisica;
-import view.TelaCadastroPessoaFisica;
+import view.busca.TelaBuscaPessoaFisica;
+import view.cadastro.TelaCadastroPessoaFisica;
 
 public class ControllerPessoaFisica implements ActionListener {
 

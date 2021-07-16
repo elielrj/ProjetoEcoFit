@@ -10,12 +10,12 @@ import javax.swing.JTextField;
 import model.bo.PessoaFisica;
 import model.bo.Receber;
 import model.bo.Venda;
-import view.TelaBuscaReceber;
-import view.TelaCadastroReceber;
+import view.busca.TelaBuscaReceber;
+import view.cadastro.TelaCadastroReceber;
 
 public class ControllerRecebebimento implements ActionListener {
 
-    TelaCadastroReceber telaCadastroReceber = new TelaCadastroReceber();
+    TelaCadastroReceber telaCadastroReceber;
     public static int codigo;
 
     public ControllerRecebebimento(TelaCadastroReceber telaCadastroReceber) {
@@ -44,19 +44,19 @@ public class ControllerRecebebimento implements ActionListener {
             Ativa(true);
             LimpaEstadoComponentes(false);
         } else if (e.getSource() == this.telaCadastroReceber.getjButtonGravar()) {
-            //montar objeto a persistir
-            Receber receber = new Receber();
-
-            receber.setValorRecebido(Float.parseFloat(this.telaCadastroReceber.getjFormattedTextFieldValorPago().getText()));
-            receber.setValorDeDescontoNegociado(Float.parseFloat(this.telaCadastroReceber.getjFormattedTextFieldValorDesconto().getText()));
-            receber.setValorDeAcrescimo(Float.parseFloat(this.telaCadastroReceber.getjFormattedTextFieldValorDesconto().getText()));
-            receber.setData(this.telaCadastroReceber.getjFormattedTextFieldDataEmissao().getText());
-            receber.setVenda((Venda) this.telaCadastroReceber.getjComboBoxVendasId().getSelectedItem());
-
+            Receber receber = new Receber.ReceberBuilder()
+                    .setData(this.telaCadastroReceber.getjFormattedTextFieldDataEmissao().getText())//2
+                    .setHora(this.telaCadastroReceber.getjFormattedTextField_Hora().getText())//3
+                    .setValorDeDescontoNegociado(Float.parseFloat(this.telaCadastroReceber.getjFormattedTextFieldValorDesconto().getText()))//4
+                    .setValorDeAcrescimo(Float.parseFloat(this.telaCadastroReceber.getjFormattedTextFieldValorDesconto().getText()))//5
+                    .setValorRecebido(Float.parseFloat(this.telaCadastroReceber.getjFormattedTextFieldValorPago().getText()))//6
+                    .setObservacao(this.telaCadastroReceber.getjTextAreaObs().getText())//7
+                    .setVenda((Venda) this.telaCadastroReceber.getjComboBoxVendasId().getSelectedItem())//8
+                    .createReceber();
             if (codigo == 0) {
                 service.ServiceReceber.Incluir(receber);
             } else {
-                receber.setId(Integer.parseInt(this.telaCadastroReceber.getjTextFieldId().getText()));
+                receber.setId(Integer.parseInt(this.telaCadastroReceber.getjTextFieldId().getText()));//1
                 service.ServiceReceber.Atualizar(receber);
             }
             Ativa(true);
@@ -72,7 +72,7 @@ public class ControllerRecebebimento implements ActionListener {
             if (codigo != 0) {
                 Ativa(false);
                 LimpaEstadoComponentes(true);
-                Receber receber = new Receber();
+                Receber receber = new Receber.ReceberBuilder().createReceber();
                 receber = service.ServiceReceber.Buscar(codigo);
                 this.telaCadastroReceber.getjTextFieldId().setText(receber.getId() + "");
                 this.telaCadastroReceber.getjFormattedTextFieldValorEmitido().setText(receber.getValorRecebido() + "");

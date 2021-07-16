@@ -3,7 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
-import view.TelaBuscaProduto;
+import view.busca.TelaBuscaProduto;
 import model.bo.Produto;
 
 public class ControllerProdutoBusca implements ActionListener {
@@ -27,7 +27,7 @@ public class ControllerProdutoBusca implements ActionListener {
                 produtoDaLista.getUnidadeDeVenda(),
                 produtoDaLista.getCorrelacaoUnidade(),
                 produtoDaLista.getValor(),
-                produtoDaLista.getQuantidadeDeEstoque(),
+                service.ServiceEstoque.BuscarEstoquePorIdDoProduto(produtoDaLista.getId()),
                 produtoDaLista.getCodigoDeBarras(),
                 produtoDaLista.getObservacao(),
                 produtoDaLista.getStatus()

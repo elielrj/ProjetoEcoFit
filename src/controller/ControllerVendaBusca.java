@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import view.TelaBuscaVenda;
+import view.busca.TelaBuscaVenda;
 import model.bo.Venda;
 
 public class ControllerVendaBusca implements ActionListener {

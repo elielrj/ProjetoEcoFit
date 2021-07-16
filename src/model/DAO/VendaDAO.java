@@ -22,12 +22,13 @@ public class VendaDAO implements InterfaceDAO<Venda> {
             pstm = conexao.prepareStatement(sqlExecutar);
             pstm.setString(1, objeto.getData());
             pstm.setString(2, objeto.getHora());
-            pstm.setString(3, objeto.getDataDeVencimento());
-            pstm.setString(4, objeto.getObservacao());
-            pstm.setFloat(5, objeto.getValorDoDesconto());
-            pstm.setFloat(6, objeto.getValorTotal());
-            pstm.setBoolean(7, objeto.getStatus());
-            pstm.setInt(8, objeto.getPessoaFisica().getId());
+            pstm.setString(3, objeto.getUserCaixa());
+            pstm.setString(4, objeto.getDataDeVencimento());
+            pstm.setString(5, objeto.getObservacao());
+            pstm.setFloat(6, objeto.getValorDoDesconto());
+            pstm.setFloat(7, objeto.getValorTotal());
+            pstm.setBoolean(8, objeto.getStatus());
+            pstm.setInt(9, objeto.getPessoaFisica().getId());
 
             pstm.executeUpdate();
 
@@ -55,18 +56,19 @@ public class VendaDAO implements InterfaceDAO<Venda> {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-                Venda venda = new Venda();
-                venda.setId(rs.getInt("id"));
-                venda.setData(rs.getString("data"));
-                venda.setHora(rs.getString("hora"));
-                venda.setDataDeVencimento(rs.getString("dataDeVencimento"));
-                venda.setObservacao(rs.getString("observacao"));
-                venda.setValorDoDesconto(rs.getFloat("valorDoDesconto"));
-                venda.setValorTotal(rs.getFloat("valorTotal"));
-
-                PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
-                venda.setPessoaFisica(pessoaFisicaDAO.Retrieve(rs.getInt("pessoaFisicaId")));
-
+                Venda venda = new Venda.VendaBuilder()
+                        .setId(rs.getInt("id"))
+                        .setData(rs.getString("data"))
+                        .setHora(rs.getString("hora"))
+                        .setDataDeVencimento(rs.getString("dataDeVencimento"))
+                        .setObservacao(rs.getString("observacao"))
+                        .setValorDoDesconto(rs.getFloat("valorDoDesconto"))
+                        .setValorTotal(rs.getFloat("valorTotal"))
+                        .setStatus(rs.getBoolean("status"))
+                        .setPessoaFisica(
+                                service.ServicePessoaFisica.Buscar(rs.getInt("pessoaFisicaId"))
+                        )
+                        .createVenda();
                 vendas.add(venda);
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
@@ -91,20 +93,21 @@ public class VendaDAO implements InterfaceDAO<Venda> {
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
 
-            Venda venda = new Venda();
+            Venda venda = new Venda.VendaBuilder().createVenda();
 
             while (rs.next()) {
                 venda.setId(rs.getInt("id"));
                 venda.setData(rs.getString("data"));
                 venda.setHora(rs.getString("hora"));
+                venda.setUserCaixa(rs.getString("usercaixa"));
                 venda.setDataDeVencimento(rs.getString("dataDeVencimento"));
                 venda.setObservacao(rs.getString("observacao"));
                 venda.setValorDoDesconto(rs.getFloat("valorDoDesconto"));
                 venda.setValorTotal(rs.getFloat("valorTotal"));
                 venda.setStatus(rs.getBoolean("status"));
-
-                PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
-                venda.setPessoaFisica(pessoaFisicaDAO.Retrieve(rs.getInt("pessoaFisicaId")));
+                venda.setPessoaFisica(
+                        service.ServicePessoaFisica.Buscar(rs.getInt("pessoaFisicaId"))
+                );
 
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
@@ -127,13 +130,14 @@ public class VendaDAO implements InterfaceDAO<Venda> {
 
             pstm.setString(1, objeto.getData());
             pstm.setString(2, objeto.getHora());
-            pstm.setString(3, objeto.getDataDeVencimento());
-            pstm.setString(4, objeto.getObservacao());
-            pstm.setDouble(5, objeto.getValorDoDesconto());
-            pstm.setDouble(6, objeto.getValorTotal());
-            pstm.setBoolean(7, objeto.getStatus());
-            pstm.setInt(8, objeto.getPessoaFisica().getId());
-            pstm.setInt(9, objeto.getId());
+            pstm.setString(3, objeto.getUserCaixa());
+            pstm.setString(4, objeto.getDataDeVencimento());
+            pstm.setString(5, objeto.getObservacao());
+            pstm.setDouble(6, objeto.getValorDoDesconto());
+            pstm.setDouble(7, objeto.getValorTotal());
+            pstm.setBoolean(8, objeto.getStatus());
+            pstm.setInt(9, objeto.getPessoaFisica().getId());
+            pstm.setInt(10, objeto.getId());
             pstm.executeUpdate();
 
         } catch (Exception ex) {
@@ -181,7 +185,10 @@ public class VendaDAO implements InterfaceDAO<Venda> {
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return venda.getId();
         } catch (Exception ex) {
-            ConectionFactory.closeConnection(conexao, pstm, rs);
+            throw new RuntimeException(" \nCLASSE: VendaDAO->Retrive\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
         }
     }
 

@@ -11,8 +11,8 @@ import model.bo.Bairro;
 import model.bo.Fornecedor;
 import model.bo.Endereco;
 
-import view.TelaBuscaFornecedor;
-import view.TelaCadastroFornecedor;
+import view.busca.TelaBuscaFornecedor;
+import view.cadastro.TelaCadastroFornecedor;
 
 public class ControllerFornecedor implements ActionListener {
 

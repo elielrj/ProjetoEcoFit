@@ -25,10 +25,10 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
             pstm.setString(3, objeto.getUnidadeDeVenda());
             pstm.setString(4, objeto.getCorrelacaoUnidade());
             pstm.setDouble(5, objeto.getValor());
-            pstm.setInt(6, objeto.getQuantidadeDeEstoque());
-            pstm.setString(7, objeto.getCodigoDeBarras());
-            pstm.setBoolean(8, objeto.getStatus());
-            pstm.setString(9, objeto.getObservacao());
+
+            pstm.setString(6, objeto.getCodigoDeBarras());
+            pstm.setBoolean(7, objeto.getStatus());
+            pstm.setString(8, objeto.getObservacao());
 
             pstm.executeUpdate();
 
@@ -55,19 +55,17 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
             List<Produto> produtos = new ArrayList();
 
             while (rs.next()) {
-                Produto produto = new Produto();
-
-                produto.setId(rs.getInt("id"));
-                produto.setDescricao(rs.getString("descricao"));
-                produto.setUnidadeDeCompra(rs.getString("unidadeDeCompra"));
-                produto.setUnidadeDeVenda(rs.getString("unidadeDeVenda"));
-                produto.setCorrelacaoUnidade(rs.getString("correlacaoUnidade"));
-                produto.setValor(rs.getFloat("valor"));
-                produto.setQuantidadeDeEstoque(rs.getInt("quantidadeDeEstoque"));
-                produto.setCodigoDeBarras(rs.getString("codigoDeBarras"));
-                produto.setStatus(rs.getBoolean("status"));
-                produto.setObservacao(rs.getString("observacao"));
-
+                Produto produto = new Produto.ProdutoBuilder()
+                        .setId(rs.getInt("id"))
+                        .setDescricao(rs.getString("descricao"))
+                        .setUnidadeDeCompra(rs.getString("unidadeDeCompra"))
+                        .setUnidadeDeVenda(rs.getString("unidadeDeVenda"))
+                        .setCorrelacaoUnidade(rs.getString("correlacaoUnidade"))
+                        .setValor(rs.getFloat("valor"))
+                        .setCodigoDeBarras(rs.getString("codigoDeBarras"))
+                        .setStatus(rs.getBoolean("status"))
+                        .setObservacao(rs.getString("observacao"))
+                        .createProduto();
                 produtos.add(produto);
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
@@ -92,7 +90,7 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
 
-            Produto produto = new Produto();
+            Produto produto = new Produto.ProdutoBuilder().createProduto();
 
             while (rs.next()) {
 
@@ -102,7 +100,6 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
                 produto.setUnidadeDeVenda(rs.getString("unidadeDeVenda"));
                 produto.setCorrelacaoUnidade(rs.getString("correlacaoUnidade"));
                 produto.setValor(rs.getFloat("valor"));
-                produto.setQuantidadeDeEstoque(rs.getInt("quantidadeDeEstoque"));
                 produto.setCodigoDeBarras(rs.getString("codigoDeBarras"));
                 produto.setStatus(rs.getBoolean("status"));
                 produto.setObservacao(rs.getString("observacao"));
@@ -128,11 +125,8 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
             pstm = conexao.prepareStatement(sqlExecutar);
             pstm.setString(1, codigodeBarrasDoProduto);
             rs = pstm.executeQuery();
-
             Produto produto = new Produto.ProdutoBuilder().createProduto();
-
             while (rs.next()) {
-
                 produto.setId(rs.getInt("id"));//1
                 produto.setDescricao(rs.getString("descricao"));//2
                 produto.setUnidadeDeCompra(rs.getString("unidadeDeCompra"));//3
@@ -142,7 +136,6 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
                 produto.setCodigoDeBarras(rs.getString("codigoDeBarras"));//7
                 produto.setStatus(rs.getBoolean("status"));//8
                 produto.setObservacao(rs.getString("observacao"));//9
-
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return produto;
@@ -151,7 +144,7 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
             return null;
         }
     }
-    
+
     @Override
     public void Update(Produto objeto) {
         Connection conexao = ConectionFactory.getConection();
@@ -166,14 +159,11 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
             pstm.setString(3, objeto.getUnidadeDeVenda());
             pstm.setString(4, objeto.getCorrelacaoUnidade());
             pstm.setDouble(5, objeto.getValor());
-            pstm.setInt(6, objeto.getQuantidadeDeEstoque());
-            pstm.setString(7, objeto.getCodigoDeBarras());
-            pstm.setBoolean(8, objeto.getStatus());
-            pstm.setString(9, objeto.getObservacao());
-            pstm.setInt(10, objeto.getId());
-
+            pstm.setString(6, objeto.getCodigoDeBarras());
+            pstm.setBoolean(7, objeto.getStatus());
+            pstm.setString(8, objeto.getObservacao());
+            pstm.setInt(9, objeto.getId());
             pstm.executeUpdate();
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }

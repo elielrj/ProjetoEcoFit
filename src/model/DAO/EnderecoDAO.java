@@ -18,7 +18,7 @@ public class EnderecoDAO implements InterfaceDAO<Endereco> {
             pstm = conexao.prepareStatement(SQL.ENDERECO_CREATE);
             pstm.setString(1, objeto.getLogradouro());
             pstm.setString(2, objeto.getNumero());
-            pstm.setInt(3, objeto.getBairroId());
+            pstm.setInt(3, objeto.getBairro().getId());
             pstm.setString(4, objeto.getCep());
             pstm.setBoolean(5, objeto.getStatus());
             pstm.executeUpdate();
@@ -41,13 +41,16 @@ public class EnderecoDAO implements InterfaceDAO<Endereco> {
             rs = pstm.executeQuery();
             List<Endereco> enderecos = new ArrayList();
             while (rs.next()) {
-                Endereco endereco = new Endereco();
-                endereco.setId(rs.getInt("id"));
-                endereco.setLogradouro(rs.getString("logradouro"));
-                endereco.setNumero(rs.getString("numero"));
-                endereco.setBairroId(rs.getInt("bairroId"));
-                endereco.setCep(rs.getString("cep"));
-                endereco.setStatus(rs.getBoolean("status"));
+                Endereco endereco = new Endereco.EnderecoBuilder()
+                        .setId(rs.getInt("id"))
+                        .setLogradouro(rs.getString("logradouro"))
+                        .setNumero(rs.getString("numero"))
+                        .setBairro(
+                                service.ServiceBairro.Buscar(rs.getInt("bairroId"))
+                        )
+                        .setCep(rs.getString("cep"))
+                        .setStatus(rs.getBoolean("status"))
+                        .createEndereco();
                 enderecos.add(endereco);
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
@@ -69,12 +72,14 @@ public class EnderecoDAO implements InterfaceDAO<Endereco> {
             pstm = conexao.prepareStatement(SQL.ENDERECO_RETRIVE_ID);
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
-            Endereco endereco = new Endereco();
+            Endereco endereco = new Endereco.EnderecoBuilder().createEndereco();
             while (rs.next()) {
                 endereco.setId(rs.getInt("id"));
                 endereco.setLogradouro(rs.getString("logradouro"));
                 endereco.setNumero(rs.getString("numero"));
-                endereco.setBairroId(rs.getInt("bairroId"));
+                endereco.setBairro(
+                    service.ServiceBairro.Buscar(rs.getInt("bairroId"))
+                );
                 endereco.setCep(rs.getString("cep"));
                 endereco.setStatus(rs.getBoolean("status"));
             }
@@ -96,7 +101,7 @@ public class EnderecoDAO implements InterfaceDAO<Endereco> {
             pstm = conexao.prepareStatement(SQL.ENDERECO_UPDATE);
             pstm.setString(1, objeto.getLogradouro());
             pstm.setString(2, objeto.getNumero());
-            pstm.setInt(3, objeto.getBairroId());
+            pstm.setInt(3, objeto.getBairro().getId());
             pstm.setString(4, objeto.getCep());
             pstm.setBoolean(5, objeto.getStatus());
             pstm.setInt(6, objeto.getId());
@@ -126,7 +131,7 @@ public class EnderecoDAO implements InterfaceDAO<Endereco> {
             );
         }
     }
-    
+
     public void Delete(int idEndereco) {
         try {
             Connection conexao = ConectionFactory.getConection();
@@ -142,7 +147,7 @@ public class EnderecoDAO implements InterfaceDAO<Endereco> {
             );
         }
     }
-    
+
     public Endereco RetrievePorId(Endereco endereco) {
         try {
             Connection conexao = ConectionFactory.getConection();
@@ -152,12 +157,14 @@ public class EnderecoDAO implements InterfaceDAO<Endereco> {
             pstm.setString(1, endereco.getLogradouro());
             pstm.setString(2, endereco.getCep());
             rs = pstm.executeQuery();
-            Endereco enderecoRetorno = new Endereco();
+            Endereco enderecoRetorno = new Endereco.EnderecoBuilder().createEndereco();
             while (rs.next()) {
                 enderecoRetorno.setId(rs.getInt("id"));
                 enderecoRetorno.setLogradouro(rs.getString("logradouro"));
                 enderecoRetorno.setNumero(rs.getString("numero"));
-                enderecoRetorno.setBairroId(rs.getInt("bairroId"));
+                enderecoRetorno.setBairro(
+                        service.ServiceBairro.Buscar(rs.getInt("bairroId"))
+                );
                 enderecoRetorno.setCep(rs.getString("cep"));
                 enderecoRetorno.setStatus(rs.getBoolean("status"));
             }

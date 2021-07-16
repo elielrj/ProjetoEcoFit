@@ -3,7 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
-import view.TelaBuscaFornecedor;
+import view.busca.TelaBuscaFornecedor;
 import model.bo.Fornecedor;
 
 public class ControllerFornecedorBusca implements ActionListener {

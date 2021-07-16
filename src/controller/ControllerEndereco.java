@@ -11,9 +11,9 @@ import javax.swing.JTextField;
 import model.bo.Bairro;
 import model.bo.Cidade;
 import model.bo.Endereco;
-import view.TelaBuscaEndereco;
+import view.busca.TelaBuscaEndereco;
 
-import view.TelaCadastroEndereco;
+import view.cadastro.TelaCadastroEndereco;
 
 public class ControllerEndereco implements ActionListener {
 

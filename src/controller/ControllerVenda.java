@@ -1,30 +1,25 @@
 package controller;
 
+import controller.deletar.ControllerFaturamentoBusca;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import model.DAO.FaturamentoDAO;
-import model.DAO.ItemDeVendaDAO;
+import model.bo.Estoque;
 import model.bo.ItemDeVenda;
-import model.bo.PessoaFisica;
 import model.bo.Produto;
-import view.TelaBuscaPessoaFisica;
-import view.TelaBuscaProduto;
+import view.busca.TelaBuscaPessoaFisica;
+import view.busca.TelaBuscaProduto;
 import view.TelaFaturamento;
-import model.bo.Faturamento;
+import model.bo.deletar.Faturamento;
 import model.bo.Venda;
-import view.TelaBuscaFaturamento;
+import view.busca.TelaBuscaFaturamento;
 
 public class ControllerVenda implements ActionListener {
 
@@ -379,21 +374,39 @@ public class ControllerVenda implements ActionListener {
 
             for (ItemDeVenda itemDeVenda : venda.getItensDeVenda()) {
                 itemDeVenda.setVendaId(venda.getId());
+                
+                //ESTOQUE: 1º busca estoque pelo produtoId
+                Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdDoProduto(itemDeVenda.getProduto().getId());
+                //ESTOQUE: 2º setar a nova qtd no estoque
+                estoque.setQuantidade(estoque.getQuantidade() - itemDeVenda.getQuantidade());
+                service.ServiceEstoque.Atualizar(estoque);
+                //VENDA: finalmente inluir-la
                 service.ServiceItemDeVenda.Incluir(itemDeVenda);
+                
             }
-
+            
             //DEBITAR NO ESTOQUE!!!!!!!!!!
+            
         } else {
             //1º atualizar a venda
             service.ServiceVenda.Atualizar(venda);
 
             //2º deletar itens anterior no banco
+            //buscar antes de deletar!
+            ItemDeVenda itemDeVenda = service.ServiceItemDeVenda.Buscar(venda.getId());
+            
+            Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdDoProduto(itemDeVenda.getProduto().getId());
+            estoque.setQuantidade(
+                    estoque.getQuantidade() + itemDeVenda.getQuantidade()
+            );
+            service.ServiceEstoque.Atualizar(estoque);
+            
             service.ServiceItemDeVenda.Deletar(venda.getId());
             //3ºatualizar os itens c/ idVenda e incluir na tabela de itens de venda no banco          
 
-            for (ItemDeVenda itemDeVenda : venda.getItensDeVenda()) {
-                itemDeVenda.setVendaId(venda.getId());
-                service.ServiceItemDeVenda.Incluir(itemDeVenda);
+            for (ItemDeVenda item : venda.getItensDeVenda()) {
+                item.setVendaId(venda.getId());
+                service.ServiceItemDeVenda.Incluir(item);
             }
         }
 

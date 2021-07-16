@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import model.bo.Compra;
-import view.TelaBuscaPagamentos;
+import view.busca.TelaBuscaPagamentos;
 
 public class ControllerPagamentosBusca implements ActionListener {
 

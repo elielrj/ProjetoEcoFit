@@ -21,5 +21,12 @@ public final class SQL  {
         public static  String ENDERECO_RETRIVE_LOGRADOURO_AND_CEP = "SELECT  id,logradouro,numero,bairroId, cep,status FROM endereco  WHERE logradouro=? and cep=?";
         public static  String ENDERECO_UPDATE = "UPDATE endereco SET logradouro=?,numero=?,bairroId=?,cep=?,status=? WHERE id=?";
         public static  String ENDERECO_DELETE = "DELETE FROM endereco WHERE id = ?";
+        
+        public static  String ESTOQUE_CREATE = "INSERT INTO estoque(produtoid,quantidade) VALUES(?,?)";
+        public static  String ESTOQUE_RETRIVE_ALL =  "SELECT id,produtoid,quantidade FROM estoque";
+        public static  String ESTOQUE_RETRIVE_ONE_ID =  "SELECT id,produtoid,quantidade FROM estoque WHERE estoque.id=?";
+        public static  String ESTOQUE_RETRIVE_ONE_ID_PRODUTO_DO_ESTOQUE =  "SELECT id,produtoid,quantidade FROM estoque WHERE estoque.produtoid=?";
+        public static  String ESTOQUE_UPDATE =  "UPDATE estoque SET produtoid=?,quantidade=?  WHERE id=?";
+        public static  String ESTOQUE_DELETE =  "DELETE FROM estoque WHERE id = ?";
 }
 

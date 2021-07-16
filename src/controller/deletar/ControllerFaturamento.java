@@ -1,6 +1,5 @@
 package controller.deletar;
 
-import controller.ControllerFaturamentoBusca;
 import controller.ControllerPessoaFisicaBusca;
 import controller.ControllerProdutoBusca;
 import java.awt.Component;
@@ -20,11 +19,11 @@ import model.DAO.ItemDeVendaDAO;
 import model.bo.ItemDeVenda;
 import model.bo.PessoaFisica;
 import model.bo.Produto;
-import view.TelaBuscaPessoaFisica;
-import view.TelaBuscaProduto;
+import view.busca.TelaBuscaPessoaFisica;
+import view.busca.TelaBuscaProduto;
 import view.TelaFaturamento;
-import model.bo.Faturamento;
-import view.TelaBuscaFaturamento;
+import model.bo.deletar.Faturamento;
+import view.busca.TelaBuscaFaturamento;
 
 public class ControllerFaturamento implements ActionListener {
 

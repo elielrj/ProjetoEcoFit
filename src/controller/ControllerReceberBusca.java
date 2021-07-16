@@ -3,7 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
-import view.TelaBuscaReceber;
+import view.busca.TelaBuscaReceber;
 import model.bo.Receber;
 
 public class ControllerReceberBusca implements ActionListener {
@@ -17,7 +17,7 @@ public class ControllerReceberBusca implements ActionListener {
         this.telaBuscaReceber.getjButtonSair().addActionListener(this);
 
         //fazer a carga inicial do jtable
-        DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaReceber.getjTable1().getModel();
+        DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaReceber.getjTable_ReceberBusca().getModel();
 
         for (Receber receberDaLista : service.ServiceReceber.Buscar()) {
             tabela.addRow(new Object[]{receberDaLista.getId(),
@@ -37,7 +37,7 @@ public class ControllerReceberBusca implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.telaBuscaReceber.getjButtonCarregar()) {
-            ControllerRecebebimento.codigo = (int) this.telaBuscaReceber.getjTable1().getValueAt(this.telaBuscaReceber.getjTable1().getSelectedRow(), 0);
+            ControllerRecebebimento.codigo = (int) this.telaBuscaReceber.getjTable_ReceberBusca().getValueAt(this.telaBuscaReceber.getjTable_ReceberBusca().getSelectedRow(), 0);
             this.telaBuscaReceber.dispose();
         }
         if (e.getSource() == this.telaBuscaReceber.getjButtonSair()) {

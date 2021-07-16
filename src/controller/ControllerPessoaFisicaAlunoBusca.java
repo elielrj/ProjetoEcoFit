@@ -3,7 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
-import view.TelaBuscaPessoaFisica;
+import view.busca.TelaBuscaPessoaFisica;
 import model.bo.PessoaFisica;
 
 public class ControllerPessoaFisicaAlunoBusca implements ActionListener {

@@ -9,9 +9,10 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import model.bo.Estoque;
 import model.bo.Produto;
-import view.TelaBuscaProduto;
-import view.TelaCadastroProduto;
+import view.busca.TelaBuscaProduto;
+import view.cadastro.TelaCadastroProduto;
 
 public class ControllerProduto implements ActionListener {
 
@@ -44,24 +45,42 @@ public class ControllerProduto implements ActionListener {
             Ativa(true);
             LimpaEstadoComponentes(false);
         } else if (e.getSource() == this.telaCadastroProduto.getjButtonGravar()) {
-            //montar objeto a persistir
-            Produto produto = new Produto();
-            produto.setDescricao(this.telaCadastroProduto.getjTextFieldDescricao().getText());
-            produto.setUnidadeDeCompra(this.telaCadastroProduto.getjTextFieldUnCompra().getText());
-            produto.setUnidadeDeVenda((String) this.telaCadastroProduto.getjTextFieldUnVenda().getText());
-            produto.setCorrelacaoUnidade((String) this.telaCadastroProduto.getjTextFieldCorrelacao().getText());
-            produto.setValor(Float.parseFloat(this.telaCadastroProduto.getjTextFieldValorProduto().getText()));
-
-            produto.setQuantidadeDeEstoque(Integer.parseInt(this.telaCadastroProduto.getjTextFieldQtdEstoque().getText()));
-            produto.setCodigoDeBarras(this.telaCadastroProduto.getjTextFieldCodBarras().getText());
-            produto.setStatus(this.telaCadastroProduto.getjComboBoxStatus().getSelectedItem().equals("Sim"));
-            produto.setObservacao(this.telaCadastroProduto.getjTextAreaObs().getText());
-
+            Produto produto = new Produto.ProdutoBuilder()
+                .setDescricao(this.telaCadastroProduto.getjTextFieldDescricao().getText())//2
+                .setUnidadeDeCompra(this.telaCadastroProduto.getjTextFieldUnCompra().getText())//3
+                .setUnidadeDeVenda((String) this.telaCadastroProduto.getjTextFieldUnVenda().getText())//4
+                .setCorrelacaoUnidade((String) this.telaCadastroProduto.getjTextFieldCorrelacao().getText())//5
+                .setValor(Float.parseFloat(this.telaCadastroProduto.getjTextFieldValorProduto().getText()))//6
+                .setCodigoDeBarras(this.telaCadastroProduto.getjTextFieldCodBarras().getText())//7
+                .setStatus(this.telaCadastroProduto.getjComboBoxStatus().getSelectedItem().equals("Sim"))//8
+                .setObservacao(this.telaCadastroProduto.getjTextAreaObs().getText())//9
+                .createProduto();
+            Estoque estoque = new Estoque.EstoqueBuilder()                    
+                    .setQuantidade(Integer.parseInt(this.telaCadastroProduto.getjTextFieldQtdEstoque().getText()))
+                    .createEstoque();
+            
+            
             if (codigo == 0) {
                 service.ServiceProduto.Incluir(produto);
+                
+                produto = service.ServiceProduto.Buscar(produto.getCodigoDeBarras());
+                estoque.setProdutoId(produto.getId());
+                service.ServiceEstoque.Incluir(estoque);
+                
+                
             } else {
                 produto.setId(Integer.parseInt(this.telaCadastroProduto.getjTextFieldId().getText()));
                 service.ServiceProduto.Atualizar(produto);
+                
+                estoque.setProdutoId(produto.getId());
+                
+                estoque.setId(
+                    (service.ServiceEstoque.BuscarEstoquePorIdDoProduto(produto.getId())
+                    ).getId()
+                );
+                        
+                service.ServiceEstoque.Incluir(estoque);
+
             }
             Ativa(true);
             LimpaEstadoComponentes(false);
@@ -76,20 +95,23 @@ public class ControllerProduto implements ActionListener {
             if (codigo != 0) {
                 Ativa(false);
                 LimpaEstadoComponentes(true);
-                Produto produto = new Produto();
-                produto = service.ServiceProduto.Buscar(codigo);
-                this.telaCadastroProduto.getjTextFieldId().setText(produto.getId() + "");
-                this.telaCadastroProduto.getjTextFieldDescricao().setText(produto.getDescricao());
-                this.telaCadastroProduto.getjTextFieldUnCompra().setText(produto.getUnidadeDeCompra());
-                this.telaCadastroProduto.getjTextFieldUnVenda().setText(produto.getUnidadeDeVenda());
-                this.telaCadastroProduto.getjTextFieldCorrelacao().setText(produto.getCorrelacaoUnidade());
-                this.telaCadastroProduto.getjTextFieldValorProduto().setText(produto.getValor() + "");
+                Produto produto = service.ServiceProduto.Buscar(codigo);
+                
+                this.telaCadastroProduto.getjTextFieldId().setText(produto.getId() + "");//1
+                this.telaCadastroProduto.getjTextFieldDescricao().setText(produto.getDescricao());//2
+                this.telaCadastroProduto.getjTextFieldUnCompra().setText(produto.getUnidadeDeCompra());//3
+                this.telaCadastroProduto.getjTextFieldUnVenda().setText(produto.getUnidadeDeVenda());//4
+                this.telaCadastroProduto.getjTextFieldCorrelacao().setText(produto.getCorrelacaoUnidade());//5
+                this.telaCadastroProduto.getjTextFieldValorProduto().setText(produto.getValor() + "");//6
+                this.telaCadastroProduto.getjTextFieldCodBarras().setText(produto.getCodigoDeBarras());//7
+                this.telaCadastroProduto.getjComboBoxStatus().setSelectedItem(produto.getStatus());//8
+                this.telaCadastroProduto.getjTextAreaObs().setText(produto.getObservacao());//9
 
-                this.telaCadastroProduto.getjTextFieldQtdEstoque().setText(produto.getQuantidadeDeEstoque() + "");
-                this.telaCadastroProduto.getjTextFieldCodBarras().setText(produto.getCodigoDeBarras());
-                this.telaCadastroProduto.getjComboBoxStatus().setSelectedItem(produto.getStatus());
-                this.telaCadastroProduto.getjTextAreaObs().setText(produto.getObservacao());
-
+                this.telaCadastroProduto.getjTextFieldQtdEstoque().setText(
+                        service.ServiceEstoque.BuscarEstoquePorIdDoProduto(
+                                produto.getId())+""
+                );
+                
                 this.telaCadastroProduto.getjTextFieldId().setEnabled(false);
             }
         }

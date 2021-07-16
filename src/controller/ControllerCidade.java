@@ -8,8 +8,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import model.bo.Cidade;
-import view.TelaBuscaCidade;
-import view.TelaCadastroCidade;
+import view.busca.TelaBuscaCidade;
+import view.cadastro.TelaCadastroCidade;
 
 public class ControllerCidade implements ActionListener {
 

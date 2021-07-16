@@ -1,7 +1,7 @@
 package model.DAO;
 
 import java.util.List;
-import model.bo.Faturamento;
+import model.bo.deletar.Faturamento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

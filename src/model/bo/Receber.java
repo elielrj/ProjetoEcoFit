@@ -2,14 +2,14 @@ package model.bo;
 
 public class Receber {
 
-    private int id;
-    private String data;
-    private String hora;
-    private float valorDeDescontoNegociado;
-    private float valorDeAcrescimo;
-    private float valorRecebido;
-    private String observacao;
-    private Venda venda;
+    private int id;//1
+    private String data;//2
+    private String hora;//3
+    private float valorDeDescontoNegociado;//4
+    private float valorDeAcrescimo;//5
+    private float valorRecebido;//6
+    private String observacao;//7
+    private Venda venda;//8
 
     private Receber(ReceberBuilder receberBuilder) {
         this.id = receberBuilder.id;

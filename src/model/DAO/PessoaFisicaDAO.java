@@ -20,14 +20,14 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             pstm.setString(2, objeto.getRg());
             pstm.setString(3, objeto.getCpf());
             pstm.setString(4, objeto.getDataDeNascimento());
-
-            pstm.setString(5, objeto.getTelefone1());
-            pstm.setString(6, objeto.getTelefone2());
-            pstm.setString(7, objeto.getEmail());
-            pstm.setString(8, objeto.getObservacao());
-            pstm.setBoolean(9, objeto.getStatus());
-            pstm.setInt(10, objeto.getEndereco());
-            pstm.setString(11, objeto.getTipo());
+            pstm.setInt(5, objeto.getEndereco().getId());
+            pstm.setString(6, objeto.getTipo());
+            pstm.setString(7, objeto.getTelefone1());
+            pstm.setString(8, objeto.getTelefone2());
+            pstm.setString(9, objeto.getEmail());
+            pstm.setString(10, objeto.getObservacao());
+            pstm.setBoolean(11, objeto.getStatus());
+            pstm.setString(12, objeto.getComplemento());
 
             pstm.executeUpdate();
 
@@ -52,31 +52,23 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             List<PessoaFisica> pessoaFisicas = new ArrayList();
 
             while (rs.next()) {
-                PessoaFisica pessoaFisica = new PessoaFisica();
-
-                pessoaFisica.setId(rs.getInt("id"));
-                pessoaFisica.setNome(rs.getString("nome"));
-                pessoaFisica.setRg(rs.getString("rg"));
-
-                pessoaFisica.setCpf(rs.getString("cpf"));
-                pessoaFisica.setDataDeNascimento(rs.getString("dataDeNascimento"));
-                pessoaFisica.setTelefone1(rs.getString("telefone1"));
-
-                pessoaFisica.setTelefone2(rs.getString("telefone2"));
-                pessoaFisica.setEmail(rs.getString("email"));
-                pessoaFisica.setObservacao(rs.getString("observacao"));
-
-                pessoaFisica.setStatus(rs.getBoolean("status"));
-
-                // EnderecoDAO enderecoDAO = new EnderecoDAO();
-                pessoaFisica.setEndereco(
-                        (service.ServiceEndereco.Buscar(
-                                rs.getInt("enderecoId")
-                        )).getId()
-                );
-
-                pessoaFisica.setTipo(rs.getString("tipo"));
-
+                PessoaFisica pessoaFisica = new PessoaFisica.PessoaFisicaBuilder()
+                        .setId(rs.getInt("id"))
+                        .setNome(rs.getString("nome"))
+                        .setRg(rs.getString("rg"))
+                        .setCpf(rs.getString("cpf"))
+                        .setDataDeNascimento(rs.getString("dataDeNascimento"))
+                        .setEndereco(
+                                service.ServiceEndereco.Buscar(rs.getInt("enderecoId"))
+                        )
+                        .setTipo(rs.getString("tipo"))
+                        .setTelefone1(rs.getString("telefone1"))
+                        .setTelefone2(rs.getString("telefone2"))
+                        .setEmail(rs.getString("email"))
+                        .setObservacao(rs.getString("observacao"))
+                        .setStatus(rs.getBoolean("status"))
+                        .setComplemento(rs.getString("complemento"))
+                        .createPessoaFisica();
                 pessoaFisicas.add(pessoaFisica);
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
@@ -98,7 +90,7 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             pstm = conexao.prepareStatement(sqlExecutar);
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
-            PessoaFisica pessoaFisica = new PessoaFisica();
+            PessoaFisica pessoaFisica = new PessoaFisica.PessoaFisicaBuilder().createPessoaFisica();
 
             while (rs.next()) {
                 pessoaFisica.setId(rs.getInt("id"));
@@ -106,17 +98,16 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
                 pessoaFisica.setRg(rs.getString("rg"));
                 pessoaFisica.setCpf(rs.getString("cpf"));
                 pessoaFisica.setDataDeNascimento(rs.getString("dataDeNascimento"));
-
+                pessoaFisica.setEndereco(
+                        service.ServiceEndereco.Buscar(rs.getInt("enderecoId"))
+                );
+                pessoaFisica.setTipo(rs.getString("tipo"));
                 pessoaFisica.setTelefone1(rs.getString("telefone1"));
                 pessoaFisica.setTelefone2(rs.getString("telefone2"));
                 pessoaFisica.setEmail(rs.getString("email"));
                 pessoaFisica.setObservacao(rs.getString("observacao"));
                 pessoaFisica.setStatus(rs.getBoolean("status"));
-
-                EnderecoDAO enderecoDAO = new EnderecoDAO();
-                pessoaFisica.setEndereco((service.ServiceEndereco.Buscar(rs.getInt("enderecoId"))).getId());
-
-                pessoaFisica.setTipo(rs.getString("tipo"));
+                pessoaFisica.setComplemento(rs.getString("complemento"));
 
             }
 
@@ -142,14 +133,15 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             pstm.setString(2, objeto.getRg());
             pstm.setString(3, objeto.getCpf());
             pstm.setString(4, objeto.getDataDeNascimento());
+            pstm.setInt(5, objeto.getEndereco().getId());
+            pstm.setString(6, objeto.getTipo());
+            pstm.setString(7, objeto.getTelefone1());
+            pstm.setString(8, objeto.getTelefone2());
+            pstm.setString(9, objeto.getEmail());
+            pstm.setString(10, objeto.getObservacao());
+            pstm.setBoolean(11, objeto.getStatus());
+            pstm.setString(12, objeto.getComplemento());
 
-            pstm.setString(5, objeto.getTelefone1());
-            pstm.setString(6, objeto.getTelefone2());
-            pstm.setString(7, objeto.getEmail());
-            pstm.setString(8, objeto.getObservacao());
-            pstm.setBoolean(9, objeto.getStatus());
-            pstm.setInt(10, objeto.getEndereco());
-            pstm.setString(11, objeto.getTipo());
             pstm.setInt(12, objeto.getId());
 
             pstm.executeUpdate();
@@ -191,26 +183,26 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             List<PessoaFisica> pessoaFisicas = new ArrayList();
 
             while (rs.next()) {
-                PessoaFisica pessoaFisica = new PessoaFisica();
+                PessoaFisica pessoaFisica = new PessoaFisica.PessoaFisicaBuilder()
+                        .setId(rs.getInt("id"))
+                        .setNome(rs.getString("nome"))
+                        .setRg(rs.getString("rg"))
+                        .setCpf(rs.getString("cpf"))
+                        .setDataDeNascimento(rs.getString("dataDeNascimento"))
+                        .setEndereco(
+                                service.ServiceEndereco.Buscar(rs.getInt("enderecoId"))
+                        )
+                        .setTipo(rs.getString("tipo"))
+                        .setTelefone1(rs.getString("telefone1"))
+                        .setTelefone2(rs.getString("telefone2"))
+                        .setEmail(rs.getString("email"))
+                        .setObservacao(rs.getString("observacao"))
+                        .setStatus(rs.getBoolean("status"))
+                        .setComplemento(rs.getString("complemento"))
+                        .createPessoaFisica();
 
-                pessoaFisica.setId(rs.getInt("id"));
-                pessoaFisica.setNome(rs.getString("nome"));
-                pessoaFisica.setRg(rs.getString("rg"));
-
-                pessoaFisica.setCpf(rs.getString("cpf"));
-                pessoaFisica.setDataDeNascimento(rs.getString("dataDeNascimento"));
-                pessoaFisica.setTelefone1(rs.getString("telefone1"));
-
-                pessoaFisica.setTelefone2(rs.getString("telefone2"));
-                pessoaFisica.setEmail(rs.getString("email"));
-                pessoaFisica.setObservacao(rs.getString("observacao"));
-
-                pessoaFisica.setStatus(rs.getBoolean("status"));
-
-                EnderecoDAO enderecoDAO = new EnderecoDAO();
-                pessoaFisica.setEndereco((service.ServiceEndereco.Buscar(rs.getInt("enderecoId"))).getId());
-
-                pessoaFisica.setTipo(rs.getString("tipo"));
+        
+                 
 
                 pessoaFisicas.add(pessoaFisica);
             }
@@ -236,25 +228,23 @@ public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
             List<PessoaFisica> pessoaFisicas = new ArrayList();
 
             while (rs.next()) {
-                PessoaFisica pessoaFisica = new PessoaFisica();
-
-                pessoaFisica.setId(rs.getInt("id"));
-                pessoaFisica.setNome(rs.getString("nome"));
-                pessoaFisica.setRg(rs.getString("rg"));
-
-                pessoaFisica.setCpf(rs.getString("cpf"));
-                pessoaFisica.setDataDeNascimento(rs.getString("dataDeNascimento"));
-                pessoaFisica.setTelefone1(rs.getString("telefone1"));
-
-                pessoaFisica.setTelefone2(rs.getString("telefone2"));
-                pessoaFisica.setEmail(rs.getString("email"));
-                pessoaFisica.setObservacao(rs.getString("observacao"));
-
-                pessoaFisica.setStatus(rs.getBoolean("status"));
-
-                pessoaFisica.setEndereco((service.ServiceEndereco.Buscar(rs.getInt("enderecoId"))).getId());
-
-                pessoaFisica.setTipo(rs.getString("tipo"));
+                PessoaFisica pessoaFisica = new PessoaFisica.PessoaFisicaBuilder()
+                        .setId(rs.getInt("id"))
+                        .setNome(rs.getString("nome"))
+                        .setRg(rs.getString("rg"))
+                        .setCpf(rs.getString("cpf"))
+                        .setDataDeNascimento(rs.getString("dataDeNascimento"))
+                        .setEndereco(
+                                service.ServiceEndereco.Buscar(rs.getInt("enderecoId"))
+                        )
+                        .setTipo(rs.getString("tipo"))
+                        .setTelefone1(rs.getString("telefone1"))
+                        .setTelefone2(rs.getString("telefone2"))
+                        .setEmail(rs.getString("email"))
+                        .setObservacao(rs.getString("observacao"))
+                        .setStatus(rs.getBoolean("status"))
+                        .setComplemento(rs.getString("complemento"))
+                        .createPessoaFisica();
 
                 pessoaFisicas.add(pessoaFisica);
             }

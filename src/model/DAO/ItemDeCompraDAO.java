@@ -21,9 +21,9 @@ public class ItemDeCompraDAO implements InterfaceDAO<ItemDeCompra> {
         try {
             pstm = conexao.prepareStatement(sqlExecutar);
             pstm.setInt(1, objeto.getQuantidade());
-            pstm.setDouble(2, objeto.getValor());
+            pstm.setDouble(2, objeto.getSubTotal());
             pstm.setInt(3, objeto.getProduto().getId());
-            pstm.setInt(4, objeto.getCompra().getId());
+            pstm.setInt(4, objeto.getCompraId());
             pstm.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -48,18 +48,15 @@ public class ItemDeCompraDAO implements InterfaceDAO<ItemDeCompra> {
             List<ItemDeCompra> itensDeCompra = new ArrayList();
 
             while (rs.next()) {
-                ItemDeCompra itemDeCompra = new ItemDeCompra();
-
-                itemDeCompra.setId(rs.getInt("id"));
-                itemDeCompra.setQuantidade(rs.getInt("quantidade"));
-                itemDeCompra.setValor(rs.getFloat("valor"));
-
-                ProdutoDAO produtoDAO = new ProdutoDAO();
-                itemDeCompra.setProduto(produtoDAO.Retrieve(rs.getInt("produtoId")));
-
-                CompraDAO compraDAO = new CompraDAO();
-                itemDeCompra.setCompra(compraDAO.Retrieve(rs.getInt("compraId")));
-
+                ItemDeCompra itemDeCompra = new ItemDeCompra.ItemDeCompraBuilder()
+                        .setId(rs.getInt("id"))//1
+                        .setQuantidade(rs.getInt("quantidade"))//2
+                        .setSubTotal(rs.getFloat("valor"))//3
+                        .setProduto(
+                                service.ServiceProduto.Buscar(rs.getInt("produtoId"))
+                        )//4
+                        .setCompraId(rs.getInt("compraId"))//5
+                        .createItemDeCompra();
                 itensDeCompra.add(itemDeCompra);
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
@@ -84,18 +81,16 @@ public class ItemDeCompraDAO implements InterfaceDAO<ItemDeCompra> {
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
 
-            ItemDeCompra itemDeCompra = new ItemDeCompra();
+            ItemDeCompra itemDeCompra = new ItemDeCompra.ItemDeCompraBuilder().createItemDeCompra();
 
             while (rs.next()) {
                 itemDeCompra.setId(rs.getInt("id"));
                 itemDeCompra.setQuantidade(rs.getInt("quantidade"));
-                itemDeCompra.setValor(rs.getFloat("valor"));
-
-                ProdutoDAO produtoDAO = new ProdutoDAO();
-                itemDeCompra.setProduto(produtoDAO.Retrieve(rs.getInt("produtoId")));
-
-                CompraDAO compraDAO = new CompraDAO();
-                itemDeCompra.setCompra(compraDAO.Retrieve(rs.getInt("compraId")));
+                itemDeCompra.setSubTotal(rs.getFloat("valor"));
+                itemDeCompra.setProduto(
+                        service.ServiceProduto.Buscar(rs.getInt("produtoId"))
+                );
+                itemDeCompra.setCompraId(rs.getInt("compraId"));
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return itemDeCompra;
@@ -115,9 +110,9 @@ public class ItemDeCompraDAO implements InterfaceDAO<ItemDeCompra> {
         try {
             pstm = conexao.prepareStatement(sqlExecutar);
             pstm.setInt(1, objeto.getQuantidade());
-            pstm.setFloat(2, objeto.getValor());
+            pstm.setFloat(2, objeto.getSubTotal());
             pstm.setInt(3, objeto.getProduto().getId());
-            pstm.setInt(4, objeto.getCompra().getId());
+            pstm.setInt(4, objeto.getCompraId());
             pstm.setInt(5, objeto.getId());
             pstm.executeUpdate();
         } catch (Exception ex) {

@@ -7,7 +7,6 @@ import java.util.List;
 import model.bo.Cidade;
 import java.util.ArrayList;
 import model.DAO.SQL.SQL;
-import model.bo.CidadeBuilder;
 
 public class CidadeDAO implements InterfaceDAO<Cidade> {
 
@@ -40,7 +39,11 @@ public class CidadeDAO implements InterfaceDAO<Cidade> {
             rs = pstm.executeQuery();
             List<Cidade> cidades = new ArrayList();
             while (rs.next()) {
-                Cidade cidade = new CidadeBuilder().setId(rs.getInt("id")).setNome(rs.getString("nome")).setStatus(rs.getBoolean("status")).createCidade();
+                Cidade cidade = new Cidade.CidadeBuilder()
+                        .setId(rs.getInt("id"))
+                        .setNome(rs.getString("nome"))
+                        .setStatus(rs.getBoolean("status"))
+                        .createCidade();
                 cidades.add(cidade);
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
@@ -62,7 +65,7 @@ public class CidadeDAO implements InterfaceDAO<Cidade> {
             pstm = conexao.prepareStatement(SQL.CIDADE_RETRIVE_ONE_ID);
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
-            Cidade cidade = new Cidade();
+            Cidade cidade = new Cidade.CidadeBuilder().createCidade();
             while (rs.next()) {
                 cidade.setId(rs.getInt("id"));
                 cidade.setNome(rs.getString("nome"));

@@ -1,7 +1,7 @@
 package service;
 
 import java.util.List;
-import model.bo.Faturamento;
+import model.bo.deletar.Faturamento;
 import model.DAO.FaturamentoDAO;
 import model.bo.Venda;
 

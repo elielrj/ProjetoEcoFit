@@ -80,7 +80,7 @@ public class Produto {
         this.codigoDeBarras = codigoDeBarras;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 

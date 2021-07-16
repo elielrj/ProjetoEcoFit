@@ -20,12 +20,11 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
 
         try {
             pstm = conexao.prepareStatement(sqlExecutar);
-            pstm.setInt(1, objeto.getQuantidade());
-            pstm.setDouble(2, objeto.getValor());
-            pstm.setBoolean(3, objeto.getStatus());
-            pstm.setInt(4, objeto.getVendaId());
-            pstm.setInt(5, objeto.getProduto().getId());
-
+            pstm.setBoolean(1, objeto.getStatus());//2
+            pstm.setInt(2, objeto.getQuantidade());//3
+            pstm.setInt(3, objeto.getProduto().getId());//4
+            pstm.setDouble(4, objeto.getSubTotal());//5
+            pstm.setInt(5, objeto.getVendaId());//6
             pstm.executeUpdate();
 
         } catch (Exception ex) {
@@ -51,17 +50,16 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
             List<ItemDeVenda> itensDeVenda = new ArrayList();
 
             while (rs.next()) {
-                ItemDeVenda itemDeVenda = new ItemDeVenda();
-
-                itemDeVenda.setId(rs.getInt("id"));
-                itemDeVenda.setQuantidade(rs.getInt("quantidade"));
-                itemDeVenda.setValor(rs.getFloat("valor"));
-                itemDeVenda.setStatus(rs.getBoolean("status"));
-                itemDeVenda.setVendaId(rs.getInt("vendaId"));
-
-                ProdutoDAO produtoDAO = new ProdutoDAO();
-                itemDeVenda.setProduto(produtoDAO.Retrieve(rs.getInt("produtoId")));
-
+                ItemDeVenda itemDeVenda = new ItemDeVenda.ItemDeVendaBuilder()
+                        .setId(rs.getInt("id"))
+                        .setStatus(rs.getBoolean("status"))
+                        .setQuantidade(rs.getInt("quantidade"))
+                        .setProduto(
+                                service.ServiceProduto.Buscar(rs.getInt("produtoId"))
+                        )
+                        .setSubTotal(rs.getFloat("valor"))
+                        .setVendaId(rs.getInt("vendaId"))
+                        .createItemDeVenda();
                 itensDeVenda.add(itemDeVenda);
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
@@ -86,18 +84,17 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
 
-            ItemDeVenda itemDeVenda = new ItemDeVenda();
+            ItemDeVenda itemDeVenda = new ItemDeVenda.ItemDeVendaBuilder().createItemDeVenda();
 
             while (rs.next()) {
                 itemDeVenda.setId(rs.getInt("id"));
-                itemDeVenda.setQuantidade(rs.getInt("quantidade"));
-                itemDeVenda.setValor(rs.getFloat("valor"));
                 itemDeVenda.setStatus(rs.getBoolean("status"));
+                itemDeVenda.setQuantidade(rs.getInt("quantidade"));
+                itemDeVenda.setProduto(
+                        service.ServiceProduto.Buscar(rs.getInt("produtoId"))
+                );
+                itemDeVenda.setSubTotal(rs.getFloat("valor"));
                 itemDeVenda.setVendaId(rs.getInt("vendaId"));
-
-                ProdutoDAO produtoDAO = new ProdutoDAO();
-                itemDeVenda.setProduto(produtoDAO.Retrieve(rs.getInt("produtoId")));
-
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return itemDeVenda;
@@ -116,11 +113,12 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
 
         try {
             pstm = conexao.prepareStatement(sqlExecutar);
-            pstm.setInt(1, objeto.getQuantidade());
-            pstm.setFloat(2, objeto.getValor());
-            pstm.setBoolean(3, objeto.getStatus());
-            pstm.setInt(4, objeto.getVendaId());
-            pstm.setInt(5, objeto.getProduto().getId());
+
+            pstm.setBoolean(1, objeto.getStatus());
+            pstm.setInt(2, objeto.getQuantidade());
+            pstm.setInt(3, objeto.getProduto().getId());
+            pstm.setFloat(4, objeto.getSubTotal());
+            pstm.setInt(5, objeto.getVendaId());
             pstm.setInt(6, objeto.getId());
             pstm.executeUpdate();
         } catch (Exception ex) {
@@ -144,7 +142,7 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
         }
         ConectionFactory.closeConnection(conexao, pstm);
     }
-    
+
     public void Delete(int idVenda) {
         Connection conexao = ConectionFactory.getConection();
         String sqlExecutar = "DELETE FROM itemDeVenda WHERE itemdevenda.vendaid=?";
@@ -176,16 +174,16 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
             List<ItemDeVenda> itensDeVenda = new ArrayList<>();
 
             while (rs.next()) {
-                ItemDeVenda itemDeVenda = new ItemDeVenda();
-                itemDeVenda.setId(rs.getInt("id"));
-                itemDeVenda.setQuantidade(rs.getInt("quantidade"));
-                itemDeVenda.setValor(rs.getFloat("valor"));
-                itemDeVenda.setStatus(rs.getBoolean("status"));
-                itemDeVenda.setVendaId(rs.getInt("vendaId"));
-
-                ProdutoDAO produtoDAO = new ProdutoDAO();
-                itemDeVenda.setProduto(produtoDAO.Retrieve(rs.getInt("produtoId")));
-
+                ItemDeVenda itemDeVenda = new ItemDeVenda.ItemDeVendaBuilder()
+                        .setId(rs.getInt("id"))
+                        .setStatus(rs.getBoolean("status"))
+                        .setQuantidade(rs.getInt("quantidade"))
+                        .setProduto(
+                                service.ServiceProduto.Buscar(rs.getInt("produtoId"))
+                        )
+                        .setSubTotal(rs.getFloat("valor"))
+                        .setVendaId(rs.getInt("vendaId"))
+                        .createItemDeVenda();
                 itensDeVenda.add(itemDeVenda);
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
@@ -216,13 +214,12 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
             while (rs.next()) {
                 ItemDeVenda itemDeVenda = new ItemDeVenda.ItemDeVendaBuilder()
                         .setId(rs.getInt("id"))//1
-                        .setQuantidade(rs.getInt("quantidade"))//3
-                        .setSubTotal(rs.getFloat("valor"))//5
                         .setStatus(rs.getBoolean("status"))//2
-                        .setVendaId(rs.getInt("vendaId"))//6
+                        .setQuantidade(rs.getInt("quantidade"))//3
                         .setProduto(service.ServiceProduto.Buscar(rs.getInt("produtoId")))//4
+                        .setSubTotal(rs.getFloat("valor"))//5
+                        .setVendaId(rs.getInt("vendaId"))//6                        
                         .createItemDeVenda();
-
                 itensDeVenda.add(itemDeVenda);
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);

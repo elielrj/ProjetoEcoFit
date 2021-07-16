@@ -2,14 +2,14 @@ package model.bo;
 
 public class Pagar {
 
-    private int id;
-    private String data;
-    private String hora;
-    private float valorDeDescontoNegociado;
-    private float valorDeAcrescimo;
-    private float valorPago;
-    private String observacao;
-    private Compra compra;
+    private int id;//1
+    private String data;//2
+    private String hora;//3
+    private float valorDeDescontoNegociado;//4
+    private float valorDeAcrescimo;//5
+    private float valorPago;//6
+    private String observacao;//7
+    private Compra compra;//8
 
     private Pagar(PagarBuilder pagarBuilder) {
         this.id = pagarBuilder.id;

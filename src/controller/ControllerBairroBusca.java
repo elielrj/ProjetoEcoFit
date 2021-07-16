@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import view.TelaBuscaBairro;
+import view.busca.TelaBuscaBairro;
 import model.bo.Bairro;
 
 public class ControllerBairroBusca implements ActionListener {
