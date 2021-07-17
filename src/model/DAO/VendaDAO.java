@@ -102,6 +102,9 @@ public class VendaDAO implements InterfaceDAO<Venda> {
                         service.ServicePessoaFisica.Buscar(rs.getInt("pessoafisicaid"))
                 );
                 venda.setUserCaixa(rs.getString("usercaixa"));
+                venda.setItensDeVenda(
+                        service.ServiceItemDeVenda.BuscarListaDeUmaVenda(venda.getId())
+                );
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return venda;

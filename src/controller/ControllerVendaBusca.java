@@ -35,13 +35,14 @@ public class ControllerVendaBusca implements ActionListener {
         }else if (e.getSource() == this.telaBuscaVenda.getjButton_deletar()){
             try{
                 service.ServiceVenda.Deletar((int) 
+                        
                         this.telaBuscaVenda.getjTable_BuscaVendas().getValueAt(
                         this.telaBuscaVenda.getjTable_BuscaVendas().getSelectedRow(),0)
                 );
                 JOptionPane.showMessageDialog(null, "Venda deletado com sucesso!");
                 carregarDadosNaTabela();
             } catch (Exception ex) {
-                throw new RuntimeException(" \nCLASSE: ControllerBuscaBairro->actionPerformed(ActionEvent e)->deletar\nMENSAGEM:" 
+                throw new RuntimeException(" \nCLASSE: ControllerVendaBusca->actionPerformed(ActionEvent e)->deletar\nMENSAGEM:" 
                         + ex.getMessage() + "\nLOCALIZADO:" 
                         + ex.getLocalizedMessage()
                 );
