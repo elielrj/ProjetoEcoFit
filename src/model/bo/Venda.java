@@ -31,7 +31,7 @@ public class Venda {
         this.pessoaFisica = vendaBuilder.pessoaFisica;
         this.itensDeVenda = new ArrayList<>(); 
         dataHora();
-        
+        setUserCaixa("Eliel");
     }
 
     public int getId() {
@@ -225,11 +225,10 @@ public class Venda {
         adicionarItem(1,produto);
     }
     
-    public void removerItemDaLista(int numeroDaLinhasSelecionada){
-        itensDeVenda.remove(numeroDaLinhasSelecionada);
-        /*
+    public void removerItemDaLista(Produto produto){
+        
         for(ItemDeVenda i : itensDeVenda){
-            if (i.getProduto().getId() == numeroDaLinhasSelecionada){
+            if (i.getProduto().getId() == produto.getId()){
                 if (i.getQuantidade() > 1){
                     i.setQuantidade(i.getQuantidade() -1 );
                     break;
@@ -238,7 +237,7 @@ public class Venda {
                     break;
                 }
             }
-        }*/
+        }
     }
     
     public boolean existeItemNaLista(int idDaLinhaSelecionada) {
@@ -255,6 +254,9 @@ public class Venda {
         DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         this.setData(formatterData.format(agora));
 
+        //30 dias para pagamento
+        this.setDataDeVencimento(formatterData.format(agora.plusMonths(1)));
+        
         // formatar a hora
         DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
         this.setHora(formatterHora.format(agora));

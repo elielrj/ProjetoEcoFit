@@ -60,13 +60,14 @@ public class ControllerProdutoBusca implements ActionListener {
         tabela.getDataVector().removeAllElements();
 
         for (Produto produtoDaLista : service.ServiceProduto.Buscar()) {
-            tabela.addRow(new Object[]{produtoDaLista.getId(),
+            tabela.addRow(new Object[]{
+                produtoDaLista.getId(),
                 produtoDaLista.getDescricao(),
                 produtoDaLista.getUnidadeDeCompra(),
                 produtoDaLista.getUnidadeDeVenda(),
                 produtoDaLista.getCorrelacaoUnidade(),
                 produtoDaLista.getValor(),
-                service.ServiceEstoque.BuscarEstoquePorIdPeloProduto(produtoDaLista.getId()),
+                service.ServiceEstoque.BuscarAQuantidadeNoEstoqueComOIdDoProduto(produtoDaLista.getId()),
                 produtoDaLista.getCodigoDeBarras(),
                 produtoDaLista.getObservacao(),
                 produtoDaLista.getStatus()

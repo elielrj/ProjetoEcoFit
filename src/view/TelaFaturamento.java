@@ -105,7 +105,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Formulário de Cadastro de ...");
-        setPreferredSize(new java.awt.Dimension(902, 700));
+        setPreferredSize(new java.awt.Dimension(900, 700));
         setResizable(false);
 
         jPanelTitulo.setBackground(new java.awt.Color(204, 255, 0));
@@ -253,6 +253,7 @@ public class TelaFaturamento extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFormattedTextFieldFaturamentoHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel6.setText("Id Cliente");
 

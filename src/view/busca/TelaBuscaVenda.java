@@ -109,7 +109,7 @@ public class TelaBuscaVenda extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Data", "Hora", "Caixa", "Data Venc", "Obs", "Valor Desconto", "Total", "Status", "Possoa", "Qtd Itens"
+                "Id", "Data", "Hora", "Caixa", "Data Venc", "Obs", "Valor Desconto", "Total", "Status", "Pessoa", "Qtd Itens"
             }
         ));
         jScrollPane1.setViewportView(jTable_BuscaVendas);

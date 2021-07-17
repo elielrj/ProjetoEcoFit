@@ -113,7 +113,6 @@ public class EstoqueDAO implements InterfaceDAO<Estoque> {
     public void Update(Estoque objeto) {
         try {
             Connection conexao = ConectionFactory.getConection();
-
             PreparedStatement pstm = null;
             pstm = conexao.prepareStatement(SQL.ESTOQUE_UPDATE);
             pstm.setInt(1, objeto.getProdutoId());

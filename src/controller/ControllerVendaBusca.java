@@ -19,24 +19,8 @@ public class ControllerVendaBusca implements ActionListener {
         this.telaBuscaVenda.getjButtonSair().addActionListener(this);
         this.telaBuscaVenda.getjButton_deletar().addActionListener(this);
 
-        //fazer a carga inicial do jtable
-        DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaVenda.getjTable_BuscaVendas().getModel();
-
-        for (Venda vendaDaLista : service.ServiceVenda.Buscar()) {
-            tabela.addRow(new Object[]{
-                vendaDaLista.getId(),//1
-                vendaDaLista.getData(),//2
-                vendaDaLista.getHora(),//3
-                vendaDaLista.getUserCaixa(),//4
-                vendaDaLista.getDataDeVencimento(),//5
-                vendaDaLista.getObservacao(),//6
-                vendaDaLista.getValorDoDesconto(),//7
-                vendaDaLista.getValorTotal(),//8
-                vendaDaLista.getStatus(),//9
-                vendaDaLista.getPessoaFisica().getNome(),//10
-                vendaDaLista.quantidadeDeItensNaLista()//10
-            });
-        }
+        
+       carregarDadosNaTabela();
 
     }
 
@@ -50,8 +34,11 @@ public class ControllerVendaBusca implements ActionListener {
             this.telaBuscaVenda.dispose();
         }else if (e.getSource() == this.telaBuscaVenda.getjButton_deletar()){
             try{
-                service.ServiceBairro.Deletar((int) this.telaBuscaVenda.getjTable_BuscaVendas().getValueAt(this.telaBuscaVenda.getjTable_BuscaVendas().getSelectedRow(),0));
-                JOptionPane.showMessageDialog(null, "Bairro deletado com sucesso!");
+                service.ServiceVenda.Deletar((int) 
+                        this.telaBuscaVenda.getjTable_BuscaVendas().getValueAt(
+                        this.telaBuscaVenda.getjTable_BuscaVendas().getSelectedRow(),0)
+                );
+                JOptionPane.showMessageDialog(null, "Venda deletado com sucesso!");
                 carregarDadosNaTabela();
             } catch (Exception ex) {
                 throw new RuntimeException(" \nCLASSE: ControllerBuscaBairro->actionPerformed(ActionEvent e)->deletar\nMENSAGEM:" 

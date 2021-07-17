@@ -198,7 +198,7 @@
                     <Column editable="true" title="Valor Desconto" type="java.lang.Object"/>
                     <Column editable="true" title="Total" type="java.lang.Object"/>
                     <Column editable="true" title="Status" type="java.lang.Object"/>
-                    <Column editable="true" title="Possoa" type="java.lang.Object"/>
+                    <Column editable="true" title="Pessoa" type="java.lang.Object"/>
                     <Column editable="true" title="Qtd Itens" type="java.lang.Object"/>
                   </Table>
                 </Property>

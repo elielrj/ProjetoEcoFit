@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import model.DAO.SQL.SQL;
+import model.bo.Estoque;
+import model.bo.ItemDeVenda;
 
 public class VendaDAO implements InterfaceDAO<Venda> {
 
@@ -21,7 +23,7 @@ public class VendaDAO implements InterfaceDAO<Venda> {
             pstm = conexao.prepareStatement(SQL.VENDA_CREATE);
             pstm.setString(1, objeto.getData());
             pstm.setString(2, objeto.getHora());
-            
+
             pstm.setString(3, objeto.getDataDeVencimento());
             pstm.setString(4, objeto.getObservacao());
             pstm.setFloat(5, objeto.getValorDoDesconto());
@@ -40,16 +42,10 @@ public class VendaDAO implements InterfaceDAO<Venda> {
 
     @Override
     public List<Venda> Retrieve() {
-
         Connection conexao = ConectionFactory.getConection();
-
-        
-
         PreparedStatement pstm = null;
         ResultSet rs = null;
-
         List<Venda> vendas = new ArrayList();
-
         try {
             pstm = conexao.prepareStatement(SQL.VENDA_RETRIVE_ALL);
             rs = pstm.executeQuery();
@@ -57,7 +53,7 @@ public class VendaDAO implements InterfaceDAO<Venda> {
             while (rs.next()) {
                 Venda venda = new Venda.VendaBuilder()
                         .setId(rs.getInt("id"))
-                        .setData(rs.getString("data"))
+                        .setData(rs.getString("datavenda"))
                         .setHora(rs.getString("hora"))
                         .setDataDeVencimento(rs.getString("datavencimento"))
                         .setObservacao(rs.getString("observacao"))
@@ -83,8 +79,6 @@ public class VendaDAO implements InterfaceDAO<Venda> {
     public Venda Retrieve(int id) {
         Connection conexao = ConectionFactory.getConection();
 
-        
-
         PreparedStatement pstm = null;
         ResultSet rs = null;
 
@@ -97,7 +91,7 @@ public class VendaDAO implements InterfaceDAO<Venda> {
 
             while (rs.next()) {
                 venda.setId(rs.getInt("id"));
-                venda.setData(rs.getString("data"));
+                venda.setData(rs.getString("datavenda"));
                 venda.setHora(rs.getString("hora"));
                 venda.setDataDeVencimento(rs.getString("datavencimento"));
                 venda.setObservacao(rs.getString("observacao"));
@@ -107,7 +101,7 @@ public class VendaDAO implements InterfaceDAO<Venda> {
                 venda.setPessoaFisica(
                         service.ServicePessoaFisica.Buscar(rs.getInt("pessoafisicaid"))
                 );
-  venda.setUserCaixa(rs.getString("usercaixa"));
+                venda.setUserCaixa(rs.getString("usercaixa"));
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return venda;
@@ -120,7 +114,6 @@ public class VendaDAO implements InterfaceDAO<Venda> {
     @Override
     public void Update(Venda objeto) {
         Connection conexao = ConectionFactory.getConection();
-        
 
         PreparedStatement pstm = null;
 
@@ -151,8 +144,38 @@ public class VendaDAO implements InterfaceDAO<Venda> {
         PreparedStatement pstm = null;
 
         try {
+            
+            for (ItemDeVenda i : objeto.getItensDeVenda()){
+                Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdDoProduto(i.getProduto().getId());
+                estoque.setQuantidade(estoque.getQuantidade() + i.getQuantidade());
+                service.ServiceEstoque.Atualizar(estoque);
+                service.ServiceItemDeVenda.Deletar(i);
+            }
             pstm = conexao.prepareStatement(SQL.VENDA_DELETE);
             pstm.setInt(1, objeto.getId());
+            pstm.executeUpdate();
+        } catch (Exception ex) {
+            throw new RuntimeException(" \nCLASSE: BairroDAO->Retrive->bairroDAO\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
+        }
+    }
+    
+    public void Delete(int idVenda) {
+        Connection conexao = ConectionFactory.getConection();
+        PreparedStatement pstm = null;
+
+        try {
+            Venda venda = service.ServiceVenda.Buscar(idVenda);
+            for (ItemDeVenda i : venda.getItensDeVenda()){
+                Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdDoProduto(i.getProduto().getId());
+                estoque.setQuantidade(estoque.getQuantidade() + i.getQuantidade());
+                service.ServiceEstoque.Atualizar(estoque);
+                service.ServiceItemDeVenda.Deletar(i);
+            }
+            pstm = conexao.prepareStatement(SQL.VENDA_DELETE);
+            pstm.setInt(1, venda.getId());
             pstm.executeUpdate();
         } catch (Exception ex) {
             throw new RuntimeException(" \nCLASSE: BairroDAO->Retrive->bairroDAO\nMENSAGEM:"
@@ -164,7 +187,6 @@ public class VendaDAO implements InterfaceDAO<Venda> {
 
     public int Retrieve(Venda venda) {
         Connection conexao = ConectionFactory.getConection();
-
 
         PreparedStatement pstm = null;
         ResultSet rs = null;

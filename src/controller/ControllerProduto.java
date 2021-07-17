@@ -40,6 +40,7 @@ public class ControllerProduto implements ActionListener {
             Ativa(false);
             LimpaEstadoComponentes(true);
             this.telaCadastroProduto.getjTextFieldId().setEnabled(false);
+            this.telaCadastroProduto.getjTextField_EstoqueID().setEnabled(false);
             codigo = 0;
         } else if (e.getSource() == this.telaCadastroProduto.getjButtonCancelar()) {
             Ativa(true);
@@ -72,11 +73,8 @@ public class ControllerProduto implements ActionListener {
                 produto.setId(Integer.parseInt(this.telaCadastroProduto.getjTextFieldId().getText()));
                 service.ServiceProduto.Atualizar(produto);
                 
-                estoque.setProdutoId(produto.getId());
-                
-                estoque.setId(
-                    service.ServiceEstoque.BuscarEstoquePorIdPeloProduto(produto.getId())
-                );
+                estoque.setProdutoId(produto.getId());                
+                estoque.setId(Integer.parseInt(this.telaCadastroProduto.getjTextField_EstoqueID().getText()));
                         
                 service.ServiceEstoque.Atualizar(estoque);
 
@@ -105,13 +103,13 @@ public class ControllerProduto implements ActionListener {
                 this.telaCadastroProduto.getjTextFieldCodBarras().setText(produto.getCodigoDeBarras());//7
                 this.telaCadastroProduto.getjComboBoxStatus().setSelectedItem(produto.getStatus());//8
                 this.telaCadastroProduto.getjTextAreaObs().setText(produto.getObservacao());//9
-
-                this.telaCadastroProduto.getjTextFieldQtdEstoque().setText(
-                        service.ServiceEstoque.BuscarEstoquePorIdPeloProduto(
-                                produto.getId())+""
-                );
+                
+                Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdPeloProduto(produto.getId());
+                this.telaCadastroProduto.getjTextFieldQtdEstoque().setText(estoque.getQuantidade()+"");
+                this.telaCadastroProduto.getjTextField_EstoqueID().setText(estoque.getId()+"");
                 
                 this.telaCadastroProduto.getjTextFieldId().setEnabled(false);
+                this.telaCadastroProduto.getjTextField_EstoqueID().setEnabled(false);
             }
         }
 

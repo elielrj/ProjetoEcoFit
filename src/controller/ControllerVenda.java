@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -103,7 +104,7 @@ public class ControllerVenda implements ActionListener {
 
             //codigo = 0;
             TelaBuscaVenda TelaBuscaVenda = new TelaBuscaVenda(null, true);
-            ControllerVendaBusca controllerBuscaFaturamento = new ControllerVendaBusca(TelaBuscaVenda);
+            ControllerVendaBusca controllerVendaBusca = new ControllerVendaBusca(TelaBuscaVenda);
             TelaBuscaVenda.setVisible(true);
 
             if (codigo != 0) {
@@ -282,6 +283,11 @@ public class ControllerVenda implements ActionListener {
         LimpaEstadoComponentes(true);
         codigo = 0;
         this.telaFaturamento.getjComboBoxStatus().setSelectedItem("Faturando");
+        this.telaFaturamento.getjTextField_FaturamentoUsuario().setText(venda.getUserCaixa());
+        this.telaFaturamento.getjFormattedTextField_FaturamentoData().setText(venda.getData());
+        this.telaFaturamento.getjFormattedTextField_FaturamentoHora().setText(venda.getHora());
+        this.telaFaturamento.getjFormattedTextField_DataDeVencimento().setText(venda.getDataDeVencimento());
+        this.telaFaturamento.getjFormattedTextField_ValorDeDesconto().setText(venda.getValorDoDesconto() + "");
     }
 
     public void buscaClienteAluno() {
@@ -350,7 +356,7 @@ public class ControllerVenda implements ActionListener {
             tabela.addRow(new Object[]{});
         }
         this.telaFaturamento.getjTable_FaturamentoItens().setModel(tabela);
-        this.telaFaturamento.getjLabel_FaturamentoValorTotal().setText(venda.calcularValorTotal()+ "");
+        this.telaFaturamento.getjLabel_FaturamentoValorTotal().setText(venda.calcularValorTotal() + "");
     }
 
     private void gravarFaturamento() {
@@ -398,20 +404,35 @@ public class ControllerVenda implements ActionListener {
 
             //2º deletar itens anterior no banco
             //buscar antes de deletar!
-            ItemDeVenda itemDeVenda = service.ServiceItemDeVenda.Buscar(venda.getId());
+            List<ItemDeVenda> itensDeVenda = service.ServiceItemDeVenda.BuscarListaDeUmaVenda(venda.getId());
 
-            Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdDoProduto(itemDeVenda.getProduto().getId());
-            estoque.setQuantidade(
-                    estoque.getQuantidade() + itemDeVenda.getQuantidade()
-            );
-            service.ServiceEstoque.Atualizar(estoque);
+            for (ItemDeVenda itemDeVenda : itensDeVenda) {
+                Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdDoProduto(itemDeVenda.getProduto().getId());
+                estoque.setQuantidade(
+                        estoque.getQuantidade() + itemDeVenda.getQuantidade()
+                );
+                service.ServiceEstoque.Atualizar(estoque);
+                service.ServiceItemDeVenda.Deletar(itemDeVenda);
+            }
 
-            service.ServiceItemDeVenda.Deletar(venda.getId());
             //3ºatualizar os itens c/ idVenda e incluir na tabela de itens de venda no banco          
-
             for (ItemDeVenda item : venda.getItensDeVenda()) {
+                //Setar o IDVenda no item
                 item.setVendaId(venda.getId());
-                service.ServiceItemDeVenda.Incluir(item);
+                try {
+                    //buscar estoque, depois debitar e atualizar
+                    Estoque estoque = service.ServiceEstoque.Buscar(item.getProduto().getId());
+                    estoque.setQuantidade(estoque.getQuantidade() - item.getQuantidade());
+                    service.ServiceEstoque.Atualizar(estoque);
+                    //Incluir item
+                    service.ServiceItemDeVenda.Incluir(item);                    
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Estoque insuficiente!");
+                    throw new RuntimeException(" \nCLASSE: BairroDAO->Retrive->bairroDAO\nMENSAGEM:"
+                            + ex.getMessage() + "\nLOCALIZADO:"
+                            + ex.getLocalizedMessage()
+                    ); 
+                } 
             }
         }
 
@@ -426,11 +447,12 @@ public class ControllerVenda implements ActionListener {
 
     private void removerItemFaturado() {
 
-        int numeroDaLinhasSelecionada = this.telaFaturamento.getjTable_FaturamentoItens().getSelectionModel().getSelectionMode();
+       // int numeroDaLinhasSelecionada = this.telaFaturamento.getjTable_FaturamentoItens().getSelectionModel().getSelectionMode();
 
-        //idDaLinhaSelecionada = (int) this.telaFaturamento.getjTable_FaturamentoItens().getValueAt(
-        //        this.telaFaturamento.getjTable_FaturamentoItens().getSelectedRow(), 1);
-        venda.removerItemDaLista(numeroDaLinhasSelecionada);
+        int idDoProdutoSelecionado = (int) this.telaFaturamento.getjTable_FaturamentoItens().getValueAt(
+                this.telaFaturamento.getjTable_FaturamentoItens().getSelectedRow(), 1);
+        Produto produto = service.ServiceProduto.Buscar(idDoProdutoSelecionado);
+        venda.removerItemDaLista(produto);
         atualizarTabelaDeItens();
 
     }
@@ -487,7 +509,7 @@ public class ControllerVenda implements ActionListener {
         }
         return false;
     }
-    
+
     private void dataHora() {
 
         // data/hora atual

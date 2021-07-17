@@ -20,7 +20,7 @@ public class ServiceVenda {
 
     public static List<Venda> Buscar() {
         VendaDAO vendaDAO = new VendaDAO();
-        return (vendaDAO.Retrieve());
+        return vendaDAO.Retrieve();
     }
 
     public static Venda Buscar(int id) {
@@ -36,5 +36,10 @@ public class ServiceVenda {
     public static void Deletar(Venda objeto) {
         VendaDAO vendaDAO = new VendaDAO();
         vendaDAO.Delete(objeto);
+    }
+    
+    public static void Deletar(int idVenda) {
+        VendaDAO vendaDAO = new VendaDAO();
+        vendaDAO.Delete(idVenda);
     }
 }
