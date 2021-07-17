@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.List;
 import model.bo.Bairro;
 import java.util.ArrayList;
-import model.DAO.SQL.SQL;
 
 public class BairroDAO implements InterfaceDAO<Bairro> {
 

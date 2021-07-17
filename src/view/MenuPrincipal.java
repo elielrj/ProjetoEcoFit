@@ -36,14 +36,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuMovimentos = new javax.swing.JMenu();
         jMenuItemVendas = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem22 = new javax.swing.JMenuItem();
         jSeparator6 = new javax.swing.JPopupMenu.Separator();
         jMenuItem21 = new javax.swing.JMenuItem();
-        jSeparator7 = new javax.swing.JPopupMenu.Separator();
-        jMenuItemContasAPagar = new javax.swing.JMenuItem();
-        jMenuItemContasAReceber = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JPopupMenu.Separator();
         jMenuRelatorios = new javax.swing.JMenu();
         jMenuItemRelatorioBairros = new javax.swing.JMenuItem();
         jMenuItem12RelatorioCidades = new javax.swing.JMenuItem();
@@ -56,8 +54,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItemRelatorioProdutos = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
         jMenuCotas = new javax.swing.JMenu();
-        jMenuItemPagar = new javax.swing.JMenuItem();
-        jMenuItemReceber = new javax.swing.JMenuItem();
+        jMenuItemContasAReceber = new javax.swing.JMenuItem();
+        jMenuItemContasAPagar = new javax.swing.JMenuItem();
         jMenuItemRelatorioCompras = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -154,7 +152,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuCadastros);
 
-        jMenuMovimentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fornecedor.png"))); // NOI18N
+        jMenuMovimentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Notes.png"))); // NOI18N
         jMenuMovimentos.setText("Movimentos");
 
         jMenuItemVendas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/vendas.png"))); // NOI18N
@@ -165,6 +163,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuMovimentos.add(jMenuItemVendas);
+
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/OK.png"))); // NOI18N
+        jMenuItem6.setText("Receber");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenuMovimentos.add(jMenuItem6);
 
         jMenuItem22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/mensalidade.png"))); // NOI18N
         jMenuItem22.setText("Gerador Mensalidades");
@@ -184,26 +191,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuMovimentos.add(jMenuItem21);
-        jMenuMovimentos.add(jSeparator7);
 
-        jMenuItemContasAPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/contas.png"))); // NOI18N
-        jMenuItemContasAPagar.setText("Contas à Pagar");
-        jMenuItemContasAPagar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemContasAPagarActionPerformed(evt);
-            }
-        });
-        jMenuMovimentos.add(jMenuItemContasAPagar);
-
-        jMenuItemContasAReceber.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/contas.png"))); // NOI18N
-        jMenuItemContasAReceber.setText("Contas à Receber");
-        jMenuItemContasAReceber.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemContasAReceberActionPerformed(evt);
-            }
-        });
-        jMenuMovimentos.add(jMenuItemContasAReceber);
-
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/No.png"))); // NOI18N
         jMenuItem4.setText("Pagar");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,14 +200,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuMovimentos.add(jMenuItem4);
-
-        jMenuItem6.setText("Receber");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenuMovimentos.add(jMenuItem6);
+        jMenuMovimentos.add(jSeparator7);
 
         jMenuBar1.add(jMenuMovimentos);
 
@@ -294,21 +276,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuCotas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/contas.png"))); // NOI18N
         jMenuCotas.setText("Contas");
 
-        jMenuItemPagar.setText("Pagar");
-        jMenuItemPagar.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemContasAReceber.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/contas.png"))); // NOI18N
+        jMenuItemContasAReceber.setText("Contas à Receber");
+        jMenuItemContasAReceber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemPagarActionPerformed(evt);
+                jMenuItemContasAReceberActionPerformed(evt);
             }
         });
-        jMenuCotas.add(jMenuItemPagar);
+        jMenuCotas.add(jMenuItemContasAReceber);
 
-        jMenuItemReceber.setText("Receber");
-        jMenuItemReceber.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemContasAPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/contas.png"))); // NOI18N
+        jMenuItemContasAPagar.setText("Contas à Pagar");
+        jMenuItemContasAPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemReceberActionPerformed(evt);
+                jMenuItemContasAPagarActionPerformed(evt);
             }
         });
-        jMenuCotas.add(jMenuItemReceber);
+        jMenuCotas.add(jMenuItemContasAPagar);
 
         jMenuRelatorios.add(jMenuCotas);
 
@@ -464,18 +448,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     private void jMenuItemContasAPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContasAPagarActionPerformed
-       
+       TelaBuscaContaAPagar telaBuscaContaAPagar = new TelaBuscaContaAPagar(null, true);
+        ControllerContasAPagarBusca controllerContasAPagarBusca = new ControllerContasAPagarBusca(telaBuscaContaAPagar);
+        telaBuscaContaAPagar.setVisible(true);
     }//GEN-LAST:event_jMenuItemContasAPagarActionPerformed
 
-    private void jMenuItemPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPagarActionPerformed
-        
-    }//GEN-LAST:event_jMenuItemPagarActionPerformed
-
-    private void jMenuItemReceberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReceberActionPerformed
-        
-    }//GEN-LAST:event_jMenuItemReceberActionPerformed
-
     private void jMenuItemContasAReceberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContasAReceberActionPerformed
+        TelaBuscaContaAReceber telaBuscaContaAReceber = new TelaBuscaContaAReceber(null, true);
+        ControllerContasAReceberBusca controllerContasAReceberBusca = new ControllerContasAReceberBusca(telaBuscaContaAReceber);
+        telaBuscaContaAReceber.setVisible(true);  
         
     }//GEN-LAST:event_jMenuItemContasAReceberActionPerformed
 
@@ -568,8 +549,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemContasAPagar;
     private javax.swing.JMenuItem jMenuItemContasAReceber;
     private javax.swing.JMenuItem jMenuItemEnderecos;
-    private javax.swing.JMenuItem jMenuItemPagar;
-    private javax.swing.JMenuItem jMenuItemReceber;
     private javax.swing.JMenuItem jMenuItemRelatorioAlunos;
     private javax.swing.JMenuItem jMenuItemRelatorioBairros;
     private javax.swing.JMenuItem jMenuItemRelatorioCeps;

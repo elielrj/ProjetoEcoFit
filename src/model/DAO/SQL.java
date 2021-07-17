@@ -1,4 +1,4 @@
-package model.DAO.SQL;
+package model.DAO;
 
 public final class SQL {
 
@@ -90,6 +90,20 @@ public final class SQL {
     public static String VENDA_RETRIVE_VENDA_OBJ = "SELECT id FROM venda WHERE venda.valortotal=? and venda.pessoafisicaid=? and venda.datavenda=?";
     public static String VENDA_UPDATE = "UPDATE venda SET datavenda=?,hora=?,datavencimento= ?,observacao=?,valordesconto=?,valortotal =?,status=?,pessoafisicaid=?,usercaixa=? WHERE id=?";
     public static String VENDA_DELETE = "DELETE FROM venda WHERE id=?";
+   
+    public static String CONTA_A_PAGAR_CREATE = "INSERT INTO contaapagar(compraid,valor,status) VALUES(?,?,?)";
+    public static String CONTA_A_PAGAR_RETRIVE_ALL = "SELECT id,compraid,valor,status FROM contaapagar";
+    public static String CONTA_A_PAGAR_RETRIVE_ONE_ID = "SELECT id,compraid,valor,status FROM contaapagar WHERE contaapagar.id=?";
+    public static String CONTA_A_PAGAR_RETRIVE_ONE_ID_DA_COMPRA = "SELECT id,compraid,valor,status FROM contaapagar WHERE contaapagar.compraid=?";
+    public static String CONTA_A_PAGAR_UPDATE = "UPDATE contaapagar SET compraid=?,valor=?,status=? WHERE id=?";
+    public static String CONTA_A_PAGAR_DELETE = "DELETE FROM contaapagar WHERE id=?";
+    
+    public static String CONTA_A_RECEBER_CREATE = "INSERT INTO contaareceber(vendaid,valor,status) VALUES(?,?,?)";
+    public static String CONTA_A_RECEBER_RETRIVE_ALL = "SELECT id,vendaid,valor,status FROM contaareceber";
+    public static String CONTA_A_RECEBER_RETRIVE_ONE_ID = "SELECT id,vendaid,valor,status FROM contaareceber WHERE contaareceber.id=?";
+    public static String CONTA_A_RECEBER_RETRIVE_ONE_ID_DA_VENDA = "SELECT id,vendaid,valor,status FROM contaareceber WHERE contaareceber.vendaid=?";
+    public static String CONTA_A_RECEBER_UPDATE = "UPDATE contaareceber SET vendaid=?,valor=?,status=? WHERE id=?";
+    public static String CONTA_A_RECEBER_DELETE = "DELETE FROM contaareceber WHERE id=?";
 
 
     

@@ -6,7 +6,6 @@ import java.util.List;
 import model.bo.ItemDeVenda;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import model.DAO.SQL.SQL;
 
 public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
 

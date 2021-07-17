@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.List;
 import model.bo.Estoque;
 import java.util.ArrayList;
-import model.DAO.SQL.SQL;
 
 public class EstoqueDAO implements InterfaceDAO<Estoque> {
 

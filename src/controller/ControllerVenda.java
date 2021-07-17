@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import model.bo.ContaAReceber;
 import model.bo.Estoque;
 import model.bo.ItemDeVenda;
 import model.bo.Produto;
@@ -64,7 +65,7 @@ public class ControllerVenda implements ActionListener {
                     cancelarFaturamento();
                 } else if (evt.getKeyCode() == KeyEvent.VK_F4) {
                     //persistir no banco
-                    gravarFaturamento();
+                    gravarVenda();
                 } else if (evt.getKeyCode() == KeyEvent.VK_F5) {
                     //remover item selecionado
                     if (existeFaturamentoEmAndamento()) {
@@ -94,7 +95,7 @@ public class ControllerVenda implements ActionListener {
             // 3- GRAVAR
         } else if (e.getSource() == this.telaCadastroVenda.getjButton_Gravar()) {
             if (validarCliente()) {
-                gravarFaturamento();
+                gravarVenda();
             } else {
                 JOptionPane.showMessageDialog(null, "Selecione um cliente!");
                 this.telaCadastroVenda.getjTextField_ClienteId().requestFocus();
@@ -359,7 +360,7 @@ public class ControllerVenda implements ActionListener {
         this.telaCadastroVenda.getjLabel_FaturamentoValorTotal().setText(venda.calcularValorTotal() + "");
     }
 
-    private void gravarFaturamento() {
+    private void gravarVenda() {
 
         venda.setData(this.telaCadastroVenda.getjFormattedTextField_FaturamentoData().getText());//2
         venda.setHora(this.telaCadastroVenda.getjFormattedTextField_FaturamentoHora().getText());//3
@@ -382,7 +383,7 @@ public class ControllerVenda implements ActionListener {
             service.ServiceVenda.Incluir(venda);
             //Resgatar o Id da Venda
             venda.setId(service.ServiceVenda.Buscar(venda));
-            //2º incluir os itens c/ idVenda na tabela de itens de venda no banco
+            //2º incluir os itens c/ idVenda na tabela de itens de venda no banco           
 
             for (ItemDeVenda itemDeVenda : venda.getItensDeVenda()) {
                 itemDeVenda.setVendaId(venda.getId());
@@ -397,7 +398,14 @@ public class ControllerVenda implements ActionListener {
 
             }
 
-            //DEBITAR NO ESTOQUE!!!!!!!!!!
+            //3º criar conta a receber
+            ContaAReceber contaAReceber = new ContaAReceber.ContaAReceberBuilder()
+                    .setVendaId(venda.getId())
+                    .setValor(venda.getValorTotal())
+                    .setStatus(false)
+                    .createContaAReceber();
+            service.ServiceContaAReceber.Incluir(contaAReceber);
+            
         } else {
             //1º atualizar a venda
             service.ServiceVenda.Atualizar(venda);
@@ -434,6 +442,12 @@ public class ControllerVenda implements ActionListener {
                     ); 
                 } 
             }
+            
+            //4º atualizar conta a receber (BUSCA, ATUALIZA VALOR, E ATUALIZA)
+            ContaAReceber contaAReceber = service.ServiceContaAReceber.BuscarIdDaContaAReceberPeloIdDaVenda(venda.getId());
+            contaAReceber.setValor(venda.getValorTotal());
+            service.ServiceContaAReceber.Atualizar(contaAReceber);
+                    
         }
 
         Ativa(true);

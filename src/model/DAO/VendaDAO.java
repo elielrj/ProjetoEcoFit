@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import model.DAO.SQL.SQL;
 import model.bo.Estoque;
 import model.bo.ItemDeVenda;
 

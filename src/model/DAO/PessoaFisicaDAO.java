@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import model.DAO.SQL.SQL;
 import model.bo.PessoaFisica;
 
 public class PessoaFisicaDAO implements InterfaceDAO<PessoaFisica> {
