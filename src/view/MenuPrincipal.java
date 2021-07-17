@@ -44,8 +44,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItemContasAReceber = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuRelatorios = new javax.swing.JMenu();
         jMenuItemRelatorioBairros = new javax.swing.JMenuItem();
         jMenuItem12RelatorioCidades = new javax.swing.JMenuItem();
@@ -60,7 +58,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuCotas = new javax.swing.JMenu();
         jMenuItemPagar = new javax.swing.JMenuItem();
         jMenuItemReceber = new javax.swing.JMenuItem();
-        jMenuItemRelatorioFaturamentos = new javax.swing.JMenuItem();
         jMenuItemRelatorioCompras = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -223,12 +220,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenuMovimentos.add(jMenuItem6);
 
-        jMenuItem9.setText("Itens de Compra");
-        jMenuMovimentos.add(jMenuItem9);
-
-        jMenuItem3.setText("Itens de Venda");
-        jMenuMovimentos.add(jMenuItem3);
-
         jMenuBar1.add(jMenuMovimentos);
 
         jMenuRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/mensalidade.png"))); // NOI18N
@@ -321,15 +312,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuRelatorios.add(jMenuCotas);
 
-        jMenuItemRelatorioFaturamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/faturamento.png"))); // NOI18N
-        jMenuItemRelatorioFaturamentos.setText("Faturamentos");
-        jMenuItemRelatorioFaturamentos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemRelatorioFaturamentosActionPerformed(evt);
-            }
-        });
-        jMenuRelatorios.add(jMenuItemRelatorioFaturamentos);
-
         jMenuItemRelatorioCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/compras.png"))); // NOI18N
         jMenuItemRelatorioCompras.setText("Compras");
         jMenuItemRelatorioCompras.addActionListener(new java.awt.event.ActionListener() {
@@ -385,7 +367,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVendasActionPerformed
-        //
+        TelaCadastroVenda telaCadastroVenda = new TelaCadastroVenda();
+        ControllerVenda controllerVenda = new ControllerVenda(telaCadastroVenda);
+        telaCadastroVenda.setVisible(true);
     }//GEN-LAST:event_jMenuItemVendasActionPerformed
 
     private void jMenuItemCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCidadesActionPerformed
@@ -467,18 +451,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
-    private void jMenuItemRelatorioFaturamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioFaturamentosActionPerformed
-        TelaFaturamento telaFaturamento = new TelaFaturamento();
-        ControllerVenda controllerFaturamento = new ControllerVenda(telaFaturamento);
-        telaFaturamento.setVisible(true);
-    }//GEN-LAST:event_jMenuItemRelatorioFaturamentosActionPerformed
-
     private void jMenuItemRelatorioComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioComprasActionPerformed
-
+        TelaBuscaCompra telaBuscaCompra = new TelaBuscaCompra();
+        ControllerCompraBusca controllerCompraBusca = new ControllerCompraBusca(telaBuscaCompra);
+        telaBuscaCompra.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelatorioComprasActionPerformed
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
-        
+        TelaCadastroCompra telaCadastroCompra = new view.cadastro.TelaCadastroCompra();
+        ControllerCompra controllerCompra = new controller.ControllerCompra(telaCadastroCompra);
+        telaCadastroCompra.setVisible(true);        
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     private void jMenuItemContasAPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemContasAPagarActionPerformed
@@ -510,9 +492,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemEnderecosActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        TelaFaturamento telaFaturamento = new TelaFaturamento();
-        ControllerVenda controllerFaturamento = new ControllerVenda(telaFaturamento);
-        telaFaturamento.setVisible(true);
+        TelaBuscaVenda telaBuscaVenda = new TelaBuscaVenda();
+        ControllerVendaBusca controllerVendaBusca = new controller.ControllerVendaBusca(telaBuscaVenda);
+        telaBuscaVenda.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
@@ -575,13 +557,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem24;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem jMenuItemAlunos;
     private javax.swing.JMenuItem jMenuItemBairros;
     private javax.swing.JMenuItem jMenuItemCidades;
@@ -594,7 +574,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemRelatorioBairros;
     private javax.swing.JMenuItem jMenuItemRelatorioCeps;
     private javax.swing.JMenuItem jMenuItemRelatorioCompras;
-    private javax.swing.JMenuItem jMenuItemRelatorioFaturamentos;
     private javax.swing.JMenuItem jMenuItemRelatorioFornecedoreres;
     private javax.swing.JMenuItem jMenuItemRelatorioPersonal;
     private javax.swing.JMenuItem jMenuItemRelatorioProdutos;
