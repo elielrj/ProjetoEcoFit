@@ -97,5 +97,14 @@ public class ItemDeCompra {
         }
 
     }
+    
+     public Float calcularSubTotal(){
+        subTotal = quantidade * produto.getValor();
+        return subTotal;
+    }
+    
+    public void atualizarSubTotal(){
+        subTotal = quantidade * produto.getValor();
+    }
 
 }

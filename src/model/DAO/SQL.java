@@ -15,10 +15,11 @@ public final class SQL {
     public static String CIDADE_UPDATE = "UPDATE cidade SET nome=?,status=? WHERE id=?";
     public static String CIDADE_DELETE = "DELETE FROM cidade WHERE id=?";
     
-    public static String COMPRA_CREATE = "INSERT INTO compra(datacompra,hora,datavencimento,observacao,valordesconto,valortotal,status,fornecedorid ) VALUES(?,?,?,?,?,?,?,?,?)";
+    public static String COMPRA_CREATE = "INSERT INTO compra(datacompra,hora,datavencimento,observacao,valordesconto,valortotal,status,fornecedorid ) VALUES(?,?,?,?,?,?,?,?)";
     public static String COMPRA_RETRIVE_ALL = "SELECT id,datacompra,hora,datavencimento,observacao,valordesconto,valortotal,status,fornecedorid FROM compra";
     public static String COMPRA_RETRIVE_ONE_ID = "SELECT id,datacompra,hora,datavencimento,observacao,valordesconto,valortotal,status,fornecedorid FROM compra WHERE compra.id=?";
-    public static String COMPRA_UPDATE = "UPDATE compra SET data=?,hora=?,datavencimento=  ?,observacao=?,valordesconto=?,valortotal=?,status=?,fornecedorid=? WHERE id=?";
+    public static String COMPRA_RETRIVE_COMPRA_OBJ = "SELECT id FROM compra WHERE compra.valortotal=? and compra.fornecedorid=? and compra.datacompra=?";
+    public static String COMPRA_UPDATE = "UPDATE compra SET datacompra=?,hora=?,datavencimento= ?,observacao=?,valordesconto=?,valortotal=?,status=?,fornecedorid=? WHERE compra.id=?";
     public static String COMPRA_DELETE = "DELETE FROM compra WHERE id =?";
 
     public static String ENDERECO_CREATE = "INSERT INTO endereco(logradouro,numero,bairroid,cep,status) VALUES(?,?,?,?,?)";

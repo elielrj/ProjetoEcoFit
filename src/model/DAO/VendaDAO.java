@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import model.bo.ContaAReceber;
 import model.bo.Estoque;
 import model.bo.ItemDeVenda;
 
@@ -153,6 +154,10 @@ public class VendaDAO implements InterfaceDAO<Venda> {
                 service.ServiceEstoque.Atualizar(estoque);
                 service.ServiceItemDeVenda.Deletar(i);
             }
+            
+            ContaAReceber contaaReceber = service.ServiceContaAReceber.BuscarIdDaContaAReceberPeloIdDaVenda(objeto.getId());
+            service.ServiceContaAReceber.Deletar(contaaReceber);
+            
             pstm = conexao.prepareStatement(SQL.VENDA_DELETE);
             pstm.setInt(1, objeto.getId());
             pstm.executeUpdate();
@@ -176,6 +181,10 @@ public class VendaDAO implements InterfaceDAO<Venda> {
                 service.ServiceEstoque.Atualizar(estoque);
                 service.ServiceItemDeVenda.Deletar(i);
             }
+            
+            ContaAReceber contaaReceber = service.ServiceContaAReceber.BuscarIdDaContaAReceberPeloIdDaVenda(idVenda);
+            service.ServiceContaAReceber.Deletar(contaaReceber);
+            
             pstm = conexao.prepareStatement(SQL.VENDA_DELETE);
             pstm.setInt(1, venda.getId());
             pstm.executeUpdate();

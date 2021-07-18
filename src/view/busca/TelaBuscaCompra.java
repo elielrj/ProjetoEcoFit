@@ -39,7 +39,7 @@ public class TelaBuscaCompra extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("BUSCA POR VENDAS");
+        jLabel1.setText("BUSCA POR COMPRAS");
 
         javax.swing.GroupLayout jPanelTituloLayout = new javax.swing.GroupLayout(jPanelTitulo);
         jPanelTitulo.setLayout(jPanelTituloLayout);
@@ -204,7 +204,7 @@ public class TelaBuscaCompra extends javax.swing.JDialog {
         return jButtonSair;
     }
 
-    public JTable getjTable_BuscaVendas() {
+    public JTable getjTable_BuscaCompras() {
         return jTable_BuscaVendas;
     }
 

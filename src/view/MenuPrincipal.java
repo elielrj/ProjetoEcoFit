@@ -442,8 +442,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemRelatorioComprasActionPerformed
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
-        TelaCadastroCompra telaCadastroCompra = new view.cadastro.TelaCadastroCompra();
-        ControllerCompra controllerCompra = new controller.ControllerCompra(telaCadastroCompra);
+        TelaCadastroCompra telaCadastroCompra = new TelaCadastroCompra();
+        ControllerCompra controllerCompra = new ControllerCompra(telaCadastroCompra);
         telaCadastroCompra.setVisible(true);        
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 

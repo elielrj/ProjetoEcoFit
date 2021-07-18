@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.ArrayList;
+import model.bo.Compra;
 import model.bo.ContaAPagar;
 
 public class ContaAPagarDAO implements InterfaceDAO<ContaAPagar> {
@@ -163,28 +164,29 @@ public class ContaAPagarDAO implements InterfaceDAO<ContaAPagar> {
             );
         }
     }
-
-    public int RetrieveIdTheCity(int idContaAPagar) {
+*/
+    public ContaAPagar RetrieveIdDaContaAReceberPeloIdDaCompra(int idDaCompra) {
         try {
             Connection conexao = ConectionFactory.getConection();
             PreparedStatement pstm = null;
             ResultSet rs = null;
-            pstm = conexao.prepareStatement(SQL.CONTA_A_PAGAR_RETRIVE_ONE_ID);
-            pstm.setInt(1, idContaAPagar);
+            pstm = conexao.prepareStatement(SQL.CONTA_A_PAGAR_RETRIVE_ONE_ID_DA_COMPRA);
+            pstm.setInt(1, idDaCompra);
             rs = pstm.executeQuery();
             ContaAPagar contaAPagar = new ContaAPagar.ContaAPagarBuilder().createContaAPagar();
             while (rs.next()) {
-                contaAPagar.setCidade(
-                        service.ServiceCidade.Buscar(rs.getInt("cidadeId"))
-                );
+                contaAPagar.setId(rs.getInt("id"));
+                contaAPagar.setCompraId(rs.getInt("nome"));
+                contaAPagar.setValor(rs.getFloat("valor"));
+                contaAPagar.setStatus(rs.getBoolean("status"));
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
-            return contaAPagar.getCidade().getId();
+            return contaAPagar;
         } catch (Exception ex) {
             throw new RuntimeException(" \nCLASSE: ContaAPagarDAO->RetrieveIdTheCity(int idContaAPagar)->contaAPagarDAO\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
         }
-    }*/
+    }
 }

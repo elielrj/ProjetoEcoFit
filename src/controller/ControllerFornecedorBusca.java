@@ -10,6 +10,7 @@ import model.bo.Fornecedor;
 public class ControllerFornecedorBusca implements ActionListener {
 
     TelaBuscaFornecedor telaBuscaFornecedor;
+    int codigoFornecedor = 0;
 
     public ControllerFornecedorBusca(TelaBuscaFornecedor telaBuscaFornecedor) {
         this.telaBuscaFornecedor = telaBuscaFornecedor;
@@ -27,13 +28,15 @@ public class ControllerFornecedorBusca implements ActionListener {
         if (e.getSource() == this.telaBuscaFornecedor.getjButtonSair())
             this.telaBuscaFornecedor.dispose();
         else if (e.getSource() == this.telaBuscaFornecedor.getjButtonCarregar()) {
-            ControllerFornecedor.codigo = (int) this.telaBuscaFornecedor.getjTable1().getValueAt(this.telaBuscaFornecedor.getjTable1().getSelectedRow(), 0);
+            codigoFornecedor = (int) this.telaBuscaFornecedor.getjTable_Fornecedor().getValueAt(this.telaBuscaFornecedor.getjTable_Fornecedor().getSelectedRow(), 0);
+            ControllerFornecedor.codigo = codigoFornecedor;
+            this.telaBuscaFornecedor.setIdDoFornecedor(codigoFornecedor);
             this.telaBuscaFornecedor.dispose();
         }else if(e.getSource() == this.telaBuscaFornecedor.getjButton_Deletar()) {
             try{
                 service.ServiceFornecedor.Deletar(
-                        (int) this.telaBuscaFornecedor.getjTable1().getValueAt(
-                                this.telaBuscaFornecedor.getjTable1().getSelectedRow(),0
+                        (int) this.telaBuscaFornecedor.getjTable_Fornecedor().getValueAt(
+                                this.telaBuscaFornecedor.getjTable_Fornecedor().getSelectedRow(),0
                         )
                 );
                 JOptionPane.showMessageDialog(null, "Fornecedor deletado com sucesso!");
@@ -49,7 +52,7 @@ public class ControllerFornecedorBusca implements ActionListener {
 
     private void carregarDadosNaTabela() {
         
-        DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaFornecedor.getjTable1().getModel();
+        DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaFornecedor.getjTable_Fornecedor().getModel();
         tabela.getDataVector().removeAllElements();
         
         for (Fornecedor fornecedorDaLista : service.ServiceFornecedor.Buscar()) {

@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import view.busca.TelaBuscaCompra;
-import model.bo.Venda;
+import model.bo.Compra;
 
 public class ControllerCompraBusca implements ActionListener {
 
@@ -30,19 +30,19 @@ public class ControllerCompraBusca implements ActionListener {
             this.telaBuscaCompra.dispose();
         else if (e.getSource() == this.telaBuscaCompra.getjButtonCarregar()) {
 
-            ControllerVenda.codigo = (int) this.telaBuscaCompra.getjTable_BuscaVendas().getValueAt(this.telaBuscaCompra.getjTable_BuscaVendas().getSelectedRow(), 0);
+            ControllerCompra.codigo = (int) this.telaBuscaCompra.getjTable_BuscaCompras().getValueAt(this.telaBuscaCompra.getjTable_BuscaCompras().getSelectedRow(), 0);
             this.telaBuscaCompra.dispose();
         }else if (e.getSource() == this.telaBuscaCompra.getjButton_deletar()){
             try{
-                service.ServiceVenda.Deletar((int) 
+                service.ServiceCompra.Deletar((int) 
                         
-                        this.telaBuscaCompra.getjTable_BuscaVendas().getValueAt(
-                        this.telaBuscaCompra.getjTable_BuscaVendas().getSelectedRow(),0)
+                        this.telaBuscaCompra.getjTable_BuscaCompras().getValueAt(
+                        this.telaBuscaCompra.getjTable_BuscaCompras().getSelectedRow(),0)
                 );
-                JOptionPane.showMessageDialog(null, "Venda deletado com sucesso!");
+                JOptionPane.showMessageDialog(null, "Compra deletado com sucesso!");
                 carregarDadosNaTabela();
             } catch (Exception ex) {
-                throw new RuntimeException(" \nCLASSE: ControllerVendaBusca->actionPerformed(ActionEvent e)->deletar\nMENSAGEM:" 
+                throw new RuntimeException(" \nCLASSE: ControllerCompraBusca->actionPerformed(ActionEvent e)->deletar\nMENSAGEM:" 
                         + ex.getMessage() + "\nLOCALIZADO:" 
                         + ex.getLocalizedMessage()
                 );
@@ -53,22 +53,22 @@ public class ControllerCompraBusca implements ActionListener {
     
     private void carregarDadosNaTabela() {
         
-        DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaCompra.getjTable_BuscaVendas().getModel();
+        DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaCompra.getjTable_BuscaCompras().getModel();
         tabela.getDataVector().removeAllElements();
         
-        for (Venda vendaDaLista : service.ServiceVenda.Buscar()) {
+        for (Compra compraDaLista : service.ServiceCompra.Buscar()) {
             tabela.addRow(new Object[]{
-                vendaDaLista.getId(),//1
-                vendaDaLista.getData(),//2
-                vendaDaLista.getHora(),//3
-                vendaDaLista.getUserCaixa(),//4
-                vendaDaLista.getDataDeVencimento(),//5
-                vendaDaLista.getObservacao(),//6
-                vendaDaLista.getValorDoDesconto(),//7
-                vendaDaLista.getValorTotal(),//8
-                vendaDaLista.getStatus(),//9
-                vendaDaLista.getPessoaFisica().getNome(),//10
-                vendaDaLista.quantidadeDeItensNaLista()//10
+                compraDaLista.getId(),//1
+                compraDaLista.getData(),//2
+                compraDaLista.getHora(),//3
+                //compraDaLista.getUserCaixa(),//4
+                compraDaLista.getDataDeVencimento(),//5
+                compraDaLista.getObservacao(),//6
+                compraDaLista.getValorDeDesconto(),//7
+                compraDaLista.getValorTotal(),//8
+                compraDaLista.getStatus(),//9
+                //compraDaLista.getPessoaFisica().getNome(),//10
+                compraDaLista.quantidadeDeItensNaLista()//10
             });
         }
     }

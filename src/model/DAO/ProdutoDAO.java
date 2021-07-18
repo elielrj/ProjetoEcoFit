@@ -53,11 +53,11 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
                 Produto produto = new Produto.ProdutoBuilder()
                         .setId(rs.getInt("id"))
                         .setDescricao(rs.getString("descricao"))
-                        .setUnidadeDeCompra(rs.getString("unidadeDeCompra"))
-                        .setUnidadeDeVenda(rs.getString("unidadeDeVenda"))
-                        .setCorrelacaoUnidade(rs.getString("correlacaoUnidade"))
+                        .setUnidadeDeCompra(rs.getString("unidadedecompra"))
+                        .setUnidadeDeVenda(rs.getString("unidadedevenda"))
+                        .setCorrelacaoUnidade(rs.getString("correlacaounidade"))
                         .setValor(rs.getFloat("valor"))
-                        .setCodigoDeBarras(rs.getString("codigoDeBarras"))
+                        .setCodigoDeBarras(rs.getString("codigodebarras"))
                         .setStatus(rs.getBoolean("status"))
                         .setObservacao(rs.getString("observacao"))
                         .createProduto();
@@ -87,11 +87,11 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
 
                 produto.setId(rs.getInt("id"));
                 produto.setDescricao(rs.getString("descricao"));
-                produto.setUnidadeDeCompra(rs.getString("unidadeDeCompra"));
-                produto.setUnidadeDeVenda(rs.getString("unidadeDeVenda"));
-                produto.setCorrelacaoUnidade(rs.getString("correlacaoUnidade"));
+                produto.setUnidadeDeCompra(rs.getString("unidadedecompra"));
+                produto.setUnidadeDeVenda(rs.getString("unidadedevenda"));
+                produto.setCorrelacaoUnidade(rs.getString("correlacaounidade"));
                 produto.setValor(rs.getFloat("valor"));
-                produto.setCodigoDeBarras(rs.getString("codigoDeBarras"));
+                produto.setCodigoDeBarras(rs.getString("codigodebarras"));
                 produto.setStatus(rs.getBoolean("status"));
                 produto.setObservacao(rs.getString("observacao"));
             }
@@ -115,11 +115,11 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
             while (rs.next()) {
                 produto.setId(rs.getInt("id"));//1
                 produto.setDescricao(rs.getString("descricao"));//2
-                produto.setUnidadeDeCompra(rs.getString("unidadeDeCompra"));//3
-                produto.setUnidadeDeVenda(rs.getString("unidadeDeVenda"));//4
-                produto.setCorrelacaoUnidade(rs.getString("correlacaoUnidade"));//5
+                produto.setUnidadeDeCompra(rs.getString("unidadedecompra"));//3
+                produto.setUnidadeDeVenda(rs.getString("unidadedevenda"));//4
+                produto.setCorrelacaoUnidade(rs.getString("correlacaounidade"));//5
                 produto.setValor(rs.getFloat("valor"));//6
-                produto.setCodigoDeBarras(rs.getString("codigoDeBarras"));//7
+                produto.setCodigoDeBarras(rs.getString("codigodebarras"));//7
                 produto.setStatus(rs.getBoolean("status"));//8
                 produto.setObservacao(rs.getString("observacao"));//9
             }

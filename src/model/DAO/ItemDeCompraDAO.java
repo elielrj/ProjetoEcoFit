@@ -12,11 +12,7 @@ public class ItemDeCompraDAO implements InterfaceDAO<ItemDeCompra> {
     @Override
     public void Create(ItemDeCompra objeto) {
         Connection conexao = ConectionFactory.getConection();
-
-        
-
         PreparedStatement pstm = null;
-
         try {
             pstm = conexao.prepareStatement(SQL.ITEM_DE_COMPRA_CREATE);
             pstm.setInt(1, objeto.getQuantidade());
@@ -24,11 +20,15 @@ public class ItemDeCompraDAO implements InterfaceDAO<ItemDeCompra> {
             pstm.setFloat(3, objeto.getSubTotal());
             pstm.setInt(4, objeto.getCompraId());
             pstm.executeUpdate();
+            ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            throw new RuntimeException(" \nCLASSE: ItemDeCompraDAO->Create->\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );            
         }
 
-        ConectionFactory.closeConnection(conexao, pstm);
+        
     }
 
     @Override
@@ -54,7 +54,7 @@ public class ItemDeCompraDAO implements InterfaceDAO<ItemDeCompra> {
                                 service.ServiceProduto.Buscar(rs.getInt("produtoid"))
                         )//4                        
                         .setSubTotal(rs.getFloat("valor"))//3
-                        .setCompraId(rs.getInt("compraId"))//5
+                        .setCompraId(rs.getInt("compraid"))//5
                         .createItemDeCompra();
                 itensDeCompra.add(itemDeCompra);
             }
@@ -86,10 +86,10 @@ public class ItemDeCompraDAO implements InterfaceDAO<ItemDeCompra> {
                 itemDeCompra.setId(rs.getInt("id"));
                 itemDeCompra.setQuantidade(rs.getInt("quantidade"));
                 itemDeCompra.setProduto(
-                        service.ServiceProduto.Buscar(rs.getInt("produtoId"))
+                        service.ServiceProduto.Buscar(rs.getInt("produtoid"))
                 );
                 itemDeCompra.setSubTotal(rs.getFloat("valor"));
-                itemDeCompra.setCompraId(rs.getInt("compraId"));
+                itemDeCompra.setCompraId(rs.getInt("compraid"));
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return itemDeCompra;
@@ -132,6 +132,42 @@ public class ItemDeCompraDAO implements InterfaceDAO<ItemDeCompra> {
             ex.printStackTrace();
         }
         ConectionFactory.closeConnection(conexao, pstm);
+    }
+    
+    public List<ItemDeCompra> RetrieveListaDeUmaCompra(int idDaVenda) {
+
+        try {
+            Connection conexao = ConectionFactory.getConection();
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            pstm = conexao.prepareStatement(SQL.ITEM_DE_VENDA_RETRIVE_ALL_POR_VENDAID);
+            pstm.setInt(1, idDaVenda);
+            rs = pstm.executeQuery();
+
+            List<ItemDeCompra> itensDeVenda = new ArrayList<>();
+
+            while (rs.next()) {
+                ItemDeCompra itemDeVenda = new ItemDeCompra.ItemDeCompraBuilder()
+                        .setId(rs.getInt("id"))//1
+                        .setQuantidade(rs.getInt("quantidade"))//3
+                        .setCompraId(rs.getInt("compraid")
+                        )//6   
+                        .setProduto(
+                                service.ServiceProduto.Buscar(rs.getInt("produtoid"))
+                        )//4
+                        .setSubTotal(rs.getFloat("subtotal"))//5
+                        .createItemDeCompra();
+                itensDeVenda.add(itemDeVenda);
+            }
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return itensDeVenda;
+        } catch (Exception ex) {
+            throw new RuntimeException(" \nCLASSE: ItemDeVendaDAO->RetrieveListaDeUmaVenda\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
+        }
+
     }
 
 }

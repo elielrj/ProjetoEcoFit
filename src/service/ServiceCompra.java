@@ -32,4 +32,14 @@ public class ServiceCompra {
         CompraDAO compraDAO = new CompraDAO();
         compraDAO.Delete(objeto);
     }
+    
+    public static void Deletar(int idDaCompra) {
+        CompraDAO compraDAO = new CompraDAO();
+        compraDAO.Delete(idDaCompra);
+    }
+    
+    public static int Buscar(Compra compra) {
+        CompraDAO compraDAO = new CompraDAO();
+        return compraDAO.Retrieve(compra);
+    }
 }

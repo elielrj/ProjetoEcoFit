@@ -14,6 +14,8 @@ import view.FormModeloBuscas;
  * @author esfso
  */
 public class TelaBuscaFornecedor extends javax.swing.JDialog {
+    
+    private int IdDoFornecedor = 0;
 
     /**
      * Creates new form FormModeloBuscas
@@ -46,7 +48,7 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
         jButton_Deletar = new javax.swing.JButton();
         jPanelDados = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable_Fornecedor = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -123,7 +125,7 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
 
         jPanelDados.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_Fornecedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -139,12 +141,12 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(50);
-            jTable1.getColumnModel().getColumn(1).setMaxWidth(500);
-            jTable1.getColumnModel().getColumn(2).setMaxWidth(100);
-            jTable1.getColumnModel().getColumn(3).setMaxWidth(100);
+        jScrollPane1.setViewportView(jTable_Fornecedor);
+        if (jTable_Fornecedor.getColumnModel().getColumnCount() > 0) {
+            jTable_Fornecedor.getColumnModel().getColumn(0).setMaxWidth(50);
+            jTable_Fornecedor.getColumnModel().getColumn(1).setMaxWidth(500);
+            jTable_Fornecedor.getColumnModel().getColumn(2).setMaxWidth(100);
+            jTable_Fornecedor.getColumnModel().getColumn(3).setMaxWidth(100);
         }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
@@ -223,7 +225,7 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelDados;
     private javax.swing.JPanel jPanelTitulo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable_Fornecedor;
     // End of variables declaration//GEN-END:variables
 
     public JButton getjButtonCarregar() {
@@ -234,12 +236,20 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
         return jButtonSair;
     }
 
-    public JTable getjTable1() {
-        return jTable1;
+    public JTable getjTable_Fornecedor() {
+        return jTable_Fornecedor;
     }
 
     public JButton getjButton_Deletar() {
         return jButton_Deletar;
+    }
+
+    public int getIdDoFornecedor() {
+        return IdDoFornecedor;
+    }
+
+    public void setIdDoFornecedor(int IdDoFornecedor) {
+        this.IdDoFornecedor = IdDoFornecedor;
     }
 
 }

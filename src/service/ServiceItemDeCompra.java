@@ -32,4 +32,9 @@ public class ServiceItemDeCompra {
         ItemDeCompraDAO itemDeCompraDAO = new ItemDeCompraDAO();
         itemDeCompraDAO.Delete(objeto);
     }
+    
+    public static List<ItemDeCompra> BuscarListaDeUmaCompra(int idDaVenda) {
+        ItemDeCompraDAO itemDeCompraDAO = new ItemDeCompraDAO();
+        return itemDeCompraDAO.RetrieveListaDeUmaCompra(idDaVenda);
+    }
 }

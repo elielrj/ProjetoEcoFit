@@ -68,7 +68,7 @@
               <Color blue="ff" green="66" red="66" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="BUSCA POR VENDAS"/>
+            <Property name="text" type="java.lang.String" value="BUSCA POR COMPRAS"/>
           </Properties>
         </Component>
       </SubComponents>

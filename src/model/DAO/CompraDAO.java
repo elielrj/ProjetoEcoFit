@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import model.bo.ContaAPagar;
+
 
 public class CompraDAO implements InterfaceDAO<Compra> {
 
@@ -50,21 +52,22 @@ public class CompraDAO implements InterfaceDAO<Compra> {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-                Compra compra = new Compra();
-                compra.setId(rs.getInt("id"));
-                compra.setData(rs.getString("data"));
-                compra.setHora(rs.getString("hora"));
+                Compra compra = new Compra.CompraBuilder()
+                .setId(rs.getInt("id"))
+                .setData(rs.getString("datacompra"))
+                .setHora(rs.getString("hora"))
 
-                compra.setDataDeVencimento(rs.getString("datavencimento"));
-                compra.setObservacao(rs.getString("observacao"));
-                compra.setValorDeDesconto(rs.getFloat("valordesconto"));
+                .setDataDeVencimento(rs.getString("datavencimento"))
+                .setObservacao(rs.getString("observacao"))
+                .setValorDeDesconto(rs.getFloat("valordesconto"))
 
-                compra.setValorTotal(rs.getFloat("valortotal"));
-                compra.setStatus(rs.getBoolean("status"));
+                .setValorTotal(rs.getFloat("valortotal"))
+                .setStatus(rs.getBoolean("status"))
 
-                compra.setFornecedor(
+                .setFornecedor(
                         service.ServiceFornecedor.Buscar(rs.getInt("fornecedorid"))
-                );
+                )
+                        .createCompra();
 
                 compras.add(compra);
             }
@@ -84,15 +87,15 @@ public class CompraDAO implements InterfaceDAO<Compra> {
         ResultSet rs = null;
 
         try {
-            pstm = conexao.prepareStatement(SQL.COMPRA_CREATE);
+            pstm = conexao.prepareStatement(SQL.COMPRA_RETRIVE_ONE_ID);
             pstm.setInt(1, id);
 
             rs = pstm.executeQuery();
-            Compra compra = new Compra();
+            Compra compra = new Compra.CompraBuilder().createCompra();
 
             while (rs.next()) {
                 compra.setId(rs.getInt("id"));
-                compra.setData(rs.getString("data"));
+                compra.setData(rs.getString("datacompra"));
                 compra.setHora(rs.getString("hora"));
 
                 compra.setDataDeVencimento(rs.getString("datavencimento"));
@@ -110,8 +113,10 @@ public class CompraDAO implements InterfaceDAO<Compra> {
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return compra;
         } catch (Exception ex) {
-            ConectionFactory.closeConnection(conexao, pstm, rs);
-            return null;
+            throw new RuntimeException(" \nCLASSE: CompraDAO->Retrive\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
         }
     }
 
@@ -150,10 +155,57 @@ public class CompraDAO implements InterfaceDAO<Compra> {
             pstm = conexao.prepareStatement(SQL.COMPRA_DELETE);
             pstm.setInt(1, objeto.getId());
             pstm.executeUpdate();
+            
+            ContaAPagar contaAPagar = service.ServiceContaAPagar.BuscarIdDaContaAReceberPeloIdDaCompra(objeto.getId());
+            service.ServiceContaAPagar.Deletar(contaAPagar);
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         ConectionFactory.closeConnection(conexao, pstm);
     }
 
+    public int Retrieve(Compra compra) {
+        Connection conexao = ConectionFactory.getConection();
+
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+
+        try {
+            pstm = conexao.prepareStatement(SQL.COMPRA_RETRIVE_COMPRA_OBJ);
+            pstm.setFloat(1, compra.getValorTotal());
+            pstm.setInt(2, compra.getFornecedor().getId());
+            pstm.setString(3, compra.getData());
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                compra.setId(rs.getInt("id"));//1
+            }
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return compra.getId();
+        } catch (Exception ex) {
+            throw new RuntimeException(" \nCLASSE: VendaDAO->Retrive\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
+        }
+    }
+    
+    public void Delete(int idDaCompra) {
+        Connection conexao = ConectionFactory.getConection();
+        PreparedStatement pstm = null;
+
+        try {
+            pstm = conexao.prepareStatement(SQL.COMPRA_DELETE);
+            pstm.setInt(1, idDaCompra);
+            pstm.executeUpdate();
+            
+            ContaAPagar contaAPagar = service.ServiceContaAPagar.BuscarIdDaContaAReceberPeloIdDaCompra(idDaCompra);
+            service.ServiceContaAPagar.Deletar(contaAPagar);
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        ConectionFactory.closeConnection(conexao, pstm);
+    }
 }

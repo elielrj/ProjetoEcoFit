@@ -40,9 +40,9 @@ public class ServiceContaAPagar {
         ContaAPagarDAO contaAPagarDAO = new ContaAPagarDAO();
         return contaAPagarDAO.RetrieveForCity(idCidade);
     }
-
-    public static int BuscarIdDaCidade(int idContaAPagar) {
+*/
+    public static ContaAPagar BuscarIdDaContaAReceberPeloIdDaCompra(int idDaCompra) {
         ContaAPagarDAO contaAPagarDAO = new ContaAPagarDAO();
-        return contaAPagarDAO.RetrieveIdTheCity(idContaAPagar);
-    }*/
+        return contaAPagarDAO.RetrieveIdDaContaAReceberPeloIdDaCompra(idDaCompra);
+    }
 }
