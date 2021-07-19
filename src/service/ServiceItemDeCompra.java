@@ -33,8 +33,8 @@ public class ServiceItemDeCompra {
         itemDeCompraDAO.Delete(objeto);
     }
     
-    public static List<ItemDeCompra> BuscarListaDeUmaCompra(int idDaVenda) {
+    public static List<ItemDeCompra> BuscarListaDeUmaCompra(int idDaCompra) {
         ItemDeCompraDAO itemDeCompraDAO = new ItemDeCompraDAO();
-        return itemDeCompraDAO.RetrieveListaDeUmaCompra(idDaVenda);
+        return itemDeCompraDAO.RetrieveListaDeUmaCompra(idDaCompra);
     }
 }

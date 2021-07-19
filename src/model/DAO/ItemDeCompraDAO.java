@@ -134,14 +134,14 @@ public class ItemDeCompraDAO implements InterfaceDAO<ItemDeCompra> {
         ConectionFactory.closeConnection(conexao, pstm);
     }
     
-    public List<ItemDeCompra> RetrieveListaDeUmaCompra(int idDaVenda) {
+    public List<ItemDeCompra> RetrieveListaDeUmaCompra(int idDaCompra) {
 
         try {
             Connection conexao = ConectionFactory.getConection();
             PreparedStatement pstm = null;
             ResultSet rs = null;
-            pstm = conexao.prepareStatement(SQL.ITEM_DE_VENDA_RETRIVE_ALL_POR_VENDAID);
-            pstm.setInt(1, idDaVenda);
+            pstm = conexao.prepareStatement(SQL.ITEM_DE_COMPRA_RETRIVE_ALL_POR_COMPRAID);
+            pstm.setInt(1, idDaCompra);
             rs = pstm.executeQuery();
 
             List<ItemDeCompra> itensDeVenda = new ArrayList<>();

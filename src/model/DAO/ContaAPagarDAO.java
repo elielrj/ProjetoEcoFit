@@ -70,7 +70,7 @@ public class ContaAPagarDAO implements InterfaceDAO<ContaAPagar> {
             ContaAPagar contaAPagar = new ContaAPagar.ContaAPagarBuilder().createContaAPagar();
             while (rs.next()) {
                 contaAPagar.setId(rs.getInt("id"));
-                contaAPagar.setCompraId(rs.getInt("nome"));
+                contaAPagar.setCompraId(rs.getInt("compraid"));
                 contaAPagar.setValor(rs.getFloat("valor"));
                 contaAPagar.setStatus(rs.getBoolean("status"));
             }
@@ -93,6 +93,7 @@ public class ContaAPagarDAO implements InterfaceDAO<ContaAPagar> {
             pstm.setInt(1, objeto.getCompraId());
             pstm.setFloat(2, objeto.getValor());
             pstm.setBoolean(3, objeto.getStatus());
+            pstm.setInt(4, objeto.getId());
             pstm.executeUpdate();
             ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
@@ -176,7 +177,7 @@ public class ContaAPagarDAO implements InterfaceDAO<ContaAPagar> {
             ContaAPagar contaAPagar = new ContaAPagar.ContaAPagarBuilder().createContaAPagar();
             while (rs.next()) {
                 contaAPagar.setId(rs.getInt("id"));
-                contaAPagar.setCompraId(rs.getInt("nome"));
+                contaAPagar.setCompraId(rs.getInt("compraid"));
                 contaAPagar.setValor(rs.getFloat("valor"));
                 contaAPagar.setStatus(rs.getBoolean("status"));
             }

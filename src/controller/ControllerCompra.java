@@ -19,6 +19,7 @@ import model.bo.Produto;
 import view.busca.TelaBuscaFornecedor;
 import view.busca.TelaBuscaProduto;
 import model.bo.Compra;
+import model.bo.ContaAPagar;
 import view.busca.TelaBuscaCompra;
 import view.busca.TelaBuscaFornecedor;
 import view.cadastro.TelaCadastroCompra;
@@ -369,6 +370,15 @@ public class ControllerCompra implements ActionListener {
                 service.ServiceItemDeCompra.Incluir(itemDeCompra);
 
             }
+            
+            //3º criar conta a receber
+            ContaAPagar contaAPagar = new ContaAPagar.ContaAPagarBuilder()
+                    .setCompraId(compra.getId())
+                    .setValor(compra.getValorTotal())
+                    .setStatus(false)
+                    .createContaAPagar();
+            service.ServiceContaAPagar.Incluir(contaAPagar);
+            
 
             //DEBITAR NO ESTOQUE!!!!!!!!!!
         } else {
@@ -406,6 +416,10 @@ public class ControllerCompra implements ActionListener {
                             + ex.getLocalizedMessage()
                     ); 
                 } 
+                //4º atualizar conta a receber (BUSCA, ATUALIZA VALOR, E ATUALIZA)
+            ContaAPagar contaAPagar = service.ServiceContaAPagar.BuscarIdDaContaAReceberPeloIdDaCompra(compra.getId());
+            contaAPagar.setValor(compra.getValorTotal());
+            service.ServiceContaAPagar.Atualizar(contaAPagar);
             }
         }
 

@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 import model.bo.Venda;
 import model.DAO.VendaDAO;
+import model.bo.PessoaFisica;
 
 public class ServiceVenda {
 
@@ -41,5 +42,10 @@ public class ServiceVenda {
     public static void Deletar(int idVenda) {
         VendaDAO vendaDAO = new VendaDAO();
         vendaDAO.Delete(idVenda);
+    }
+    
+    public static  List<Venda> RetriveBuscaVendaDeUmCliente(PessoaFisica pessoaFisica){
+        VendaDAO vendaDAO = new VendaDAO();
+        return vendaDAO.RetrieveBuscaVendaDeUmCliente(pessoaFisica);
     }
 }

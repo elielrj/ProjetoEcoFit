@@ -225,6 +225,13 @@ public class PessoaFisica {
         }
 
     }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
+    
+    
     
 
 }

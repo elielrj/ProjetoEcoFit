@@ -40,7 +40,7 @@ public final class SQL {
     public static String FORNECEFOR_CREATE = "INSERT INTO fornecedor(razaosocial,cnpj,inscricaoestadual,telefone1,telefone2,email,observacao,status,enderecoid,complemento) VALUES (?,?,?,?,?,?,?,?,?,?)";
     public static String FORNECEFOR_RETRIVE_ALL = "SELECT id,razaosocial,cnpj,inscricaoestadual,telefone1,telefone2,email,observacao,status,enderecoid,complemento FROM fornecedor";
     public static String FORNECEFOR_RETRIVE_ONE_ID = "SELECT id,razaosocial,cnpj,inscricaoestadual,telefone1,telefone2,email,observacao,status,enderecoid,complemento  FROM fornecedor WHERE  fornecedor.id=?";
-    public static String FORNECEFOR_UPDATE = "UPDATE fornecedor SET razaosocial =?,cnpj=?,inscricaoestadual=?,telefone1=?,telefone2=?,email=?,observacao=?,status=?,enderecoid=?,complemento=? WHERE id =?";
+    public static String FORNECEFOR_UPDATE = "UPDATE fornecedor SET razaosocial=?,cnpj=?,inscricaoestadual=?,telefone1=?,telefone2=?,email=?,observacao=?,status=?,enderecoid=?,complemento=? WHERE id =?";
     public static String FORNECEFOR_DELETE = "DELETE FROM fornecedor WHERE id=?";
     
     public static String ITEM_DE_COMPRA_CREATE = "INSERT INTO itemdecompra(quantidade,produtoid,subtotal,compraid) VALUES (?,?,?,?)";
@@ -48,6 +48,7 @@ public final class SQL {
     public static String ITEM_DE_COMPRA_RETRIVE_ONE_ID = "SELECT id,quantidade,produtoid,subtotal,compraid FROM itemdecompra WHERE itemdecompra.id=?";
     public static String ITEM_DE_COMPRA_UPDATE = "UPDATE itemdecompra SET quantidade=?,produtoId=?,subtotal=?,compraId=? WHERE id=?";
     public static String ITEM_DE_COMPRA_DELETE = "DELETE FROM itemdecompra WHERE id=?";
+    public static String ITEM_DE_COMPRA_RETRIVE_ALL_POR_COMPRAID = "SELECT id,quantidade,compraid,produtoid,subtotal FROM itemdecompra WHERE itemdecompra.compraid=?";
 
     public static String ITEM_DE_VENDA_CREATE = "INSERT INTO itemdevenda( quantidade,vendaid,produtoid,subtotal) VALUES(?,?,?,?)";
     public static String ITEM_DE_VENDA_RETRIVE_ALL = "SELECT id,quantidade,vendaid,produtoid,subtotal FROM itemdevenda WHERE order bay id";
@@ -59,8 +60,8 @@ public final class SQL {
     
     public static String PAGAR_CREATE = "INSERT INTO pagar(datapagamento,hora,valordesconto,valoracrescimo,valorpago,observacao,compraid,status) VALUES(?,?,?,?,?,?,?,?)";
     public static String PAGAR_RETRIVE_ALL = "SELECT id,datapagamento,hora,valordesconto,valoracrescimo,valorpago,observacao,compraid,status FROM pagar";
-    public static String PAGAR_RETRIVE_ONE_ID = "SELECT id,datapagamento,hora,valordesconto,valoracrescimo,valorpago,observacao,compraid,status FROM pagar WHERE id=?";
-    public static String PAGAR_UPDATE = "UPDATE pagar SET datapagamento=?,hora=?,valordesconto=?,valoracrescimo =?,valorpago=?,observacao=?,compraid=?,status=?WHERE id=?";
+    public static String PAGAR_RETRIVE_ONE_ID = "SELECT id,datapagamento,hora,valordesconto,valoracrescimo,valorpago,observacao,compraid,status FROM pagar WHERE pagar.id=?";
+    public static String PAGAR_UPDATE = "UPDATE pagar SET datapagamento=?,hora=?,valordesconto=?,valoracrescimo=?,valorpago=?,observacao=?,compraid=?,status=? WHERE pagar.id=?";
     public static String PAGAR_DELETE = "DELETE FROM pagar WHERE id=?";
     
     public static String PESSOA_FISICA_CREATE = "INSERT INTO pessoafisica(nome,rg,cpf,datanascimento,telefone1,telefone2,email,observacao,status,enderecoid,tipo,complemento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -80,16 +81,17 @@ public final class SQL {
     public static String PRODUTO_DELETE = "DELETE FROM produto WHERE id=?";
     
     public static String RECEBER_CREATE = "INSERT INTO receber(datarecebimento,hora,valordesconto,valoracrescimo,valorrecebido,observacao,vendaid) VALUES(?,?,?,?,?,?,?)";
-    public static String RECEBER_RETRIVE_ALL = "SELECT id,data,hora,valorDeDescontoNegociado,valorDeAcrescimo,valorRecebido,observacao,vendaId FROM receber";
-    public static String RECEBER_RETRIVE_ONE_ID = "SELECT id,data,hora,valorDeDescontoNegociado,valorDeAcrescimo,valorRecebido,observacao,vendaId FROM receber WHERE receber.id =?";
-    public static String RECEBER_UPDATE = "UPDATE receber SET data =?,hora =?,valorDeDescontoNegociado =?,valorDeAcrescimo =?,valorRecebido =?,observacao=?,vendaId =? WHERE id=?";
-    public static String RECEBER_DELETE = "DELETE FROM receber WHERE id =?";
+    public static String RECEBER_RETRIVE_ALL = "SELECT id,datarecebimento,hora,valordesconto,valoracrescimo,valorrecebido,observacao,vendaid FROM receber";
+    public static String RECEBER_RETRIVE_ONE_ID = "SELECT id,datarecebimento,hora,valordesconto,valoracrescimo,valorrecebido,observacao,vendaid FROM receber WHERE receber.id =?";
+    public static String RECEBER_UPDATE = "UPDATE receber SET datarecebimento=?,hora=?,valorDeDescontoNegociado=?,valorDeAcrescimo=?,valorRecebido=?,observacao=?,vendaId =? WHERE receber.id=?";
+    public static String RECEBER_DELETE = "DELETE FROM receber WHERE id=?";
     
     public static String VENDA_CREATE = "INSERT INTO venda(datavenda,hora,datavencimento,observacao,valordesconto,valortotal,status,pessoafisicaid,usercaixa) VALUES(?,?,?,?,?,?,?,?,?)";
     public static String VENDA_RETRIVE_ALL = "SELECT id,datavenda,hora,datavencimento,observacao,valordesconto,valortotal,status,pessoafisicaid,usercaixa FROM venda";
     public static String VENDA_RETRIVE_ONE_ID = "SELECT id,datavenda,hora,datavencimento,observacao,valordesconto,valortotal,status,pessoafisicaid,usercaixa FROM venda WHERE venda.id=?";
+    public static String VENDA_RETRIVE_ONE_ID_PESSOA_FISICA_ID = "SELECT id,datavenda,hora,datavencimento,observacao,valordesconto,valortotal,status,pessoafisicaid,usercaixa FROM venda WHERE venda.pessoafisicaid=?";
     public static String VENDA_RETRIVE_VENDA_OBJ = "SELECT id FROM venda WHERE venda.valortotal=? and venda.pessoafisicaid=? and venda.datavenda=?";
-    public static String VENDA_UPDATE = "UPDATE venda SET datavenda=?,hora=?,datavencimento= ?,observacao=?,valordesconto=?,valortotal =?,status=?,pessoafisicaid=?,usercaixa=? WHERE id=?";
+    public static String VENDA_UPDATE = "UPDATE venda SET datavenda=?,hora=?,datavencimento= ?,observacao=?,valordesconto=?,valortotal=?,status=?,pessoafisicaid=?,usercaixa=? WHERE id=?";
     public static String VENDA_DELETE = "DELETE FROM venda WHERE id=?";
    
     public static String CONTA_A_PAGAR_CREATE = "INSERT INTO contaapagar(compraid,valor,status) VALUES(?,?,?)";
@@ -105,6 +107,7 @@ public final class SQL {
     public static String CONTA_A_RECEBER_RETRIVE_ONE_ID_DA_VENDA = "SELECT id,vendaid,valor,status FROM contaareceber WHERE contaareceber.vendaid=?";
     public static String CONTA_A_RECEBER_UPDATE = "UPDATE contaareceber SET vendaid=?,valor=?,status=? WHERE id=?";
     public static String CONTA_A_RECEBER_DELETE = "DELETE FROM contaareceber WHERE id=?";
+    
 
 
     

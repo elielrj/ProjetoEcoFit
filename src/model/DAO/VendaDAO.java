@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import model.bo.ContaAReceber;
 import model.bo.Estoque;
 import model.bo.ItemDeVenda;
+import model.bo.PessoaFisica;
 
 public class VendaDAO implements InterfaceDAO<Venda> {
 
@@ -38,6 +39,38 @@ public class VendaDAO implements InterfaceDAO<Venda> {
         }
 
         ConectionFactory.closeConnection(conexao, pstm);
+    }
+
+    @Override
+    public Venda Retrieve(int id) {
+        Connection conexao = ConectionFactory.getConection();
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
+            pstm = conexao.prepareStatement(SQL.VENDA_RETRIVE_ONE_ID);
+            rs = pstm.executeQuery();
+            Venda venda = new Venda.VendaBuilder().createVenda();
+
+            while (rs.next()) {
+                venda.setId(rs.getInt("id"));
+                venda.setData(rs.getString("datavenda"));
+                venda.setHora(rs.getString("hora"));
+                venda.setDataDeVencimento(rs.getString("datavencimento"));
+                venda.setObservacao(rs.getString("observacao"));
+                venda.setValorDoDesconto(rs.getFloat("valordesconto"));
+                venda.setValorTotal(rs.getFloat("valortotal"));
+                venda.setStatus(rs.getBoolean("status"));
+                venda.setPessoaFisica(
+                        service.ServicePessoaFisica.Buscar(rs.getInt("pessoafisicaid"))
+                );
+                venda.setUserCaixa(rs.getString("usercaixa"));
+            }
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return venda;
+        } catch (Exception ex) {
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return null;
+        }
     }
 
     @Override
@@ -75,39 +108,42 @@ public class VendaDAO implements InterfaceDAO<Venda> {
         }
     }
 
-    @Override
-    public Venda Retrieve(int id) {
+    public List<Venda> RetrieveBuscaVendaDeUmCliente(PessoaFisica pessoaFisica) {
         Connection conexao = ConectionFactory.getConection();
 
         PreparedStatement pstm = null;
         ResultSet rs = null;
 
         try {
-            pstm = conexao.prepareStatement(SQL.VENDA_RETRIVE_ONE_ID);
-            pstm.setInt(1, id);
+            pstm = conexao.prepareStatement(SQL.VENDA_RETRIVE_ONE_ID_PESSOA_FISICA_ID);
+            pstm.setInt(1, pessoaFisica.getId());
             rs = pstm.executeQuery();
-
-            Venda venda = new Venda.VendaBuilder().createVenda();
+            List<Venda> vendas = new ArrayList();
 
             while (rs.next()) {
-                venda.setId(rs.getInt("id"));
-                venda.setData(rs.getString("datavenda"));
-                venda.setHora(rs.getString("hora"));
-                venda.setDataDeVencimento(rs.getString("datavencimento"));
-                venda.setObservacao(rs.getString("observacao"));
-                venda.setValorDoDesconto(rs.getFloat("valordesconto"));
-                venda.setValorTotal(rs.getFloat("valortotal"));
-                venda.setStatus(rs.getBoolean("status"));
-                venda.setPessoaFisica(
-                        service.ServicePessoaFisica.Buscar(rs.getInt("pessoafisicaid"))
-                );
-                venda.setUserCaixa(rs.getString("usercaixa"));
-                venda.setItensDeVenda(
-                        service.ServiceItemDeVenda.BuscarListaDeUmaVenda(venda.getId())
-                );
+                Venda venda = new Venda.VendaBuilder()
+                        .setId(rs.getInt("id"))
+                        .setData(rs.getString("datavenda"))
+                        .setHora(rs.getString("hora"))
+                        .setDataDeVencimento(rs.getString("datavencimento"))
+                        .setObservacao(rs.getString("observacao"))
+                        .setValorDoDesconto(rs.getFloat("valordesconto"))
+                        .setValorTotal(rs.getFloat("valortotal"))
+                        .setStatus(rs.getBoolean("status"))
+                        .setPessoaFisica(
+                                service.ServicePessoaFisica.Buscar(rs.getInt("pessoafisicaid"))
+                        )
+                        .setUserCaixa(rs.getString("usercaixa"))
+                        .setItensDeVenda(
+                                service.ServiceItemDeVenda.BuscarListaDeUmaVenda(
+                                        rs.getInt("id")
+                                )
+                        )
+                        .createVenda();
+                vendas.add(venda);
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
-            return venda;
+            return vendas;
         } catch (Exception ex) {
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return null;
@@ -147,17 +183,17 @@ public class VendaDAO implements InterfaceDAO<Venda> {
         PreparedStatement pstm = null;
 
         try {
-            
-            for (ItemDeVenda i : objeto.getItensDeVenda()){
+
+            for (ItemDeVenda i : objeto.getItensDeVenda()) {
                 Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdDoProduto(i.getProduto().getId());
                 estoque.setQuantidade(estoque.getQuantidade() + i.getQuantidade());
                 service.ServiceEstoque.Atualizar(estoque);
                 service.ServiceItemDeVenda.Deletar(i);
             }
-            
+
             ContaAReceber contaaReceber = service.ServiceContaAReceber.BuscarIdDaContaAReceberPeloIdDaVenda(objeto.getId());
             service.ServiceContaAReceber.Deletar(contaaReceber);
-            
+
             pstm = conexao.prepareStatement(SQL.VENDA_DELETE);
             pstm.setInt(1, objeto.getId());
             pstm.executeUpdate();
@@ -168,23 +204,23 @@ public class VendaDAO implements InterfaceDAO<Venda> {
             );
         }
     }
-    
+
     public void Delete(int idVenda) {
         Connection conexao = ConectionFactory.getConection();
         PreparedStatement pstm = null;
 
         try {
             Venda venda = service.ServiceVenda.Buscar(idVenda);
-            for (ItemDeVenda i : venda.getItensDeVenda()){
+            for (ItemDeVenda i : venda.getItensDeVenda()) {
                 Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdDoProduto(i.getProduto().getId());
                 estoque.setQuantidade(estoque.getQuantidade() + i.getQuantidade());
                 service.ServiceEstoque.Atualizar(estoque);
                 service.ServiceItemDeVenda.Deletar(i);
             }
-            
+
             ContaAReceber contaaReceber = service.ServiceContaAReceber.BuscarIdDaContaAReceberPeloIdDaVenda(idVenda);
             service.ServiceContaAReceber.Deletar(contaaReceber);
-            
+
             pstm = conexao.prepareStatement(SQL.VENDA_DELETE);
             pstm.setInt(1, venda.getId());
             pstm.executeUpdate();

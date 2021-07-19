@@ -3,8 +3,10 @@ package controller;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import model.bo.PessoaFisica;
@@ -27,7 +29,18 @@ public class ControllerRecebebimento implements ActionListener {
         this.telaCadastroReceber.getjButtonCancelar().addActionListener(this);
         this.telaCadastroReceber.getjButtonGravar().addActionListener(this);
         this.telaCadastroReceber.getjButtonSair().addActionListener(this);
+        
+        this.telaCadastroReceber.getjComboBox_DataDaVenda().addActionListener(this);
+        
+        
 
+        for(PessoaFisica pessoaFisica : service.ServicePessoaFisica.Buscar()){
+            this.telaCadastroReceber.getjComboBox_Cliente().addItem(pessoaFisica);
+        }
+        
+        this.telaCadastroReceber.getjComboBox_DataDaVenda().addItem("");
+        this.telaCadastroReceber.getjComboBox_DataDaVenda().setSelectedItem("");
+        
         Ativa(true);
         LimpaEstadoComponentes(false);
 
@@ -39,6 +52,26 @@ public class ControllerRecebebimento implements ActionListener {
             Ativa(false);
             LimpaEstadoComponentes(true);
             this.telaCadastroReceber.getjTextFieldId().setEnabled(false);
+            this.telaCadastroReceber.getjFormattedTextFieldDataEmissao().setEnabled(false);
+            this.telaCadastroReceber.getjFormattedTextFieldValorDesconto().setEnabled(false);
+            this.telaCadastroReceber.getjFormattedTextFieldValorAcrescimo().setEnabled(false);
+            this.telaCadastroReceber.getjFormattedTextFieldDataEmissao().setEnabled(false);
+            this.telaCadastroReceber.getjFormattedTextFieldDataVencimento().setEnabled(false);
+            this.telaCadastroReceber.getjFormattedTextFieldDataPagamento().setEnabled(false);
+            this.telaCadastroReceber.getjFormattedTextField_Hora().setEnabled(false);
+            
+            if(oClienteEstaSelecionado()){
+                PessoaFisica pessoaFisica = (PessoaFisica) this.telaCadastroReceber.getjComboBox_Cliente().getSelectedItem();
+                
+                for(Venda venda : buscaVendaDeUmCliente(pessoaFisica)){
+                    this.telaCadastroReceber.getjComboBox_DataDaVenda().addItem(venda.getData());
+                }
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione um cliente!");
+                this.telaCadastroReceber.getjComboBox_Cliente().requestFocus();
+            }
+            
             codigo = 0;
         } else if (e.getSource() == this.telaCadastroReceber.getjButtonCancelar()) {
             Ativa(true);
@@ -97,6 +130,15 @@ public class ControllerRecebebimento implements ActionListener {
         this.telaCadastroReceber.getjButtonGravar().setEnabled(!estadoBotoes);
         this.telaCadastroReceber.getjButtonBuscar().setEnabled(estadoBotoes);
         this.telaCadastroReceber.getjButtonSair().setEnabled(estadoBotoes);
+        
+        this.telaCadastroReceber.getjFormattedTextFieldValorEmitido().setEnabled(estadoBotoes);
+        this.telaCadastroReceber.getjFormattedTextFieldValorDesconto().setEnabled(estadoBotoes);
+        this.telaCadastroReceber.getjFormattedTextFieldValorAcrescimo().setEnabled(estadoBotoes);
+        this.telaCadastroReceber.getjFormattedTextFieldValorPago().setEnabled(estadoBotoes);
+       
+        this.telaCadastroReceber.getjFormattedTextFieldDataVencimento().setEnabled(estadoBotoes);
+        this.telaCadastroReceber.getjFormattedTextFieldDataPagamento().setEnabled(!estadoBotoes);
+        this.telaCadastroReceber.getjComboBox_Cliente().setEnabled(estadoBotoes);
     }
 
     public void LimpaEstadoComponentes(boolean estadoCompo) {
@@ -130,8 +172,19 @@ public class ControllerRecebebimento implements ActionListener {
                 ((JComboBox) componente).setSelectedItem(0);
                 componente.setEnabled(estadoCompo);
             }
+            this.telaCadastroReceber.getjTextAreaObs().setEnabled(estadoCompo);
 
         }
     }
+    
+    private List<Venda> buscaVendaDeUmCliente(PessoaFisica pessoaFisica){
+        return service.ServiceVenda.RetriveBuscaVendaDeUmCliente(pessoaFisica);
+    }
+
+    private boolean oClienteEstaSelecionado() {
+        return !this.telaCadastroReceber.getjComboBox_Cliente().getSelectedItem().equals("");    
+            
+    }
+    
 
 }
