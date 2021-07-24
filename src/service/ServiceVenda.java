@@ -8,10 +8,8 @@ import model.bo.PessoaFisica;
 public class ServiceVenda {
 
     public static void Incluir(Venda objeto) {
-
         VendaDAO vendaDAO = new VendaDAO();
         vendaDAO.Create(objeto);
-
     }
 
     public static void Atualizar(Venda objeto) {
@@ -29,20 +27,20 @@ public class ServiceVenda {
         return vendaDAO.Retrieve(id);
     }
     
-    public static int Buscar(Venda venda) {
+    public static int BuscarObjetoVendaPeloClienteValorTotalEData(Venda venda) {
         VendaDAO vendaDAO = new VendaDAO();
-        return vendaDAO.Retrieve(venda);
+        return vendaDAO.RetrieveObjetoVendaPeloClienteValorTotalEData(venda);
     }
 
     public static void Deletar(Venda objeto) {
         VendaDAO vendaDAO = new VendaDAO();
         vendaDAO.Delete(objeto);
     }
-    
+    /*
     public static void Deletar(int idVenda) {
         VendaDAO vendaDAO = new VendaDAO();
         vendaDAO.Delete(idVenda);
-    }
+    }*/
     
     public static  List<Venda> RetriveBuscaVendaDeUmCliente(PessoaFisica pessoaFisica){
         VendaDAO vendaDAO = new VendaDAO();

@@ -7,10 +7,8 @@ import model.DAO.ProdutoDAO;
 public class ServiceProduto {
 
     public static void Incluir(Produto objeto) {
-
         ProdutoDAO produtoDAO = new ProdutoDAO();
         produtoDAO.Create(objeto);
-
     }
 
     public static void Atualizar(Produto objeto) {
@@ -44,7 +42,6 @@ public class ServiceProduto {
     }
     
     public static boolean codigoDeBarrasValido(String codBarras){
-                
         ProdutoDAO produtoDAO = new ProdutoDAO();
         return produtoDAO.codigoDeBarrasValido(codBarras);
         

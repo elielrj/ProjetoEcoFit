@@ -58,8 +58,6 @@ public class EstoqueDAO implements InterfaceDAO<Estoque> {
     public Estoque Retrieve(int id) {
         try {
             Connection conexao = ConectionFactory.getConection();
-
-            //String sqlExecutar = "SELECT id,nome,status FROM estoque WHERE estoque.id=?";
             PreparedStatement pstm = null;
             ResultSet rs = null;
             pstm = conexao.prepareStatement(SQL.ESTOQUE_RETRIVE_ONE_ID);
@@ -71,7 +69,6 @@ public class EstoqueDAO implements InterfaceDAO<Estoque> {
                 estoque.setProdutoId(rs.getInt("produtoid"));
                 estoque.setQuantidade(rs.getInt("quantidade"));
             }
-
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return estoque;
         } catch (Exception ex) {
@@ -85,8 +82,6 @@ public class EstoqueDAO implements InterfaceDAO<Estoque> {
     public int RetrieveDeIdEstoquePeloIdProduto(int id) {
         try {
             Connection conexao = ConectionFactory.getConection();
-
-            //String sqlExecutar = "SELECT id,nome,status FROM estoque WHERE estoque.id=?";
             PreparedStatement pstm = null;
             ResultSet rs = null;
             pstm = conexao.prepareStatement(SQL.ESTOQUE_RETRIVE_ONE_ID_DO_ESTOQUE);
@@ -97,7 +92,6 @@ public class EstoqueDAO implements InterfaceDAO<Estoque> {
                 estoque.setId(rs.getInt("id"));
                 
             }
-
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return estoque.getId();
         } catch (Exception ex) {
@@ -146,12 +140,10 @@ public class EstoqueDAO implements InterfaceDAO<Estoque> {
 
 
 public Estoque RetrievePorIdDoProduto(int idProdutoDoEstoque) {
-        try {
             Connection conexao = ConectionFactory.getConection();
-
-            //String sqlExecutar = "SELECT id,nome,status FROM estoque WHERE estoque.id=?";
             PreparedStatement pstm = null;
             ResultSet rs = null;
+        try {
             pstm = conexao.prepareStatement(SQL.ESTOQUE_RETRIVE_ONE_ID_PRODUTO_DO_ESTOQUE);
             pstm.setInt(1, idProdutoDoEstoque);
             rs = pstm.executeQuery();
@@ -161,15 +153,14 @@ public Estoque RetrievePorIdDoProduto(int idProdutoDoEstoque) {
                 estoque.setProdutoId(rs.getInt("produtoid"));
                 estoque.setQuantidade(rs.getInt("quantidade"));
             }
-
-            ConectionFactory.closeConnection(conexao, pstm, rs);
             return estoque;
         } catch (Exception ex) {
             throw new RuntimeException(" \nCLASSE: EstoqueDAO->Retrive(int id)->estoqueDAO\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
+        }finally{
+            ConectionFactory.closeConnection(conexao, pstm, rs);
         }
     }
-    
 }

@@ -21,7 +21,7 @@ public class ContaAReceberDAO implements InterfaceDAO<ContaAReceber> {
             pstm.executeUpdate();      
             ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ContaAReceberDAO->Create->contaAReceberDAO\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: ContaAReceberDAO->Create\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );            
@@ -50,7 +50,7 @@ public class ContaAReceberDAO implements InterfaceDAO<ContaAReceber> {
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return contaARecebers;
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ContaAReceberDAO->Retrive->contaAReceberDAO\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: ContaAReceberDAO->Retrive\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
@@ -76,7 +76,7 @@ public class ContaAReceberDAO implements InterfaceDAO<ContaAReceber> {
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return contaAReceber;
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ContaAReceberDAO->Retrive(int id)->contaAReceberDAO\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: ContaAReceberDAO->Retrive(int id)\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
@@ -96,7 +96,7 @@ public class ContaAReceberDAO implements InterfaceDAO<ContaAReceber> {
             pstm.executeUpdate();
             ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ContaAReceberDAO->Update->contaAReceberDAO\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: ContaAReceberDAO->Update\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
@@ -113,7 +113,7 @@ public class ContaAReceberDAO implements InterfaceDAO<ContaAReceber> {
             pstm.executeUpdate();
             ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ContaAReceberDAO->Delete->contaAReceberDAO\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: ContaAReceberDAO->Delete\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );

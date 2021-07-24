@@ -21,12 +21,11 @@ public class ControllerReceberBusca implements ActionListener {
 
         for (Receber receberDaLista : service.ServiceReceber.Buscar()) {
             tabela.addRow(new Object[]{receberDaLista.getId(),
-                receberDaLista.getData(),
+                receberDaLista.getDataRecebimento(),
                 receberDaLista.getValorRecebido(),
-                receberDaLista.getData(),
-                receberDaLista.getData(),
-                receberDaLista.getValorDeDescontoNegociado(),
-                receberDaLista.getValorDeAcrescimo(),
+                receberDaLista.getDataRecebimento(),
+                receberDaLista.getDataRecebimento(),
+                receberDaLista.getValorAcrescimo(),
                 receberDaLista.getValorRecebido(),
                 receberDaLista.getObservacao()
             });

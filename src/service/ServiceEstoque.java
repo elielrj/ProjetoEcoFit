@@ -7,10 +7,8 @@ import model.DAO.EstoqueDAO;
 public class ServiceEstoque {
 
     public static void Incluir(Estoque objeto) {
-
         EstoqueDAO estoqueDAO = new EstoqueDAO();
         estoqueDAO.Create(objeto);
-
     }
 
     public static void Atualizar(Estoque objeto) {
@@ -35,12 +33,12 @@ public class ServiceEstoque {
     
     public static Estoque BuscarEstoquePorIdDoProduto(int idDoProduto) {
         EstoqueDAO estoqueDAO = new EstoqueDAO();
-        return estoqueDAO.Retrieve(idDoProduto);
+        return estoqueDAO.RetrievePorIdDoProduto(idDoProduto);
     }
     
     public static Estoque BuscarEstoquePorIdPeloProduto(int idDoProduto) {
         EstoqueDAO estoqueDAO = new EstoqueDAO();
-        return estoqueDAO.Retrieve(idDoProduto);
+        return estoqueDAO.RetrievePorIdDoProduto(idDoProduto);
     }
     
     
@@ -48,5 +46,4 @@ public class ServiceEstoque {
         EstoqueDAO estoqueDAO = new EstoqueDAO();
         return estoqueDAO.Retrieve(idDoProduto).getQuantidade();
     }
-
 }

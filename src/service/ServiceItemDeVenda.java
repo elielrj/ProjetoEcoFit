@@ -7,10 +7,8 @@ import model.DAO.ItemDeVendaDAO;
 public class ServiceItemDeVenda {
 
     public static void Incluir(ItemDeVenda objeto) {
-
         ItemDeVendaDAO itemDeVendaDAO = new ItemDeVendaDAO();
         itemDeVendaDAO.Create(objeto);
-
     }
 
     public static void Atualizar(ItemDeVenda objeto) {
@@ -37,8 +35,8 @@ public class ServiceItemDeVenda {
         itemDeVendaDAO.Delete(idVenda);
     }
     
-    public static List<ItemDeVenda> BuscarListaDeUmaVenda(int idDaVenda) {
+    public static List<ItemDeVenda> BuscarUmaListaDeItemDeVendaPeloIdDaVenda(int idDaVenda) {
         ItemDeVendaDAO itemDeVendaDAO = new ItemDeVendaDAO();
-        return itemDeVendaDAO.RetrieveListaDeUmaVenda(idDaVenda);
+        return itemDeVendaDAO.RetrieveUmaListaDeItemDeVendaPeloIdDaVenda(idDaVenda);
     }
 }

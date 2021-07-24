@@ -7,10 +7,8 @@ import model.DAO.ItemDeCompraDAO;
 public class ServiceItemDeCompra {
 
     public static void Incluir(ItemDeCompra objeto) {
-
         ItemDeCompraDAO itemDeCompraDAO = new ItemDeCompraDAO();
         itemDeCompraDAO.Create(objeto);
-
     }
 
     public static void Atualizar(ItemDeCompra objeto) {

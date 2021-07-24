@@ -7,10 +7,8 @@ import model.DAO.ReceberDAO;
 public class ServiceItemDeReceber {
 
     public static void Incluir(Receber objeto) {
-
         ReceberDAO receberDAO = new ReceberDAO();
         receberDAO.Create(objeto);
-
     }
 
     public static void Atualizar(Receber objeto) {

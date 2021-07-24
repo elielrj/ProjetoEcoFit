@@ -218,6 +218,7 @@ public class Venda {
                 return;
             }
         }
+        itemDeVenda.atualizarSubTotal();
         itensDeVenda.add(itemDeVenda);
     }
     

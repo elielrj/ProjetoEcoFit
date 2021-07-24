@@ -8,19 +8,15 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import model.bo.ContaAPagar;
 
-
 public class CompraDAO implements InterfaceDAO<Compra> {
 
     @Override
     public void Create(Compra objeto) {
 
-        Connection conexao = ConectionFactory.getConection();
-
-        PreparedStatement pstm = null;
-
         try {
+            Connection conexao = ConectionFactory.getConection();
+            PreparedStatement pstm = null;
             pstm = conexao.prepareStatement(SQL.COMPRA_CREATE);
-
             pstm.setString(1, objeto.getData());
             pstm.setString(2, objeto.getHora());
             pstm.setString(3, objeto.getDataDeVencimento());
@@ -30,12 +26,14 @@ public class CompraDAO implements InterfaceDAO<Compra> {
             pstm.setBoolean(7, objeto.getStatus());
             pstm.setInt(8, objeto.getFornecedor().getId());
             pstm.executeUpdate();
-
+            ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            throw new RuntimeException(" \nCLASSE: CompraDAO->Create\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
         }
 
-        ConectionFactory.closeConnection(conexao, pstm);
     }
 
     @Override
@@ -53,20 +51,17 @@ public class CompraDAO implements InterfaceDAO<Compra> {
 
             while (rs.next()) {
                 Compra compra = new Compra.CompraBuilder()
-                .setId(rs.getInt("id"))
-                .setData(rs.getString("datacompra"))
-                .setHora(rs.getString("hora"))
-
-                .setDataDeVencimento(rs.getString("datavencimento"))
-                .setObservacao(rs.getString("observacao"))
-                .setValorDeDesconto(rs.getFloat("valordesconto"))
-
-                .setValorTotal(rs.getFloat("valortotal"))
-                .setStatus(rs.getBoolean("status"))
-
-                .setFornecedor(
-                        service.ServiceFornecedor.Buscar(rs.getInt("fornecedorid"))
-                )
+                        .setId(rs.getInt("id"))
+                        .setData(rs.getString("datacompra"))
+                        .setHora(rs.getString("hora"))
+                        .setDataDeVencimento(rs.getString("datavencimento"))
+                        .setObservacao(rs.getString("observacao"))
+                        .setValorDeDesconto(rs.getFloat("valordesconto"))
+                        .setValorTotal(rs.getFloat("valortotal"))
+                        .setStatus(rs.getBoolean("status"))
+                        .setFornecedor(
+                                service.ServiceFornecedor.Buscar(rs.getInt("fornecedorid"))
+                        )
                         .createCompra();
 
                 compras.add(compra);
@@ -74,8 +69,10 @@ public class CompraDAO implements InterfaceDAO<Compra> {
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return compras;
         } catch (Exception ex) {
-            ConectionFactory.closeConnection(conexao, pstm, rs);
-            return null;
+            throw new RuntimeException(" \nCLASSE: CompraDAO->RetriveALL\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
         }
     }
 
@@ -155,10 +152,10 @@ public class CompraDAO implements InterfaceDAO<Compra> {
             pstm = conexao.prepareStatement(SQL.COMPRA_DELETE);
             pstm.setInt(1, objeto.getId());
             pstm.executeUpdate();
-            
+
             ContaAPagar contaAPagar = service.ServiceContaAPagar.BuscarIdDaContaAReceberPeloIdDaCompra(objeto.getId());
             service.ServiceContaAPagar.Deletar(contaAPagar);
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -190,22 +187,22 @@ public class CompraDAO implements InterfaceDAO<Compra> {
             );
         }
     }
-    
-    public void Delete(int idDaCompra) {
-        Connection conexao = ConectionFactory.getConection();
-        PreparedStatement pstm = null;
 
+    public void Delete(int idDaCompra) {
         try {
+            Connection conexao = ConectionFactory.getConection();
+            PreparedStatement pstm = null;
             pstm = conexao.prepareStatement(SQL.COMPRA_DELETE);
             pstm.setInt(1, idDaCompra);
             pstm.executeUpdate();
-            
             ContaAPagar contaAPagar = service.ServiceContaAPagar.BuscarIdDaContaAReceberPeloIdDaCompra(idDaCompra);
             service.ServiceContaAPagar.Deletar(contaAPagar);
-            
+            ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            throw new RuntimeException(" \nCLASSE: CompraDAO->Delete\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
         }
-        ConectionFactory.closeConnection(conexao, pstm);
     }
 }

@@ -30,7 +30,7 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
             pstm.executeUpdate();
             ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: BairroDAO->Create\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: ProdutoDAO->Create\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
 		);
@@ -66,8 +66,10 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return produtos;
         } catch (Exception ex) {
-            ConectionFactory.closeConnection(conexao, pstm, rs);
-            return null;
+            throw new RuntimeException(" \nCLASSE: EstoqueDAO->Retrive\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
         }
     }
 
@@ -126,8 +128,10 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return produto;
         } catch (Exception ex) {
-            ConectionFactory.closeConnection(conexao, pstm, rs);
-            return null;
+            throw new RuntimeException(" \nCLASSE: EstoqueDAO->Retruve(CodBarras)\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
         }
     }
 
@@ -159,40 +163,29 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
     }
 
     @Override
-    public void Delete(Produto objeto) {
-        Connection conexao = ConectionFactory.getConection();
-        
-        PreparedStatement pstm = null;
-
+    public void Delete(Produto objeto) {        
+        Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdDoProduto(objeto.getId());
+        service.ServiceEstoque.Deletar(estoque);
         try {
-            Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdDoProduto(objeto.getId());
-            service.ServiceEstoque.Deletar(estoque);
-            
+            Connection conexao = ConectionFactory.getConection();
+            PreparedStatement pstm = null;            
             pstm = conexao.prepareStatement(SQL.PRODUTO_DELETE);
             pstm.setInt(1, objeto.getId());
             pstm.executeUpdate();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            ConectionFactory.closeConnection(conexao, pstm);
+        }catch (Exception ex) {
+            throw new RuntimeException(" \nCLASSE: EstoqueDAO->Delete()\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
         }
-        ConectionFactory.closeConnection(conexao, pstm);
+        
     }
     
      public void Delete(int idProduto) {
-        Connection conexao = ConectionFactory.getConection();
+        Produto produto = service.ServiceProduto.Buscar(idProduto);
+        Delete(produto);
         
-        PreparedStatement pstm = null;
-
-        try {
-            Estoque objeto = service.ServiceEstoque.Buscar(idProduto);
-            service.ServiceEstoque.Deletar(objeto);
-            
-            pstm = conexao.prepareStatement(SQL.PRODUTO_DELETE);
-            pstm.setInt(1, objeto.getId());
-            pstm.executeUpdate();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        ConectionFactory.closeConnection(conexao, pstm);
     }
 
     public boolean codigoDeBarrasValido(String codBarras) {

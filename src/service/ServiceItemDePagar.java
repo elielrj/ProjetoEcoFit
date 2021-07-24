@@ -7,10 +7,8 @@ import model.DAO.PagarDAO;
 public class ServiceItemDePagar {
 
     public static void Incluir(Pagar objeto) {
-
         PagarDAO pagarDAO = new PagarDAO();
         pagarDAO.Create(objeto);
-
     }
 
     public static void Atualizar(Pagar objeto) {

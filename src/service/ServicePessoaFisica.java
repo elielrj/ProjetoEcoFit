@@ -2,14 +2,12 @@ package service;
 
 import java.util.List;
 import model.bo.PessoaFisica;
-import model.DAO.EnderecoDAO;
 import model.DAO.PessoaFisicaDAO;
-import model.bo.Endereco;
+
 
 public class ServicePessoaFisica {
 
     public static void Incluir(PessoaFisica objeto) {
-
         PessoaFisicaDAO alunoDAO = new PessoaFisicaDAO();
         alunoDAO.Create(objeto);
     }

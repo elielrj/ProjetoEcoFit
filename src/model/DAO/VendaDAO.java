@@ -16,15 +16,12 @@ public class VendaDAO implements InterfaceDAO<Venda> {
     @Override
     public void Create(Venda objeto) {
 
-        Connection conexao = ConectionFactory.getConection();
-
-        PreparedStatement pstm = null;
-
         try {
+            Connection conexao = ConectionFactory.getConection();
+            PreparedStatement pstm = null;
             pstm = conexao.prepareStatement(SQL.VENDA_CREATE);
             pstm.setString(1, objeto.getData());
             pstm.setString(2, objeto.getHora());
-
             pstm.setString(3, objeto.getDataDeVencimento());
             pstm.setString(4, objeto.getObservacao());
             pstm.setFloat(5, objeto.getValorDoDesconto());
@@ -33,24 +30,25 @@ public class VendaDAO implements InterfaceDAO<Venda> {
             pstm.setInt(8, objeto.getPessoaFisica().getId());
             pstm.setString(9, objeto.getUserCaixa());
             pstm.executeUpdate();
-
+            ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            throw new RuntimeException(" \nCLASSE: VendaDAO->Create-\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
         }
-
-        ConectionFactory.closeConnection(conexao, pstm);
     }
 
     @Override
     public Venda Retrieve(int id) {
-        Connection conexao = ConectionFactory.getConection();
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
         try {
+            Connection conexao = ConectionFactory.getConection();
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
             pstm = conexao.prepareStatement(SQL.VENDA_RETRIVE_ONE_ID);
+            pstm.setInt(1, id);
             rs = pstm.executeQuery();
             Venda venda = new Venda.VendaBuilder().createVenda();
-
             while (rs.next()) {
                 venda.setId(rs.getInt("id"));
                 venda.setData(rs.getString("datavenda"));
@@ -68,8 +66,10 @@ public class VendaDAO implements InterfaceDAO<Venda> {
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return venda;
         } catch (Exception ex) {
-            ConectionFactory.closeConnection(conexao, pstm, rs);
-            return null;
+            throw new RuntimeException(" \nCLASSE: VendaDAO->Retrive-\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
         }
     }
 
@@ -135,7 +135,7 @@ public class VendaDAO implements InterfaceDAO<Venda> {
                         )
                         .setUserCaixa(rs.getString("usercaixa"))
                         .setItensDeVenda(
-                                service.ServiceItemDeVenda.BuscarListaDeUmaVenda(
+                                service.ServiceItemDeVenda.BuscarUmaListaDeItemDeVendaPeloIdDaVenda(
                                         rs.getInt("id")
                                 )
                         )
@@ -179,26 +179,22 @@ public class VendaDAO implements InterfaceDAO<Venda> {
 
     @Override
     public void Delete(Venda objeto) {
-        Connection conexao = ConectionFactory.getConection();
-        PreparedStatement pstm = null;
-
+        ContaAReceber contaaReceber = service.ServiceContaAReceber.BuscarIdDaContaAReceberPeloIdDaVenda(objeto.getId());
+        service.ServiceContaAReceber.Deletar(contaaReceber);
+        for (ItemDeVenda i : objeto.getItensDeVenda()) {
+            Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdDoProduto(i.getProduto().getId());
+            estoque.setQuantidade(estoque.getQuantidade() + i.getQuantidade());
+            service.ServiceEstoque.Atualizar(estoque);
+            service.ServiceItemDeVenda.Deletar(i);
+        }
         try {
-
-            for (ItemDeVenda i : objeto.getItensDeVenda()) {
-                Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdDoProduto(i.getProduto().getId());
-                estoque.setQuantidade(estoque.getQuantidade() + i.getQuantidade());
-                service.ServiceEstoque.Atualizar(estoque);
-                service.ServiceItemDeVenda.Deletar(i);
-            }
-
-            ContaAReceber contaaReceber = service.ServiceContaAReceber.BuscarIdDaContaAReceberPeloIdDaVenda(objeto.getId());
-            service.ServiceContaAReceber.Deletar(contaaReceber);
-
+            Connection conexao = ConectionFactory.getConection();
+            PreparedStatement pstm = null;
             pstm = conexao.prepareStatement(SQL.VENDA_DELETE);
             pstm.setInt(1, objeto.getId());
             pstm.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: BairroDAO->Retrive->bairroDAO\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: VendaDAO->Delete\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
@@ -206,11 +202,13 @@ public class VendaDAO implements InterfaceDAO<Venda> {
     }
 
     public void Delete(int idVenda) {
-        Connection conexao = ConectionFactory.getConection();
+        Venda venda = service.ServiceVenda.Buscar(idVenda);
+        //Delete(venda);
+        /*Connection conexao = ConectionFactory.getConection();
         PreparedStatement pstm = null;
 
         try {
-            Venda venda = service.ServiceVenda.Buscar(idVenda);
+            Venda venda = service.ServiceVenda.BuscarObjetoVendaPeloClienteValorTotalEData(idVenda);
             for (ItemDeVenda i : venda.getItensDeVenda()) {
                 Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdDoProduto(i.getProduto().getId());
                 estoque.setQuantidade(estoque.getQuantidade() + i.getQuantidade());
@@ -229,22 +227,40 @@ public class VendaDAO implements InterfaceDAO<Venda> {
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
+        }*/
+        ContaAReceber contaaReceber = service.ServiceContaAReceber.BuscarIdDaContaAReceberPeloIdDaVenda(idVenda);
+        service.ServiceContaAReceber.Deletar(contaaReceber);
+        for (ItemDeVenda i : venda.getItensDeVenda()) {
+            Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdDoProduto(i.getProduto().getId());
+            estoque.setQuantidade(estoque.getQuantidade() + i.getQuantidade());
+            service.ServiceEstoque.Atualizar(estoque);
+            service.ServiceItemDeVenda.Deletar(i);
+        }
+        try {
+            Connection conexao = ConectionFactory.getConection();
+            PreparedStatement pstm = null;
+            pstm = conexao.prepareStatement(SQL.VENDA_DELETE);
+            pstm.setInt(1, idVenda);
+            pstm.executeUpdate();
+        } catch (Exception ex) {
+            throw new RuntimeException(" \nCLASSE: VendaDAO->Delete IdVenda\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
         }
     }
 
-    public int Retrieve(Venda venda) {
-        Connection conexao = ConectionFactory.getConection();
-
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
+    public int RetrieveObjetoVendaPeloClienteValorTotalEData(Venda venda) {
 
         try {
+            Connection conexao = ConectionFactory.getConection();
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
             pstm = conexao.prepareStatement(SQL.VENDA_RETRIVE_VENDA_OBJ);
             pstm.setFloat(1, venda.getValorTotal());
             pstm.setInt(2, venda.getPessoaFisica().getId());
             pstm.setString(3, venda.getData());
             rs = pstm.executeQuery();
-
             while (rs.next()) {
                 venda.setId(rs.getInt("id"));//1
             }

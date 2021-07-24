@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
-import java.util.ArrayList;
-import model.bo.Compra;
-import model.bo.ContaAPagar;
+import java.util.ArrayList;import model.bo.ContaAPagar;
 
 public class ContaAPagarDAO implements InterfaceDAO<ContaAPagar> {
 
@@ -22,7 +20,7 @@ public class ContaAPagarDAO implements InterfaceDAO<ContaAPagar> {
             pstm.executeUpdate();      
             ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ContaAPagarDAO->Create->contaAPagarDAO\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: ContaAPagarDAO->Create\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );            
@@ -51,7 +49,7 @@ public class ContaAPagarDAO implements InterfaceDAO<ContaAPagar> {
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return contaAPagars;
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ContaAPagarDAO->Retrive->contaAPagarDAO\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: ContaAPagarDAO->Retrive\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
@@ -97,7 +95,7 @@ public class ContaAPagarDAO implements InterfaceDAO<ContaAPagar> {
             pstm.executeUpdate();
             ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ContaAPagarDAO->Update->contaAPagarDAO\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: ContaAPagarDAO->Update\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
@@ -114,7 +112,7 @@ public class ContaAPagarDAO implements InterfaceDAO<ContaAPagar> {
             pstm.executeUpdate();
             ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ContaAPagarDAO->Delete->contaAPagarDAO\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: ContaAPagarDAO->Delete\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );

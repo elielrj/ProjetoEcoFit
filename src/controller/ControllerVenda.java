@@ -135,7 +135,7 @@ public class ControllerVenda implements ActionListener {
                 this.telaCadastroVenda.getjComboBox_alunoOuPersonal().setSelectedItem(venda.getPessoaFisica().getTipo());
                 this.telaCadastroVenda.getjTextField_Cliente_Email().setText(venda.getPessoaFisica().getEmail());//10 - 10                
 //
-                venda.setItensDeVenda(service.ServiceItemDeVenda.BuscarListaDeUmaVenda(venda.getId())); //11
+                venda.setItensDeVenda(service.ServiceItemDeVenda.BuscarUmaListaDeItemDeVendaPeloIdDaVenda(venda.getId())); //11
                 atualizarTabelaDeItens();
             }
             // 5- PESQUISAR PRODUTO
@@ -327,7 +327,7 @@ public class ControllerVenda implements ActionListener {
         } else if (codigoDeBarras.length() >= 13) {
             return false;
         } else {
-            Produto produto = service.ServiceProduto.Buscar(Integer.parseInt(codigoDeBarras));
+            Produto produto = service.ServiceProduto.BuscarObjetoVendaPeloClienteValorTotalEData(Integer.parseInt(codigoDeBarras));
             if (produto.getId() == Integer.parseInt(codigoDeBarras)) {
                 return true;
             }
@@ -382,18 +382,19 @@ public class ControllerVenda implements ActionListener {
             //1º incluir a venda
             service.ServiceVenda.Incluir(venda);
             //Resgatar o Id da Venda
-            venda.setId(service.ServiceVenda.Buscar(venda));
+            venda.setId(service.ServiceVenda.BuscarObjetoVendaPeloClienteValorTotalEData(venda));
             //2º incluir os itens c/ idVenda na tabela de itens de venda no banco           
 
             for (ItemDeVenda itemDeVenda : venda.getItensDeVenda()) {
                 itemDeVenda.setVendaId(venda.getId());
+                
 
                 //ESTOQUE: 1º busca estoque pelo produtoId
                 Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdDoProduto(itemDeVenda.getProduto().getId());
                 //ESTOQUE: 2º setar a nova qtd no estoque
                 estoque.setQuantidade(estoque.getQuantidade() - itemDeVenda.getQuantidade());
                 service.ServiceEstoque.Atualizar(estoque);
-                //VENDA: finalmente inluir-la
+                //VENDA: finalmente incluir-la
                 service.ServiceItemDeVenda.Incluir(itemDeVenda);
 
             }
@@ -412,7 +413,7 @@ public class ControllerVenda implements ActionListener {
 
             //2º deletar itens anterior no banco
             //buscar antes de deletar!
-            List<ItemDeVenda> itensDeVenda = service.ServiceItemDeVenda.BuscarListaDeUmaVenda(venda.getId());
+            List<ItemDeVenda> itensDeVenda = service.ServiceItemDeVenda.BuscarUmaListaDeItemDeVendaPeloIdDaVenda(venda.getId());
 
             for (ItemDeVenda itemDeVenda : itensDeVenda) {
                 Estoque estoque = service.ServiceEstoque.BuscarEstoquePorIdDoProduto(itemDeVenda.getProduto().getId());
@@ -512,6 +513,16 @@ public class ControllerVenda implements ActionListener {
 
     private void cancelarFaturamento() {
         venda.removerTodosOsItensDaLista();
+        this.telaCadastroVenda.getjTextField_ClienteId().setText("");
+        this.telaCadastroVenda.getjTextField_Cliente_Nome().setText("");
+        this.telaCadastroVenda.getjTextField_Cliente_Cidade().setText("");
+        this.telaCadastroVenda.getjTextField_Cliente_Bairro().setText("");
+        this.telaCadastroVenda.getjTextField_Cliente_Email().setText("");
+        this.telaCadastroVenda.getjTextField_Cliente_Tel1().setText("");
+        this.telaCadastroVenda.getjTextField_Cliente_Tel2().setText("");
+        this.telaCadastroVenda.getjTextArea_Obs().setText("");
+        this.telaCadastroVenda.getjTextField_Faturamento_Id().setText("");
+        this.telaCadastroVenda.getjComboBox_alunoOuPersonal().setSelectedItem("");
         atualizarTabelaDeItens();
         Ativa(true);
         LimpaEstadoComponentes(false);

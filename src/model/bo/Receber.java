@@ -3,20 +3,20 @@ package model.bo;
 public class Receber {
 
     private int id;//1
-    private String data;//2
+    private String dataRecebimento;//2
     private String hora;//3
-    private float valorDeDescontoNegociado;//4
-    private float valorDeAcrescimo;//5
+//    private float valorDesconto;//4
+    private float valorAcrescimo;//5
     private float valorRecebido;//6
     private String observacao;//7
     private Venda venda;//8
 
     private Receber(ReceberBuilder receberBuilder) {
         this.id = receberBuilder.id;
-        this.data = receberBuilder.data;
+        this.dataRecebimento = receberBuilder.dataRecebimento;
         this.hora = receberBuilder.hora;
-        this.valorDeDescontoNegociado = receberBuilder.valorDeDescontoNegociado;
-        this.valorDeAcrescimo = receberBuilder.valorDeAcrescimo;
+        //this.valorDesconto = receberBuilder.valorDesconto;
+        this.valorAcrescimo = receberBuilder.valorAcrescimo;
         this.valorRecebido = receberBuilder.valorRecebido;
         this.observacao = receberBuilder.observacao;
         this.venda = receberBuilder.venda;
@@ -30,12 +30,12 @@ public class Receber {
         this.id = id;
     }
 
-    public String getData() {
-        return data;
+    public String getDataRecebimento() {
+        return dataRecebimento;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setDataRecebimento(String dataRecebimento) {
+        this.dataRecebimento = dataRecebimento;
     }
 
     public String getHora() {
@@ -45,21 +45,13 @@ public class Receber {
     public void setHora(String hora) {
         this.hora = hora;
     }
-
-    public float getValorDeDescontoNegociado() {
-        return valorDeDescontoNegociado;
+    
+    public float getValorAcrescimo() {
+        return valorAcrescimo;
     }
 
-    public void setValorDeDescontoNegociado(float valorDeDescontoNegociado) {
-        this.valorDeDescontoNegociado = valorDeDescontoNegociado;
-    }
-
-    public float getValorDeAcrescimo() {
-        return valorDeAcrescimo;
-    }
-
-    public void setValorDeAcrescimo(float valorDeAcrescimo) {
-        this.valorDeAcrescimo = valorDeAcrescimo;
+    public void setValorAcrescimo(float valorAcrescimo) {
+        this.valorAcrescimo = valorAcrescimo;
     }
 
     public float getValorRecebido() {
@@ -89,10 +81,10 @@ public class Receber {
     public static class ReceberBuilder {
 
         private int id;
-        private String data;
+        private String dataRecebimento;
         private String hora;
-        private float valorDeDescontoNegociado;
-        private float valorDeAcrescimo;
+        private float valorDesconto;
+        private float valorAcrescimo;
         private float valorRecebido;
         private String observacao;
         private Venda venda;
@@ -105,8 +97,8 @@ public class Receber {
             return this;
         }
 
-        public ReceberBuilder setData(String data) {
-            this.data = data;
+        public ReceberBuilder setDataRecebimento(String data) {
+            this.dataRecebimento = data;
             return this;
         }
 
@@ -115,13 +107,13 @@ public class Receber {
             return this;
         }
 
-        public ReceberBuilder setValorDeDescontoNegociado(float valorDeDescontoNegociado) {
-            this.valorDeDescontoNegociado = valorDeDescontoNegociado;
+        public ReceberBuilder setValorDesconto(float valorDesconto) {
+            this.valorDesconto = valorDesconto;
             return this;
         }
 
-        public ReceberBuilder setValorDeAcrescimo(float valorDeAcrescimo) {
-            this.valorDeAcrescimo = valorDeAcrescimo;
+        public ReceberBuilder setValorAcrescimo(float valorAcrescimo) {
+            this.valorAcrescimo = valorAcrescimo;
             return this;
         }
 

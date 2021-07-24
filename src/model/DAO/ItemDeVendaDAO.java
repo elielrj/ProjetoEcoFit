@@ -6,16 +6,15 @@ import java.util.List;
 import model.bo.ItemDeVenda;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
 
     @Override
     public void Create(ItemDeVenda objeto) {
-        Connection conexao = ConectionFactory.getConection();
-
-        PreparedStatement pstm = null;
-
         try {
+            Connection conexao = ConectionFactory.getConection();
+            PreparedStatement pstm = null;
             pstm = conexao.prepareStatement(SQL.ITEM_DE_VENDA_CREATE);
             pstm.setInt(1, objeto.getQuantidade());//3
             pstm.setInt(2, objeto.getVendaId());//4
@@ -29,7 +28,6 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
                     + ex.getLocalizedMessage()
             );
         }
-
     }
 
     @Override
@@ -89,7 +87,7 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
                         service.ServiceProduto.Buscar(rs.getInt("produtoid"))
                 );
                 itemDeVenda.setSubTotal(rs.getFloat("subtotal"));
-                
+
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return itemDeVenda;
@@ -135,7 +133,10 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
             pstm.setInt(1, objeto.getId());
             pstm.executeUpdate();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            throw new RuntimeException(" \nCLASSE: ItemDeVendaDAO->Delete Objeto Item \nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
         }
         ConectionFactory.closeConnection(conexao, pstm);
     }
@@ -158,7 +159,7 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
     }
 //??????????????????????????????????????????????????????????
 
-   /* public List<ItemDeVenda> RetrieveTodosOsItensDeUmaVenda(int idDaVenda) {
+    /* public List<ItemDeVenda> RetrieveTodosOsItensDeUmaVenda(int idDaVenda) {
         Connection conexao = ConectionFactory.getConection();
 
         PreparedStatement pstm = null;
@@ -192,8 +193,7 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
             );
         }
     }*/
-
-    public List<ItemDeVenda> RetrieveListaDeUmaVenda(int idDaVenda) {
+    public List<ItemDeVenda> RetrieveUmaListaDeItemDeVendaPeloIdDaVenda(int idDaVenda) {
 
         try {
             Connection conexao = ConectionFactory.getConection();
@@ -202,9 +202,7 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
             pstm = conexao.prepareStatement(SQL.ITEM_DE_VENDA_RETRIVE_ALL_POR_VENDAID);
             pstm.setInt(1, idDaVenda);
             rs = pstm.executeQuery();
-
             List<ItemDeVenda> itensDeVenda = new ArrayList<>();
-
             while (rs.next()) {
                 ItemDeVenda itemDeVenda = new ItemDeVenda.ItemDeVendaBuilder()
                         .setId(rs.getInt("id"))//1
@@ -221,11 +219,10 @@ public class ItemDeVendaDAO implements InterfaceDAO<ItemDeVenda> {
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return itensDeVenda;
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: ItemDeVendaDAO->RetrieveListaDeUmaVenda\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: ItemDeVendaDAO->RetrieveUmaListaDeItemDeVendaPeloIdDaVenda\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
         }
-
     }
 }

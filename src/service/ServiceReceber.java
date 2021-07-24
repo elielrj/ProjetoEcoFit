@@ -7,10 +7,8 @@ import model.DAO.ReceberDAO;
 public class ServiceReceber {
 
     public static void Incluir(Receber objeto) {
-
         ReceberDAO receberDAO = new ReceberDAO();
         receberDAO.Create(objeto);
-
     }
 
     public static void Atualizar(Receber objeto) {
@@ -26,6 +24,11 @@ public class ServiceReceber {
     public static Receber Buscar(int id) {
         ReceberDAO receberDAO = new ReceberDAO();
         return receberDAO.Retrieve(id);
+    }
+    
+    public static Receber BuscarPorUmaIdVendaRecebido(int idVenda) {
+        ReceberDAO receberDAO = new ReceberDAO();
+        return receberDAO.RetrievePorUmaIdVendaRecebido(idVenda);  
     }
 
     public static void Deletar(Receber objeto) {

@@ -17,14 +17,14 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
             pstm = conexao.prepareStatement(SQL.BAIRRO_CREATE);
             pstm.setString(1, objeto.getNome());
             pstm.setBoolean(2, objeto.getStatus());
-            pstm.setInt(3, objeto.getCidade().getId());            
-            pstm.executeUpdate();      
+            pstm.setInt(3, objeto.getCidade().getId());
+            pstm.executeUpdate();
             ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: BairroDAO->Create->bairroDAO\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: BairroDAO->Create\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
-            );            
+            );
         }
     }
 
@@ -46,13 +46,13 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
                                 service.ServiceCidade.Buscar(rs.getInt("cidadeId"))
                         )
                         .createBairro();
-                
+
                 bairros.add(bairro);
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return bairros;
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: BairroDAO->Retrive->bairroDAO\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: BairroDAO->Retrive\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
@@ -74,13 +74,13 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
                 bairro.setNome(rs.getString("nome"));
                 bairro.setStatus(rs.getBoolean("status"));
                 bairro.setCidade(
-                    service.ServiceCidade.Buscar(rs.getInt("cidadeid"))
+                        service.ServiceCidade.Buscar(rs.getInt("cidadeid"))
                 );
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return bairro;
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: BairroDAO->Retrive(int id)->bairroDAO\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: BairroDAO->Retrive(int id)\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
@@ -100,7 +100,7 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
             pstm.executeUpdate();
             ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: BairroDAO->Update->bairroDAO\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: BairroDAO->Update\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
@@ -117,7 +117,7 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
             pstm.executeUpdate();
             ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: BairroDAO->Delete->bairroDAO\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: BairroDAO->Delete\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
@@ -133,7 +133,7 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
             pstm.executeUpdate();
             ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: BairroDAO->Delete->bairroDAO\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: BairroDAO->Delete\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
@@ -162,7 +162,7 @@ public class BairroDAO implements InterfaceDAO<Bairro> {
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return bairros;
         } catch (Exception ex) {
-            throw new RuntimeException(" \nCLASSE: BairroDAO->Retrive(int id)->bairroDAO\nMENSAGEM:"
+            throw new RuntimeException(" \nCLASSE: BairroDAO->Retrive(int idCidade)\nMENSAGEM:"
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );

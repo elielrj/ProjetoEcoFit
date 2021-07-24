@@ -7,10 +7,8 @@ import model.DAO.FornecedorDAO;
 public class ServiceFornecedor {
 
     public static void Incluir(Fornecedor objeto) {
-
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
         fornecedorDAO.Create(objeto);
-
     }
 
     public static void Atualizar(Fornecedor objeto) {
