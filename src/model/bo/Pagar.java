@@ -3,24 +3,25 @@ package model.bo;
 public class Pagar {
 
     private int id;//1
-    private String data;//2
+    private String dataPagamento;//2
     private String hora;//3
-    private float valorDeDescontoNegociado;//4
-    private float valorDeAcrescimo;//5
+   // private float valorDesconto;//4
+    private float valorAcrescimo;//5
     private float valorPago;//6
     private String observacao;//7
-    private Compra compra;//8
-    private boolean status;//9
+    //private Compra compra;//8
+    //private boolean status;//9
+    private ContaAPagar contaAPagar;
 
     private Pagar(PagarBuilder pagarBuilder) {
         this.id = pagarBuilder.id;
-        this.data = pagarBuilder.data;
+        this.dataPagamento = pagarBuilder.dataPagamento;
         this.hora = pagarBuilder.hora;
-        this.valorDeDescontoNegociado = pagarBuilder.valorDeDescontoNegociado;
-        this.valorDeAcrescimo = pagarBuilder.valorDeAcrescimo;
+        //this.valorDesconto = pagarBuilder.valorDesconto;
+        this.valorAcrescimo = pagarBuilder.valorAcrescimo;
         this.valorPago = pagarBuilder.valorPago;
         this.observacao = pagarBuilder.observacao;
-        this.compra = pagarBuilder.compra;
+        this.contaAPagar = pagarBuilder.contaAPagar;
     }
 
     public int getId() {
@@ -31,12 +32,12 @@ public class Pagar {
         this.id = id;
     }
 
-    public String getData() {
-        return data;
+    public String getDataPagamento() {
+        return dataPagamento;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setDataPagamento(String dataPagamento) {
+        this.dataPagamento = dataPagamento;
     }
 
     public String getHora() {
@@ -47,28 +48,13 @@ public class Pagar {
         this.hora = hora;
     }
 
-    public float getValorDeDescontoNegociado() {
-        return valorDeDescontoNegociado;
+    
+    public float getValorAcrescimo() {
+        return valorAcrescimo;
     }
 
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public void setValorDeDescontoNegociado(float valorDeDescontoNegociado) {
-        this.valorDeDescontoNegociado = valorDeDescontoNegociado;
-    }
-
-    public float getValorDeAcrescimo() {
-        return valorDeAcrescimo;
-    }
-
-    public void setValorDeAcrescimo(float valorDeAcrescimo) {
-        this.valorDeAcrescimo = valorDeAcrescimo;
+    public void setValorAcrescimo(float valorAcrescimo) {
+        this.valorAcrescimo = valorAcrescimo;
     }
 
     public float getValorPago() {
@@ -87,25 +73,27 @@ public class Pagar {
         this.observacao = observacao;
     }
 
-    public Compra getCompra() {
-        return compra;
+    public ContaAPagar getContaAPagar() {
+        return contaAPagar;
     }
 
-    public void setCompra(Compra compra) {
-        this.compra = compra;
+    public void setContaAPagar(ContaAPagar contaAPagar) {
+        this.contaAPagar = contaAPagar;
     }
 
     public static class PagarBuilder {
 
         private int id;
-        private String data;
+        private String dataPagamento;
         private String hora;
-        private float valorDeDescontoNegociado;
-        private float valorDeAcrescimo;
+       // private float valorDesconto;
+        private float valorAcrescimo;
         private float valorPago;
         private String observacao;
-        private Compra compra;
-        private boolean status;
+  //      private Compra compra;
+//        private boolean status;
+        private ContaAPagar contaAPagar;
+
 
         public PagarBuilder() {
         }
@@ -115,8 +103,8 @@ public class Pagar {
             return this;
         }
 
-        public PagarBuilder setData(String data) {
-            this.data = data;
+        public PagarBuilder setDataPagamento(String dataPagamento) {
+            this.dataPagamento = dataPagamento;
             return this;
         }
 
@@ -125,13 +113,9 @@ public class Pagar {
             return this;
         }
 
-        public PagarBuilder setValorDeDescontoNegociado(float valorDeDescontoNegociado) {
-            this.valorDeDescontoNegociado = valorDeDescontoNegociado;
-            return this;
-        }
-
-        public PagarBuilder setValorDeAcrescimo(float valorDeAcrescimo) {
-            this.valorDeAcrescimo = valorDeAcrescimo;
+        
+        public PagarBuilder setValorAcrescimo(float valorDeAcrescimo) {
+            this.valorAcrescimo = valorDeAcrescimo;
             return this;
         }
 
@@ -140,18 +124,13 @@ public class Pagar {
             return this;
         }
 
-        public PagarBuilder setStatus(boolean status) {
-            this.status = status;
+        public PagarBuilder setContaAPagar(ContaAPagar contaAPagar) {
+            this.contaAPagar = contaAPagar;
             return this;
         }
 
         public PagarBuilder setObservacao(String observacao) {
             this.observacao = observacao;
-            return this;
-        }
-
-        public PagarBuilder setCompra(Compra compra) {
-            this.compra = compra;
             return this;
         }
 

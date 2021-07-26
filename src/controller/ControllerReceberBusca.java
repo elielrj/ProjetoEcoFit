@@ -20,14 +20,14 @@ public class ControllerReceberBusca implements ActionListener {
         DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaReceber.getjTable_ReceberBusca().getModel();
 
         for (Receber receberDaLista : service.ServiceReceber.Buscar()) {
-            tabela.addRow(new Object[]{receberDaLista.getId(),
+            tabela.addRow(new Object[]{
+                receberDaLista.getId(),
                 receberDaLista.getDataRecebimento(),
-                receberDaLista.getValorRecebido(),
-                receberDaLista.getDataRecebimento(),
-                receberDaLista.getDataRecebimento(),
+                receberDaLista.getHora(),
                 receberDaLista.getValorAcrescimo(),
                 receberDaLista.getValorRecebido(),
-                receberDaLista.getObservacao()
+                receberDaLista.getObservacao(),
+                receberDaLista.getContaAReceber()
             });
         }
 

@@ -17,14 +17,12 @@ public class PagarDAO implements InterfaceDAO<Pagar> {
 
         try {
             pstm = conexao.prepareStatement(SQL.PAGAR_CREATE);
-            pstm.setString(1, objeto.getData());
+            pstm.setString(1, objeto.getDataPagamento());
             pstm.setString(2, objeto.getHora());
-            pstm.setDouble(3, objeto.getValorDeDescontoNegociado());
-            pstm.setDouble(4, objeto.getValorDeAcrescimo());
-            pstm.setDouble(5, objeto.getValorPago());
-            pstm.setString(6, objeto.getObservacao());
-            pstm.setInt(7, objeto.getCompra().getId());
-            pstm.setBoolean(8, objeto.getStatus());
+            pstm.setDouble(3, objeto.getValorAcrescimo());
+            pstm.setDouble(4, objeto.getValorPago());
+            pstm.setString(5, objeto.getObservacao());
+            pstm.setInt(6, objeto.getContaAPagar().getId());
             pstm.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -48,16 +46,14 @@ public class PagarDAO implements InterfaceDAO<Pagar> {
             while (rs.next()) {
                 Pagar pagamento = new Pagar.PagarBuilder()
                         .setId(rs.getInt("id"))
-                        .setData(rs.getString("datapagamento"))
+                        .setDataPagamento(rs.getString("datapagamento"))
                         .setHora(rs.getString("hora"))
-                        .setValorDeDescontoNegociado(rs.getFloat("valordedescontoNegociado"))
-                        .setValorDeAcrescimo(rs.getFloat("valoracrescimo"))
+                        .setValorAcrescimo(rs.getFloat("valoracrescimo"))
                         .setValorPago(rs.getFloat("valorpago"))
                         .setObservacao(rs.getString("observacao"))
-                        .setCompra(
-                                service.ServiceCompra.Buscar(rs.getInt("compraid"))
+                        .setContaAPagar(
+                                service.ServiceContaAPagar.Buscar(rs.getInt("contaapagarid"))
                         )
-                        .setStatus(rs.getBoolean("status"))
                         .createPagar();
 
                 pagamentos.add(pagamento);
@@ -86,17 +82,14 @@ public class PagarDAO implements InterfaceDAO<Pagar> {
 
             while (rs.next()) {
                 pagamento.setId(rs.getInt("id"));
-                pagamento.setData(rs.getString("datapagamento"));
+                pagamento.setDataPagamento(rs.getString("datapagamento"));
                 pagamento.setHora(rs.getString("hora"));
-                pagamento.setValorDeDescontoNegociado(rs.getFloat("valordesconto"));
-                pagamento.setValorDeAcrescimo(rs.getFloat("valoracrescimo"));
+                pagamento.setValorAcrescimo(rs.getFloat("valoracrescimo"));
                 pagamento.setValorPago(rs.getFloat("valorpago"));
                 pagamento.setObservacao(rs.getString("observacao"));
-                pagamento.setCompra(
-                        service.ServiceCompra.Buscar(rs.getInt("compraid"))
+                pagamento.setContaAPagar(
+                        service.ServiceContaAPagar.Buscar(rs.getInt("contaapagarid"))
                 );
-                pagamento.setStatus(rs.getBoolean("status"));
-
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return pagamento;
@@ -114,15 +107,13 @@ public class PagarDAO implements InterfaceDAO<Pagar> {
 
         try {
             pstm = conexao.prepareStatement(SQL.PAGAR_UPDATE);
-            pstm.setString(1, objeto.getData());
+            pstm.setString(1, objeto.getDataPagamento());
             pstm.setString(2, objeto.getHora());
-            pstm.setDouble(3, objeto.getValorDeDescontoNegociado());
-            pstm.setDouble(4, objeto.getValorDeAcrescimo());
-            pstm.setDouble(5, objeto.getValorPago());
-            pstm.setString(6, objeto.getObservacao());
-            pstm.setInt(7, objeto.getCompra().getId());
-            pstm.setBoolean(8, objeto.getStatus());
-            pstm.setInt(9, objeto.getId());
+            pstm.setDouble(3, objeto.getValorAcrescimo());
+            pstm.setDouble(4, objeto.getValorPago());
+            pstm.setString(5, objeto.getObservacao());
+            pstm.setInt(6, objeto.getContaAPagar().getId());
+            pstm.setInt(7, objeto.getId());
 
             pstm.executeUpdate();
 

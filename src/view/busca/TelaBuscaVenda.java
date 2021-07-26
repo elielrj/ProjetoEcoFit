@@ -5,6 +5,7 @@ import javax.swing.JTable;
 import view.FormModeloBuscas;
 
 public class TelaBuscaVenda extends javax.swing.JDialog {
+    private int idVenda = 0;
 
     public TelaBuscaVenda(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -211,5 +212,14 @@ public class TelaBuscaVenda extends javax.swing.JDialog {
     public JButton getjButton_deletar() {
         return jButton_deletar;
     }
+
+    public int getIdVenda() {
+        return idVenda;
+    }
+
+    public void setIdVenda(int idVenda) {
+        this.idVenda = idVenda;
+    }
+    
 
 }

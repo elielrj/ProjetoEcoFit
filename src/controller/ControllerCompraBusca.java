@@ -10,6 +10,7 @@ import model.bo.Compra;
 public class ControllerCompraBusca implements ActionListener {
 
     TelaBuscaCompra telaBuscaCompra;
+    int idCompra = 0;
 
     public ControllerCompraBusca(TelaBuscaCompra telaBuscaCompra) {
         
@@ -30,7 +31,9 @@ public class ControllerCompraBusca implements ActionListener {
             this.telaBuscaCompra.dispose();
         else if (e.getSource() == this.telaBuscaCompra.getjButtonCarregar()) {
 
-            ControllerCompra.codigo = (int) this.telaBuscaCompra.getjTable_BuscaCompras().getValueAt(this.telaBuscaCompra.getjTable_BuscaCompras().getSelectedRow(), 0);
+            idCompra = (int) this.telaBuscaCompra.getjTable_BuscaCompras().getValueAt(this.telaBuscaCompra.getjTable_BuscaCompras().getSelectedRow(), 0);
+            ControllerCompra.codigo = idCompra;
+            this.telaBuscaCompra.setIdCompra(idCompra);
             this.telaBuscaCompra.dispose();
         }else if (e.getSource() == this.telaBuscaCompra.getjButton_deletar()){
             try{

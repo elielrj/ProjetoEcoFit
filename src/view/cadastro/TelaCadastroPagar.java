@@ -8,11 +8,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import view.FormModeloCadastros;
 
-public class TelaCadastroReceber extends javax.swing.JFrame {
+public class TelaCadastroPagar extends javax.swing.JFrame {
 
     static int idDaVenda;
     
-    public TelaCadastroReceber() {
+    public TelaCadastroPagar() {
         initComponents();       
     }
 
@@ -57,12 +57,12 @@ public class TelaCadastroReceber extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jTextField_VendaId = new javax.swing.JTextField();
+        jTextField_CompraId = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        jTextField_VendaCliente = new javax.swing.JTextField();
-        jFormattedTextField_VendaValor = new javax.swing.JFormattedTextField();
-        jFormattedTextField_VendaData = new javax.swing.JFormattedTextField();
-        jButton_VendaBuscaId = new javax.swing.JButton();
+        jTextField_CompraFornecedor = new javax.swing.JTextField();
+        jFormattedTextField_CompraValor = new javax.swing.JFormattedTextField();
+        jFormattedTextField_CompraData = new javax.swing.JFormattedTextField();
+        jButton_CompraBuscaId = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -78,7 +78,7 @@ public class TelaCadastroReceber extends javax.swing.JFrame {
         jLabelTitulo.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabelTitulo.setForeground(new java.awt.Color(51, 0, 153));
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTitulo.setText("Receber");
+        jLabelTitulo.setText("Pagar");
         jLabelTitulo.setPreferredSize(new java.awt.Dimension(533, 50));
 
         javax.swing.GroupLayout jPanelTituloLayout = new javax.swing.GroupLayout(jPanelTitulo);
@@ -197,7 +197,7 @@ public class TelaCadastroReceber extends javax.swing.JFrame {
         }
         jFormattedTextFieldDataEmissão.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jLabel7.setText("Valor da Venda");
+        jLabel7.setText("Valor da Compra");
 
         jLabel12.setText("Hora");
 
@@ -208,24 +208,24 @@ public class TelaCadastroReceber extends javax.swing.JFrame {
         }
         jFormattedTextField_Hora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jLabel13.setText("Cliente");
+        jLabel13.setText("Fornecedor");
 
-        jLabel14.setText("Data da Venda");
+        jLabel14.setText("Data da Compra");
 
-        jLabel15.setText("Id da Venda");
+        jLabel15.setText("Id da Compra");
 
-        jTextField_VendaId.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_CompraId.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jFormattedTextField_VendaValor.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jFormattedTextField_CompraValor.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        jFormattedTextField_VendaData.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jFormattedTextField_VendaData.addActionListener(new java.awt.event.ActionListener() {
+        jFormattedTextField_CompraData.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jFormattedTextField_CompraData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField_VendaDataActionPerformed(evt);
+                jFormattedTextField_CompraDataActionPerformed(evt);
             }
         });
 
-        jButton_VendaBuscaId.setText("..");
+        jButton_CompraBuscaId.setText("..");
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
@@ -239,23 +239,23 @@ public class TelaCadastroReceber extends javax.swing.JFrame {
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField_VendaId, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextField_CompraId, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel1)
                                 .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton_VendaBuscaId)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                        .addComponent(jButton_CompraBuscaId)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
-                            .addComponent(jTextField_VendaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField_CompraFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
-                            .addComponent(jFormattedTextField_VendaData, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jFormattedTextField_CompraData, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFormattedTextField_VendaValor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFormattedTextField_CompraValor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(39, 39, 39))
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
@@ -317,12 +317,12 @@ public class TelaCadastroReceber extends javax.swing.JFrame {
                             .addGap(1, 1, 1)
                             .addComponent(jLabel7)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jFormattedTextField_VendaValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jFormattedTextField_CompraValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanelDadosLayout.createSequentialGroup()
                             .addComponent(jLabel15)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField_VendaId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jFormattedTextField_VendaData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField_CompraId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jFormattedTextField_CompraData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosLayout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addGap(26, 26, 26))
@@ -330,8 +330,8 @@ public class TelaCadastroReceber extends javax.swing.JFrame {
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField_VendaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton_VendaBuscaId))))
+                            .addComponent(jTextField_CompraFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton_CompraBuscaId))))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
@@ -375,9 +375,9 @@ public class TelaCadastroReceber extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldIdActionPerformed
 
-    private void jFormattedTextField_VendaDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField_VendaDataActionPerformed
+    private void jFormattedTextField_CompraDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField_CompraDataActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField_VendaDataActionPerformed
+    }//GEN-LAST:event_jFormattedTextField_CompraDataActionPerformed
 
     /**
      * @param args the command line arguments
@@ -420,16 +420,16 @@ public class TelaCadastroReceber extends javax.swing.JFrame {
     private javax.swing.JButton jButtonGravar;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSair;
-    private javax.swing.JButton jButton_VendaBuscaId;
+    private javax.swing.JButton jButton_CompraBuscaId;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataEmissao;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataEmissão;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataVencimento;
     private javax.swing.JFormattedTextField jFormattedTextFieldValorAcrescimo;
     private javax.swing.JFormattedTextField jFormattedTextFieldValorEmitido;
     private javax.swing.JFormattedTextField jFormattedTextFieldValorPago;
+    private javax.swing.JFormattedTextField jFormattedTextField_CompraData;
+    private javax.swing.JFormattedTextField jFormattedTextField_CompraValor;
     private javax.swing.JFormattedTextField jFormattedTextField_Hora;
-    private javax.swing.JFormattedTextField jFormattedTextField_VendaData;
-    private javax.swing.JFormattedTextField jFormattedTextField_VendaValor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -452,8 +452,8 @@ public class TelaCadastroReceber extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea jTextAreaObs;
     private javax.swing.JTextField jTextFieldId;
-    private javax.swing.JTextField jTextField_VendaCliente;
-    private javax.swing.JTextField jTextField_VendaId;
+    private javax.swing.JTextField jTextField_CompraFornecedor;
+    private javax.swing.JTextField jTextField_CompraId;
     // End of variables declaration//GEN-END:variables
 
     public JButton getjButtonBuscar() {
@@ -526,24 +526,24 @@ public class TelaCadastroReceber extends javax.swing.JFrame {
 
  
 
-    public JTextField getjTextField_VendaId() {
-        return jTextField_VendaId;
+    public JTextField getjTextField_CompraId() {
+        return jTextField_CompraId;
     }
 
-    public JButton getjButton_VendaBuscaId() {
-        return jButton_VendaBuscaId;
+    public JButton getjButton_CompraBuscaId() {
+        return jButton_CompraBuscaId;
     }
 
-    public JFormattedTextField getjFormattedTextField_VendaData() {
-        return jFormattedTextField_VendaData;
+    public JFormattedTextField getjFormattedTextField_CompraData() {
+        return jFormattedTextField_CompraData;
     }
 
-    public JFormattedTextField getjFormattedTextField_VendaValor() {
-        return jFormattedTextField_VendaValor;
+    public JFormattedTextField getjFormattedTextField_CompraValor() {
+        return jFormattedTextField_CompraValor;
     }
 
-    public JTextField getjTextField_VendaCliente() {
-        return jTextField_VendaCliente;
+    public JTextField getjTextField_CompraFornecedor() {
+        return jTextField_CompraFornecedor;
     }
 
   

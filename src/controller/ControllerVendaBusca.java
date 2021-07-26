@@ -14,6 +14,7 @@ import model.bo.Venda;
 public class ControllerVendaBusca implements ActionListener {
 
     TelaBuscaVenda telaBuscaVenda;
+    int idVenda = 0;
 
     public ControllerVendaBusca(TelaBuscaVenda telaBuscaVenda) {
 
@@ -22,7 +23,7 @@ public class ControllerVendaBusca implements ActionListener {
         this.telaBuscaVenda.getjButtonCarregar().addActionListener(this);
         this.telaBuscaVenda.getjButtonSair().addActionListener(this);
         this.telaBuscaVenda.getjButton_deletar().addActionListener(this);
-
+        
         carregarDadosNaTabela();
 
     }
@@ -33,7 +34,9 @@ public class ControllerVendaBusca implements ActionListener {
             this.telaBuscaVenda.dispose();
         } else if (e.getSource() == this.telaBuscaVenda.getjButtonCarregar()) {
 
-            ControllerVenda.codigo = (int) this.telaBuscaVenda.getjTable_BuscaVendas().getValueAt(this.telaBuscaVenda.getjTable_BuscaVendas().getSelectedRow(), 0);
+            idVenda = (int) this.telaBuscaVenda.getjTable_BuscaVendas().getValueAt(this.telaBuscaVenda.getjTable_BuscaVendas().getSelectedRow(), 0);
+            ControllerVenda.codigo = idVenda;
+            this.telaBuscaVenda.setIdVenda(idVenda);
             this.telaBuscaVenda.dispose();
         } else if (e.getSource() == this.telaBuscaVenda.getjButton_deletar()) {
             Venda venda
@@ -98,4 +101,5 @@ public class ControllerVendaBusca implements ActionListener {
         }
     }
 
+    
 }

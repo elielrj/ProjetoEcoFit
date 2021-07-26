@@ -370,7 +370,7 @@ public class ControllerVenda implements ActionListener {
         venda.setObservacao(this.telaCadastroVenda.getjTextArea_Obs().getText());//6
         venda.setValorDoDesconto(
                 Float.parseFloat(
-                        semMascara(this.telaCadastroVenda.getjFormattedTextField_ValorDeDesconto().getText())
+                        substituirVirgolaPorPonto(this.telaCadastroVenda.getjFormattedTextField_ValorDeDesconto().getText())
                 )
         );//7
         venda.setValorTotal(Float.parseFloat(this.telaCadastroVenda.getjLabel_FaturamentoValorTotal().getText()));//8
@@ -548,5 +548,11 @@ public class ControllerVenda implements ActionListener {
         DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
         venda.setHora(formatterHora.format(agora));
 
+    }
+    
+    private static String substituirVirgolaPorPonto(String dado) {
+        //dado = dado.replaceAll("\\.", "");
+        dado = dado.replaceAll("\\,", ".");
+        return dado;
     }
 }

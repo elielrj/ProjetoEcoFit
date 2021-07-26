@@ -164,7 +164,7 @@ public class ContaAPagarDAO implements InterfaceDAO<ContaAPagar> {
         }
     }
 */
-    public ContaAPagar RetrieveIdDaContaAReceberPeloIdDaCompra(int idDaCompra) {
+    public ContaAPagar RetrieveIdDaContaAPagarrPeloIdDaCompra(int idDaCompra) {
         try {
             Connection conexao = ConectionFactory.getConection();
             PreparedStatement pstm = null;

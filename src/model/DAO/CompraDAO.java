@@ -153,7 +153,7 @@ public class CompraDAO implements InterfaceDAO<Compra> {
             pstm.setInt(1, objeto.getId());
             pstm.executeUpdate();
 
-            ContaAPagar contaAPagar = service.ServiceContaAPagar.BuscarIdDaContaAReceberPeloIdDaCompra(objeto.getId());
+            ContaAPagar contaAPagar = service.ServiceContaAPagar.BuscarIdDaContaAPagarPeloIdDaCompra(objeto.getId());
             service.ServiceContaAPagar.Deletar(contaAPagar);
 
         } catch (Exception ex) {
@@ -195,7 +195,7 @@ public class CompraDAO implements InterfaceDAO<Compra> {
             pstm = conexao.prepareStatement(SQL.COMPRA_DELETE);
             pstm.setInt(1, idDaCompra);
             pstm.executeUpdate();
-            ContaAPagar contaAPagar = service.ServiceContaAPagar.BuscarIdDaContaAReceberPeloIdDaCompra(idDaCompra);
+            ContaAPagar contaAPagar = service.ServiceContaAPagar.BuscarIdDaContaAPagarPeloIdDaCompra(idDaCompra);
             service.ServiceContaAPagar.Deletar(contaAPagar);
             ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {

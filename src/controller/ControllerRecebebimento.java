@@ -3,22 +3,26 @@ package controller;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import model.bo.PessoaFisica;
 import model.bo.Receber;
 import model.bo.Venda;
 import view.busca.TelaBuscaReceber;
+import view.busca.TelaBuscaVenda;
 import view.cadastro.TelaCadastroReceber;
 
 public class ControllerRecebebimento implements ActionListener {
 
     TelaCadastroReceber telaCadastroReceber;
     public static int codigo;
+    Venda venda;
+    private String data;
+    private String Hora;
 
     public ControllerRecebebimento(TelaCadastroReceber telaCadastroReceber) {
 
@@ -30,24 +34,13 @@ public class ControllerRecebebimento implements ActionListener {
         this.telaCadastroReceber.getjButtonGravar().addActionListener(this);
         this.telaCadastroReceber.getjButtonSair().addActionListener(this);
 
-        
-
-        //this.telaCadastroReceber.getjComboBox_Cliente().addItem("");
-        //this.telaCadastroReceber.getjComboBox_Cliente().setSelectedItem("");
-        for (PessoaFisica pessoaFisica : service.ServicePessoaFisica.Buscar()) {
-            this.telaCadastroReceber.getjComboBox_Cliente().addItem(pessoaFisica);
-        }
-
-        this.telaCadastroReceber.getjComboBox_DataDaVenda().addActionListener(this);
-        this.telaCadastroReceber.getjComboBox_DataDaVenda().addItem("");
-        //this.telaCadastroReceber.getjComboBox_DataDaVenda().setSelectedItem("");
-        
-        this.telaCadastroReceber.getjComboBox_ValorDaVenda().addActionListener(this);
-        this.telaCadastroReceber.getjComboBox_ValorDaVenda().addItem("");
-        //this.telaCadastroReceber.getjComboBox_ValorDaVenda().setSelectedItem("");
+        this.telaCadastroReceber.getjButton_VendaBuscaId().addActionListener(this);
 
         Ativa(true);
         LimpaEstadoComponentes(false);
+
+        this.venda = new Venda.VendaBuilder().createVenda();
+        dataHora();
 
     }
 
@@ -58,18 +51,25 @@ public class ControllerRecebebimento implements ActionListener {
             LimpaEstadoComponentes(true);
             this.telaCadastroReceber.getjTextFieldId().setEnabled(false);
             this.telaCadastroReceber.getjTextField_VendaId().setEnabled(false);
+
             this.telaCadastroReceber.getjFormattedTextFieldDataEmissao().setEnabled(false);
-            this.telaCadastroReceber.getjFormattedTextFieldValorDesconto().setEnabled(false);
-            this.telaCadastroReceber.getjFormattedTextFieldValorAcrescimo().setEnabled(false);
-            this.telaCadastroReceber.getjFormattedTextFieldValorEmitido().setEnabled(false);
-            
             this.telaCadastroReceber.getjFormattedTextFieldDataVencimento().setEnabled(false);
             this.telaCadastroReceber.getjFormattedTextFieldDataPagamento().setEnabled(false);
+
+            this.telaCadastroReceber.getjFormattedTextFieldValorEmitido().setEnabled(false);
             this.telaCadastroReceber.getjFormattedTextField_Hora().setEnabled(false);
+
+            this.telaCadastroReceber.getjFormattedTextField_VendaValor().setEnabled(false);
+            this.telaCadastroReceber.getjFormattedTextField_VendaData().setEnabled(false);
+            this.telaCadastroReceber.getjTextField_VendaCliente().setEnabled(false);
+            
+            this.telaCadastroReceber.getjFormattedTextFieldDataPagamento().setText(data);
+            this.telaCadastroReceber.getjFormattedTextField_Hora().setText(Hora);
+
+            codigo = 0;
 
             
 
-            codigo = 0;
         } else if (e.getSource() == this.telaCadastroReceber.getjButtonCancelar()) {
             Ativa(true);
             LimpaEstadoComponentes(false);
@@ -77,16 +77,19 @@ public class ControllerRecebebimento implements ActionListener {
             Receber receber = new Receber.ReceberBuilder()
                     .setDataRecebimento(this.telaCadastroReceber.getjFormattedTextFieldDataEmissao().getText())//2
                     .setHora(this.telaCadastroReceber.getjFormattedTextField_Hora().getText())//3
-                    .setValorDesconto(Float.parseFloat(this.telaCadastroReceber.getjFormattedTextFieldValorDesconto().getText()))//4
-                    .setValorAcrescimo(Float.parseFloat(this.telaCadastroReceber.getjFormattedTextFieldValorDesconto().getText()))//5
-                    .setValorRecebido(Float.parseFloat(this.telaCadastroReceber.getjFormattedTextFieldValorPago().getText()))//6
+                    .setValorAcrescimo(Float.parseFloat(substituirVirgolaPorPonto(this.telaCadastroReceber.getjFormattedTextFieldValorAcrescimo().getText())))//5
+                    .setValorRecebido(Float.parseFloat(substituirVirgolaPorPonto(this.telaCadastroReceber.getjFormattedTextFieldValorPago().getText())))//6
                     .setObservacao(this.telaCadastroReceber.getjTextAreaObs().getText())//7
-                    .setVenda((Venda) this.telaCadastroReceber.getjComboBoxVendasId().getSelectedItem())//8
+                    .setContaAReceber(
+                            service.ServiceContaAReceber.BuscarIdDaContaAReceberPeloIdDaVenda(
+                                    Integer.parseInt(this.telaCadastroReceber.getjTextField_VendaId().getText())
+                            )
+                    )//8
                     .createReceber();
             if (codigo == 0) {
                 service.ServiceReceber.Incluir(receber);
             } else {
-                receber.setId(Integer.parseInt(this.telaCadastroReceber.getjTextFieldId().getText()));//1
+                receber.setId(Integer.parseInt(substituirVirgolaPorPonto(this.telaCadastroReceber.getjTextFieldId().getText())));//1
                 service.ServiceReceber.Atualizar(receber);
             }
             Ativa(true);
@@ -104,59 +107,64 @@ public class ControllerRecebebimento implements ActionListener {
                 LimpaEstadoComponentes(true);
                 Receber receber = new Receber.ReceberBuilder().createReceber();
                 receber = service.ServiceReceber.Buscar(codigo);
-                this.telaCadastroReceber.getjTextFieldId().setText(receber.getId() + "");
-                this.telaCadastroReceber.getjFormattedTextFieldValorEmitido().setText(receber.getVenda().getValorTotal()+ "");
-                this.telaCadastroReceber.getjFormattedTextFieldValorDesconto().setText(receber.getVenda().getValorDoDesconto()+ "");
-                this.telaCadastroReceber.getjFormattedTextFieldValorAcrescimo().setText(receber.getValorAcrescimo() + "");
-                this.telaCadastroReceber.getjFormattedTextFieldValorPago().setText(receber.getValorAcrescimo() + "");
-                this.telaCadastroReceber.getjFormattedTextFieldDataEmissao().setText(receber.getDataRecebimento());
-                this.telaCadastroReceber.getjFormattedTextFieldDataVencimento().setText(receber.getDataRecebimento());
-                this.telaCadastroReceber.getjFormattedTextFieldDataPagamento().setText(receber.getDataRecebimento());
-                this.telaCadastroReceber.getjFormattedTextField_Hora().setText(receber.getDataRecebimento());
-                
-                Venda venda = service.ServiceVenda.Buscar(receber.getVenda().getId());
-                
-                this.telaCadastroReceber.getjTextField_VendaId().setText(venda.getId()+"");
-                this.telaCadastroReceber.getjComboBox_Cliente().setSelectedItem(receber.getVenda().getPessoaFisica());
-                this.telaCadastroReceber.getjComboBox_DataDaVenda().setSelectedItem(receber.getVenda().getData());
-                this.telaCadastroReceber.getjComboBox_ValorDaVenda().setSelectedItem(receber.getVenda().getValorTotal());
-                
-                this.telaCadastroReceber.getjTextAreaObs().setText(receber.getObservacao());
 
+                //ID'S
+                this.telaCadastroReceber.getjTextFieldId().setText(receber.getId() + "");
+                this.telaCadastroReceber.getjTextField_VendaId().setText(receber.getContaAReceber().getVendaId() + "");
+                //VENDA
+                this.venda = service.ServiceVenda.Buscar(receber.getContaAReceber().getId());
+                this.telaCadastroReceber.getjTextField_VendaId().setText(receber.getContaAReceber().getVendaId() + "");
+                this.telaCadastroReceber.getjTextField_VendaCliente().setText(venda.getPessoaFisica().getNome());
+                this.telaCadastroReceber.getjFormattedTextField_VendaData().setText(venda.getData());
+                this.telaCadastroReceber.getjFormattedTextField_VendaValor().setText(venda.getValorTotal() + "");
+                //DATAS
+                this.telaCadastroReceber.getjFormattedTextFieldDataEmissao().setText(venda.getData());
+                this.telaCadastroReceber.getjFormattedTextFieldDataVencimento().setText(venda.getDataDeVencimento());
+                this.telaCadastroReceber.getjFormattedTextFieldDataPagamento().setText(receber.getDataRecebimento());
+                //VALORES
+                this.telaCadastroReceber.getjFormattedTextFieldValorEmitido().setText(receber.getContaAReceber().getValor() + "");
+                this.telaCadastroReceber.getjFormattedTextFieldValorAcrescimo().setText(receber.getValorAcrescimo() + "");
+                this.telaCadastroReceber.getjFormattedTextFieldValorPago().setText(receber.getValorRecebido() + "");
+                //HORA
+                this.telaCadastroReceber.getjFormattedTextField_Hora().setText(receber.getHora());
+                //OBS
+                this.telaCadastroReceber.getjTextAreaObs().setText(receber.getObservacao());
+                //FALSE
                 this.telaCadastroReceber.getjTextFieldId().setEnabled(false);
+                this.telaCadastroReceber.getjTextField_VendaId().setEnabled(false);
+                this.telaCadastroReceber.getjFormattedTextFieldDataEmissao().setEnabled(false);
+                this.telaCadastroReceber.getjFormattedTextFieldDataVencimento().setEnabled(false);
+                this.telaCadastroReceber.getjFormattedTextFieldDataPagamento().setEnabled(false);
+                this.telaCadastroReceber.getjFormattedTextFieldValorEmitido().setEnabled(false);
+                this.telaCadastroReceber.getjFormattedTextField_Hora().setEnabled(false);
+                this.telaCadastroReceber.getjFormattedTextField_VendaValor().setEnabled(false);
+                this.telaCadastroReceber.getjFormattedTextField_VendaData().setEnabled(false);
+                this.telaCadastroReceber.getjTextField_VendaCliente().setEnabled(false);
             }
         }
+        else if (e.getSource() == this.telaCadastroReceber.getjButton_VendaBuscaId()) {
+
+                TelaBuscaVenda telaBuscaVenda = new TelaBuscaVenda(null,true);
+                ControllerVendaBusca controllerVendaBusca = new ControllerVendaBusca(telaBuscaVenda);
+                telaBuscaVenda.setVisible(true);
+
+                //VENDA
+                venda = service.ServiceVenda.Buscar(telaBuscaVenda.getIdVenda());
+                this.telaCadastroReceber.getjTextField_VendaCliente().setText(venda.getPessoaFisica().getNome());
+                this.telaCadastroReceber.getjFormattedTextField_VendaData().setText(venda.getData());
+                this.telaCadastroReceber.getjFormattedTextField_VendaValor().setText(venda.getValorTotal() + "");
+                //DATAS
+                this.telaCadastroReceber.getjFormattedTextFieldDataEmissao().setText(venda.getData());
+                this.telaCadastroReceber.getjFormattedTextFieldDataVencimento().setText(venda.getDataDeVencimento());
+                //VALOR                
+                this.telaCadastroReceber.getjFormattedTextFieldValorEmitido().setText(venda.getValorTotal() + "");
+                //ID DA VENDA
+                this.telaCadastroReceber.getjTextField_VendaId().setText(venda.getId() + "");
+            }
 
         if (e.getSource() == this.telaCadastroReceber.getjButtonSair()) {
             this.telaCadastroReceber.dispose();
         }
-        if (e.getSource() == this.telaCadastroReceber.getjComboBox_ValorDaVenda()) {
-            //if (aDataDaVendaEstaSelecionada()) {
-
-                for (Venda venda : service.ServiceVenda.RetriveBuscaVendaDeUmCliente((PessoaFisica) this.telaCadastroReceber.getjComboBox_Cliente().getSelectedItem())) {
-                    if (venda.getData().equals(this.telaCadastroReceber.getjComboBox_DataDaVenda().getSelectedItem())) {
-                        this.telaCadastroReceber.getjComboBox_ValorDaVenda().addItem(venda.getValorTotal());
-                        this.telaCadastroReceber.getjTextField_VendaId().setText(venda.getId()+"");
-                    }
-                }
-           /* } else {
-                JOptionPane.showMessageDialog(null, "Selecione 1º um clienete e data da venda!");
-            }*/
-        }
-        if (e.getSource() == this.telaCadastroReceber.getjComboBox_DataDaVenda()) {            
-            //if (oClienteEstaSelecionado()) {
-                PessoaFisica pessoaFisica = (PessoaFisica) this.telaCadastroReceber.getjComboBox_Cliente().getSelectedItem();
-                //List<Venda> vendasDoCliente = buscaVendaDeUmCliente(pessoaFisica);
-                for (Venda venda : service.ServiceVenda.RetriveBuscaVendaDeUmCliente((PessoaFisica) this.telaCadastroReceber.getjComboBox_Cliente().getSelectedItem())) {
-                    this.telaCadastroReceber.getjComboBox_DataDaVenda().addItem(venda.getData());
-                }
-
-            /*} else {
-                JOptionPane.showMessageDialog(null, "Selecione um cliente 1º!");
-                this.telaCadastroReceber.getjComboBox_Cliente().requestFocus();
-            }*/
-        }
-
     }
 
     public void Ativa(boolean estadoBotoes) {
@@ -167,13 +175,13 @@ public class ControllerRecebebimento implements ActionListener {
         this.telaCadastroReceber.getjButtonSair().setEnabled(estadoBotoes);
 
         this.telaCadastroReceber.getjFormattedTextFieldValorEmitido().setEnabled(estadoBotoes);
-        this.telaCadastroReceber.getjFormattedTextFieldValorDesconto().setEnabled(estadoBotoes);
         this.telaCadastroReceber.getjFormattedTextFieldValorAcrescimo().setEnabled(estadoBotoes);
         this.telaCadastroReceber.getjFormattedTextFieldValorPago().setEnabled(estadoBotoes);
 
         this.telaCadastroReceber.getjFormattedTextFieldDataVencimento().setEnabled(estadoBotoes);
         this.telaCadastroReceber.getjFormattedTextFieldDataPagamento().setEnabled(!estadoBotoes);
-        this.telaCadastroReceber.getjComboBox_Cliente().setEnabled(estadoBotoes);
+        this.telaCadastroReceber.getjButton_VendaBuscaId().setEnabled(!estadoBotoes);
+        //this.telaCadastroReceber.getjComboBox_Cliente().setEnabled(estadoBotoes);
     }
 
     public void LimpaEstadoComponentes(boolean estadoCompo) {
@@ -212,18 +220,43 @@ public class ControllerRecebebimento implements ActionListener {
         }
     }
 
+    private void dataHora() {
 
-    private boolean oClienteEstaSelecionado() {
-        return !this.telaCadastroReceber.getjComboBox_Cliente().getSelectedItem().equals("");
+        // data/hora atual
+        LocalDateTime agora = LocalDateTime.now();
+
+        // formatar a data
+        DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+        this.setData(formatterData.format(agora));
+
+        // formatar a hora
+        DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+        this.setHora(formatterHora.format(agora));
 
     }
 
-    private boolean aDataDaVendaEstaSelecionada() {
-        if (!this.telaCadastroReceber.getjComboBox_DataDaVenda().equals("")) {
-            return true;
-        }
-        return false;
-
+    public String getData() {
+        return data;
     }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getHora() {
+        return Hora;
+    }
+
+    public void setHora(String Hora) {
+        this.Hora = Hora;
+    }
+
+
+    private static String substituirVirgolaPorPonto(String dado) {
+        //dado = dado.replaceAll("\\.", "");
+        dado = dado.replaceAll("\\,", ".");
+        return dado;
+    }
+
 
 }

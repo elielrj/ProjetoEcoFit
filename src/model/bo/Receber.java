@@ -9,7 +9,7 @@ public class Receber {
     private float valorAcrescimo;//5
     private float valorRecebido;//6
     private String observacao;//7
-    private Venda venda;//8
+    private ContaAReceber contaAReceber;//8
 
     private Receber(ReceberBuilder receberBuilder) {
         this.id = receberBuilder.id;
@@ -19,7 +19,7 @@ public class Receber {
         this.valorAcrescimo = receberBuilder.valorAcrescimo;
         this.valorRecebido = receberBuilder.valorRecebido;
         this.observacao = receberBuilder.observacao;
-        this.venda = receberBuilder.venda;
+        this.contaAReceber = receberBuilder.contaAReceber;
     }
 
     public int getId() {
@@ -70,12 +70,12 @@ public class Receber {
         this.observacao = observacao;
     }
 
-    public Venda getVenda() {
-        return venda;
+    public ContaAReceber getContaAReceber() {
+        return contaAReceber;
     }
 
-    public void setVenda(Venda venda) {
-        this.venda = venda;
+    public void setContaAReceber(ContaAReceber contaAReceber) {
+        this.contaAReceber = contaAReceber;
     }
 
     public static class ReceberBuilder {
@@ -87,7 +87,7 @@ public class Receber {
         private float valorAcrescimo;
         private float valorRecebido;
         private String observacao;
-        private Venda venda;
+        private ContaAReceber contaAReceber;
 
         public ReceberBuilder() {
         }
@@ -107,11 +107,6 @@ public class Receber {
             return this;
         }
 
-        public ReceberBuilder setValorDesconto(float valorDesconto) {
-            this.valorDesconto = valorDesconto;
-            return this;
-        }
-
         public ReceberBuilder setValorAcrescimo(float valorAcrescimo) {
             this.valorAcrescimo = valorAcrescimo;
             return this;
@@ -127,8 +122,8 @@ public class Receber {
             return this;
         }
 
-        public ReceberBuilder setVenda(Venda venda) {
-            this.venda = venda;
+        public ReceberBuilder setContaAReceber(ContaAReceber contaAReceber) {
+            this.contaAReceber = contaAReceber;
             return this;
         }
 

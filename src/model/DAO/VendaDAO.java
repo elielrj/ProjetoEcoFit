@@ -150,6 +150,49 @@ public class VendaDAO implements InterfaceDAO<Venda> {
         }
     }
 
+    public List<Venda> RetrieveBuscaVendaDeUmClientePorIDPFeData(PessoaFisica pessoaFisica, String data) {
+        Connection conexao = ConectionFactory.getConection();
+
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+
+        try {
+            pstm = conexao.prepareStatement(SQL.VENDA_RETRIVE_POR_PESSOA_FISICA_ID_AND_DATA_DA_VENDA);
+            pstm.setInt(1, pessoaFisica.getId());
+            pstm.setString(2, data);
+            rs = pstm.executeQuery();
+            List<Venda> vendas = new ArrayList();
+
+            while (rs.next()) {
+                Venda venda = new Venda.VendaBuilder()
+                        .setId(rs.getInt("id"))
+                        .setData(rs.getString("datavenda"))
+                        .setHora(rs.getString("hora"))
+                        .setDataDeVencimento(rs.getString("datavencimento"))
+                        .setObservacao(rs.getString("observacao"))
+                        .setValorDoDesconto(rs.getFloat("valordesconto"))
+                        .setValorTotal(rs.getFloat("valortotal"))
+                        .setStatus(rs.getBoolean("status"))
+                        .setPessoaFisica(
+                                service.ServicePessoaFisica.Buscar(rs.getInt("pessoafisicaid"))
+                        )
+                        .setUserCaixa(rs.getString("usercaixa"))
+                        .setItensDeVenda(
+                                service.ServiceItemDeVenda.BuscarUmaListaDeItemDeVendaPeloIdDaVenda(
+                                        rs.getInt("id")
+                                )
+                        )
+                        .createVenda();
+                vendas.add(venda);
+            }
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return vendas;
+        } catch (Exception ex) {
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return null;
+        }
+    }
+    
     @Override
     public void Update(Venda objeto) {
         Connection conexao = ConectionFactory.getConection();

@@ -17,10 +17,10 @@ public class ReceberDAO implements InterfaceDAO<Receber> {
             pstm = conexao.prepareStatement(SQL.RECEBER_CREATE);
             pstm.setString(1, objeto.getDataRecebimento());
             pstm.setString(2, objeto.getHora());
-            pstm.setDouble(3, objeto.getValorAcrescimo());
-            pstm.setDouble(4, objeto.getValorRecebido());
+            pstm.setFloat(3, objeto.getValorAcrescimo());
+            pstm.setFloat(4, objeto.getValorRecebido());
             pstm.setString(5, objeto.getObservacao());
-            pstm.setInt(6, objeto.getVenda().getId());
+            pstm.setInt(6, objeto.getContaAReceber().getId());
             pstm.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -44,12 +44,11 @@ public class ReceberDAO implements InterfaceDAO<Receber> {
                         .setId(rs.getInt("id"))
                         .setDataRecebimento(rs.getString("data"))
                         .setHora(rs.getString("hora"))
-                        .setValorDesconto(rs.getFloat("valorDeDescontoNegociado"))
                         .setValorAcrescimo(rs.getFloat("valorDeAcrescimo"))
                         .setValorRecebido(rs.getFloat("valorRecebido"))
                         .setObservacao(rs.getString("observacao"))
-                        .setVenda(
-                                service.ServiceVenda.Buscar(rs.getInt("vendaId"))
+                        .setContaAReceber(
+                                service.ServiceContaAReceber.Buscar(rs.getInt("contaareceberid"))
                         )
                         .createReceber();
                 recebimentos.add(recebimento);
@@ -79,8 +78,8 @@ public class ReceberDAO implements InterfaceDAO<Receber> {
                 recebimento.setValorAcrescimo(rs.getFloat("valoracrescimo"));
                 recebimento.setValorRecebido(rs.getFloat("valorrecebido"));
                 recebimento.setObservacao(rs.getString("observacao"));
-                recebimento.setVenda(
-                        service.ServiceVenda.Buscar(rs.getInt("vendaid"))
+                recebimento.setContaAReceber(
+                        service.ServiceContaAReceber.Buscar(rs.getInt("contaareceberid"))
                 );
             }
             return recebimento;
@@ -107,7 +106,7 @@ public class ReceberDAO implements InterfaceDAO<Receber> {
             pstm.setDouble(3, objeto.getValorAcrescimo());
             pstm.setDouble(4, objeto.getValorRecebido());
             pstm.setString(5, objeto.getObservacao());
-            pstm.setInt(6, objeto.getVenda().getId());
+            pstm.setInt(6, objeto.getContaAReceber().getId());
             pstm.setInt(7, objeto.getId());
 
             pstm.executeUpdate();
@@ -139,7 +138,7 @@ public class ReceberDAO implements InterfaceDAO<Receber> {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         try {
-            pstm = conexao.prepareStatement(SQL.RECEBER_RETRIVE_ONE_ID_DA_VENDA);
+            pstm = conexao.prepareStatement(SQL.RECEBER_RETRIVE_ONE_ID_DA_CONTA_A_RECEBER);
             pstm.setInt(1, idVenda);
             rs = pstm.executeQuery();
             Receber recebimento = new Receber.ReceberBuilder().createReceber();
@@ -150,8 +149,8 @@ public class ReceberDAO implements InterfaceDAO<Receber> {
                 recebimento.setValorAcrescimo(rs.getFloat("valoracrescimo"));
                 recebimento.setValorRecebido(rs.getFloat("valorrecebido"));
                 recebimento.setObservacao(rs.getString("observacao"));
-                recebimento.setVenda(
-                        service.ServiceVenda.Buscar(rs.getInt("vendaid"))
+                recebimento.setContaAReceber(
+                        service.ServiceContaAReceber.Buscar(rs.getInt("contaareceberid"))
                 );
             }
             return recebimento;

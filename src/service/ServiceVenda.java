@@ -46,4 +46,8 @@ public class ServiceVenda {
         VendaDAO vendaDAO = new VendaDAO();
         return vendaDAO.RetrieveBuscaVendaDeUmCliente(pessoaFisica);
     }
+    public static  List<Venda> RetriveBuscaVendaDeUmClientePelaIDPFeData(PessoaFisica pessoaFisica, String data){
+        VendaDAO vendaDAO = new VendaDAO();
+        return vendaDAO.RetrieveBuscaVendaDeUmClientePorIDPFeData(pessoaFisica, data);
+    }
 }

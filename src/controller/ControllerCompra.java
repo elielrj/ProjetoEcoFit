@@ -343,7 +343,7 @@ public class ControllerCompra implements ActionListener {
         compra.setObservacao(this.telaCadastroCompra.getjTextArea_Obs().getText());//6
         compra.setValorDeDesconto(
                 Float.parseFloat(
-                        semMascara(this.telaCadastroCompra.getjFormattedTextField_ValorDeDesconto().getText())
+                        substituirVirgolaPorPonto(this.telaCadastroCompra.getjFormattedTextField_ValorDeDesconto().getText())
                 )
         );//7
         compra.setValorTotal(Float.parseFloat(this.telaCadastroCompra.getjLabel_FaturamentoValorTotal().getText()));//8
@@ -417,7 +417,7 @@ public class ControllerCompra implements ActionListener {
                     ); 
                 } 
                 //4º atualizar conta a receber (BUSCA, ATUALIZA VALOR, E ATUALIZA)
-            ContaAPagar contaAPagar = service.ServiceContaAPagar.BuscarIdDaContaAReceberPeloIdDaCompra(compra.getId());
+            ContaAPagar contaAPagar = service.ServiceContaAPagar.BuscarIdDaContaAPagarPeloIdDaCompra(compra.getId());
             contaAPagar.setValor(compra.getValorTotal());
             service.ServiceContaAPagar.Atualizar(contaAPagar);
             }
@@ -509,5 +509,11 @@ public class ControllerCompra implements ActionListener {
         DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
         compra.setHora(formatterHora.format(agora));
 
+    }
+    
+    private static String substituirVirgolaPorPonto(String dado) {
+        //dado = dado.replaceAll("\\.", "");
+        dado = dado.replaceAll("\\,", ".");
+        return dado;
     }
 }

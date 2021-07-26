@@ -96,7 +96,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButtonCarregar" min="-2" pref="109" max="-2" attributes="0"/>
-                  <EmptySpace pref="553" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="230" max="-2" attributes="0"/>
+                  <Component id="jButton_Deletar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="236" max="32767" attributes="0"/>
                   <Component id="jButtonSair" min="-2" pref="114" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -109,6 +111,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButtonCarregar" alignment="3" max="32767" attributes="0"/>
                       <Component id="jButtonSair" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton_Deletar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -134,6 +137,14 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSairActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton_Deletar">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imagens/Delete.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Deletar"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -174,16 +185,14 @@
             <Component class="javax.swing.JTable" name="jTable_ReceberBusca">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="9" rowCount="0">
+                  <Table columnCount="7" rowCount="0">
                     <Column editable="false" title="Id" type="java.lang.Integer"/>
-                    <Column editable="false" title="Data de Emiss&#xe3;o" type="java.lang.Float"/>
-                    <Column editable="true" title="Valor Emitido" type="java.lang.Float"/>
-                    <Column editable="false" title="Data Vencimento" type="java.lang.String"/>
-                    <Column editable="false" title="Data Pagamento" type="java.lang.String"/>
-                    <Column editable="false" title="Valor de Desconto" type="java.lang.Float"/>
-                    <Column editable="false" title="Valor Acr&#xe9;cimo" type="java.lang.Float"/>
+                    <Column editable="false" title="Data Pagamento" type="java.lang.Float"/>
+                    <Column editable="true" title="Hora" type="java.lang.Float"/>
+                    <Column editable="false" title="Valor Acr&#xe9;scimo" type="java.lang.String"/>
                     <Column editable="false" title="Valor Pago" type="java.lang.Float"/>
                     <Column editable="false" title="Obs" type="java.lang.String"/>
+                    <Column editable="false" title="Conta a Pagar Id" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -193,42 +202,32 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="100" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="100" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="100" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="80" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="80" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="80" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="80" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="100" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>

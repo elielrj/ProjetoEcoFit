@@ -24,6 +24,7 @@ public class TelaBuscaPagar extends javax.swing.JDialog {
         jPanelBotoes = new javax.swing.JPanel();
         jButtonCarregar = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
+        jButton_Deletar = new javax.swing.JButton();
         jPanelDados = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_ReceberBusca = new javax.swing.JTable();
@@ -38,7 +39,7 @@ public class TelaBuscaPagar extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Receber");
+        jLabel1.setText("Pagar");
 
         javax.swing.GroupLayout jPanelTituloLayout = new javax.swing.GroupLayout(jPanelTitulo);
         jPanelTitulo.setLayout(jPanelTituloLayout);
@@ -67,6 +68,9 @@ public class TelaBuscaPagar extends javax.swing.JDialog {
             }
         });
 
+        jButton_Deletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Delete.png"))); // NOI18N
+        jButton_Deletar.setText("Deletar");
+
         javax.swing.GroupLayout jPanelBotoesLayout = new javax.swing.GroupLayout(jPanelBotoes);
         jPanelBotoes.setLayout(jPanelBotoesLayout);
         jPanelBotoesLayout.setHorizontalGroup(
@@ -74,7 +78,9 @@ public class TelaBuscaPagar extends javax.swing.JDialog {
             .addGroup(jPanelBotoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 553, Short.MAX_VALUE)
+                .addGap(214, 214, 214)
+                .addComponent(jButton_Deletar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 252, Short.MAX_VALUE)
                 .addComponent(jButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -84,7 +90,8 @@ public class TelaBuscaPagar extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCarregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonSair))
+                    .addComponent(jButtonSair)
+                    .addComponent(jButton_Deletar))
                 .addContainerGap())
         );
 
@@ -97,14 +104,14 @@ public class TelaBuscaPagar extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Data de Emissão", "Valor Emitido", "Data Vencimento", "Data Pagamento", "Valor de Desconto", "Valor Acrécimo", "Valor Pago", "Obs"
+                "Id", "Data Recebimento", "Hora", "Valor Acrécimo", "Valor Pago", "Obs", "Conta a Receber Id"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.Float.class, java.lang.Object.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false, false, false, false
+                false, false, true, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -118,14 +125,6 @@ public class TelaBuscaPagar extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable_ReceberBusca);
         if (jTable_ReceberBusca.getColumnModel().getColumnCount() > 0) {
             jTable_ReceberBusca.getColumnModel().getColumn(0).setMaxWidth(50);
-            jTable_ReceberBusca.getColumnModel().getColumn(1).setMaxWidth(100);
-            jTable_ReceberBusca.getColumnModel().getColumn(2).setMaxWidth(100);
-            jTable_ReceberBusca.getColumnModel().getColumn(3).setMaxWidth(100);
-            jTable_ReceberBusca.getColumnModel().getColumn(4).setMaxWidth(80);
-            jTable_ReceberBusca.getColumnModel().getColumn(5).setMaxWidth(80);
-            jTable_ReceberBusca.getColumnModel().getColumn(6).setMaxWidth(80);
-            jTable_ReceberBusca.getColumnModel().getColumn(7).setMaxWidth(80);
-            jTable_ReceberBusca.getColumnModel().getColumn(8).setMaxWidth(100);
         }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
@@ -191,6 +190,7 @@ public class TelaBuscaPagar extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCarregar;
     private javax.swing.JButton jButtonSair;
+    private javax.swing.JButton jButton_Deletar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanelBotoes;
     private javax.swing.JPanel jPanelDados;
@@ -207,7 +207,12 @@ public class TelaBuscaPagar extends javax.swing.JDialog {
         return jButtonSair;
     }
 
-    public JTable getjTable_ReceberBusca() {
+    public JTable getjTable_PagarBusca() {
         return jTable_ReceberBusca;
     }
+
+    public JButton getjButton_Deletar() {
+        return jButton_Deletar;
+    }
+    
 }
