@@ -96,9 +96,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButtonCarregar" min="-2" pref="109" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="230" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="214" max="-2" attributes="0"/>
                   <Component id="jButton_Deletar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="236" max="32767" attributes="0"/>
+                  <EmptySpace pref="252" max="32767" attributes="0"/>
                   <Component id="jButtonSair" min="-2" pref="114" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -186,13 +186,13 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="7" rowCount="0">
-                    <Column editable="false" title="Id" type="java.lang.Integer"/>
-                    <Column editable="false" title="Data Pagamento" type="java.lang.Float"/>
-                    <Column editable="true" title="Hora" type="java.lang.Float"/>
-                    <Column editable="false" title="Valor Acr&#xe9;scimo" type="java.lang.String"/>
-                    <Column editable="false" title="Valor Pago" type="java.lang.Float"/>
-                    <Column editable="false" title="Obs" type="java.lang.String"/>
-                    <Column editable="false" title="Conta a Pagar Id" type="java.lang.String"/>
+                    <Column editable="false" title="Id" type="java.lang.Object"/>
+                    <Column editable="false" title="Data Recebimento" type="java.lang.Object"/>
+                    <Column editable="true" title="Hora" type="java.lang.Object"/>
+                    <Column editable="false" title="Valor Acr&#xe9;cimo" type="java.lang.Object"/>
+                    <Column editable="false" title="Valor Recebido" type="java.lang.Object"/>
+                    <Column editable="false" title="Obs" type="java.lang.Object"/>
+                    <Column editable="false" title="Conta a Receber Id" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

@@ -16,7 +16,7 @@ import view.busca.TelaBuscaReceber;
 import view.busca.TelaBuscaVenda;
 import view.cadastro.TelaCadastroReceber;
 
-public class ControllerRecebebimento implements ActionListener {
+public class ControllerReceber implements ActionListener {
 
     TelaCadastroReceber telaCadastroReceber;
     public static int codigo;
@@ -24,7 +24,7 @@ public class ControllerRecebebimento implements ActionListener {
     private String data;
     private String Hora;
 
-    public ControllerRecebebimento(TelaCadastroReceber telaCadastroReceber) {
+    public ControllerReceber(TelaCadastroReceber telaCadastroReceber) {
 
         this.telaCadastroReceber = telaCadastroReceber;
 
@@ -38,10 +38,8 @@ public class ControllerRecebebimento implements ActionListener {
 
         Ativa(true);
         LimpaEstadoComponentes(false);
-
         this.venda = new Venda.VendaBuilder().createVenda();
         dataHora();
-
     }
 
     @Override
@@ -49,7 +47,9 @@ public class ControllerRecebebimento implements ActionListener {
         if (e.getSource() == this.telaCadastroReceber.getjButtonNovo()) {
             Ativa(false);
             LimpaEstadoComponentes(true);
+            
             this.telaCadastroReceber.getjTextFieldId().setEnabled(false);
+            
             this.telaCadastroReceber.getjTextField_VendaId().setEnabled(false);
 
             this.telaCadastroReceber.getjFormattedTextFieldDataEmissao().setEnabled(false);
@@ -65,11 +65,7 @@ public class ControllerRecebebimento implements ActionListener {
             
             this.telaCadastroReceber.getjFormattedTextFieldDataPagamento().setText(data);
             this.telaCadastroReceber.getjFormattedTextField_Hora().setText(Hora);
-
             codigo = 0;
-
-            
-
         } else if (e.getSource() == this.telaCadastroReceber.getjButtonCancelar()) {
             Ativa(true);
             LimpaEstadoComponentes(false);
@@ -105,14 +101,12 @@ public class ControllerRecebebimento implements ActionListener {
             if (codigo != 0) {
                 Ativa(false);
                 LimpaEstadoComponentes(true);
-                Receber receber = new Receber.ReceberBuilder().createReceber();
-                receber = service.ServiceReceber.Buscar(codigo);
-
+                Receber receber = service.ServiceReceber.Buscar(codigo);
                 //ID'S
                 this.telaCadastroReceber.getjTextFieldId().setText(receber.getId() + "");
                 this.telaCadastroReceber.getjTextField_VendaId().setText(receber.getContaAReceber().getVendaId() + "");
                 //VENDA
-                this.venda = service.ServiceVenda.Buscar(receber.getContaAReceber().getId());
+                this.venda = service.ServiceVenda.Buscar(receber.getContaAReceber().getVendaId());
                 this.telaCadastroReceber.getjTextField_VendaId().setText(receber.getContaAReceber().getVendaId() + "");
                 this.telaCadastroReceber.getjTextField_VendaCliente().setText(venda.getPessoaFisica().getNome());
                 this.telaCadastroReceber.getjFormattedTextField_VendaData().setText(venda.getData());

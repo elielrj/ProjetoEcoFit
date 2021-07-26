@@ -107,16 +107,9 @@ public class TelaBuscaPagar extends javax.swing.JDialog {
                 "Id", "Data Recebimento", "Hora", "Valor Acrécimo", "Valor Pago", "Obs", "Conta a Receber Id"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Float.class, java.lang.Object.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, true, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];

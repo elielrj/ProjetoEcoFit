@@ -7,15 +7,16 @@ import javax.swing.table.DefaultTableModel;
 import model.bo.Pagar;
 import view.busca.TelaBuscaPagar;
 
-public class ControllerPagamentosBusca implements ActionListener {
+public class ControllerPagarBusca implements ActionListener {
 
     TelaBuscaPagar telaBuscaPagar;
 
-    public ControllerPagamentosBusca(TelaBuscaPagar telaBuscaPagar) {
+    public ControllerPagarBusca(TelaBuscaPagar telaBuscaPagar) {
         this.telaBuscaPagar = telaBuscaPagar;
 
         this.telaBuscaPagar.getjButtonCarregar().addActionListener(this);
         this.telaBuscaPagar.getjButtonSair().addActionListener(this);
+        this.telaBuscaPagar.getjButton_Deletar().setEnabled(false);
 
         carregarDadosNaTabela();
         
@@ -28,14 +29,14 @@ public class ControllerPagamentosBusca implements ActionListener {
             this.telaBuscaPagar.dispose();
         
         else if (e.getSource() == this.telaBuscaPagar.getjButtonCarregar()) {
-            ControllerPagamentos.codigo = (int) this.telaBuscaPagar.getjTable_PagarBusca().getValueAt(
+            ControllerPagar.codigo = (int) this.telaBuscaPagar.getjTable_PagarBusca().getValueAt(
                     this.telaBuscaPagar.getjTable_PagarBusca().getSelectedRow(),0);
             this.telaBuscaPagar.dispose();
         }else if (e.getSource() == this.telaBuscaPagar.getjButton_Deletar()){
             try{
-                service.ServiceBairro.Deletar((int) this.telaBuscaPagar.getjTable_PagarBusca().getValueAt(
-                        this.telaBuscaPagar.getjTable_PagarBusca().getSelectedRow(),0));
-                JOptionPane.showMessageDialog(null, "Bairro deletado com sucesso!");
+                service.ServicePagar.Deletar((int) this.telaBuscaPagar.getjTable_PagarBusca().getValueAt(
+                        this.telaBuscaPagar.getjTable_PagarBusca().getSelectedRow(),0)); 
+                JOptionPane.showMessageDialog(null, "Pagar deletado com sucesso!");
                 carregarDadosNaTabela();
             } catch (Exception ex) {
                 throw new RuntimeException(" \nCLASSE: ControllerBuscaBairro->actionPerformed(ActionEvent e)->deletar\nMENSAGEM:" 
@@ -49,6 +50,7 @@ public class ControllerPagamentosBusca implements ActionListener {
 
     private void carregarDadosNaTabela() {
         DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaPagar.getjTable_PagarBusca().getModel();
+        tabela.getDataVector().removeAllElements();
 
         for (Pagar pagamentosDaLista : service.ServicePagar.Buscar()) {
             tabela.addRow(new Object[]{

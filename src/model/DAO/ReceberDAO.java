@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import static service.ServiceReceber.Deletar;
 
 public class ReceberDAO implements InterfaceDAO<Receber> {
 
@@ -31,21 +32,22 @@ public class ReceberDAO implements InterfaceDAO<Receber> {
 
     @Override
     public List<Receber> Retrieve() {
-        Connection conexao = ConectionFactory.getConection();
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
-        List<Receber> recebimentos = new ArrayList();
+
         try {
+            Connection conexao = ConectionFactory.getConection();
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            List<Receber> recebimentos = new ArrayList();
             pstm = conexao.prepareStatement(SQL.RECEBER_RETRIVE_ALL);
             rs = pstm.executeQuery();
 
             while (rs.next()) {
                 Receber recebimento = new Receber.ReceberBuilder()
                         .setId(rs.getInt("id"))
-                        .setDataRecebimento(rs.getString("data"))
+                        .setDataRecebimento(rs.getString("datarecebimento"))
                         .setHora(rs.getString("hora"))
-                        .setValorAcrescimo(rs.getFloat("valorDeAcrescimo"))
-                        .setValorRecebido(rs.getFloat("valorRecebido"))
+                        .setValorAcrescimo(rs.getFloat("valoracrescimo"))
+                        .setValorRecebido(rs.getFloat("valorrecebido"))
                         .setObservacao(rs.getString("observacao"))
                         .setContaAReceber(
                                 service.ServiceContaAReceber.Buscar(rs.getInt("contaareceberid"))
@@ -56,9 +58,9 @@ public class ReceberDAO implements InterfaceDAO<Receber> {
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return recebimentos;
         } catch (Exception ex) {
-            ConectionFactory.closeConnection(conexao, pstm, rs);
             return null;
         }
+        
     }
 
     @Override
@@ -131,6 +133,10 @@ public class ReceberDAO implements InterfaceDAO<Receber> {
             ex.printStackTrace();
         }
         ConectionFactory.closeConnection(conexao, pstm);
+    }
+
+    public void Delete(int idReceber) {
+        Deletar(Retrieve(idReceber));
     }
 
     public Receber RetrievePorUmaIdVendaRecebido(int idVenda) {

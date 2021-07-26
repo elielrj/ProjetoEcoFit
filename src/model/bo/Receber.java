@@ -83,7 +83,6 @@ public class Receber {
         private int id;
         private String dataRecebimento;
         private String hora;
-        private float valorDesconto;
         private float valorAcrescimo;
         private float valorRecebido;
         private String observacao;

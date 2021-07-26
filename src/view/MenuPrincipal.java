@@ -480,13 +480,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         TelaCadastroReceber telaCadastroReceber = new TelaCadastroReceber();
-        ControllerRecebebimento controllerReceber = new ControllerRecebebimento(telaCadastroReceber);
+        ControllerReceber controllerReceber = new ControllerReceber(telaCadastroReceber);
         telaCadastroReceber.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         TelaCadastroPagar telaCadastroPagar = new TelaCadastroPagar();
-        ControllerPagamentos controllerPagar = new ControllerPagamentos(telaCadastroPagar);
+        ControllerPagar controllerPagar = new ControllerPagar(telaCadastroPagar);
         telaCadastroPagar.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 

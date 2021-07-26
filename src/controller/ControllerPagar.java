@@ -12,10 +12,10 @@ import javax.swing.JTextField;
 import model.bo.Compra;
 import model.bo.Pagar;
 import view.busca.TelaBuscaCompra;
-import view.busca.TelaBuscaPagamentos;
+import view.busca.TelaBuscaPagar;
 import view.cadastro.TelaCadastroPagar;
 
-public class ControllerPagamentos implements ActionListener {
+public class ControllerPagar implements ActionListener {
 
     TelaCadastroPagar telaCadastroPagar;
     public static int codigo;
@@ -23,7 +23,7 @@ public class ControllerPagamentos implements ActionListener {
     private String data;
     private String Hora; 
 
-    public ControllerPagamentos(TelaCadastroPagar telaCadastroPagar) {
+    public ControllerPagar(TelaCadastroPagar telaCadastroPagar) {
 
         this.telaCadastroPagar = telaCadastroPagar;
 
@@ -95,8 +95,8 @@ public class ControllerPagamentos implements ActionListener {
         if (e.getSource() == this.telaCadastroPagar.getjButtonBuscar()) {
 
             codigo = 0;
-            TelaBuscaPagamentos telaBuscaPagar = new TelaBuscaPagamentos(null, true);
-            ControllerPagamentosBusca controllerBuscaPagar = new ControllerPagamentosBusca(telaBuscaPagar);
+            TelaBuscaPagar telaBuscaPagar = new TelaBuscaPagar(null, true);
+            ControllerPagarBusca controllerBuscaPagar = new ControllerPagarBusca(telaBuscaPagar);
             telaBuscaPagar.setVisible(true);
 
             if (codigo != 0) {
@@ -108,7 +108,7 @@ public class ControllerPagamentos implements ActionListener {
                 this.telaCadastroPagar.getjTextFieldId().setText(pagar.getId() + "");
                 this.telaCadastroPagar.getjTextField_CompraId().setText(pagar.getContaAPagar().getCompraId() + "");
                 //COMPRA
-                this.compra = service.ServiceCompra.Buscar(pagar.getContaAPagar().getId());
+                this.compra = service.ServiceCompra.Buscar(pagar.getContaAPagar().getCompraId());
                 this.telaCadastroPagar.getjTextField_CompraId().setText(pagar.getContaAPagar().getCompraId() + "");
                 this.telaCadastroPagar.getjTextField_CompraFornecedor().setText(compra.getFornecedor().getRazaoSocial());
                 this.telaCadastroPagar.getjFormattedTextField_CompraData().setText(compra.getData());

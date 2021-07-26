@@ -78,9 +78,9 @@ public class TelaBuscaReceber extends javax.swing.JDialog {
             .addGroup(jPanelBotoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(230, 230, 230)
+                .addGap(214, 214, 214)
                 .addComponent(jButton_Deletar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 252, Short.MAX_VALUE)
                 .addComponent(jButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -104,19 +104,12 @@ public class TelaBuscaReceber extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Data Pagamento", "Hora", "Valor Acréscimo", "Valor Pago", "Obs", "Conta a Pagar Id"
+                "Id", "Data Recebimento", "Hora", "Valor Acrécimo", "Valor Recebido", "Obs", "Conta a Receber Id"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, true, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];

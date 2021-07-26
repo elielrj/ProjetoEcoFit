@@ -138,5 +138,8 @@ public class PagarDAO implements InterfaceDAO<Pagar> {
         }
         ConectionFactory.closeConnection(conexao, pstm);
     }
+    public void Delete(int idPagar){
+        Delete(Retrieve(idPagar));
+    }
 
 }

@@ -69,7 +69,7 @@ public class ContaAReceberDAO implements InterfaceDAO<ContaAReceber> {
             ContaAReceber contaAReceber = new ContaAReceber.ContaAReceberBuilder().createContaAReceber();
             while (rs.next()) {
                 contaAReceber.setId(rs.getInt("id"));
-                contaAReceber.setVendaId(rs.getInt("nome"));
+                contaAReceber.setVendaId(rs.getInt("vendaid"));
                 contaAReceber.setValor(rs.getFloat("valor"));
                 contaAReceber.setStatus(rs.getBoolean("status"));
             }

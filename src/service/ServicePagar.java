@@ -30,4 +30,8 @@ public class ServicePagar {
         PagarDAO pagarDAO = new PagarDAO();
         pagarDAO.Delete(objeto);
     }
+    public static void Deletar(int idPagar) {
+        PagarDAO pagarDAO = new PagarDAO();
+        pagarDAO.Delete(idPagar);
+    }
 }

@@ -2,9 +2,11 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import view.busca.TelaBuscaReceber;
+import model.bo.Pagar;
 import model.bo.Receber;
+import view.busca.TelaBuscaReceber;
 
 public class ControllerReceberBusca implements ActionListener {
 
@@ -15,32 +17,52 @@ public class ControllerReceberBusca implements ActionListener {
 
         this.telaBuscaReceber.getjButtonCarregar().addActionListener(this);
         this.telaBuscaReceber.getjButtonSair().addActionListener(this);
+        this.telaBuscaReceber.getjButton_Deletar().setEnabled(false);
 
-        //fazer a carga inicial do jtable
-        DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaReceber.getjTable_ReceberBusca().getModel();
-
-        for (Receber receberDaLista : service.ServiceReceber.Buscar()) {
-            tabela.addRow(new Object[]{
-                receberDaLista.getId(),
-                receberDaLista.getDataRecebimento(),
-                receberDaLista.getHora(),
-                receberDaLista.getValorAcrescimo(),
-                receberDaLista.getValorRecebido(),
-                receberDaLista.getObservacao(),
-                receberDaLista.getContaAReceber()
-            });
-        }
+        carregarDadosNaTabela();
+        
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.telaBuscaReceber.getjButtonCarregar()) {
-            ControllerRecebebimento.codigo = (int) this.telaBuscaReceber.getjTable_ReceberBusca().getValueAt(this.telaBuscaReceber.getjTable_ReceberBusca().getSelectedRow(), 0);
+        if (e.getSource() == this.telaBuscaReceber.getjButtonSair()) 
             this.telaBuscaReceber.dispose();
+        
+        else if (e.getSource() == this.telaBuscaReceber.getjButtonCarregar()) {
+            ControllerReceber.codigo = (int) this.telaBuscaReceber.getjTable_ReceberBusca().getValueAt(
+                    this.telaBuscaReceber.getjTable_ReceberBusca().getSelectedRow(),0);
+            this.telaBuscaReceber.dispose();
+        }else if (e.getSource() == this.telaBuscaReceber.getjButton_Deletar()){
+            try{
+                service.ServicePagar.Deletar((int) this.telaBuscaReceber.getjTable_ReceberBusca().getValueAt(
+                        this.telaBuscaReceber.getjTable_ReceberBusca().getSelectedRow(),0)); 
+                JOptionPane.showMessageDialog(null, "Pagar deletado com sucesso!");
+                carregarDadosNaTabela();
+            } catch (Exception ex) {
+                throw new RuntimeException(" \nCLASSE: ControllerBuscaBairro->actionPerformed(ActionEvent e)->deletar\nMENSAGEM:" 
+                        + ex.getMessage() + "\nLOCALIZADO:" 
+                        + ex.getLocalizedMessage()
+                );
+            }
         }
-        if (e.getSource() == this.telaBuscaReceber.getjButtonSair()) {
-            this.telaBuscaReceber.dispose();
+        
+    }
+
+    private void carregarDadosNaTabela() {
+        DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaReceber.getjTable_ReceberBusca().getModel();
+        tabela.getDataVector().removeAllElements();
+
+        for (Receber recebimentosDaLista : service.ServiceReceber.Buscar()) {
+            tabela.addRow(new Object[]{
+                recebimentosDaLista.getId(),
+                recebimentosDaLista.getDataRecebimento(),
+                recebimentosDaLista.getHora(),
+                recebimentosDaLista.getValorAcrescimo(),
+                recebimentosDaLista.getValorRecebido(),
+                recebimentosDaLista.getObservacao(),
+                recebimentosDaLista.getContaAReceber().getId()
+            });
         }
     }
 

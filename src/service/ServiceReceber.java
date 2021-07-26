@@ -35,4 +35,8 @@ public class ServiceReceber {
         ReceberDAO receberDAO = new ReceberDAO();
         receberDAO.Delete(objeto);
     }
+    public static void Deletar(int idReceber) {
+        ReceberDAO receberDAO = new ReceberDAO();
+        receberDAO.Delete(idReceber);
+    }
 }
