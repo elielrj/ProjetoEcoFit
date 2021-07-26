@@ -37,7 +37,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuMovimentos = new javax.swing.JMenu();
         jMenuItemVendas = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem22 = new javax.swing.JMenuItem();
         jSeparator6 = new javax.swing.JPopupMenu.Separator();
         jMenuItem21 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -80,6 +79,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabelTitulo2.setText("ECO FIT");
 
         jLabelImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/academia.jpg"))); // NOI18N
+
+        jMenuBar1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jMenuCadastros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/novo.png"))); // NOI18N
         jMenuCadastros.setText("Cadastros");
@@ -172,15 +173,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuMovimentos.add(jMenuItem6);
-
-        jMenuItem22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/mensalidade.png"))); // NOI18N
-        jMenuItem22.setText("Gerador Mensalidades");
-        jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem22ActionPerformed(evt);
-            }
-        });
-        jMenuMovimentos.add(jMenuItem22);
         jMenuMovimentos.add(jSeparator6);
 
         jMenuItem21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/compras.png"))); // NOI18N
@@ -460,12 +452,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItemContasAReceberActionPerformed
 
-    private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
-        //TelaBuscaVenda telaBuscaVenda = new TelaBuscaVenda();
-        //ControllerBuscaVenda controllerBuscaVenda = new ControllerBuscaVenda(telaBuscaVenda);
-        //telaBuscaVenda.setVisible(true);
-    }//GEN-LAST:event_jMenuItem22ActionPerformed
-
     private void jMenuItemEnderecosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEnderecosActionPerformed
         TelaCadastroEndereco telaCadastroEndereco = new TelaCadastroEndereco();
         ControllerEndereco controllerEndereco = new ControllerEndereco(telaCadastroEndereco);
@@ -535,7 +521,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem21;
-    private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem4;

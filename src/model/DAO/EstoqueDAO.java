@@ -16,7 +16,7 @@ public class EstoqueDAO implements InterfaceDAO<Estoque> {
             PreparedStatement pstm = null;
             pstm = conexao.prepareStatement(SQL.ESTOQUE_CREATE);
             pstm.setInt(1, objeto.getProdutoId());
-            pstm.setInt(2, objeto.getQuantidade());        
+            pstm.setInt(2, objeto.getQuantidade());
             pstm.executeUpdate();
             ConectionFactory.closeConnection(conexao, pstm);
         } catch (Exception ex) {
@@ -78,7 +78,7 @@ public class EstoqueDAO implements InterfaceDAO<Estoque> {
             );
         }
     }
-    
+
     public int RetrieveDeIdEstoquePeloIdProduto(int id) {
         try {
             Connection conexao = ConectionFactory.getConection();
@@ -90,7 +90,7 @@ public class EstoqueDAO implements InterfaceDAO<Estoque> {
             Estoque estoque = new Estoque.EstoqueBuilder().createEstoque();
             while (rs.next()) {
                 estoque.setId(rs.getInt("id"));
-                
+
             }
             ConectionFactory.closeConnection(conexao, pstm, rs);
             return estoque.getId();
@@ -138,11 +138,10 @@ public class EstoqueDAO implements InterfaceDAO<Estoque> {
         }
     }
 
-
-public Estoque RetrievePorIdDoProduto(int idProdutoDoEstoque) {
-            Connection conexao = ConectionFactory.getConection();
-            PreparedStatement pstm = null;
-            ResultSet rs = null;
+    public Estoque RetrievePorIdDoProduto(int idProdutoDoEstoque) {
+        Connection conexao = ConectionFactory.getConection();
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
         try {
             pstm = conexao.prepareStatement(SQL.ESTOQUE_RETRIVE_ONE_ID_PRODUTO_DO_ESTOQUE);
             pstm.setInt(1, idProdutoDoEstoque);
@@ -159,7 +158,32 @@ public Estoque RetrievePorIdDoProduto(int idProdutoDoEstoque) {
                     + ex.getMessage() + "\nLOCALIZADO:"
                     + ex.getLocalizedMessage()
             );
-        }finally{
+        } finally {
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+        }
+    }
+    
+    public int BuscarAQuantidadeNoEstoqueComOIdDoProduto(int idDoProduto) {
+        Connection conexao = ConectionFactory.getConection();
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
+            pstm = conexao.prepareStatement(SQL.ESTOQUE_RETRIVE_ONE_ID_PRODUTO_DO_ESTOQUE);
+            pstm.setInt(1, idDoProduto);
+            rs = pstm.executeQuery();
+            Estoque estoque = new Estoque.EstoqueBuilder().createEstoque();
+            while (rs.next()) {
+                estoque.setId(rs.getInt("id"));
+                estoque.setProdutoId(rs.getInt("produtoid"));
+                estoque.setQuantidade(rs.getInt("quantidade"));
+            }
+            return estoque.getQuantidade();
+        } catch (Exception ex) {
+            throw new RuntimeException(" \nCLASSE: EstoqueDAO->Retrive(int id)->estoqueDAO\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
+        } finally {
             ConectionFactory.closeConnection(conexao, pstm, rs);
         }
     }

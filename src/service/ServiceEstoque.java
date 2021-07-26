@@ -44,6 +44,6 @@ public class ServiceEstoque {
     
     public static int BuscarAQuantidadeNoEstoqueComOIdDoProduto(int idDoProduto) {
         EstoqueDAO estoqueDAO = new EstoqueDAO();
-        return estoqueDAO.Retrieve(idDoProduto).getQuantidade();
+        return estoqueDAO.BuscarAQuantidadeNoEstoqueComOIdDoProduto(idDoProduto);
     }
 }

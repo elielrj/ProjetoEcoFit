@@ -39,6 +39,7 @@ public class ControllerPagar implements ActionListener {
         LimpaEstadoComponentes(false);
         this.compra = new Compra.CompraBuilder().createCompra();
         dataHora();
+        
     }
 
     @Override

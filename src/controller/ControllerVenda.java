@@ -44,6 +44,70 @@ public class ControllerVenda implements ActionListener {
         this.telaCadastroVenda.getjButton_ProdutoAdicionar().addActionListener(this);
         this.telaCadastroVenda.getjButton_ClienteBuscaId().addActionListener(this);
         this.telaCadastroVenda.getjButton_ProdutoRemover().addActionListener(this);
+        this.telaCadastroVenda.getjPanelDados().addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (existeFaturamentoEmAndamento()) {
+                        if (validarCodigoBarras()) {
+                            inserirItem();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Cód de Barras inválido");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Não existe um faturamento em andamento");
+                    }
+                } else if (evt.getKeyCode() == KeyEvent.VK_F1) {
+                    buscaCodigoDeBarrasDoProduto();
+                } else if (evt.getKeyCode() == KeyEvent.VK_F2) {
+                    novoFaturamento();
+                } else if (evt.getKeyCode() == KeyEvent.VK_F3) {
+                    cancelarFaturamento();
+                } else if (evt.getKeyCode() == KeyEvent.VK_F4) {
+                    //persistir no banco
+                    gravarVenda();
+                } else if (evt.getKeyCode() == KeyEvent.VK_F5) {
+                    //remover item selecionado
+                    if (existeFaturamentoEmAndamento()) {
+                        removerItemFaturado();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Selecione 1 item!");
+                    }
+                }
+            }
+
+        });
+        this.telaCadastroVenda.getjFormattedTextField_ProdutoCodBarras().addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (existeFaturamentoEmAndamento()) {
+                        if (validarCodigoBarras()) {
+                            inserirItem();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Cód de Barras inválido");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Não existe um faturamento em andamento");
+                    }
+                } else if (evt.getKeyCode() == KeyEvent.VK_F1) {
+                    buscaCodigoDeBarrasDoProduto();
+                } else if (evt.getKeyCode() == KeyEvent.VK_F2) {
+                    novoFaturamento();
+                } else if (evt.getKeyCode() == KeyEvent.VK_F3) {
+                    cancelarFaturamento();
+                } else if (evt.getKeyCode() == KeyEvent.VK_F4) {
+                    //persistir no banco
+                    gravarVenda();
+                } else if (evt.getKeyCode() == KeyEvent.VK_F5) {
+                    //remover item selecionado
+                    if (existeFaturamentoEmAndamento()) {
+                        removerItemFaturado();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Selecione 1 item!");
+                    }
+                }
+            }
+
+        });
         //KEY   
         this.telaCadastroVenda.getjPanelDados().addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

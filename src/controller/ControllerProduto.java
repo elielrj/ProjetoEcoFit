@@ -3,8 +3,6 @@ package controller;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import static java.lang.Float.parseFloat;
-import static java.lang.Integer.parseInt;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
