@@ -19,8 +19,8 @@ public class PagarDAO implements InterfaceDAO<Pagar> {
             pstm = conexao.prepareStatement(SQL.PAGAR_CREATE);
             pstm.setString(1, objeto.getDataPagamento());
             pstm.setString(2, objeto.getHora());
-            pstm.setDouble(3, objeto.getValorAcrescimo());
-            pstm.setDouble(4, objeto.getValorPago());
+            pstm.setFloat(3, objeto.getValorAcrescimo());
+            pstm.setFloat(4, objeto.getValorPago());
             pstm.setString(5, objeto.getObservacao());
             pstm.setInt(6, objeto.getContaAPagar().getId());
             pstm.executeUpdate();
@@ -109,8 +109,8 @@ public class PagarDAO implements InterfaceDAO<Pagar> {
             pstm = conexao.prepareStatement(SQL.PAGAR_UPDATE);
             pstm.setString(1, objeto.getDataPagamento());
             pstm.setString(2, objeto.getHora());
-            pstm.setDouble(3, objeto.getValorAcrescimo());
-            pstm.setDouble(4, objeto.getValorPago());
+            pstm.setFloat(3, objeto.getValorAcrescimo());
+            pstm.setFloat(4, objeto.getValorPago());
             pstm.setString(5, objeto.getObservacao());
             pstm.setInt(6, objeto.getContaAPagar().getId());
             pstm.setInt(7, objeto.getId());

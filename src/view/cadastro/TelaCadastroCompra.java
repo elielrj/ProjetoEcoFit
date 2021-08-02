@@ -147,7 +147,7 @@ public class TelaCadastroCompra extends javax.swing.JFrame {
         jButtonGravar.setPreferredSize(new java.awt.Dimension(90, 30));
         jPainelBotoes.add(jButtonGravar);
 
-        jButtonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
+        jButtonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/buscar.png"))); // NOI18N
         jButtonBuscar.setText("Buscar");
         jButtonBuscar.setIconTextGap(3);
         jButtonBuscar.setPreferredSize(new java.awt.Dimension(90, 30));
@@ -333,6 +333,8 @@ public class TelaCadastroCompra extends javax.swing.JFrame {
 
         jLabel15.setText("Data Vencimento");
 
+        jTextField_Faturamento_Id.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         jLabel16.setText("Id Compra");
 
         try {
@@ -517,8 +519,7 @@ public class TelaCadastroCompra extends javax.swing.JFrame {
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jFormattedTextField_DataDeVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldFaturamentoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelF1)

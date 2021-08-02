@@ -20,6 +20,15 @@ public class ServiceReceber {
         ReceberDAO receberDAO = new ReceberDAO();
         return (receberDAO.Retrieve());
     }
+    
+    public static List<Receber> BuscarPorVendasNaoRecebidas() {
+        ReceberDAO receberDAO = new ReceberDAO();
+        return (receberDAO.RetrieveBuscarPorVendasNaoRecebidas());
+    }
+    public static List<Receber> BuscarPorVendasRecebidas(int idContaAReceber) {
+        ReceberDAO receberDAO = new ReceberDAO();
+        return (receberDAO.RetrieveBuscarPorVendasRecebidas(idContaAReceber));
+    }
 
     public static Receber Buscar(int id) {
         ReceberDAO receberDAO = new ReceberDAO();

@@ -123,7 +123,7 @@ public class TelaCadastroPagar extends javax.swing.JFrame {
         jButtonGravar.setPreferredSize(new java.awt.Dimension(90, 30));
         jPainelBotoes.add(jButtonGravar);
 
-        jButtonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
+        jButtonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/buscar.png"))); // NOI18N
         jButtonBuscar.setText("Buscar");
         jButtonBuscar.setIconTextGap(3);
         jButtonBuscar.setPreferredSize(new java.awt.Dimension(90, 30));

@@ -18,7 +18,7 @@ public class TelaBuscaPessoaFisica extends javax.swing.JDialog {
 
     public TelaBuscaPessoaFisica() {
         initComponents();
-        setSize(800, 600);
+        //setSize(800, 600);
     }
 
     @SuppressWarnings("unchecked")
@@ -51,7 +51,7 @@ public class TelaBuscaPessoaFisica extends javax.swing.JDialog {
         jPanelTitulo.setLayout(jPanelTituloLayout);
         jPanelTituloLayout.setHorizontalGroup(
             jPanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 796, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1096, Short.MAX_VALUE)
         );
         jPanelTituloLayout.setVerticalGroup(
             jPanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,7 +91,7 @@ public class TelaBuscaPessoaFisica extends javax.swing.JDialog {
                 .addComponent(jButtonCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(222, 222, 222)
                 .addComponent(jButton_Deletar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 544, Short.MAX_VALUE)
                 .addComponent(jButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -121,21 +121,15 @@ public class TelaBuscaPessoaFisica extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setMaxWidth(30);
-            jTable1.getColumnModel().getColumn(1).setMaxWidth(80);
-            jTable1.getColumnModel().getColumn(2).setMaxWidth(80);
-            jTable1.getColumnModel().getColumn(3).setMaxWidth(80);
-            jTable1.getColumnModel().getColumn(4).setMaxWidth(100);
-            jTable1.getColumnModel().getColumn(5).setMaxWidth(80);
-            jTable1.getColumnModel().getColumn(6).setMaxWidth(80);
-            jTable1.getColumnModel().getColumn(7).setMaxWidth(100);
-            jTable1.getColumnModel().getColumn(8).setMaxWidth(120);
+            jTable1.getColumnModel().getColumn(9).setMaxWidth(50);
+            jTable1.getColumnModel().getColumn(11).setMaxWidth(70);
         }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
         jPanelDadosLayout.setHorizontalGroup(
             jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 796, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1096, Short.MAX_VALUE)
         );
         jPanelDadosLayout.setVerticalGroup(
             jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

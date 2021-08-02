@@ -56,6 +56,34 @@ public class ContaAReceberDAO implements InterfaceDAO<ContaAReceber> {
             );
         }
     }
+    /*
+    public List<ContaAReceber> RetrieveBuscarUmaListaDeRecebimentosDeUmaVenda(int idVenda) {
+        try {
+            Connection conexao = ConectionFactory.getConection();
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            pstm = conexao.prepareStatement(SQL.CONTA_A_RECEBER_RETRIVE_ONE_ID_DA_VENDA);
+            rs = pstm.executeQuery();
+            List<ContaAReceber> contaARecebers = new ArrayList();
+            while (rs.next()) {
+                ContaAReceber contaAReceber = new ContaAReceber.ContaAReceberBuilder()
+                        .setId(rs.getInt("id"))
+                        .setVendaId(rs.getInt("vendaid"))
+                        .setValor(rs.getFloat("valor"))
+                        .setStatus(rs.getBoolean("status"))
+                        .createContaAReceber();
+                
+                contaARecebers.add(contaAReceber);
+            }
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return contaARecebers;
+        } catch (Exception ex) {
+            throw new RuntimeException(" \nCLASSE: ContaAReceberDAO->Retrive\nMENSAGEM:"
+                    + ex.getMessage() + "\nLOCALIZADO:"
+                    + ex.getLocalizedMessage()
+            );
+        }
+    }*/
 
     @Override
     public ContaAReceber Retrieve(int id) {

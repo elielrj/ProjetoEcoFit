@@ -21,8 +21,8 @@ public class CompraDAO implements InterfaceDAO<Compra> {
             pstm.setString(2, objeto.getHora());
             pstm.setString(3, objeto.getDataDeVencimento());
             pstm.setString(4, objeto.getObservacao());
-            pstm.setDouble(5, objeto.getValorDeDesconto());
-            pstm.setDouble(6, objeto.getValorTotal());
+            pstm.setFloat(5, objeto.getValorDeDesconto());
+            pstm.setFloat(6, objeto.getValorTotal());
             pstm.setBoolean(7, objeto.getStatus());
             pstm.setInt(8, objeto.getFornecedor().getId());
             pstm.executeUpdate();

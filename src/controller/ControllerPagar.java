@@ -34,6 +34,7 @@ public class ControllerPagar implements ActionListener {
         this.telaCadastroPagar.getjButtonSair().addActionListener(this);
         
         this.telaCadastroPagar.getjButton_CompraBuscaId().addActionListener(this);
+        
 
         Ativa(true);
         LimpaEstadoComponentes(false);
@@ -179,6 +180,7 @@ public class ControllerPagar implements ActionListener {
         this.telaCadastroPagar.getjFormattedTextFieldDataVencimento().setEnabled(estadoBotoes);
         this.telaCadastroPagar.getjFormattedTextFieldDataPagamento().setEnabled(!estadoBotoes);
         this.telaCadastroPagar.getjButton_CompraBuscaId().setEnabled(!estadoBotoes);
+        this.telaCadastroPagar.getjTextAreaObs().setEnabled(!estadoBotoes);
     }
 
     public void LimpaEstadoComponentes(boolean estadoCompo) {

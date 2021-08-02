@@ -110,7 +110,7 @@ public class TelaBuscaCompra extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Data", "Hora", "Caixa", "Data Venc", "Obs", "Valor Desconto", "Total", "Status", "Pessoa", "Qtd Itens"
+                "Id", "Data", "Hora", "Data Venc", "Obs", "Valor Desconto", "Total", "Status"
             }
         ));
         jScrollPane1.setViewportView(jTable_BuscaVendas);
@@ -118,7 +118,6 @@ public class TelaBuscaCompra extends javax.swing.JDialog {
             jTable_BuscaVendas.getColumnModel().getColumn(0).setMaxWidth(50);
             jTable_BuscaVendas.getColumnModel().getColumn(1).setMaxWidth(450);
             jTable_BuscaVendas.getColumnModel().getColumn(2).setMaxWidth(50);
-            jTable_BuscaVendas.getColumnModel().getColumn(3).setMaxWidth(200);
         }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);

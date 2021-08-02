@@ -83,6 +83,8 @@ public final class SQL {
     public static String RECEBER_CREATE = "INSERT INTO receber(datarecebimento,hora,valoracrescimo,valorrecebido,observacao,contaareceberid) VALUES(?,?,?,?,?,?)";
     public static String RECEBER_RETRIVE_ALL = "SELECT id,datarecebimento,hora,valoracrescimo,valorrecebido,observacao,contaareceberid FROM receber";
     public static String RECEBER_RETRIVE_ONE_ID = "SELECT id,datarecebimento,hora,valoracrescimo,valorrecebido,observacao,contaareceberid FROM receber WHERE receber.id =?";
+    public static String RECEBER_RETRIVE_ALL_VENDAS_NAO_RECEBIDAS = "SELECT id,datarecebimento,hora,valoracrescimo,valorrecebido,observacao,contaareceberid FROM receber WHERE receber.status=false";
+    public static String RECEBER_RETRIVE_ALL_VENDAS_RECEBIDAS = "SELECT id,datarecebimento,hora,valoracrescimo,valorrecebido,observacao,contaareceberid FROM receber WHERE receber.contaareceberid=?";
     public static String RECEBER_RETRIVE_ONE_ID_DA_CONTA_A_RECEBER = "SELECT id,datarecebimento,hora,valoracrescimo,valorrecebido,observacao,contaareceberid FROM receber WHERE receber.contaareceberid=?";
     public static String RECEBER_UPDATE = "UPDATE receber SET datarecebimento=?,hora=?,valoracrescimo=?,valorrecebido=?,observacao=?,contaareceberid =? WHERE receber.id=?";
     public static String RECEBER_DELETE = "DELETE FROM receber WHERE id=?";

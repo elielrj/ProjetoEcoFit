@@ -153,7 +153,7 @@
         <Component class="javax.swing.JButton" name="jButtonBuscar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagens/cancelar.png"/>
+              <Image iconType="3" name="/imagens/buscar.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Buscar"/>
             <Property name="iconTextGap" type="int" value="3"/>
@@ -430,7 +430,6 @@
                               <Component id="jTextFieldFaturamentoUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jComboBoxStatus" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="-2" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -751,6 +750,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField_Faturamento_Id">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel16">
           <Properties>

@@ -206,8 +206,8 @@ public class VendaDAO implements InterfaceDAO<Venda> {
             pstm.setString(2, objeto.getHora());
             pstm.setString(3, objeto.getDataDeVencimento());
             pstm.setString(4, objeto.getObservacao());
-            pstm.setDouble(5, objeto.getValorDoDesconto());
-            pstm.setDouble(6, objeto.getValorTotal());
+            pstm.setFloat(5, objeto.getValorDoDesconto());
+            pstm.setFloat(6, objeto.getValorTotal());
             pstm.setBoolean(7, objeto.getStatus());
             pstm.setInt(8, objeto.getPessoaFisica().getId());
             pstm.setString(9, objeto.getUserCaixa());

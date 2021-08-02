@@ -69,9 +69,9 @@ public class ControllerCompraBusca implements ActionListener {
                 compraDaLista.getObservacao(),//6
                 compraDaLista.getValorDeDesconto(),//7
                 compraDaLista.getValorTotal(),//8
-                compraDaLista.getStatus(),//9
+                compraDaLista.getStatus()//9
                 //compraDaLista.getPessoaFisica().getNome(),//10
-                compraDaLista.quantidadeDeItensNaLista()//10
+                //compraDaLista.quantidadeDeItensNaLista()//10
             });
         }
     }

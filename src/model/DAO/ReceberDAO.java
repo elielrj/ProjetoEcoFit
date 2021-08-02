@@ -62,7 +62,72 @@ public class ReceberDAO implements InterfaceDAO<Receber> {
         }
         
     }
+    
+     public List<Receber> RetrieveBuscarPorVendasNaoRecebidas() {
 
+        try {
+            Connection conexao = ConectionFactory.getConection();
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            List<Receber> recebimentos = new ArrayList();
+            pstm = conexao.prepareStatement(SQL.RECEBER_RETRIVE_ALL_VENDAS_NAO_RECEBIDAS);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                Receber recebimento = new Receber.ReceberBuilder()
+                        .setId(rs.getInt("id"))
+                        .setDataRecebimento(rs.getString("datarecebimento"))
+                        .setHora(rs.getString("hora"))
+                        .setValorAcrescimo(rs.getFloat("valoracrescimo"))
+                        .setValorRecebido(rs.getFloat("valorrecebido"))
+                        .setObservacao(rs.getString("observacao"))
+                        .setContaAReceber(
+                                service.ServiceContaAReceber.Buscar(rs.getInt("contaareceberid"))
+                        )
+                        .createReceber();
+                recebimentos.add(recebimento);
+            }
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return recebimentos;
+        } catch (Exception ex) {
+            return null;
+        }
+        
+    }
+
+     public List<Receber> RetrieveBuscarPorVendasRecebidas(int idContaAReceber) {
+
+        try {
+            Connection conexao = ConectionFactory.getConection();
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            List<Receber> recebimentos = new ArrayList();
+            pstm = conexao.prepareStatement(SQL.RECEBER_RETRIVE_ALL_VENDAS_RECEBIDAS);
+            pstm.setInt(1, idContaAReceber);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                Receber recebimento = new Receber.ReceberBuilder()
+                        .setId(rs.getInt("id"))
+                        .setDataRecebimento(rs.getString("datarecebimento"))
+                        .setHora(rs.getString("hora"))
+                        .setValorAcrescimo(rs.getFloat("valoracrescimo"))
+                        .setValorRecebido(rs.getFloat("valorrecebido"))
+                        .setObservacao(rs.getString("observacao"))
+                        .setContaAReceber(
+                                service.ServiceContaAReceber.Buscar(rs.getInt("contaareceberid"))
+                        )
+                        .createReceber();
+                recebimentos.add(recebimento);
+            }
+            ConectionFactory.closeConnection(conexao, pstm, rs);
+            return recebimentos;
+        } catch (Exception ex) {
+            return null;
+        }
+        
+    }
+     
     @Override
     public Receber Retrieve(int id) {
         Connection conexao = ConectionFactory.getConection();
@@ -105,8 +170,8 @@ public class ReceberDAO implements InterfaceDAO<Receber> {
             pstm = conexao.prepareStatement(SQL.RECEBER_UPDATE);
             pstm.setString(1, objeto.getDataRecebimento());
             pstm.setString(2, objeto.getHora());
-            pstm.setDouble(3, objeto.getValorAcrescimo());
-            pstm.setDouble(4, objeto.getValorRecebido());
+            pstm.setFloat(3, objeto.getValorAcrescimo());
+            pstm.setFloat(4, objeto.getValorRecebido());
             pstm.setString(5, objeto.getObservacao());
             pstm.setInt(6, objeto.getContaAReceber().getId());
             pstm.setInt(7, objeto.getId());

@@ -66,7 +66,7 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
         jPanelTitulo.setLayout(jPanelTituloLayout);
         jPanelTituloLayout.setHorizontalGroup(
             jPanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 796, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1096, Short.MAX_VALUE)
         );
         jPanelTituloLayout.setVerticalGroup(
             jPanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,7 +106,7 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
                 .addComponent(jButtonCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(219, 219, 219)
                 .addComponent(jButton_Deletar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 547, Short.MAX_VALUE)
                 .addComponent(jButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -130,7 +130,7 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Razão Social", "CNPJ", "Inscrição Estadual", "Tel1", "Tel2", "Email", "Obs", "Endereço", "Compl"
+                "Id", "Razão Social", "CNPJ", "Inscrição Estadual", "Tel1", "Tel2", "Email", "Obs", "Status", "Endereço"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -144,16 +144,14 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable_Fornecedor);
         if (jTable_Fornecedor.getColumnModel().getColumnCount() > 0) {
             jTable_Fornecedor.getColumnModel().getColumn(0).setMaxWidth(50);
-            jTable_Fornecedor.getColumnModel().getColumn(1).setMaxWidth(500);
-            jTable_Fornecedor.getColumnModel().getColumn(2).setMaxWidth(100);
-            jTable_Fornecedor.getColumnModel().getColumn(3).setMaxWidth(100);
+            jTable_Fornecedor.getColumnModel().getColumn(8).setMaxWidth(50);
         }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
         jPanelDadosLayout.setHorizontalGroup(
             jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 796, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1096, Short.MAX_VALUE)
         );
         jPanelDadosLayout.setVerticalGroup(
             jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

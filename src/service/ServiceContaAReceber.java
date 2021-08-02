@@ -20,6 +20,11 @@ public class ServiceContaAReceber {
         ContaAReceberDAO contaAReceberDAO = new ContaAReceberDAO();
         return (contaAReceberDAO.Retrieve());
     }
+    /*
+    public static List<ContaAReceber> BuscarUmaListaDeRecebimentosDeUmaVenda(int idVenda) {
+        ContaAReceberDAO contaAReceberDAO = new ContaAReceberDAO();
+        return (contaAReceberDAO.RetrieveBuscarUmaListaDeRecebimentosDeUmaVenda(idVenda));
+    }*/
 
     public static ContaAReceber Buscar(int id) {
         ContaAReceberDAO contaAReceberDAO = new ContaAReceberDAO();

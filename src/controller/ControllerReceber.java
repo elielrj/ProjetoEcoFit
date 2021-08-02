@@ -5,11 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
-import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import model.bo.ContaAReceber;
 import model.bo.Receber;
 import model.bo.Venda;
 import view.busca.TelaBuscaReceber;
@@ -47,9 +48,9 @@ public class ControllerReceber implements ActionListener {
         if (e.getSource() == this.telaCadastroReceber.getjButtonNovo()) {
             Ativa(false);
             LimpaEstadoComponentes(true);
-            
+
             this.telaCadastroReceber.getjTextFieldId().setEnabled(false);
-            
+
             this.telaCadastroReceber.getjTextField_VendaId().setEnabled(false);
 
             this.telaCadastroReceber.getjFormattedTextFieldDataEmissao().setEnabled(false);
@@ -62,7 +63,7 @@ public class ControllerReceber implements ActionListener {
             this.telaCadastroReceber.getjFormattedTextField_VendaValor().setEnabled(false);
             this.telaCadastroReceber.getjFormattedTextField_VendaData().setEnabled(false);
             this.telaCadastroReceber.getjTextField_VendaCliente().setEnabled(false);
-            
+
             this.telaCadastroReceber.getjFormattedTextFieldDataPagamento().setText(data);
             this.telaCadastroReceber.getjFormattedTextField_Hora().setText(Hora);
             codigo = 0;
@@ -84,9 +85,11 @@ public class ControllerReceber implements ActionListener {
                     .createReceber();
             if (codigo == 0) {
                 service.ServiceReceber.Incluir(receber);
+                atualizarStatusDeContasAReceber(receber);
             } else {
                 receber.setId(Integer.parseInt(substituirVirgolaPorPonto(this.telaCadastroReceber.getjTextFieldId().getText())));//1
                 service.ServiceReceber.Atualizar(receber);
+                atualizarStatusDeContasAReceber(receber);
             }
             Ativa(true);
             LimpaEstadoComponentes(false);
@@ -95,7 +98,7 @@ public class ControllerReceber implements ActionListener {
 
             codigo = 0;
             TelaBuscaReceber telaBuscaReceber = new TelaBuscaReceber(null, true);
-            ControllerReceberBusca controllerBuscaReceber = new ControllerReceberBusca(telaBuscaReceber);
+            ControllerReceberBusca controllerBuscaReceber  = new ControllerReceberBusca(telaBuscaReceber);
             telaBuscaReceber.setVisible(true);
 
             if (codigo != 0) {
@@ -135,26 +138,25 @@ public class ControllerReceber implements ActionListener {
                 this.telaCadastroReceber.getjFormattedTextField_VendaData().setEnabled(false);
                 this.telaCadastroReceber.getjTextField_VendaCliente().setEnabled(false);
             }
+        } else if (e.getSource() == this.telaCadastroReceber.getjButton_VendaBuscaId()) {
+
+            TelaBuscaVenda telaBuscaVenda = new TelaBuscaVenda(null, true);
+            ControllerVendaBuscaPorVendasNaoRecebidas controllerVendaBuscaPorVendasNaoRecebidas = new ControllerVendaBuscaPorVendasNaoRecebidas(telaBuscaVenda);
+            telaBuscaVenda.setVisible(true);
+
+            //VENDA
+            venda = service.ServiceVenda.Buscar(telaBuscaVenda.getIdVenda());
+            this.telaCadastroReceber.getjTextField_VendaCliente().setText(venda.getPessoaFisica().getNome());
+            this.telaCadastroReceber.getjFormattedTextField_VendaData().setText(venda.getData());
+            this.telaCadastroReceber.getjFormattedTextField_VendaValor().setText(venda.getValorTotal() + "");
+            //DATAS
+            this.telaCadastroReceber.getjFormattedTextFieldDataEmissao().setText(venda.getData());
+            this.telaCadastroReceber.getjFormattedTextFieldDataVencimento().setText(venda.getDataDeVencimento());
+            //VALOR                
+            this.telaCadastroReceber.getjFormattedTextFieldValorEmitido().setText(venda.getValorTotal() + "");
+            //ID DA VENDA
+            this.telaCadastroReceber.getjTextField_VendaId().setText(venda.getId() + "");
         }
-        else if (e.getSource() == this.telaCadastroReceber.getjButton_VendaBuscaId()) {
-
-                TelaBuscaVenda telaBuscaVenda = new TelaBuscaVenda(null,true);
-                ControllerVendaBusca controllerVendaBusca = new ControllerVendaBusca(telaBuscaVenda);
-                telaBuscaVenda.setVisible(true);
-
-                //VENDA
-                venda = service.ServiceVenda.Buscar(telaBuscaVenda.getIdVenda());
-                this.telaCadastroReceber.getjTextField_VendaCliente().setText(venda.getPessoaFisica().getNome());
-                this.telaCadastroReceber.getjFormattedTextField_VendaData().setText(venda.getData());
-                this.telaCadastroReceber.getjFormattedTextField_VendaValor().setText(venda.getValorTotal() + "");
-                //DATAS
-                this.telaCadastroReceber.getjFormattedTextFieldDataEmissao().setText(venda.getData());
-                this.telaCadastroReceber.getjFormattedTextFieldDataVencimento().setText(venda.getDataDeVencimento());
-                //VALOR                
-                this.telaCadastroReceber.getjFormattedTextFieldValorEmitido().setText(venda.getValorTotal() + "");
-                //ID DA VENDA
-                this.telaCadastroReceber.getjTextField_VendaId().setText(venda.getId() + "");
-            }
 
         if (e.getSource() == this.telaCadastroReceber.getjButtonSair()) {
             this.telaCadastroReceber.dispose();
@@ -245,12 +247,30 @@ public class ControllerReceber implements ActionListener {
         this.Hora = Hora;
     }
 
-
     private static String substituirVirgolaPorPonto(String dado) {
         //dado = dado.replaceAll("\\.", "");
         dado = dado.replaceAll("\\,", ".");
         return dado;
     }
 
+    private void atualizarStatusDeContasAReceber(Receber receber) {
+
+        List<Receber> recebimentosDeUmaVenda = service.ServiceReceber.BuscarPorVendasRecebidas(receber.getContaAReceber().getId());
+        
+        float totalRecebido = 0;
+        for( Receber r : recebimentosDeUmaVenda){
+            totalRecebido += r.getValorRecebido();
+        }
+        
+        ContaAReceber contaAReceber = service.ServiceContaAReceber.Buscar(receber.getContaAReceber().getId());
+        
+        float resultado = contaAReceber.getValor() - totalRecebido;
+        
+        if(resultado <= 0){
+            contaAReceber.setStatus(false);
+            service.ServiceContaAReceber.Atualizar(contaAReceber);
+        }
+
+    }
 
 }

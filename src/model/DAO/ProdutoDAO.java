@@ -23,7 +23,7 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
             pstm.setString(2, objeto.getUnidadeDeCompra());
             pstm.setString(3, objeto.getUnidadeDeVenda());
             pstm.setString(4, objeto.getCorrelacaoUnidade());
-            pstm.setDouble(5, objeto.getValor());
+            pstm.setFloat(5, objeto.getValor());
             pstm.setString(6, objeto.getCodigoDeBarras());
             pstm.setBoolean(7, objeto.getStatus());
             pstm.setString(8, objeto.getObservacao());
@@ -145,7 +145,7 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
             pstm.setString(2, objeto.getUnidadeDeCompra());
             pstm.setString(3, objeto.getUnidadeDeVenda());
             pstm.setString(4, objeto.getCorrelacaoUnidade());
-            pstm.setDouble(5, objeto.getValor());
+            pstm.setFloat(5, objeto.getValor());
             pstm.setString(6, objeto.getCodigoDeBarras());
             pstm.setBoolean(7, objeto.getStatus());
             pstm.setString(8, objeto.getObservacao());
